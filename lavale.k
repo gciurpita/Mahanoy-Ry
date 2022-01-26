@@ -116,7 +116,7 @@ function bench (e, col)  {
     line(x1,  yW, xW,  y1,  col)
 
     # short wall
-    x3  = Wid / 2
+    x3  = 210
     y4  = y3 - A
     y5  = y4 - D
   # line(x1,  y3, x1,  y4,  col) 
@@ -124,10 +124,13 @@ function bench (e, col)  {
     line(x3,  y4, x3,  y5,  col)
 
     # pennisula wall
-    x2  = e + A 
+    x2  = e + A + 60
     line(x2,  y2, x1,  y2,  col)
-    line(x2,  y2, x2,  y3,  col)
-    line(x2,  y3, x1,  y3,  col)
+  # line(x2,  y2, x2,  y3,  col)
+    line(x2+12,  y3, x1,  y3,  col)
+
+    y6  = (y2 + y3) / 2
+    line(140,  y6, 320,  y6,  col)
 }
 
 # ------------------------------------------------
@@ -162,55 +165,29 @@ function room (col)  {
     line(Wid, Ht, 0,   Ht,  col)
     line(0,   Door, 0,   Ht,  col)
 
-    rectAng(12*25.5, 12*10, 28, 25, -30, "green")
-    rectAng(Wid-36, 5, 24, 12, 0, "green")
+    rectAng(Wid-45, Ht-31, 28, 21, -20, "green")   # stove
+    rectAng(Wid-43, 4, 19, 18, 0, "green")          # water pump
+    rectAng(12*16,  0, 15, 11, 0, "green")          # sewer pipe
 
     radX = 8
     radY = 5
     x    = Wid - 11 - radX
     y    = Ht  - 10 - radY
     ellipse(x, y, 0, 360, radX, radY, "green")
-}
 
-# ------------------------------------------------
-function staging (col) {
-    rad = 30
-    clr = 3
-    xN  = Wid - clr
-    x1  = xN - rad
+    rectAng( 36,  0, 48, 12, 0, "light-gray")       # shelf
+    rectAng( 86,  0, 48, 12, 0, "light-gray")       # bench
+    anno(   100,  4, "work bench")
+    rectAng(136,  0, 48, 12, 0, "light-gray")       # shelf
 
-    yN  = Ht - clr
-    y2  = yN - rad
-    y0  = clr
-    y1  = y0 + rad
-
-    arc(x1, y2,  0,  90, rad, col)
-    arc(x1, y1, 90, 180, rad, col)
-    len  = rad * Pi / 2
-
-    line(xN, y1, xN, y2, col)
-    len += y1 - y0
-
-    x0  = x1 - 12*15
-    line(x0, yN, x1, yN, col)
-    len += x1 - x0
-
-    printf "title_x  staging len = %6.2f", len
-    gr = 1.5; printf " (%.2f%% %6.2f)", gr, len*gr/100
-    gr = 2.0; printf " (%.2f%% %6.2f)", gr, len*gr/100
-    printf "\n"
-
+    radDoor = 30
+    k       = 0.707     # sin 45 deg
+    arc(0, 0, 0, 45, radDoor, col)
+    line(0, 0, k*radDoor, k*radDoor, col)
 }
 
 # ------------------------------------------------
 function track () {
-  # rad = 30
-  # x0  = Wid - 32
-  # x1  = Wid - 44
-  # y0  = Ht - 33
-  # y1  =      40
-  # y2  =      44
-
     rad = Rad
     clr = 3
     xN  = Wid - clr
@@ -232,25 +209,64 @@ function track () {
     col = "yellow"
   # yN = Ht - Rad - clr
     arc(Rad+clr, yN-Rad, 270, 360, Rad, col)
-    yard(clr, yN-Rad-4,  8, -70, Fn, Sp, col)
+    yard(8,  yN-Rad-4, -4, -64, Fn, Sp, col)    # left half
+    yard(10, yN-Rad-4,  4, -64, Fn, Sp, col)    # right half
+    anno(2, 35, "Staging(?)")
+
     turntable(22, 126, col)
     arc(x1, y2,  0, 90, Rad, col)
+    yard(120, Ht-clr, -70, -8, Fn, Sp, col)     # yard
+
+    yard(200, 138,  70, -2, Fn, Sp, col)        # station
+    yard(170, 130,  70,  2, Fn, Sp, col)        # industries
+    anno(190, 122, "industries")
+
+    anno(150, 115, "Upper Shelf")
 
     # --------------------------------------
     # pennisula
     col = 9
     arc(x1, Ht-40, 90, 180, Rad, col)
-    turnAround(90, 65, 30, 60, Rad, col)
+    x0  = 90
+    y0  = 65
+    a1  = 35
+    a2  = 55
+    turnAround(x0, y0, a1, a2, Rad, col)
+
+    c = cos(a2 * Pi / 180)
+    s = sin(a2 * Pi / 180)
+    l = 30
+    x3 = x0+Rad*s
+    y3 = y0-Rad*c
+    line(x3, y3, x3 + c*l, y3 + s*l, col)
+
     arc(x1, 36, 0, 90, Rad, col)
     yard(140, 80, -70, -8, Fn, Sp, col)
+    anno( 90, 65, "industries")
+
+    yard(150, 80,  70,  2, Fn, Sp, col)
+    anno(170, 75, "station")
+
+    yard(200, 68,  70, -2, Fn, Sp, col)
+    anno(230, 60, "station")
+
+    anno(270, 86, "Staging (?)")
+    yard(320, 80, -70,  4, Fn, Sp, col)
+    anno(270, 74, "Tunnel")
+
+    anno(200, 55, "Peninsula")
 
     # --------------------------------------
     # lower shelf
     col = "orange"
     arc(x1, y1, 90, 180, Rad, col)
-    yard(300, clr, -70, 8, Fn, Sp, col)
-    turntable(200, 11, col)
+    turntable(220, 11, col)
   # wye(Wid-12, 12, 24, col)
+
+    yard(300,  6, -60, 2, Fn, Sp, col)
+    anno(260,  1, "station")
+
+    anno(250, -5, "Lower Shelf")
 }
 
 # ------------------------------------------------
@@ -275,20 +291,25 @@ function turntable (x0, y0, col) {
 }
 
 # ------------------------------------------------
-function yard (x0, y0, dx, dy, fN, sp, col) {
+function yard (x0, y0, dx, dy, fN, sp, col, xN, yN) {
     frogDim(fN)
 
     if (abs(dx) > abs(dy))  {     # horizontal
         xN = x0 + dx
         for (d = 0; d <= abs(dy); d += sp)  {
-            line(x0, y0 + sgn(dy)*d, xN, y0 + sgn(dy)*d, col)
+            y = y0 + sgn(dy)*d
+            if (sp == d && 2 == abs(dy))
+                line(x0, y, xN - sgn(dx) * fLead, y, col)
+            else
+                line(x0, y, xN, y, col)
             x0 += sgn(dx) * fLead
         }
     }
     else  {                         # vertical
         yN = y0 + dy
         for (d = 0; d <= abs(dx); d += sp)  {
-            line(x0 + sgn(dx)*d, y0, x0 + sgn(dx)*d, yN, col)
+            x   = x0 + sgn(dx)*d
+            line(x, y0, x, yN, col)
             y0 += sgn(dy) * fLead
         }
     }
@@ -312,8 +333,8 @@ BEGIN  {
     Sp  = 2         # spacing
     Rad = 30
 
-    Wid = 12 * 30
-    Ht  = 12 * 12.5
+    Wid = 12 * 29.25        # 29 ft 2in
+    Ht  = 12 * 12
 
     cn = 22
   # printf "set_color %d = (%d, %d, %d)\n", cn, 30, 30, 30
@@ -328,7 +349,7 @@ BEGIN  {
     printf "thickness = 1.5\n"
 
     grid(24, cn)
-    room("cyan")
+    room("blue")
     bench(24, "light-gray")
     track()
 
