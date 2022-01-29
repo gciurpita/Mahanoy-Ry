@@ -229,8 +229,8 @@ function track () {
     arc(x1, Ht-40, 90, 180, Rad, col)
     x0  = 90
     y0  = 65
-    a1  = 35
-    a2  = 55
+    a1  = 40
+    a2  = 57.5
     turnAround(x0, y0, a1, a2, Rad, col)
 
     c = cos(a2 * Pi / 180)
@@ -346,7 +346,7 @@ BEGIN  {
     A   = (Ht - (3 * D)) / 2
 
     printf "title   %s\n", "LaVale Train Room"
-    printf "thickness = 1.5\n"
+    printf "thickness = 2.0\n"
 
     grid(24, cn)
     room("blue")
