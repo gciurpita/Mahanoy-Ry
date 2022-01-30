@@ -100,13 +100,15 @@ function bench (e, col)  {
 
     y1  = Ht - D
     y2  = y1 - A
-    y3  = y2 - D
+    y3  = y2 - D*2
     
+    # --------------------------------------
     # end wall
     ye  = Door + 10
     line(0,   ye, e, ye,  col)
     line(e,   ye, e, y1-12,  col)
 
+    # --------------------------------------
     # long wall
     x2  = Wid - 12*6
     xW  = Wid - 8
@@ -115,19 +117,27 @@ function bench (e, col)  {
     line(x1,  yW, x2,  y1,  col)
     line(x1,  yW, xW,  y1,  col)
 
+    anno(150, y1-5, "Upper Shelf")
+
+    # --------------------------------------
     # short wall
     x3  = 210
-    y4  = y3 - A
-    y5  = y4 - D
+    y5  = 0
+    y4  = y5 + D
   # line(x1,  y3, x1,  y4,  col) 
     line(x3,  y4, x1-12,  y4,  col) 
     line(x3,  y4, x3,  y5,  col)
 
+    anno(250, y4+2, "Lower Shelf")
+
+    # --------------------------------------
     # pennisula wall
     x2  = e + A + 60
     line(x2,  y2, x1,  y2,  col)
   # line(x2,  y2, x2,  y3,  col)
     line(x2+12,  y3, x1,  y3,  col)
+
+    anno(150, y3-5, "Peninsula")
 
     y6  = (y2 + y3) / 2
     line(140,  y6, 320,  y6,  col)
@@ -211,33 +221,36 @@ function track () {
     arc(Rad+clr, yN-Rad, 270, 360, Rad, col)
     yard(8,  yN-Rad-4, -4, -64, Fn, Sp, col)    # left half
     yard(10, yN-Rad-4,  4, -64, Fn, Sp, col)    # right half
-    anno(2, 35, "Staging(?)")
+  # anno(2, 35, "Staging(?)")
 
-    turntable(22, 126, col)
+    turntable(22, 126, 130, col)
     arc(x1, y2,  0, 90, Rad, col)
-    yard(120, Ht-clr, -70, -8, Fn, Sp, col)     # yard
+    yard(120, Ht-clr, -70, -2, Fn, Sp, col)     # yard
 
     yard(200, 138,  70, -2, Fn, Sp, col)        # station
-    yard(170, 130,  70,  2, Fn, Sp, col)        # industries
-    anno(190, 122, "industries")
-
-    anno(150, 115, "Upper Shelf")
+  # yard(170, 130,  70,  2, Fn, Sp, col)        # industries
+  # anno(190, 122, "industries")
 
     # --------------------------------------
     # pennisula
     col = 9
     arc(x1, Ht-40, 90, 180, Rad, col)
     x0  = 90
-    y0  = 65
+  # y0  = 65
+  # a1  = 40
+  # a2  = 57.5
+
+    rad = 28
+    yC  = Ht/2
     a1  = 40
-    a2  = 57.5
-    turnAround(x0, y0, a1, a2, Rad, col)
+    a2  = a1
+    turnAround(x0, yC, a1, a2, rad, col)
 
     c = cos(a2 * Pi / 180)
     s = sin(a2 * Pi / 180)
-    l = 30
-    x3 = x0+Rad*s
-    y3 = y0-Rad*c
+    l = 40
+    x3 = x0+rad*s
+    y3 = yC-rad*c
     line(x3, y3, x3 + c*l, y3 + s*l, col)
 
     arc(x1, 36, 0, 90, Rad, col)
@@ -245,28 +258,24 @@ function track () {
     anno( 90, 65, "industries")
 
     yard(150, 80,  70,  2, Fn, Sp, col)
-    anno(170, 75, "station")
+  # anno(170, 75, "station")
 
     yard(200, 68,  70, -2, Fn, Sp, col)
-    anno(230, 60, "station")
+  # anno(230, 60, "station")
 
-    anno(270, 86, "Staging (?)")
-    yard(320, 80, -70,  4, Fn, Sp, col)
+    anno(270, Ht-D-A+2, "Staging (?)")
+    yard(320, Ht-D-A-D+2, -70,  6, Fn, Sp, col)
     anno(270, 74, "Tunnel")
-
-    anno(200, 55, "Peninsula")
 
     # --------------------------------------
     # lower shelf
     col = "orange"
     arc(x1, y1, 90, 180, Rad, col)
-    turntable(220, 11, col)
+    turntable(220, 11, 90, col)
   # wye(Wid-12, 12, 24, col)
 
     yard(300,  6, -60, 2, Fn, Sp, col)
-    anno(260,  1, "station")
-
-    anno(250, -5, "Lower Shelf")
+  # anno(260,  1, "station")
 }
 
 # ------------------------------------------------
@@ -281,11 +290,15 @@ function turnAround (x0, y0, ang, ang2, rad, col) {
     c = rad * cos(ang * Pi / 180)
     s = rad * sin(ang * Pi / 180)
     arc(x0 + 2*s, y0 + 2*c, 180, 180+ang, rad, col)
+
+    k = 0.707
+    line(x0, y0, x0 -k*rad, y0-k*rad, "dark-gray")
+    anno((x0+x0 -k*rad)/2, (y0+y0-k*rad)/2, rad)
 }
 
 # ------------------------------------------------
-function turntable (x0, y0, col) {
-    rad = 130 * 12 / Sc / 2
+function turntable (x0, y0, diaFt, col) {
+    rad = diaFt * 12 / Sc / 2
     arc(x0, y0, 0, 360, rad, col)
     arc(x0, y0, 0, 360, rad, col)
 }
@@ -342,8 +355,8 @@ BEGIN  {
     # aspect circle
     arc(Wid/2, Ht/2, 0, 360, Ht/2, cn)
 
-    D   = 12 * 2
-    A   = (Ht - (3 * D)) / 2
+    D   = 12 * 1.5
+    A   = (Ht - (4 * D)) / 2
 
     printf "title   %s\n", "LaVale Train Room"
     printf "thickness = 2.0\n"
