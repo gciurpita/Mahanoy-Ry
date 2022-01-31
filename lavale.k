@@ -225,15 +225,27 @@ function track () {
 
     turntable(22, 126, 130, col)
     arc(x1, y2,  0, 90, Rad, col)
-    yard(120, Ht-clr, -70, -2, Fn, Sp, col)     # yard
 
-    yard(200, 138,  70, -2, Fn, Sp, col)        # station
+    yard(120, 130, -70,  2, Fn, Sp, col)        # station
+
+    yard(200, 130,  70,  2, Fn, Sp, col)        # station
   # yard(170, 130,  70,  2, Fn, Sp, col)        # industries
   # anno(190, 122, "industries")
 
-    # --------------------------------------
+    # ------------------------------------------------
     # pennisula
     col = 9
+
+    # ---------------------------------
+    anno(310, 80, "Tunnel")
+
+    anno(270, Ht-D-A+2, "Staging (?)")
+    yard(320, Ht-D-A-D+2, -70,  6, Fn, Sp, col)
+
+    # ---------------------------------
+    yard(150, 84,  74, -2, Fn, Sp, col)     # upper
+
+    # ---------------------------------
     arc(x1, Ht-40, 90, 180, Rad, col)
     x0  = 90
   # y0  = 65
@@ -254,28 +266,29 @@ function track () {
     line(x3, y3, x3 + c*l, y3 + s*l, col)
 
     arc(x1, 36, 0, 90, Rad, col)
-    yard(140, 80, -70, -8, Fn, Sp, col)
-    anno( 90, 65, "industries")
+    if (0)
+        yard(140, 80, -70, -8, Fn, Sp, col)
+    else {
+        x10 = 124
+        y10 =  84
+        rad = 180; arc(x10, y10+rad, 180, 195, rad, col)
+        rad =  60; arc(x10, y10-rad, 310, 360, rad, col)
+        rad =  40; arc(x10, y10-rad, 290, 360, rad, col)
 
-    yard(150, 80,  70,  2, Fn, Sp, col)
-  # anno(170, 75, "station")
+    }
 
-    yard(200, 68,  70, -2, Fn, Sp, col)
-  # anno(230, 60, "station")
+    # ---------------------------------
+    yard(200, 58,  70,  2, Fn, Sp, col)     # lower
 
-    anno(270, Ht-D-A+2, "Staging (?)")
-    yard(320, Ht-D-A-D+2, -70,  6, Fn, Sp, col)
-    anno(270, 74, "Tunnel")
-
-    # --------------------------------------
+    # ---------------------------------
+    # ------------------------------------------------
     # lower shelf
     col = "orange"
     arc(x1, y1, 90, 180, Rad, col)
     turntable(220, 11, 90, col)
   # wye(Wid-12, 12, 24, col)
 
-    yard(300,  6, -60, 2, Fn, Sp, col)
-  # anno(260,  1, "station")
+    yard(300,  4, -60,  2, Fn, Sp, col)
 }
 
 # ------------------------------------------------
@@ -291,9 +304,9 @@ function turnAround (x0, y0, ang, ang2, rad, col) {
     s = rad * sin(ang * Pi / 180)
     arc(x0 + 2*s, y0 + 2*c, 180, 180+ang, rad, col)
 
-    k = 0.707
-    line(x0, y0, x0 -k*rad, y0-k*rad, "dark-gray")
-    anno((x0+x0 -k*rad)/2, (y0+y0-k*rad)/2, rad)
+    k =  0.707
+    line(x0, y0, x0 +k*rad, y0-k*rad, "dark-gray")
+    anno((x0+x0 +k*rad)/2, (y0+y0-k*rad)/2, rad)
 }
 
 # ------------------------------------------------
