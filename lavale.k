@@ -138,7 +138,7 @@ function bench (e, col)  {
     y5  = 0
     y4  = y5 + D
   # line(x1,  y3, x1,  y4,  col) 
-    line(x3,  y4, x1-12,  y4,  col) 
+    line(x3,  y4, Wid-48,  y4,  col) 
     line(x3,  y4, x3,  y5,  col)
 
     anno(250, y4+2, "Lower Shelf")
@@ -188,25 +188,40 @@ function room (col)  {
     line(Wid, Ht, 0,   Ht,  col)
     line(0,   Door, 0,   Ht,  col)
 
-    rectAng(Wid-45, Ht-31, 28, 21, -20, "green")   # stove
-    rectAng(Wid-43, 4, 19, 18, 0, "green")          # water pump
-    rectAng(12*16,  0, 15, 11, 0, "green")          # sewer pipe
+    radDoor = 30
+    k       = 0.707     # sin 45 deg
+    arc(0, 0, 0, 45, radDoor, col)
+    line(0, 0, k*radDoor, k*radDoor, col)
 
+    # --------------------------------------
+    # obstructions
+    rectAng(Wid-45, Ht-31, 28, 21, -20, "green")   # stove
+    anno(Wid-35, 115, "wood stove")
+
+  # rectAng(Wid-43, 4, 19, 18, 0, "green")          # water pump
+    arc(Wid-31, 12, 0, 360, 9, "green")          # water pump
+    anno(Wid-33, 13, "water")
+    anno(Wid-33,  9, "pump")
+
+    rectAng(12*16,  0, 15, 11, 0, "green")          # sewer pipe
+    anno(12*16.4,  5, "sewer")
+
+    # --------------------------------------
+    # work bench and shelves
     radX = 8
     radY = 5
     x    = Wid - 11 - radX
     y    = Ht  - 10 - radY
     ellipse(x, y, 0, 360, radX, radY, "green")
 
-    rectAng( 36,  0, 48, 12, 0, "light-gray")       # shelf
-    rectAng( 86,  0, 48, 12, 0, "light-gray")       # bench
-    anno(   100,  4, "work bench")
-    rectAng(136,  0, 48, 12, 0, "light-gray")       # shelf
+    col = 72
 
-    radDoor = 30
-    k       = 0.707     # sin 45 deg
-    arc(0, 0, 0, 45, radDoor, col)
-    line(0, 0, k*radDoor, k*radDoor, col)
+    rectAng( 36,  1, 48, 12, 0, col)       # shelf
+    anno(    50,  6, "shelf (48\")")
+    rectAng( 86,  1, 48, 12, 0, col)       # bench
+    anno(   100,  6, "work bench")
+    rectAng(136,  1, 48, 12, 0, col)       # shelf
+    anno(   150,  6, "shelf (48\")")
 }
 
 # ------------------------------------------------
@@ -238,7 +253,7 @@ function track () {
   # anno(2, 35, "Staging(?)")
 
     turntable(8, Ht-8, 90, col)
-    arc(x1, y2,  0, 90, Rad, col)
+    arc(x1, y2, -30, 90, Rad, col)
 
   # yard(120, 130, -70,  2, Fn, Sp, col)        # station
 
@@ -261,8 +276,8 @@ function track () {
     y10  = Ht/2
     y11  = y10 + 4
     y12  = y10 - 4
-    dash(120, y11, Wid-12, y11, 8, "white")
-    dash(120, y12, Wid-12, y12, 8, "white")
+    dash(120, y11, Wid-12, y11, 4, "white")
+    dash(120, y12, Wid-12, y12, 4, "white")
     anno(140, y12-4, "view block")
     
 
@@ -300,18 +315,19 @@ function track () {
         yard(140, 80, -70, -8, Fn, Sp, col)
     else {
         x10 = 124
-        y10 =  84
+        y10 =  79
         rad = 180; arc(x10, y10+rad, 180, 195, rad, col)
         rad =  60; arc(x10, y10-rad, 310, 360, rad, col)
         rad =  40; arc(x10, y10-rad, 290, 360, rad, col)
     }
 
     # ---------------------------------
-    yard(150, 58,  70,  2, Fn, Sp, col)     # lower peninsula
+    yard(180, 58,  70,  2, Fn, Sp, col)     # lower peninsula
 
     # ------------------------------------------------
     # lower deck staging
     col = "red"
+    col = 41
     arc(x1+2, y1-2, 90, 180, Rad, col)
     line(x1+2+Rad, y1-2, x1+2+Rad, y1-2+84, col)
 
@@ -323,10 +339,10 @@ function track () {
     # ------------------------------------------------
     # lower shelf
     col = "cyan"
-    arc(x1, y1, 90, 180, Rad, col)
+    arc(x1, y1, 90, 210, Rad, col)
     turntable(220, 7, 90, col)
 
-    yard(290, 12, -60, -2, Fn, Sp, col)
+    yard(290, 13, -60, -2, Fn, Sp, col)
 }
 
 # ------------------------------------------------
