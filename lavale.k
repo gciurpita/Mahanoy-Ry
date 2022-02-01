@@ -35,6 +35,19 @@ function arc (x0, y0, a0, a1, rad, col, a)  {
 }
 
 # ------------------------------------------------
+function dash (x0, y0, x1, y1, seg, color, x, y)  {
+    printf "\ncolor=%s\n", color
+    for (x = x0; x < x1; x += 2*seg)  {
+        printf "next\n"
+        printf " %8.4f  %8.4f\n", x, y0
+        if (x + seg < x1)
+            printf " %8.4f  %8.4f\n", x+seg, y1
+        else
+            printf " %8.4f  %8.4f\n", x1, y1
+    }
+}
+
+# ------------------------------------------------
 function line (x0, y0, x1, y1, color)  {
     printf "\nnext\ncolor=%s\n", color
     printf " %8.4f  %8.4f\n", x0, y0
@@ -135,12 +148,12 @@ function bench (e, col)  {
     x2  = e + A + 60
     line(x2,  y2, x1,  y2,  col)
   # line(x2,  y2, x2,  y3,  col)
-    line(x2+12,  y3, x1,  y3,  col)
+    line(x2,  y3, x1,  y3,  col)
 
     anno(150, y3-5, "Peninsula")
 
     y6  = (y2 + y3) / 2
-    line(140,  y6, 320,  y6,  col)
+  # line(140,  y6, 320,  y6,  col)
 }
 
 # ------------------------------------------------
@@ -218,15 +231,16 @@ function track () {
     # upper shelf
     col = "yellow"
   # yN = Ht - Rad - clr
-    arc(Rad+clr, yN-Rad, 270, 360, Rad, col)
+    arc(Rad+10, yN-Rad-4, 270, 360, Rad, col)
+
     yard(8,  yN-Rad-4, -4, -64, Fn, Sp, col)    # left half
     yard(10, yN-Rad-4,  4, -64, Fn, Sp, col)    # right half
   # anno(2, 35, "Staging(?)")
 
-    turntable(22, 126, 130, col)
+    turntable(8, Ht-8, 90, col)
     arc(x1, y2,  0, 90, Rad, col)
 
-    yard(120, 130, -70,  2, Fn, Sp, col)        # station
+  # yard(120, 130, -70,  2, Fn, Sp, col)        # station
 
     yard(200, 130,  70,  2, Fn, Sp, col)        # station
   # yard(170, 130,  70,  2, Fn, Sp, col)        # industries
@@ -234,36 +248,52 @@ function track () {
 
     # ------------------------------------------------
     # pennisula
-    col = 9
+    col = "orange"
+    arc(x1, yN - Rad - 4, 90, 180, Rad, col)
 
     # ---------------------------------
-    anno(310, 80, "Tunnel")
+    # peninsula staging
+    colStg = "dark-gray"
+    anno(Wid-40, Ht/2, "Staging (?)")
+    arc(x1, yN - Rad - 14, 90, 180, Rad, colStg)
+    yard(310, Ht-D-A-D+2, -13*12, -4, Fn, Sp, colStg)
 
-    anno(270, Ht-D-A+2, "Staging (?)")
-    yard(320, Ht-D-A-D+2, -70,  6, Fn, Sp, col)
+    y10  = Ht/2
+    y11  = y10 + 4
+    y12  = y10 - 4
+    dash(120, y11, Wid-12, y11, 8, "white")
+    dash(120, y12, Wid-12, y12, 8, "white")
+    anno(140, y12-4, "view block")
+    
 
     # ---------------------------------
     yard(150, 84,  74, -2, Fn, Sp, col)     # upper
 
     # ---------------------------------
-    arc(x1, Ht-40, 90, 180, Rad, col)
     x0  = 90
-  # y0  = 65
-  # a1  = 40
-  # a2  = 57.5
-
     rad = 28
     yC  = Ht/2
-    a1  = 40
+    a1  = 45
     a2  = a1
     turnAround(x0, yC, a1, a2, rad, col)
 
-    c = cos(a2 * Pi / 180)
-    s = sin(a2 * Pi / 180)
-    l = 40
-    x3 = x0+rad*s
-    y3 = yC-rad*c
-    line(x3, y3, x3 + c*l, y3 + s*l, col)
+    # staging reversing section
+    if (0)  {
+        c = cos(a2 * Pi / 180)
+        s = sin(a2 * Pi / 180)
+        l = 40
+        x3 = x0+rad*s
+        y3 = yC-rad*c
+        line(x3, y3, x3 + c*l, y3 + s*l, col)
+    }
+    else  {
+        a3  = 45
+        k   = 0.707
+        rad = Rad
+        x10 = x0 + Rad + 28
+        y10 = yC - Rad
+        arc(x10, y10, 270+a3, 360, rad, colStg)
+    }
 
     arc(x1, 36, 0, 90, Rad, col)
     if (0)
@@ -274,21 +304,29 @@ function track () {
         rad = 180; arc(x10, y10+rad, 180, 195, rad, col)
         rad =  60; arc(x10, y10-rad, 310, 360, rad, col)
         rad =  40; arc(x10, y10-rad, 290, 360, rad, col)
-
     }
 
     # ---------------------------------
-    yard(200, 58,  70,  2, Fn, Sp, col)     # lower
+    yard(150, 58,  70,  2, Fn, Sp, col)     # lower peninsula
 
-    # ---------------------------------
+    # ------------------------------------------------
+    # lower deck staging
+    col = "red"
+    arc(x1+2, y1-2, 90, 180, Rad, col)
+    line(x1+2+Rad, y1-2, x1+2+Rad, y1-2+84, col)
+
+    yard(x1+2, y1-2-Rad, -(9*12),  8, Fn, Sp, col)
+
+    line(250, -6, 300, -6, "black")
+    anno(250, -4, "possible lower deck staging (red)")
+
     # ------------------------------------------------
     # lower shelf
-    col = "orange"
+    col = "cyan"
     arc(x1, y1, 90, 180, Rad, col)
-    turntable(220, 11, 90, col)
-  # wye(Wid-12, 12, 24, col)
+    turntable(220, 7, 90, col)
 
-    yard(300,  4, -60,  2, Fn, Sp, col)
+    yard(290, 12, -60, -2, Fn, Sp, col)
 }
 
 # ------------------------------------------------
@@ -357,7 +395,7 @@ BEGIN  {
     G   = 0.65      # track gage
     Sc  = 87        # scale
     Sp  = 2         # spacing
-    Rad = 30
+    Rad = 28
 
     Wid = 12 * 29.25        # 29 ft 2in
     Ht  = 12 * 12
@@ -369,6 +407,7 @@ BEGIN  {
     arc(Wid/2, Ht/2, 0, 360, Ht/2, cn)
 
     D   = 12 * 1.5
+    D   = 48 / 3
     A   = (Ht - (4 * D)) / 2
 
     printf "title   %s\n", "LaVale Train Room"
