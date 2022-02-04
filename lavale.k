@@ -180,6 +180,36 @@ function grid (d, col) {
 }
 
 # ------------------------------------------------
+function join (x0, y0, x1, y1, col) {
+    line(x0, y0, x1, y1, col)
+    return
+
+    if (0)  {
+        if (x1 < x0) {
+            t  = x0; x0 = x1; x1 = t
+        }
+
+        if (y1 < y0) {
+            t  = y0; y0 = y1; y1 = t
+        }
+    }
+
+  # dx = abs(x1 - x0)
+  # dy = abs(y1 - y0)
+
+    dx = (x1 - x0)
+    dy = (y1 - y0)
+
+    w  = atan2(dy, dx)
+    r  = (dy/4) / (1 - cos(w))
+
+    anno(x0+dx/2, y0+dy/2 + 8, sprintf("%.1f, %.1f) %.1f rad, %.1f ang, %.4f, %.2f dy", \
+        dx, dy, r, w * 180/Pi, 1- cos(w), dy))
+
+    line(x0, y0, x0 + dx*cos(w), y0 - dx*sin(w), col)
+}
+
+# ------------------------------------------------
 function room (col)  {
     # room
     Door = 30
@@ -264,7 +294,9 @@ function track () {
     # ------------------------------------------------
     # pennisula
     col = "orange"
-    arc(x1, yN - Rad - 4, 90, 180, Rad, col)
+    x30 = x1
+    y30 = yN - Rad - 4;
+    arc(x30, y30, 90, 180, Rad, col)
 
     # ---------------------------------
     # peninsula staging
@@ -282,7 +314,15 @@ function track () {
     
 
     # ---------------------------------
-    yard(150, 84,  74, -2, Fn, Sp, col)     # upper
+    x20 = 150
+    y20 =  84
+    l20 =  74
+    yard(x20, y20, l20, -2, Fn, Sp, col)     # upper
+
+    x40 = x20 + l20
+    y40 = y30 - Rad
+
+    join(x30, y40, x40, y20, col)
 
     # ---------------------------------
     x0  = 90
