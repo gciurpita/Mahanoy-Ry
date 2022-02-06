@@ -19,10 +19,12 @@ function anno (x, y, text, color)  {
 }
 
 # ------------------------------------------------
-function ellipse (x0, y0, a0, a1, radX, radY, col, a)  {
+function ellipse (x0, y0, a0, a1, radX, radY, col, da, a)  {
     printf "next\ncolor = %s\n", col
 
-    for (a = a0; a <= a1; a += 2)  {
+    if ("" == da)
+        da = 2
+    for (a = a0; a <= a1; a += da)  {
         w = a * Pi / 180
         printf "  %8.4f %8.4f\n", x0+(radX * sin(w)), y0+(radY * cos(w))
     }
@@ -30,8 +32,8 @@ function ellipse (x0, y0, a0, a1, radX, radY, col, a)  {
 }
 
 # ------------------------------------------------
-function arc (x0, y0, a0, a1, rad, col, a)  {
-    ellipse(x0, y0, a0, a1, rad, rad, col)
+function arc (x0, y0, a0, a1, rad, col, da)  {
+    ellipse(x0, y0, a0, a1, rad, rad, col, da)
 }
 
 # ------------------------------------------------
@@ -76,6 +78,7 @@ function mark (x, y, dx, dy, color)  {
 
 # ------------------------------------------------
 function measure (x0, y0, x1, y1, color, x, y, len)  {
+    color = "white"
     printf "color = %s\n", color
 
     x = (x0 + x1) / 2
@@ -129,29 +132,35 @@ function bench (e, col)  {
     line(0,   ye, e, ye,  col)
     line(e,   ye, e, y1-12,  col)
 
+    measure(e+4, ye, e+4, y1, col)
+
     # --------------------------------------
     # upper shelf
     x2  = Wid - 12*6
+    x2  = 3* 12*8
     xW  = Wid - 8
     line(e+12, y1, x2,  y1,  col)
 
-    x3  = Wid - 12*5
-    y5  = Ht  - 12*1
-    line(x2,  y1, x3, y5,  col)
+  # x3  = Wid - 12*5
+  # y5  = Ht  - 12*1
+  # line(x2,  y1, x3, y5,  col)
 
     anno(150, y1-5, "Upper Shelf")
 
+    for (x = 0; x+96 < Wid; x += 96)
+        measure(x, Ht+2, x+12*8, Ht+2, col)
+
     # --------------------------------------
-    # pennisula wall
+    # pennisula
     x2  = e + A + 60
-    line(x2,  y2, x1,  y2,  col)
-  # line(x2,  y2, x2,  y3,  col)
-    line(x2,  y3, x1,  y3,  col)
+    x3  = x2 + 2* 12*8
+    line(x2,  y2, x3,  y2,  col)
+    line(x2,  y3, x3,  y3,  col)
 
     anno(150, y3-5, "Peninsula")
 
-    y6  = (y2 + y3) / 2
-  # line(140,  y6, 320,  y6,  col)
+    for (x = x2; x+96 < Wid; x += 96)
+        measure(x, 92, x+12*8, 92, col)
 
     # --------------------------------------
     # lower shelf
@@ -165,6 +174,8 @@ function bench (e, col)  {
     line(x3,  y4, x3,  y5,  col)
 
     anno(250, y4+2, "Lower Shelf")
+
+    measure(x3, 26, x3+12*8, 26, col)
 }
 
 # ------------------------------------------------
@@ -289,9 +300,7 @@ function track () {
   # yN = Ht - Rad - clr
     arc(Rad+10, yN-Rad-4, 270, 360, Rad, col)
 
-  # yard(8,  yN-Rad-4, -2, -64, Fn, Sp, col)    # left half
-  # yard(10, yN-Rad-4,  2, -64, Fn, Sp, col)    # right half
-    yard(8,  yN-Rad+2,  6, -68, Fn, Sp, col)    # right half
+    yard(8,  yN-Rad+2,  6, -74, Fn, Sp, col)    # right half
 
     turntable(8, Ht-8, 90, col)
     arc(x1, y2, -20, 90, Rad, col)
@@ -343,6 +352,8 @@ function track () {
     a1  = 45
     a2  = a1
     turnAround(x0, yC, a1, a2, rad, col)
+
+    arc(x0, yC, 180-45/2, 400, rad+4, "light-gray", 45)
 
     # staging reversing section
     if (0)  {
@@ -473,7 +484,7 @@ BEGIN  {
     Wid = 12 * 29.25        # 29 ft 2in
     Ht  = 12 * 12
 
-    cn = 22
+    cn = 17
   # printf "set_color %d = (%d, %d, %d)\n", cn, 30, 30, 30
 
     # aspect circle
