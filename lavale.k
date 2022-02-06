@@ -36,14 +36,22 @@ function arc (x0, y0, a0, a1, rad, col, a)  {
 
 # ------------------------------------------------
 function dash (x0, y0, x1, y1, seg, color, x, y)  {
+    printf "# dash:\n"
     printf "\ncolor=%s\n", color
-    for (x = x0; x < x1; x += 2*seg)  {
+
+    dx  = x1 - x0
+    dy  = (y1 - y0) * seg / dx
+    dx *= seg / dx
+    y   = y0
+
+    for (x = x0; x < x1; x += 2*dx)  {
         printf "next\n"
-        printf " %8.4f  %8.4f\n", x, y0
-        if (x + seg < x1)
-            printf " %8.4f  %8.4f\n", x+seg, y1
+        printf " %8.4f  %8.4f\n", x, y
+        if (x + dx < x1)
+            printf " %8.4f  %8.4f\n", x+dx, y+dy
         else
             printf " %8.4f  %8.4f\n", x1, y1
+        y += 2*dy
     }
 }
 
@@ -114,7 +122,7 @@ function bench (e, col)  {
     y1  = Ht - D
     y2  = y1 - A
     y3  = y2 - D*2
-    
+
     # --------------------------------------
     # end wall
     ye  = Door + 10
@@ -122,26 +130,16 @@ function bench (e, col)  {
     line(e,   ye, e, y1-12,  col)
 
     # --------------------------------------
-    # long wall
+    # upper shelf
     x2  = Wid - 12*6
     xW  = Wid - 8
-    yW  = Ht - 8
-    line(e+12,   y1, x2,  y1,  col)
-    line(x1,  yW, x2,  y1,  col)
-    line(x1,  yW, xW,  y1,  col)
+    line(e+12, y1, x2,  y1,  col)
+
+    x3  = Wid - 12*5
+    y5  = Ht  - 12*1
+    line(x2,  y1, x3, y5,  col)
 
     anno(150, y1-5, "Upper Shelf")
-
-    # --------------------------------------
-    # short wall
-    x3  = 210
-    y5  = 0
-    y4  = y5 + D
-  # line(x1,  y3, x1,  y4,  col) 
-    line(x3,  y4, Wid-48,  y4,  col) 
-    line(x3,  y4, x3,  y5,  col)
-
-    anno(250, y4+2, "Lower Shelf")
 
     # --------------------------------------
     # pennisula wall
@@ -154,6 +152,19 @@ function bench (e, col)  {
 
     y6  = (y2 + y3) / 2
   # line(140,  y6, 320,  y6,  col)
+
+    # --------------------------------------
+    # lower shelf
+    line(Wid-12,  20, Wid-12, 48,  col)
+
+    x3  = 210
+    y5  = 0
+    y4  = y5 + D
+  # line(x1,  y3, x1,  y4,  col)
+    line(x3,  y4, Wid-48,  y4,  col)
+    line(x3,  y4, x3,  y5,  col)
+
+    anno(250, y4+2, "Lower Shelf")
 }
 
 # ------------------------------------------------
@@ -278,12 +289,12 @@ function track () {
   # yN = Ht - Rad - clr
     arc(Rad+10, yN-Rad-4, 270, 360, Rad, col)
 
-    yard(8,  yN-Rad-4, -4, -64, Fn, Sp, col)    # left half
-    yard(10, yN-Rad-4,  4, -64, Fn, Sp, col)    # right half
-  # anno(2, 35, "Staging(?)")
+  # yard(8,  yN-Rad-4, -2, -64, Fn, Sp, col)    # left half
+  # yard(10, yN-Rad-4,  2, -64, Fn, Sp, col)    # right half
+    yard(8,  yN-Rad+2,  6, -68, Fn, Sp, col)    # right half
 
     turntable(8, Ht-8, 90, col)
-    arc(x1, y2, -30, 90, Rad, col)
+    arc(x1, y2, -20, 90, Rad, col)
 
   # yard(120, 130, -70,  2, Fn, Sp, col)        # station
 
@@ -301,17 +312,18 @@ function track () {
     # ---------------------------------
     # peninsula staging
     colStg = "dark-gray"
-    anno(Wid-40, Ht/2, "Staging (?)")
-    arc(x1, yN - Rad - 14, 90, 180, Rad, colStg)
+    anno(Wid-44, Ht/2 -2, "Staging (?)")
+    arc(x1, yN - Rad - 14, 90, 180, Rad, col)
     yard(310, Ht-D-A-D+2, -13*12, -4, Fn, Sp, colStg)
 
     y10  = Ht/2
     y11  = y10 + 4
     y12  = y10 - 4
-    dash(120, y11, Wid-12, y11, 4, "white")
-    dash(120, y12, Wid-12, y12, 4, "white")
+    dash(130, y11, Wid-20, y11, 4, "white")
+    dash( 90,  50, 130, y11, 4, "white")
+    dash(140, y12, Wid-12, y12, 4, "white")
     anno(140, y12-4, "view block")
-    
+
 
     # ---------------------------------
     x20 = 150
@@ -342,12 +354,12 @@ function track () {
         line(x3, y3, x3 + c*l, y3 + s*l, col)
     }
     else  {
-        a3  = 45
+        a3  = 50
         k   = 0.707
         rad = Rad
         x10 = x0 + Rad + 28
         y10 = yC - Rad
-        arc(x10, y10, 270+a3, 360, rad, colStg)
+        arc(x10, y10, 270+a3, 360, rad, col)
     }
 
     arc(x1, 36, 0, 90, Rad, col)
@@ -379,10 +391,10 @@ function track () {
     # ------------------------------------------------
     # lower shelf
     col = "cyan"
-    arc(x1, y1, 90, 210, Rad, col)
+    arc(x1, y1, 90, 200, Rad, col)
     turntable(220, 7, 90, col)
 
-    yard(290, 13, -60, -2, Fn, Sp, col)
+    yard(300, 8, -60, 2, Fn, Sp, col)
 }
 
 # ------------------------------------------------
@@ -398,9 +410,14 @@ function turnAround (x0, y0, ang, ang2, rad, col) {
     s = rad * sin(ang * Pi / 180)
     arc(x0 + 2*s, y0 + 2*c, 180, 180+ang, rad, col)
 
-    k =  0.707
-    line(x0, y0, x0 +k*rad, y0-k*rad, "dark-gray")
-    anno((x0+x0 +k*rad)/2, (y0+y0-k*rad)/2, rad)
+    if (0) {
+        k =  0.707
+        line(x0, y0, x0 +k*rad, y0-k*rad, "dark-gray")
+        anno((x0+x0 +k*rad)/2, (y0+y0-k*rad)/2, rad)
+    }
+    else  {
+        anno(x0-rad, y0, rad )
+    }
 }
 
 # ------------------------------------------------
