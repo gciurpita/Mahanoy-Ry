@@ -157,6 +157,16 @@ function bench (e, col)  {
     line(x2,  y2, x3,  y2,  col)
     line(x2,  y3, x3,  y3,  col)
 
+    joist(x2, y2, x3, y3, 16, 0, 21)
+    joist(x2, y2, x3, y3, 16, 0, 21)
+
+    rad = 32
+    yC  = (y2 + y3)/2
+    joist(x2, yC-rad, x2-2*rad, yC+rad, 16, 0, 21)
+
+    xC  = x2 - (rad + 2)
+    arc(xC, yC, 180-45/2, 400, rad, col, 45)
+  
     anno(150, y3-5, "Peninsula")
 
     for (x = x2; x+96 < Wid; x += 96)
@@ -229,6 +239,23 @@ function join (x0, y0, x1, y1, col) {
         dx, dy, r, w * 180/Pi, 1- cos(w), dy))
 
     line(x0, y0, x0 + dx*cos(w), y0 - dx*sin(w), col)
+}
+
+# ------------------------------------------------
+function joist (x0, y0, x1, y1, xSp, ySp, col) {
+    if (xSp)  {
+        if (x1 < x0)  {
+            t  = x0
+            x0 = x1
+            x1 = t
+        }
+        for (x = x0; x <= x1; x += xSp)
+            line(x, y0, x, y1, col)
+    }
+
+    if (ySp)
+        for (y = y0; y <= y1; y += ySp)
+            line(x0, y, x1, y, col)
 }
 
 # ------------------------------------------------
@@ -353,7 +380,7 @@ function track () {
     a2  = a1
     turnAround(x0, yC, a1, a2, rad, col)
 
-    arc(x0, yC, 180-45/2, 400, rad+4, "light-gray", 45)
+  # arc(x0, yC, 180-45/2, 400, rad+4, "light-gray", 45)
 
     # staging reversing section
     if (0)  {
@@ -499,7 +526,9 @@ BEGIN  {
 
     grid(24, cn)
     room("blue")
-    bench(24, "light-gray")
+    bench(24, 71)       # "light-gray")
     track()
 
+    line(0, 0, 0, -10, "black")
+    anno(0, -10, "3/15/22")
 }' $*
