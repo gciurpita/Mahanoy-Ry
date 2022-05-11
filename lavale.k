@@ -123,8 +123,6 @@ function bench (e, col)  {
     x1  = Wid - D * 1.5
 
     y1  = Ht - D
-    y2  = y1 - A
-    y3  = y2 - D*2
 
     # --------------------------------------
     # end wall
@@ -151,19 +149,28 @@ function bench (e, col)  {
         measure(x, Ht+2, x+12*8, Ht+2, col)
 
     # --------------------------------------
-    # pennisula
+    printf "\n# pennisula: e %d, A %d, D %d\n", e, A, D
     x2  = e + A + 60
     x3  = x2 + 2* 12*8
+    y2  = y1 - A
+    y3  = y2 - D*2
     line(x2,  y2, x3,  y2,  col)
     line(x2,  y3, x3,  y3,  col)
 
-    joist(x2, y2, x3, y3, 16, 0, 21)
-    joist(x2, y2, x3, y3, 16, 0, 21)
-
+    # loop radius
     rad = 32
-    yC  = (y2 + y3)/2
-    joist(x2, yC-rad, x2-2*rad, yC+rad, 16, 0, 21)
 
+    # longerons
+    col2 = "red"
+    girderWid = 24
+    y4  = y2 - (D - girderWid/2)
+    y5  = y4 - girderWid
+    x6  = x2 - (2 * rad)
+    line(x6,  y4, x3,  y4, col2)
+    line(x6,  y5, x3,  y5, col2)
+
+    # loop - fascia
+    yC  = (y2 + y3)/2
     xC  = x2 - (rad + 2)
     arc(xC, yC, 180-45/2, 400, rad, col, 45)
   
@@ -379,6 +386,13 @@ function track () {
     a1  = 45
     a2  = a1
     turnAround(x0, yC, a1, a2, rad, col)
+
+    # turnaround cross-pieces
+    col3 = "blue"
+    yR = rad * cos(30 * Pi / 180)
+    xR = rad * sin(30 * Pi / 180)
+    line(x0-xR, yC+yR, x0-xR, yC-yR, col3)
+    line(x0+xR, yC+yR, x0+xR, yC-yR, col3)
 
   # arc(x0, yC, 180-45/2, 400, rad+4, "light-gray", 45)
 
