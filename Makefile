@@ -1,8 +1,16 @@
 
-	Targ = lavale
+    Xgrs  = $(patsubst %.k, %.xgr, *.k)
+    Xgrs  = lavale.xgr loop.xgr staging.xgr
 
 %.xgr : %.k
-	$^ > $@
+	$^ | tee $@
 
-$(Targ).xgr : lavale.k
-	lavale.k > $@
+# ----------------------------------------------------------
+all : $(Xgrs)
+
+# ----------------------------------------------------------
+neat :
+	@ rm -f *~
+
+clean : neat
+	rm -f *xgr
