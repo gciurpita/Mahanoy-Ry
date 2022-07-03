@@ -259,6 +259,39 @@ BEGIN  {
 }
 
 # ----------------------------------------------------------
+function grid (x0, x1, y0, y1, dx, dy, col, x, y)  {
+    c0 = 138
+    v  = 0xe0
+    printf "set_color %d = (%d, %d, %d)\n", c0, v, v, v
+
+    c1 = 139
+    v += -20
+    printf "set_color %d = (%d, %d, %d)\n", c1, v, v, v
+
+    c2 = 140
+    v += -20
+    printf "set_color %d = (%d, %d, %d)\n", c2, v, v, v
+
+    for (x = x0; x <= x1; x += dx)  {
+        col = c0
+        if (! (x % 12))
+            col = c2
+        else if (! (x % 3))
+            col = c1
+        line(x, y0, x, y1, col)
+    }
+
+    for (y = y0; y <= y1; y += dy)  {
+        col = c0
+        if (! (y % 12))
+            col = c2
+        else if (! (y % 3))
+            col = c1
+        line(x0, y, x1, y, col)
+    }
+}
+
+# ----------------------------------------------------------
 function bench ()  {
     printf "# bench:\n"
 
@@ -266,7 +299,9 @@ function bench ()  {
     Long = 24
     Foam = 32
     Len  = 5 * 12
-    Len  = 20 * 12
+  # Len  = 20 * 12
+
+    grid(-30, 60, -30, 30, 1, 1, 21)
 
     opp = Long/2
     adj = sqrt(Rad^2 - opp^2)
@@ -285,7 +320,7 @@ function bench ()  {
     }
 
     printf "thickness = 1\n"
-    line(-adj,  0, Len,  0, "black")    # centerline
+  # line(-adj,  0, Len,  0, "black")    # centerline
 
     printf "thickness = 3\n"
     col = "dark-gray"
