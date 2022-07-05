@@ -22,18 +22,58 @@ function anno (x, y, text, color)  {
 function ellipse (x0, y0, a0, a1, radX, radY, col, da, a)  {
     printf "next\ncolor = %s\n", col
 
+    if (a0 > a1)  {
+        tmp = a0;  a0 = a1; a1 = tmp
+    }
+
     if ("" == da)
         da = 2
     for (a = a0; a <= a1; a += da)  {
         w = a * Pi / 180
         printf "  %8.4f %8.4f\n", x0+(radX * sin(w)), y0+(radY * cos(w))
+
+ #      if (! (a % 30))  {
+ #          dD = -2
+ #          if ((a % 360) <= 180)
+ #              dD = 2
+ #          x9 = x0+((dD+radX) * sin(w))
+ #          y9 = y0+((dD+radY) * cos(w))
+ #          printf "anno  %8.4f %8.4f %.2f, %5.1f\n", x9, y9, x9, y9
+ #      }
     }
     printf "\n"
 }
 
 # ------------------------------------------------
+function arcLen (x0, y0, a, rad, len)  {
+    w  = a * Pi / 180
+    dD = -2
+    if ((a % 360) <= 180)
+        dD = 2
+    x9 = x0+((dD+rad) * sin(w))
+    y9 = y0+((dD+rad) * cos(w))
+    printf "anno  %8.4f %8.4f %.1f'\''\n", x9, y9, len
+}
+
+# ------------------------------------------------
 function arc (x0, y0, a0, a1, rad, col, da)  {
     ellipse(x0, y0, a0, a1, rad, rad, col, da)
+
+    len = 0
+    da  = 12 * 180 / (Pi * rad)
+    printf "title_x  %.2f\n", da
+
+    if (1)  {
+        if (a0 < a1)
+            for (a = a0; a <= a1; a += da)
+                arcLen(x0, y0, a, rad, len++)
+        else
+            for (a = a0; a >= a1; a -= da)
+                arcLen(x0, y0, a, rad, len++)
+
+        len += -1 + (da - (a - a1)) / da
+        arcLen(x0, y0, a1, rad, len)
+    }
 }
 
 # ------------------------------------------------
@@ -95,6 +135,12 @@ function extLen (cw, pt, ignore, len, col, x, y)  {
     printf " x %.3f, y %.3f", x, y
     printf "\n"
 
+    dx  = (pt[X] + x) / 2
+    dy  = (pt[Y] + y) / 2
+    dy -= sgn(dy) * 5
+    dd  = sqrt( ((pt[X] - x) / 2)^2 + ((pt[Y] - y) / 2)^2)
+    printf "anno %.3f %.3f  %.2f\n", dx, dy, dd
+
     line(pt[X], pt[Y], x, y, col)
     pt[X] = x
     pt[Y] = y
@@ -149,7 +195,7 @@ function extCw (pt, ang0, ang1, rad, col, x, y)  {
 }
 
 # ------------------------------------------------
-function ptSave (idx, pt, ang) {
+function ptSave (idx, pt, ang, pr) {
     pts[X, idx] = pt[X]
     pts[Y, idx] = pt[Y];
     pts[A, idx] = pt[A]
@@ -160,7 +206,7 @@ function ptSave (idx, pt, ang) {
     pts[Y2, idx] = pt[Y2];
     pts[A2, idx] = pt[A2]
 
-    if (1) {
+    if (pr) {
       # mark(pts[X, idx], pts[Y, idx], 1, 1, "white")
         anno(pts[X, idx], pts[Y, idx], idx)
     }
@@ -194,7 +240,7 @@ function ptMark (pt, col) {
 
 # ------------------------------------------------
 function ptPr (pt) {
-    anno(pt[X], pt[Y], sprintf("(%.1f, %.1f) %.1f", pt[X], pt[Y], pt[A]))
+    anno(pt[X], pt[Y], sprintf("   %.1f, %.1f  %.1f", pt[X], pt[Y], pt[A]))
 }
 
 # ------------------------------------------------
@@ -237,7 +283,6 @@ function turnout (pt, cw, len, fAng, rh, col) {
 
     pt[X] = x1
     pt[Y] = y1
-    printf "title_x  %.3f\n", pt[A]
 }
 
 # ------------------------------------------------
@@ -251,25 +296,50 @@ BEGIN  {
     A2 = 5
 
     # ----------------------------
-    if (1)  bench()
-    if (1)  loop()
+    Rad    = 28
+    Foam   = 32
+    Frame  = 24
+    Offset = int(1+sqrt(Rad^2 - (Frame/2)^2))
+
+    if (1)  grid(Offset-30, Offset+60, -30, 30)
+
+    if (1)  bench(12*7, Foam, Frame)
+    if (1)  loop(Rad, Offset)
 
     if (0)  ladder1(40, 0, 50)
-    if (1)  ladder2(0, 0, 50)
+    if (0)  ladder2(0, 0, 50)
 }
 
 # ----------------------------------------------------------
-function grid (x0, x1, y0, y1, dx, dy, col, x, y)  {
+function bench (len, wid, wid2)  {
+    printf "# bench:\n"
+
+    col = "green"
+    line(0,  wid/2, len,  wid/2, col)
+    line(0, -wid/2, len, -wid/2, col)
+
+    printf "thickness = 3\n"
+    col = 140
+    line(0,  wid2/2, len,  wid2/2, col)
+    line(0, -wid2/2, len, -wid2/2, col)
+}
+
+# ----------------------------------------------------------
+function grid (x0, x1, y0, y1, dx, dy, x, y)  {
+    if ("" == dx)
+        dx = dy = 1
+
+    dV = 0x20
+    v  = 0x30
     c0 = 138
-    v  = 0xe0
     printf "set_color %d = (%d, %d, %d)\n", c0, v, v, v
 
+    v += dV
     c1 = 139
-    v += -20
     printf "set_color %d = (%d, %d, %d)\n", c1, v, v, v
 
+    v += dV
     c2 = 140
-    v += -20
     printf "set_color %d = (%d, %d, %d)\n", c2, v, v, v
 
     for (x = x0; x <= x1; x += dx)  {
@@ -291,66 +361,41 @@ function grid (x0, x1, y0, y1, dx, dy, col, x, y)  {
     }
 }
 
-# ----------------------------------------------------------
-function bench ()  {
-    printf "# bench:\n"
-
-    Rad  = 28
-    Long = 24
-    Foam = 32
-    Len  = 5 * 12
-  # Len  = 20 * 12
-
-    grid(-30, 60, -30, 30, 1, 1, 21)
-
-    opp = Long/2
-    adj = sqrt(Rad^2 - opp^2)
-
-    if (0)  {
-        printf "set_color 140 = (60, 60, 60)\n"
-        printf "thickness = 155\n"
-        line( -adj+3,  0, Len,  0, 140)
-    }
-    else  {
-        printf "thickness = 1\n"
-        col  = 51
-        edge = Foam / 2
-        line(-adj,  edge, Len,  edge, col)
-        line(-adj, -edge, Len, -edge, col)
-    }
-
-    printf "thickness = 1\n"
-  # line(-adj,  0, Len,  0, "black")    # centerline
-
-    printf "thickness = 3\n"
-    col = "dark-gray"
-    col = "black"
-    col = 41
-    line(-adj,  opp, Len,  opp, col)
-    line(-adj, -opp, Len, -opp, col)
-}
-
 # ------------------------------------------------
-function loop () {
-    printf "thickness = 2\n"
+function loop (Rad, x0) {
     ang = 50
 
     a0  = 90 + ang
     a1  = 360 + 90 - ang
-    arc(0, 0, a0, a1, Rad, "orange")
+
+    if (0) {
+        x1   = x0 + Rad * sin(a0 * Pi / 180)
+        y1   =      Rad * cos(a0 * Pi / 180)
+        printf "thickness = 1\n"
+        line(x0, 0, x1, y1, "red")
+
+        x1   = x0 + Rad * sin(a1 * Pi / 180)
+        y1   =      Rad * cos(a1 * Pi / 180)
+        line(x0, 0, x1, y1, "red")
+    }
+
+    printf "thickness = 2\n"
+    col = "orange"
+    arc(x0, 0, a1, a0, Rad, col)
+    mark(x0, 0, 1, 1, col)
 
     # manually set endpoints of arc
     pt[A] = a1
-    pt[X] = x   = Rad * cos(ang * Pi / 180)
+    pt[X] = x   = x0 + Rad * cos(ang * Pi / 180)
     pt[Y] = y   = Rad * sin(ang * Pi / 180)
     ptSave(1, pt)
-    ptPr(pt)
+  # ptPr(pt)
 
     pt[A] = a0
-    pt[X] = x   =  Rad * cos(ang * Pi / 180)
+    pt[X] = x   =  x0 + Rad * cos(ang * Pi / 180)
     pt[Y] = y   = -Rad * sin(ang * Pi / 180)
     ptSave(2, pt)
-    ptPr(pt)
+  # ptPr(pt)
 
     # --------------------------------------
     # upper reverse curve 
@@ -358,7 +403,6 @@ function loop () {
     extLen(CW, pt, pt[A], 4, "green")
 
     extCcw(pt, angRev(pt[A]), 180, Rad, "orange")
-
     # --------------------------------------
     # lower reverse curve 
     ptLoad(pt, 2)
