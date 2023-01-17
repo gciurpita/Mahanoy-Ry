@@ -63,7 +63,7 @@ function arc (x0, y0, a0, a1, rad, col, da)  {
     da  = 12 * 180 / (Pi * rad)
     printf "title_x  %.2f\n", da
 
-    if (1)  {
+    if (0)  {
         if (a0 < a1)
             for (a = a0; a <= a1; a += da)
                 arcLen(x0, y0, a, rad, len++)
@@ -84,7 +84,7 @@ function line (x0, y0, x1, y1, color)  {
 }
 
 # ------------------------------------------------
-function mark (x, y, dx, dy, color)  {
+function mark (x, y, dx, dy, color, pr)  {
     printf "color=%s\n", color
     printf "next\n"
     printf " %8.4f  %8.4f\n", x, y-dy
@@ -93,6 +93,9 @@ function mark (x, y, dx, dy, color)  {
     printf "next\n"
     printf " %8.4f  %8.4f\n", x-dx, y
     printf " %8.4f  %8.4f\n", x+dx, y
+
+    if (pr)
+        printf "anno %8.4f  %8.4f  %.2f\n", x, y+dy, x
 }
 
 # ------------------------------------------------
@@ -135,11 +138,13 @@ function extLen (cw, pt, ignore, len, col, x, y)  {
     printf " x %.3f, y %.3f", x, y
     printf "\n"
 
-    dx  = (pt[X] + x) / 2
-    dy  = (pt[Y] + y) / 2
-    dy -= sgn(dy) * 5
-    dd  = sqrt( ((pt[X] - x) / 2)^2 + ((pt[Y] - y) / 2)^2)
-    printf "anno %.3f %.3f  %.2f\n", dx, dy, dd
+    if (0)  {
+        dx  = (pt[X] + x) / 2
+        dy  = (pt[Y] + y) / 2
+        dy -= sgn(dy) * 5
+        dd  = sqrt( ((pt[X] - x) / 2)^2 + ((pt[Y] - y) / 2)^2)
+        printf "anno %.3f %.3f  %.2f\n", dx, dy, dd
+    }
 
     line(pt[X], pt[Y], x, y, col)
     pt[X] = x
@@ -240,7 +245,10 @@ function ptMark (pt, col) {
 
 # ------------------------------------------------
 function ptPr (pt) {
-    anno(pt[X], pt[Y], sprintf("   %.1f, %.1f  %.1f", pt[X], pt[Y], pt[A]))
+  # anno(pt[X], pt[Y], sprintf("   %.1f, %.1f  %.1f", pt[X], pt[Y], pt[A]))
+    anno(pt[X], 2+pt[Y], sprintf("%.1f, %.1f", pt[X], pt[Y]))
+    printf "thickness = 1\n"
+    line(pt[X], pt[Y], pt[X], pt[Y]+2, "white")
 }
 
 # ------------------------------------------------
@@ -379,17 +387,37 @@ function loop (Rad, x0) {
         line(x0, 0, x1, y1, "red")
     }
 
-    printf "thickness = 2\n"
     col = "orange"
-    arc(x0, 0, a1, a0, Rad, col)
-    mark(x0, 0, 1, 1, col)
+    printf "thickness = 1\n"
+    mark(x0, 0, 1, 1, col, 1)
 
+    printf "thickness = 2\n"
+    arc(x0, 0, a1, a0, Rad, col)
+
+    # --------------------------------------
+    # locate lateral points
+    a9    = 70
+    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
+    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
+    ptPr(pt)
+
+    a9    = 90
+    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
+    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
+    ptPr(pt)
+
+    a9    = 110
+    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
+    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
+    ptPr(pt)
+
+    # --------------------------------------
     # manually set endpoints of arc
     pt[A] = a1
     pt[X] = x   = x0 + Rad * cos(ang * Pi / 180)
     pt[Y] = y   = Rad * sin(ang * Pi / 180)
     ptSave(1, pt)
-  # ptPr(pt)
+    ptPr(pt)
 
     pt[A] = a0
     pt[X] = x   =  x0 + Rad * cos(ang * Pi / 180)
@@ -400,9 +428,11 @@ function loop (Rad, x0) {
     # --------------------------------------
     # upper reverse curve 
     ptLoad(pt, 1)
-    extLen(CW, pt, pt[A], 4, "green")
+    extLen(CW, pt, pt[A], 4.5, "green")
+    ptPr(pt)
 
     extCcw(pt, angRev(pt[A]), 180, Rad, "orange")
+    ptPr(pt)
     # --------------------------------------
     # lower reverse curve 
     ptLoad(pt, 2)
@@ -418,7 +448,7 @@ function loop (Rad, x0) {
     extLen(CCW, pt, pt[A], 10, "pink")
 
     ptSave(4, pt)
- #  ptPr(pt)
+    ptPr(pt)
 
 }
 
