@@ -12,6 +12,10 @@ function sgn (x) {
     return 1
 }
 
+function asin (x) {
+    return 2 * atan2(x / (1 + sqrt(1 - x^2)), 1)
+}
+
 # ------------------------------------------------
 function anno (x, y, text, color)  {
     yAnno += dyAnno
@@ -41,6 +45,8 @@ function ellipse (x0, y0, a0, a1, radX, radY, col, da, a)  {
  #          printf "anno  %8.4f %8.4f %.2f, %5.1f\n", x9, y9, x9, y9
  #      }
     }
+    w = a1 * Pi / 180
+    printf "  %8.4f %8.4f\n", x0+(radX * sin(w)), y0+(radY * cos(w))
     printf "\n"
 }
 
@@ -61,7 +67,7 @@ function arc (x0, y0, a0, a1, rad, col, da)  {
 
     len = 0
     da  = 12 * 180 / (Pi * rad)
-    printf "title_x  %.2f\n", da
+  # printf "title_x  %.2f\n", da
 
     if (0)  {
         if (a0 < a1)
@@ -110,6 +116,118 @@ function measure (x0, y0, x1, y1, color, x, y, len)  {
 
     len = sqrt( (x1-x0)^2 + (y1-y0)^2)
     printf "anno   %8.4f %8.4f  %.1f\n", x, y, len
+}
+
+# --------------------------------------------------------------------
+# --------------------------------------------------------------------
+# --------------------------------------------------------------------
+function dispPt (x, y, p) {
+    anno(x, y, sprintf("(%.2f, %.2f) P%d", x, y, p))
+}
+
+# ------------------------------------------------
+function drawTurnout (id, Tlen, Fang, Trad, \
+            xa, ya, x0, y0, x1, y1, x2, y2, a0, a1)  {
+    a0 = to [id, A0]
+    x0 = to [id, X0]
+    y0 = to [id, Y0]
+
+    c  = cos(a0 * Pi / 180)
+    s  = sin(a0 * Pi / 180)
+
+    to [id, X1] = x1 = x0 + Tlen * c
+    to [id, Y1] = y1 = y0 + Tlen * s
+    to [id, A1] = a1 = a0 - Fang
+
+    c1 = cos(a1 * Pi / 180)
+    s1 = sin(a1 * Pi / 180)
+    xa = x0 + Trad * s
+    ya = y0 - Trad * c
+  # mark(xa, ya, 1, 1, "cyan")
+    arc(xa, ya, 360-a0, 360-a1, Trad, "cyan")
+
+    line(x0, y0, x1, y1, "red");
+
+    to [id, X2] = xa + Trad * sin((360-a1) * Pi / 180)
+    to [id, Y2] = ya + Trad * cos((360-a1) * Pi / 180)
+
+    if (0) {
+        dispPt(to [id, X1], to [id, Y1], 1)
+        dispPt(to [id, X2], to [id, Y2], 2)
+    }
+}
+
+# ------------------------------------------------
+function ladder (x0, y0, a0)  {
+    colStr = "cyan"
+    colCur = "yellow"
+
+    printf "thickness = 1.5\n"
+
+    # ----------------------------
+    # turnout placement
+    to [0, A0] = a0
+    to [0, X0] = x0
+    to [0, Y0] = y0
+    drawTurnout(0, ToLen, ToAng, ToRad)
+
+    # ----------------------------
+    # 2nd turnout
+    to [1, A0] = to [0, A1]
+    to [1, X0] = to [0, X2]
+    to [1, Y0] = to [0, Y2]
+    drawTurnout(1, ToLen, ToAng, ToRad)
+
+    # ----------------------------
+    # non-diverging curve to horizontal
+    x1 = to [1, X1]
+    y1 = to [1, Y1]
+
+    xc = x1 + Rad * sin(to [1, A0] * Pi / 180)
+    yc = y1 - Rad * cos(to [1, A0] * Pi / 180)
+    arc(xc, yc, 360-to [1, A0], 360, Rad, colCur)
+    anno(xc, yc+Rad, sprintf("%.1f", Rad))
+
+    # ---------------------------- 
+    # horizontal intersect & trackage
+    x3 = xc
+    y3 = yc + Rad
+    x4 = x3 + 20
+    line(x3, y3, x4, y3, colStr)
+
+    # ---------------------------- 
+    # diverging curve
+    x2 = to [1, X2]
+    y2 = to [1, Y2]
+    a1 = to [1, A1]
+
+    xc = x2 + Rad * sin(a1 * Pi / 180)
+    yc = y2 - Rad * cos(a1 * Pi / 180)
+    arc(xc, yc, 360-a1, 360, Rad, colCur)
+    anno(xc, yc+Rad, sprintf("%.1f", Rad))
+
+    # ---------------------------- 
+    # diverging horizontal intersect & trackage
+    x5 = xc
+    y5 = yc + Rad
+    x6 = x4
+    line(x5, y5, x6, y5, colStr)
+  # anno(x6, y5, sprintf("(%.2f, %.2f) P6", x6, y5))
+
+    measure(x4-10, y3, x4-10, y5, "orange")
+  # measure(x0, y3, x0, y0, "orange")
+
+    # ---------------------------- 
+    # 1st turnout horizontal intersect & trackage
+    c   = cos(a0 * Pi / 180)
+    s   = sin(a0 * Pi / 180)
+    rad = (y3 + 2 - to [0, Y1]) / (1 - c)
+
+    xc = to [0, X1] + rad * s
+    yc = to [0, Y1] - rad * c
+    arc(xc, yc, 360-a0, 360, rad, colCur)
+    anno(xc, yc+rad, sprintf("%.1f", rad))
+    line(xc, yc+rad, x4, yc+rad, colStr)
 }
 
 # --------------------------------------------------------------------
@@ -244,11 +362,16 @@ function ptMark (pt, col) {
 }
 
 # ------------------------------------------------
-function ptPr (pt) {
+function ptPr (pt, x0, col, x) {
   # anno(pt[X], pt[Y], sprintf("   %.1f, %.1f  %.1f", pt[X], pt[Y], pt[A]))
     anno(pt[X], 2+pt[Y], sprintf("%.1f, %.1f", pt[X], pt[Y]))
     printf "thickness = 1\n"
     line(pt[X], pt[Y], pt[X], pt[Y]+2, "white")
+
+    if (x0)  {
+        line(x0,     0, pt [X], pt [Y], col);
+        line(pt [X], 0, pt [X], pt [Y], col);
+    }
 }
 
 # ------------------------------------------------
@@ -298,10 +421,13 @@ BEGIN  {
     Pi = atan2(0, -1)
     X  = CCW = RH = 0
     Y  = CW  = LH = 1
-    A  = 2
-    X2 = 3
-    Y2 = 4
-    A2 = 5
+
+    A0 = 0; A1 = 1; X0 = 2; Y0 = 3; X1 = 4; Y1 = 5; X2 = 6; Y2 = 7; A = 8
+
+    ToLen = 7.8
+    ToFn  = 6
+    ToAng = 9.5
+    ToRad = 12*339/87
 
     # ----------------------------
     Rad    = 28
@@ -309,13 +435,51 @@ BEGIN  {
     Frame  = 24
     Offset = int(1+sqrt(Rad^2 - (Frame/2)^2))
 
-    if (1)  grid(Offset-30, Offset+60, -30, 30)
+    if (0)  grid(Offset-30, Offset+60, -30, 30)
+    if (1)  grid(Offset-30, Offset+80, -30, 30)
 
     if (1)  bench(12*7, Foam, Frame)
     if (1)  loop(Rad, Offset)
 
     if (0)  ladder1(40, 0, 50)
     if (0)  ladder2(0, 0, 50)
+
+    if (1)  ladder(54.7, -12.5, 40)
+    if (0)  fill()
+}
+
+# ----------------------------------------------------------
+# passible plywood cut inside loop
+function fill ()  {
+    x0 =  2;  x1 = x0+12; x2 = x1+24; x3 = x2+11
+    y0 = -24; y1 = -12; y2 = 12; y3 = 24; y10 = -16; y20 = 11
+
+    if (0)  {
+        printf "color = %s\nnext\n", "red"
+        printf " %8.4f %8.4f\n", x3, y10
+        printf " %8.4f %8.4f\n", x2, y0
+        printf " %8.4f %8.4f\n", x1, y0
+        printf " %8.4f %8.4f\n", x1, y0
+        printf " %8.4f %8.4f\n", x0, y1
+        printf " %8.4f %8.4f\n", x0, y2
+        printf " %8.4f %8.4f\n", x1, y3
+        printf " %8.4f %8.4f\n", x2, y3
+        printf " %8.4f %8.4f\n", x3+6, y20
+        printf " %8.4f %8.4f\n", x3+18, y20
+
+        printf " %8.4f %8.4f\n", x3+18, y20+2
+        printf " %8.4f %8.4f\n", x3+6,  16
+    }
+
+    printf "color = %s\nnext\n", "blue"
+    printf " %8.4f %8.4f\n", 66,  16
+    printf " %8.4f %8.4f\n", 66,  11
+    printf " %8.4f %8.4f\n", 56,  11
+    printf " %8.4f %8.4f\n", 36,  24
+    printf " %8.4f %8.4f\n", 16,  24
+    printf " %8.4f %8.4f\n", 5,   16
+    printf " %8.4f %8.4f\n", 0,   4
+    printf " %8.4f %8.4f\n", 0,  -4
 }
 
 # ----------------------------------------------------------
@@ -383,7 +547,6 @@ function loop (Rad, x0) {
         line(x0, 0, x1, y1, "red")
 
         x1   = x0 + Rad * sin(a1 * Pi / 180)
-        y1   =      Rad * cos(a1 * Pi / 180)
         line(x0, 0, x1, y1, "red")
     }
 
@@ -396,60 +559,81 @@ function loop (Rad, x0) {
 
     # --------------------------------------
     # locate lateral points
-    a9    = 70
-    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
-    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
-    ptPr(pt)
+    if (1) {
+        rad   = Rad - 0.5
 
-    a9    = 90
-    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
-    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
-    ptPr(pt)
+        # ends
+        if (1)  {
+            a9 = 180 - asin(13/rad) * 180 /Pi
+            pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
+            pt[Y] = y   = rad * sin(a9 * Pi / 180)
+            ptPr(pt, x0, "cyan")
+        }
 
-    a9    = 110
-    pt[X] = x   = x0 + Rad * cos(a9 * Pi / 180)
-    pt[Y] = y   = Rad * sin(a9 * Pi / 180)
-    ptPr(pt)
+        # cross brace
+        if (1)  {
+            a9    = 110
+            pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
+            pt[Y] = y   = rad * sin(a9 * Pi / 180)
+            ptPr(pt, x0, "cyan")
+        }
+
+        a9    = 90
+        pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
+        pt[Y] = y   = rad * sin(a9 * Pi / 180)
+        ptPr(pt)
+
+        if (0) {
+            a9    = 70
+            pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
+            pt[Y] = y   = rad * sin(a9 * Pi / 180)
+            ptPr(pt)
+        }
+    }
 
     # --------------------------------------
     # manually set endpoints of arc
-    pt[A] = a1
-    pt[X] = x   = x0 + Rad * cos(ang * Pi / 180)
-    pt[Y] = y   = Rad * sin(ang * Pi / 180)
-    ptSave(1, pt)
-    ptPr(pt)
+    if (1)  {
+        pt[A] = a1
+        pt[X] = x   = x0 + Rad * cos(ang * Pi / 180)
+        pt[Y] = y   = Rad * sin(ang * Pi / 180)
+        ptSave(1, pt)
+        ptPr(pt)
+    }
 
-    pt[A] = a0
-    pt[X] = x   =  x0 + Rad * cos(ang * Pi / 180)
-    pt[Y] = y   = -Rad * sin(ang * Pi / 180)
-    ptSave(2, pt)
-  # ptPr(pt)
+        pt[A] = a0
+        pt[X] = x   =  x0 + Rad * cos(ang * Pi / 180)
+        pt[Y] = y   = -Rad * sin(ang * Pi / 180)
+        ptSave(2, pt)
+      # ptPr(pt)
 
-    # --------------------------------------
-    # upper reverse curve 
-    ptLoad(pt, 1)
-    extLen(CW, pt, pt[A], 4.5, "green")
-    ptPr(pt)
+    if (1)  {
+        # upper reverse curve 
+        ptLoad(pt, 1)
+        extLen(CW, pt, pt[A], 4.5, "green")
+        ptPr(pt)
 
-    extCcw(pt, angRev(pt[A]), 180, Rad, "orange")
-    ptPr(pt)
+        extCcw(pt, angRev(pt[A]), 180, Rad, "orange")
+        ptPr(pt)
+    }
+
     # --------------------------------------
     # lower reverse curve 
-    ptLoad(pt, 2)
-    extLen(CCW, pt, pt[A], 4, "green")
+    if (1) {
+        ptLoad(pt, 2)
+        extLen(CCW, pt, pt[A], 4, "green")
 
-    ptSave(3, pt)
+        ptSave(3, pt)
 
-    extCw(pt, angRev(pt[A]), 360, Rad, "orange")
+        extCw(pt, angRev(pt[A]), 360, Rad, "orange")
 
-    # --------------------------------------
-    # staging extension
-    ptLoad(pt, 3)
-    extLen(CCW, pt, pt[A], 10, "pink")
+        # staging extension
+        ptLoad(pt, 3)
+        extLen(CCW, pt, pt[A], 10, "pink")
 
-    ptSave(4, pt)
-    ptPr(pt)
-
+        ptSave(4, pt)
+        ptPr(pt)
+    }
 }
 
 # ------------------------------------------------
@@ -524,4 +708,5 @@ function ladder1 (x, y, ang)  {
     # --------------------------------------
     printf "\n"
     printf "title Ladder\n"
-}'
+}' $* << **END**
+**END**
