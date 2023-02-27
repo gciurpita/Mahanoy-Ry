@@ -364,7 +364,12 @@ function ptMark (pt, col) {
 # ------------------------------------------------
 function ptPr (pt, x0, col, x) {
   # anno(pt[X], pt[Y], sprintf("   %.1f, %.1f  %.1f", pt[X], pt[Y], pt[A]))
-    anno(pt[X], 2+pt[Y], sprintf("%.1f, %.1f", pt[X], pt[Y]))
+
+    if (pt [A])
+        anno(pt[X], 2+pt[Y], sprintf("%.2f, %.1f : %d", pt[X], pt[Y], pt[A]))
+    else
+        anno(pt[X], 2+pt[Y], sprintf("%.2f, %.1f", pt[X], pt[Y]))
+
     printf "thickness = 1\n"
     line(pt[X], pt[Y], pt[X], pt[Y]+2, "white")
 
@@ -434,18 +439,22 @@ BEGIN  {
     Foam   = 32
     Frame  = 24
     Offset = int(1+sqrt(Rad^2 - (Frame/2)^2))
+    Offset = 30
 
     if (0)  grid(Offset-30, Offset+60, -30, 30)
     if (1)  grid(Offset-30, Offset+80, -30, 30)
 
     if (1)  bench(12*7, Foam, Frame)
-    if (1)  loop(Rad, Offset)
+    if (1)  loop(Rad+0.5, Offset)
 
     if (0)  ladder1(40, 0, 50)
     if (0)  ladder2(0, 0, 50)
 
     if (1)  ladder(54.7, -12.5, 40)
     if (0)  fill()
+
+    printf "\n"
+    printf "title Loop Detail\n"
 }
 
 # ----------------------------------------------------------
@@ -534,6 +543,20 @@ function grid (x0, x1, y0, y1, dx, dy, x, y)  {
 }
 
 # ------------------------------------------------
+function loopLocation (a9, rad, x0) {
+    printf "# crossBrace: opp %.2f, rad %.2f, a %.1f\n", len/2, rad, a9
+    pt[A] = 0
+    pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
+    pt[Y] = y   = rad * sin(a9 * Pi / 180)
+    ptPr(pt, x0, "cyan")
+
+    aa  = 180 - a9
+    rad  = Rad + 0.5
+    len = Pi * rad * aa / 180
+    anno(pt[X], -pt[Y], sprintf(" %.1f deg : %.2f", aa, len))
+}
+
+# ------------------------------------------------
 function loop (Rad, x0) {
     ang = 50
 
@@ -565,25 +588,25 @@ function loop (Rad, x0) {
         # ends
         if (1)  {
             a9 = 180 - asin(13/rad) * 180 /Pi
-            pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
-            pt[Y] = y   = rad * sin(a9 * Pi / 180)
-            ptPr(pt, x0, "cyan")
+            loopLocation(a9, rad, x0);
         }
 
         # cross brace
         if (1)  {
-            a9    = 110
-            pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
-            pt[Y] = y   = rad * sin(a9 * Pi / 180)
-            ptPr(pt, x0, "cyan")
+            len   = 53
+
+            a9    = asin((len/2) / rad) * 180 / Pi
+            loopLocation(a9, rad, x0);
+
+            a9    = 180 - a9
+            loopLocation(a9, rad, x0);
         }
 
+        # center
         a9    = 90
-        pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
-        pt[Y] = y   = rad * sin(a9 * Pi / 180)
-        ptPr(pt)
+        loopLocation(a9, rad, x0);
 
-        if (0) {
+        if (0) {        # could also be done for 110
             a9    = 70
             pt[X] = x   = x0 + rad * cos(a9 * Pi / 180)
             pt[Y] = y   = rad * sin(a9 * Pi / 180)
