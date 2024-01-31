@@ -450,7 +450,8 @@ BEGIN  {
     if (0)  ladder1(40, 0, 50)
     if (0)  ladder2(0, 0, 50)
 
-    if (1)  ladder(54.7, -12.5, 40)
+    if (0)  ladder(54.7, -12.5, 40)
+    if (1)  ladder(59.04, -12.5, 40)
     if (0)  fill()
 
     printf "\n"
