@@ -330,20 +330,24 @@ function track () {
 
     # --------------------------------------
     # upper shelf
+
+  # turntable(8, Ht-8, 90, col)
+
+    col = "pink"
+    arc(Rad+4, yN-Rad-2, 270, 360, Rad, col)
+    yard(   4, yN-Rad-2,  1, -70, Fn, Sp, col)      # hidden staging
+
     col = "yellow"
-  # yN = Ht - Rad - clr
-    arc(Rad+10, yN-Rad-4, 270, 360, Rad, col)
+    arc(Rad+16, yN-Rad-4, 270, 360, Rad, col)
+    yard(   16, yN-Rad-4,    2, -25, Fn, Sp, col)    # right half
+    yard(   16, yN-Rad-4-55, 2,  30, Fn, Sp, col)    # right half
+    yard(   12, yN-Rad-8,   -0, -60, Fn, Sp, col)    # right half
 
-    yard(8,  yN-Rad+2,  6, -74, Fn, Sp, col)    # right half
 
-    turntable(8, Ht-8, 90, col)
-    arc(x1, y2, -20, 90, Rad, col)
+    yard(120, 141,  90, -10, Fn, Sp, col)        # station
+    yard(300, 141, -90, -10, Fn, Sp, col)        # station
 
-  # yard(120, 130, -70,  2, Fn, Sp, col)        # station
-
-    yard(200, 130,  70,  2, Fn, Sp, col)        # station
-  # yard(170, 130,  70,  2, Fn, Sp, col)        # industries
-  # anno(190, 122, "industries")
+    arc(x1, y2, -20, 90, Rad, col)              # around stove
 
     # ------------------------------------------------
     # pennisula
@@ -355,9 +359,9 @@ function track () {
     # ---------------------------------
     # peninsula staging
     colStg = "dark-gray"
-    anno(Wid-44, Ht/2 -2, "Staging (?)")
-    arc(x1, yN - Rad - 14, 90, 180, Rad, col)
+    arc(x1, yN - Rad - 11, 90, 180, Rad, col)
     yard(310, Ht-D-A-D+2, -13*12, -4, Fn, Sp, colStg)
+    anno(Wid-144, Ht/2 -2, "Staging (?)")
 
     y10  = Ht/2
     y11  = y10 + 4
@@ -414,7 +418,7 @@ function track () {
         arc(x10, y10, 270+a3, 360, rad, col)
     }
 
-    arc(x1, 36, 0, 90, Rad, col)
+    arc(x1, 30, 0, 90, Rad, col)
     if (0)
         yard(140, 80, -70, -8, Fn, Sp, col)
     else {
