@@ -130,6 +130,7 @@ function bench (e, col)  {
     line(0,   ye, e, ye,  col)
     line(e,   ye, e, y1-12,  col)
 
+
     measure(e+4, ye, e+4, y1, col)
 
     # --------------------------------------
@@ -137,7 +138,8 @@ function bench (e, col)  {
     x2  = Wid - 12*6
     x2  = 3* 12*8
     xW  = Wid - 8
-    line(e+12, y1, x2,  y1,  col)
+    line(e+12, y1,    x2,   y1, col)
+    line(e,    y1-12, e+12, y1 col)       # diagonal
 
   # x3  = Wid - 12*5
   # y5  = Ht  - 12*1
@@ -160,28 +162,41 @@ function bench (e, col)  {
     # loop radius
     rad = 32
 
-    # longerons
-    col2 = "red"
-    girderWid = 24
-    y4  = y2 - (D - girderWid/2)
-    y5  = y4 - girderWid
-    x6  = x2 - (2 * rad)
-    line(x6,  y4, x3,  y4, col2)
-    line(x6,  y5, x3,  y5, col2)
-
     # loop - fascia
     yC  = (y2 + y3)/2
     xC  = x2 - (rad + 2)
     arc(xC, yC, 180-45/2, 400, rad, col, 45)
+
+    line(x2,  y2, xC+13, yC+rad-3,  col)        # diagonal
+    line(x2,  y3, xC+13, yC-rad+3,  col)        # diagonal
   
     anno(150, y3-5, "Peninsula")
 
     for (x = x2; x+96 < Wid; x += 96)
         measure(x, 92, x+12*8, 92, col)
 
+    # longerons
+    if (Braces) {
+        col2 = "red"
+        girderWid = 24
+        y4  = y2 - (D - girderWid/2)
+        y5  = y4 - girderWid
+        x6  = x2 - (2 * rad)
+        line(x6,  y4, x3,  y4, col2)
+        line(x6,  y5, x3,  y5, col2)
+
+    # turnaround cross-pieces
+        col3 = "blue"
+        yR = rad * cos(30 * Pi / 180)
+        xR = rad * sin(30 * Pi / 180)
+        line(x0-xR, yC+yR, x0-xR, yC-yR, col3)
+        line(x0+xR, yC+yR, x0+xR, yC-yR, col3)
+    }
+
     # --------------------------------------
     # lower shelf
-    line(Wid-12,  20, Wid-12, 48,  col)
+    line(Wid-12,  20, Wid-12, 42,  col)
+    line(x3,      y3, Wid-12, 42,  col)         # diagonal
 
     x3  = 210
     y5  = 0
@@ -286,8 +301,8 @@ function room (col)  {
 
   # rectAng(Wid-43, 4, 19, 18, 0, "green")          # water pump
     arc(Wid-31, 12, 0, 360, 9, "green")          # water pump
-    anno(Wid-33, 13, "water")
-    anno(Wid-33,  9, "pump")
+    anno(Wid-36, 13, "water")
+    anno(Wid-36,  9, "pump")
 
     rectAng(12*16,  0, 15, 11, 0, "green")          # sewer pipe
     anno(12*16.4,  5, "sewer")
@@ -333,22 +348,37 @@ function track () {
 
   # turntable(8, Ht-8, 90, col)
 
-    col = "pink"
-    arc(Rad+4, yN-Rad-2, 270, 360, Rad, col)
-    yard(   4, yN-Rad-2,  1, -70, Fn, Sp, col)      # hidden staging
-
     col = "yellow"
-    arc(Rad+16, yN-Rad-4, 270, 360, Rad, col)
-    yard(   16, yN-Rad-4,    2, -25, Fn, Sp, col)    # right half
-    yard(   16, yN-Rad-4-55, 2,  30, Fn, Sp, col)    # right half
-    yard(   12, yN-Rad-8,   -0, -60, Fn, Sp, col)    # right half
+    arc(Rad+4, yN-Rad  , 270, 360, Rad, col)
+    yard(   4, yN-Rad  ,  1, -70, Fn, Sp, col)      # hidden staging
 
+    line(Rad+4, yN, x1, yN, col)
 
-    yard(120, 141,  90, -10, Fn, Sp, col)        # station
-    yard(300, 141, -90, -10, Fn, Sp, col)        # station
+    # station on tail (next to door)
+    if (1)  {
+        arc(Rad+16, yN-Rad  , 270, 360, Rad, col)
+        yard(   16, yN-Rad  ,    2, -25, Fn, Sp, col)    # right half
+        yard(   16, yN-Rad  -55, 2,  30, Fn, Sp, col)    # right half
+        yard(   12, yN-Rad-8,   -0, -60, Fn, Sp, col)    # right half
+    }
 
-    arc(x1, y2, -20, 90, Rad, col)              # around stove
+    # yard tracks
+    col = "orange"
+    if (1)  {
+        # long dbl-ended yard on right
+ #      yard(120, 141,  90, -10, Fn, Sp, col)        # station
+ #      yard(300, 141, -90, -10, Fn, Sp, col)        # station
 
+        # short single-ended yard on left
+        yard(140, yN-4, -90, -6, Fn, Sp, col)        # station
+    }
+
+    # station
+    yard(280, yN-4, -90,  0, Fn, Sp, col)        # station
+
+    # curve around stove
+    arc(x1, y2,   0, 90, Rad, col)              # around stove
+ 
     # ------------------------------------------------
     # pennisula
     col = "orange"
@@ -390,13 +420,6 @@ function track () {
     a1  = 45
     a2  = a1
     turnAround(x0, yC, a1, a2, rad, col)
-
-    # turnaround cross-pieces
-    col3 = "blue"
-    yR = rad * cos(30 * Pi / 180)
-    xR = rad * sin(30 * Pi / 180)
-    line(x0-xR, yC+yR, x0-xR, yC-yR, col3)
-    line(x0+xR, yC+yR, x0+xR, yC-yR, col3)
 
   # arc(x0, yC, 180-45/2, 400, rad+4, "light-gray", 45)
 
@@ -544,7 +567,7 @@ BEGIN  {
 
     grid(24, cn)
     room("blue")
-    bench(24, 71)       # "light-gray")
+    bench(24, "light-gray")    # 71)       # "light-gray")
     track()
 
     line(0, 0, 0, -10, "black")
