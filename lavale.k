@@ -139,7 +139,7 @@ function bench (e, col)  {
     x2  = 3* 12*8
     xW  = Wid - 8
     line(e+12, y1,    x2,   y1, col)
-    line(e,    y1-12, e+12, y1 col)       # diagonal
+    line(e,    y1-12, e+12, y1, col)       # diagonal
 
   # x3  = Wid - 12*5
   # y5  = Ht  - 12*1
@@ -231,6 +231,18 @@ function grid (d, col) {
         line(x, 0, x, Ht, col)
     for (y = 0; y < Ht; y += d)
         line(0, y, Wid, y, col)
+}
+
+function grids () {
+    printf "thickness = 1\n"
+    printf "set_color %d = (%d, %d, %d)\n", g1=33, 50, 50, 50
+    grid( 3, g1)
+
+    printf "set_color %d = (%d, %d, %d)\n", g2=34, 60, 60, 60
+    grid(12, g2)
+
+    printf "set_color %d = (%d, %d, %d)\n", g1=34, 70, 70, 70
+    grid(48, g1)
 }
 
 # ------------------------------------------------
@@ -563,9 +575,10 @@ BEGIN  {
     A   = (Ht - (4 * D)) / 2
 
     printf "title   %s\n", "LaVale Train Room"
-    printf "thickness = 2.0\n"
 
-    grid(24, cn)
+    grids()
+
+    printf "thickness = 2.0\n"
     room("blue")
     bench(24, "light-gray")    # 71)       # "light-gray")
     track()
