@@ -361,5 +361,5 @@ BEGIN  {
     }
 
     else
-        yard(6, 100)
+        yard(7, 100)
 }' $* | tee ladder.xgr
