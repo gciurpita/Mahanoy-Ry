@@ -382,7 +382,7 @@ function track () {
  #      yard(300, 141, -90, -10, Fn, Sp, col)        # station
 
         # short single-ended yard on left
-        yard(140, yN-4, -90, -6, Fn, Sp, col)        # station
+        yard(140, yN, -90, -12, Fn,  2, col)        # station
     }
 
     # station
@@ -581,6 +581,8 @@ BEGIN  {
     printf "thickness = 2.0\n"
     room("blue")
     bench(24, "light-gray")    # 71)       # "light-gray")
+
+    printf "thickness = 1.0\n"
     track()
 
     line(0, 0, 0, -10, "black")

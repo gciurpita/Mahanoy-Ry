@@ -327,39 +327,261 @@ BEGIN  {
     Pi    = atan2(0, -1)
     G     = 0.65
 
-    if (0)  {
-        ToFn  = 6
-        ToLen = 7.8
-        ToAng = 9.
-        ToRad = 12*339/87
+    AngSdg = 10
+    ColTrk = "orange"
+
+    printf "title_x \n"
+}
+
+# ------------------------------------------------
+function abs (x) {
+    if (0 > x)
+        return -x
+    return x
+}
+
+function sgn (x) {
+    if (0 > x)
+        return -1
+    return 1
+}
+
+# ------------------------------------------------
+function error (msg)  {
+    printf " ** Error: %s - %s\n", msg, $0
+    exit
+}
+
+# ------------------------------------------------
+function xyPairs (col, thick, label) {
+    printf "thickness = %s\n",  thick
+    printf "color = %s\n",      col
+    printf "next\n"
+    for (n = 2; n < NF; n += 2)
+        printf " %8.2f %8.2f\n", $n, $(n+1)
+
+}
+
+# ------------------------------------------------
+/^ *#/  { next }
+NF      { printf "# %s\n", $0 }
+/quit/  { exit }
+
+/bench/ { xyPairs("white", 2, $1); next }
+/room/  { xyPairs("blue",  2, $1); next }
+
+# ------------------------------------------------
+/curve/ {
+    rad  = $2
+    dAng = $3
+    dbg  = $4
+    printf "title_x curve: dbg %s\n", dbg
+
+    if (0 < dAng)  {
+        a0   = dir - 90
+        a1   = a0 + dAng
+        dir  = (a1 + 90) % 360
     }
     else {
-        ToFn  = 4
-        ToLen = 5.2
-        ToAng = 14.3
-        ToRad = 21.1
-    }
-    ToExt = 1/2
-
-    Len   = 100
-    N     = 5
-
-    if (0) {
-        side(0,     0, a=0, rL=0, N, Len, "red")
-        side(ToLen, 0, a=0, rL=1, N, Len, "cyan")
+        a0  = dir + 90
+        a1  = a0 + dAng
+        dir = (a1 - 90) % 360
     }
 
-    else if (0)
-        side(0,   2*N, a=0, rL=0, 2*N, Len, "red")
+    col = ColTrk
+    if ($4)
+        col = $4
 
-    else if (0)
-        turnout(0, 0, 0)
+    c = cos(a0 * Pi / 180)
+    s = sin(a0 * Pi / 180)
+    xC = xPos - c * rad
+    yC = yPos - s * rad
 
-    else if (0)  {
-        line(0, 0, 0, 16, "black")
-        siding(0,   2, a=0, rL=0, N, 100, col)
-    }
 
+    if ("" != dbg)
+        mark(xC, yC, 1, 1, "yellow")
+
+    arc(xC, yC, a0, a1, rad, col)
+
+    c    = cos(a1 * Pi / 180);   s    = sin(a1 * Pi / 180)
+    xPos = xC + c*rad;           yPos = yC + s*rad
+
+    next
+}
+
+# --------------------------------------
+/lbl/ {
+    printf "# lbl: xPos %6d, yPos %d, dir %d\n", xPos, yPos, dir
+    lblX [$2] = xPos;  lblY [$2] = yPos; lblDir [$2] = dir
+    anno(xPos, yPos, $2)
+    next
+}
+
+# --------------------------------------
+/mvto/ {
+    lbl = $2
+    if ("" == lblX [lbl])
+        error()
+
+    xPos = lblX [lbl]; yPos = lblY [lbl]; dir = lblDir [lbl]
+
+    if ("rev" == $3)
+        dir = (dir + 180) % 360
+
+    printf "# mvto: xPos %6d, yPos %d, dir %d\n", xPos, yPos, dir
+    next
+}
+
+# --------------------------------------
+/pos/   { xPos = $2; yPos = $3; dir = $4;
+  # mark(xPos, yPos, 1, 1, "red")
+    printf "thickness = 1\n"
+    next
+}
+
+# --------------------------------------
+/sdg/ { 
+    len   = $2
+    right = $3
+    sp    = $4
+
+    spur(len, right, sp)
+
+    dir -= angSdg
+    str(lenDiv)
+
+    dir = dirLst
+    next
+}
+
+# --------------------------------------
+/space/ { 
+    dx = $4 - $2
+    dy = $5 - $3
+    if (abs(dx) < abs(dy))
+        line($2, $3, dy*8/5, dy, "black")
     else
-        yard(7, 100)
-}' $* | tee ladder.xgr
+        line($2, $3, $2+dx, $3 + sgn(dy)*dx*5/8,  "black")
+    next
+}
+
+# --------------------------------------
+/spur/ { spur($2, $3, $4); next }
+
+# ----------------------------
+function spur (len, right, sp) {
+    angSdg = AngSdg
+    if ("right" == right)
+        angSdg = -AngSdg
+
+    dirLst = dir
+    dir   += angSdg
+    lenDiv = sp / sin(abs(angSdg) * Pi / 180)
+    printf "# sdg: dirLst %.2f, dir %.2f, angSdg %.2f, lenDiv %.2f\n", \
+        dirLst, dir, angSdg, lenDiv
+
+    str(lenDiv)
+
+    printf "# sdg chk 1\n"
+    dir = dirLst
+    str(len)
+}
+
+# --------------------------------------
+/str/   {
+    str($2); next
+}
+
+# ----------------------------
+function str (len) {
+    printf "# str: xPos %6d, yPos %d, dir %d, len %.2f\n", xPos, yPos, dir, len
+    x0   = xPos;                  y0   = yPos
+    c    = cos(dir * Pi / 180);   s    = sin(dir * Pi / 180)
+    xPos = x0 + c * len;          yPos = y0 + s * len
+
+    line(x0, y0, xPos, yPos, ColTrk)
+}
+
+# ------------------------------------------------
+NF { 
+    error("unkown")
+}
+
+# --------------------------------------------------------------------
+END {
+}' << **END** | tee corner.xgr
+    space 30 0 144  -60
+
+    room  30 0, 144 0, 144 -60
+#   bench 40 0, 40 -24, 116 -24, 128 -36, 128 -60
+    bench 40 0, 40 -18, 46 -24, 110 -24, 128 -36, 128 -60
+
+    pos   140 -56,  90
+    lbl    P
+    str    8
+    curve 28 80
+    str    2
+    lbl    A
+    str   55
+    lbl    B
+    str   20
+
+# siding
+    mvto   A
+    curve 46  10
+    curve 46 -10
+    lbl    C
+    str   40
+    curve 46 -10
+    curve 46  10
+
+# front
+    mvto   C
+    curve 46  10
+    str    4
+    curve 46 -10
+    str   10
+ #  lbl    e
+    str   25
+
+ #  mvto   e
+ #  curve 46 -10
+ #  str   30
+
+# back sectin
+    mvto   B rev
+    curve 20  30
+    lbl    c
+    str   18
+    curve 20 -20
+    lbl    d
+    str   30
+
+    mvto   c
+    curve 20 -30
+    str   30
+
+    mvto   d rev
+    str   10
+    lbl    f
+    str   40
+
+    mvto   f
+    curve 15  21
+    curve 15 -21
+    str   18
+
+# corner section
+    mvto   P
+    curve 15 -21
+    curve 15  21
+    str    8
+    lbl    q
+    str    4
+    curve 15  40
+    str   20
+
+    mvto   q
+    curve 15  40
+    str   24
+**END**
