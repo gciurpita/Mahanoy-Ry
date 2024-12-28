@@ -1,0 +1,77 @@
+    title Corner
+    space 30 0 144  -60
+
+    room  30 0, 144 0, 144 -60
+#   bench 40 0, 40 -24, 116 -24, 128 -36, 128 -60
+    bench 40 0, 40 -18, 46 -24, 110 -24, 128 -36, 128 -60
+
+    color orange
+
+    pos   140 -56,  90
+    lbl    P
+    str    8
+    curve 28 80
+    str    2
+    lbl    A
+    str   55
+    lbl    B
+    str   20
+
+# siding
+    mvto   A
+    curve 46  10
+    curve 46 -10
+    lbl    C
+    str   40
+    curve 46 -10
+    curve 46  10
+
+# front
+    mvto   C
+    curve 46  10
+    str    4
+    curve 46 -10
+    str   10
+ #  lbl    e
+    str   25
+
+ #  mvto   e
+ #  curve 46 -10
+ #  str   30
+
+# back sectin
+    mvto   B rev
+    curve 20  30
+    lbl    c
+    str   18
+    curve 20 -20
+    lbl    d
+    str   30
+
+    mvto   c
+    curve 20 -30
+    str   30
+
+    mvto   d rev
+    str   10
+    lbl    f
+    str   40
+
+    mvto   f
+    curve 15  21
+    curve 15 -21
+    str   18
+
+# corner section
+    mvto   P
+    curve 15 -21
+    curve 15  21
+    str    8
+    lbl    q
+    str    4
+    curve 15  40
+    str   20
+
+    mvto   q
+    curve 15  40
+    str   24

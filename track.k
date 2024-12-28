@@ -1,6 +1,7 @@
+# yet another track drawing too
 awk '
 # --------------------------------------------------------------------
-function anno (x, y, text, color)  {
+function anno (x, y, text)  {
     yAnno += dyAnno
     printf "anno %8.4f %8.4f  %s\n", x, y, text
 }
@@ -8,7 +9,7 @@ function anno (x, y, text, color)  {
 # ------------------------------------------------
 # standard orientation
 function arc (x0, y0, a0, a1, rad, col, a)  {
-    printf "next\ncolor = %s\n", col
+    printf "next\n"
 
     if (a1 < a0)  {
         a  = a0
@@ -28,7 +29,7 @@ function arc (x0, y0, a0, a1, rad, col, a)  {
 
 # ------------------------------------------------
 function line (x0, y0, x1, y1, color)  {
-    printf "next\ncolor=%s\n", color
+    printf "next\n"
     printf " %8.4f  %8.4f\n", x0, y0
     printf " %8.4f  %8.4f\n", x1, y1
     printf "\n"
@@ -355,7 +356,8 @@ function error (msg)  {
 # ------------------------------------------------
 function xyPairs (col, thick, label) {
     printf "thickness = %s\n",  thick
-    printf "color = %s\n",      col
+    if (col)
+        printf "color = %s\n",      col
     printf "next\n"
     for (n = 2; n < NF; n += 2)
         printf " %8.2f %8.2f\n", $n, $(n+1)
@@ -367,14 +369,22 @@ function xyPairs (col, thick, label) {
 NF      { printf "# %s\n", $0 }
 /quit/  { exit }
 
-/bench/ { xyPairs("white", 2, $1); next }
-/room/  { xyPairs("blue",  2, $1); next }
+/bench/ { xyPairs("white", 2, $1);    next }
+/color/ { printf "color = %s\n", col=$2;  next }
+/obj/   { xyPairs("",  2, $1);    next }
+/room/  { xyPairs("blue",  2, $1);    next }
+/title/ { printf "title  %s\n", substr($0, index($0, $2)); next }
 
 # ------------------------------------------------
 /curve/ {
     rad  = $2
     dAng = $3
     dbg  = $4
+    curve($2, $3, $4)
+}
+
+# ------------------------------------------------
+function curve (rad, dAng, dbg) {
     printf "title_x curve: dbg %s\n", dbg
 
     if (0 < dAng)  {
@@ -456,12 +466,34 @@ NF      { printf "# %s\n", $0 }
 
 # --------------------------------------
 /space/ { 
-    dx = $4 - $2
-    dy = $5 - $3
-    if (abs(dx) < abs(dy))
-        line($2, $3, dy*8/5, dy, "black")
-    else
-        line($2, $3, $2+dx, $3 + sgn(dy)*dx*5/8,  "black")
+    dx  = $4 - $2;   xC = ($2+$4) / 2
+    dy  = $5 - $3;   yC = ($3+$5) / 2
+
+    aspect = 5/8
+    if ($6)
+        aspect = $6
+
+    # black line establishing screen x/y ranges
+    printf "color = %s\n", "black"
+    if (abs(dx) < abs(dy))  {
+        dXd2 = (aspect * dy) / 2
+        line(xC - dXd2, $3, xC + dXd2, $5, col)
+        rad = dx/2
+    }
+    else  {
+        dYd2 = (aspect * dx) / 2
+        line($2, yC - dYd2, $2+dx, yC + dYd2, col)
+        rad = dy/2
+    }
+
+    # aspect circle
+    printf "# rad %6.2f, dx %6.2f, dy %6.2f\n", rad, dx, dy
+    cn = 33
+    printf "set_color %d = ( %d, %d, %d )\n", cn, 50, 50, 50
+
+    printf "color = %s\n", cn
+    arc(($4+$2)/2, ($5+$3)/2, 0, 360, rad, cn)
+
     next
 }
 
@@ -509,79 +541,4 @@ NF {
 
 # --------------------------------------------------------------------
 END {
-}' << **END** | tee corner.xgr
-    space 30 0 144  -60
-
-    room  30 0, 144 0, 144 -60
-#   bench 40 0, 40 -24, 116 -24, 128 -36, 128 -60
-    bench 40 0, 40 -18, 46 -24, 110 -24, 128 -36, 128 -60
-
-    pos   140 -56,  90
-    lbl    P
-    str    8
-    curve 28 80
-    str    2
-    lbl    A
-    str   55
-    lbl    B
-    str   20
-
-# siding
-    mvto   A
-    curve 46  10
-    curve 46 -10
-    lbl    C
-    str   40
-    curve 46 -10
-    curve 46  10
-
-# front
-    mvto   C
-    curve 46  10
-    str    4
-    curve 46 -10
-    str   10
- #  lbl    e
-    str   25
-
- #  mvto   e
- #  curve 46 -10
- #  str   30
-
-# back sectin
-    mvto   B rev
-    curve 20  30
-    lbl    c
-    str   18
-    curve 20 -20
-    lbl    d
-    str   30
-
-    mvto   c
-    curve 20 -30
-    str   30
-
-    mvto   d rev
-    str   10
-    lbl    f
-    str   40
-
-    mvto   f
-    curve 15  21
-    curve 15 -21
-    str   18
-
-# corner section
-    mvto   P
-    curve 15 -21
-    curve 15  21
-    str    8
-    lbl    q
-    str    4
-    curve 15  40
-    str   20
-
-    mvto   q
-    curve 15  40
-    str   24
-**END**
+}' $*

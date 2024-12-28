@@ -1,0 +1,158 @@
+    title End Wall
+    space 0 0 144 -60
+
+    room   0 -80, 0 0, 144 0, 144 -60
+
+    color  dark-gray
+    obj   52   0, 52  -48,   0 -48
+    obj    9 -12,  9  -9, 12  -9
+
+    bench 16 -80, 16 -50
+    bench 56   0, 56 -80
+    bench 88 -80, 88 -28, 100 -10, 130 -10
+
+    # --------------------------------------
+    # view blocks
+    color dark-gray
+    pos   67  -80  90
+    str   60
+    pos   77  -80  90
+    str   60
+
+    # --------------------------------------
+    # trackage
+    color orange
+    pos    2 -30,  90
+
+    curve 28 -110
+    # 110
+
+    # start of 1st turnout
+    str    1
+    lbl    A
+
+    # spur
+    str   11
+    curve 28 26
+
+    lbl   m
+    str  17
+
+    mvto  m
+    curve 27  13
+    curve 27 -13
+    str    5
+
+    # cont curve thru turnout 
+    mvto   A
+    color cyan
+    curve 47  -10
+
+    color orange
+    str    1
+    curve 28  -40
+    # 160
+
+    # start of 2nd turnout
+    str    1
+    lbl    B
+
+    # cont curve thru 2nd turnout
+    color cyan
+    curve 47  -10
+    # 160
+
+    color orange
+    str    1
+
+    curve 28  -30
+    # 200
+    str   10
+    curve 28   20
+    str   15
+
+    # staging ladder - 180
+    mvto   B
+    str   19
+
+    str    1
+    lbl    a
+
+    # 1st staging turnout
+    color cyan
+    curve 47  -10
+    # 160
+
+    color orange
+    str    1
+
+    str    1
+    lbl    b
+
+    # 2nd staging turnout
+    color cyan
+    curve 47  -10
+    # 170
+
+    color orange
+    str    1
+    str   15
+
+    mvto   b
+    str    4
+    curve 38  -10
+    str   15
+
+    mvto   a
+    color  red
+    str    6
+    curve 40  -20
+    str   15
+
+    # ------------------------------------------------
+    # other side
+    pos   86  -30  90
+    lbl   O
+    curve 28  -70
+    lbl   X
+
+    curve 28 -130
+
+    # ----------------------------
+    # bi-way industry
+    mvto  X rev
+    curve 28 -13
+    lbl   Y
+
+    str   18
+
+    mvto  Y
+    curve 27 -13
+    curve 27  13
+    str    7
+
+    # ----------------------------
+    mvto  O rev
+
+    str   6
+    # industry spur switch
+    lbl   n
+
+    str  10
+    # siding
+    lbl   p
+
+    str  20
+
+    mvto  p
+    curve 48  -10
+    curve 48   10
+    str   10
+
+    # industry spur
+    mvto   n rev
+    curve 27  13
+    curve 27 -13
+    str   12
+
+
