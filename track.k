@@ -9,7 +9,7 @@ function anno (x, y, text)  {
 # ------------------------------------------------
 # standard orientation
 function arc (x0, y0, a0, a1, rad, col, a)  {
-    printf "next\n"
+    printf "color=%s\nnext\n", col
 
     if (a1 < a0)  {
         a  = a0
@@ -29,7 +29,7 @@ function arc (x0, y0, a0, a1, rad, col, a)  {
 
 # ------------------------------------------------
 function line (x0, y0, x1, y1, color)  {
-    printf "next\n"
+    printf "color=%s\nnext\n", color
     printf " %8.4f  %8.4f\n", x0, y0
     printf " %8.4f  %8.4f\n", x1, y1
     printf "\n"
@@ -376,16 +376,28 @@ NF      { printf "# %s\n", $0 }
 /title/ { printf "title  %s\n", substr($0, index($0, $2)); next }
 
 # ------------------------------------------------
-/curve/ {
-    rad  = $2
-    dAng = $3
-    dbg  = $4
-    curve($2, $3, $4)
+/aspect/ {
+    printf "set_color %d = (%d, %d, %d)\n", g1=33, 50, 50, 50
+    arc($2, $3, 0, 360, $4, g1)
+    next
 }
 
 # ------------------------------------------------
-function curve (rad, dAng, dbg) {
-    printf "title_x curve: dbg %s\n", dbg
+/curve/ {
+    rad  = $2
+    dAng = $3
+    col  = $4
+    printf "# nF %d\n", NF
+    if (4 <= NF)  {
+        curve(rad, dAng, col)
+    }
+    else
+        curve(rad, dAng)
+}
+
+# ------------------------------------------------
+function curve (rad, dAng, color) {
+    printf "# curve: rad %.1f, dAng %.1f, color %s\n", red, dAng, color
 
     if (0 < dAng)  {
         a0   = dir - 90
@@ -398,23 +410,42 @@ function curve (rad, dAng, dbg) {
         dir = (a1 - 90) % 360
     }
 
-    col = ColTrk
-    if ($4)
-        col = $4
-
     c = cos(a0 * Pi / 180)
     s = sin(a0 * Pi / 180)
     xC = xPos - c * rad
     yC = yPos - s * rad
 
 
-    if ("" != dbg)
-        mark(xC, yC, 1, 1, "yellow")
+  # if ("" != dbg)
+  #     mark(xC, yC, 1, 1, "yellow")
 
+    col = ColTrk
+    if ("" != color) {
+        col = color
+        printf "#   col %s\n", col
+    }
     arc(xC, yC, a0, a1, rad, col)
 
     c    = cos(a1 * Pi / 180);   s    = sin(a1 * Pi / 180)
     xPos = xC + c*rad;           yPos = yC + s*rad
+
+    next
+}
+
+# --------------------------------------
+/grid/ {
+    x0 = $2;    y0 = int($3)
+    x1 = $4;    y1 = int($5)
+    dd = $6
+
+    printf "thickness = 0.7\n"
+    printf "set_color %d = (%d, %d, %d)\n", g2=33, 80, 80, 80
+    printf "color = %d\n", g2
+    for (x = x0; x <= x1; x += dd)
+        line(x, y0, x, y1, g2)
+
+    for (y = y0; y <= y1; y += dd)
+        line(x0, y, x1, y, g2)
 
     next
 }
@@ -521,17 +552,23 @@ function spur (len, right, sp) {
 
 # --------------------------------------
 /str/   {
-    str($2); next
+    if (3 <= NF)
+        str($2, $3)
+    else
+        str($2)
+    next
 }
 
 # ----------------------------
-function str (len) {
+function str (len, col) {
     printf "# str: xPos %6d, yPos %d, dir %d, len %.2f\n", xPos, yPos, dir, len
     x0   = xPos;                  y0   = yPos
     c    = cos(dir * Pi / 180);   s    = sin(dir * Pi / 180)
     xPos = x0 + c * len;          yPos = y0 + s * len
 
-    line(x0, y0, xPos, yPos, ColTrk)
+    if (! col)
+        col = ColTrk
+    line(x0, y0, xPos, yPos, col)
 }
 
 # ------------------------------------------------

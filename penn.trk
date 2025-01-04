@@ -1,18 +1,26 @@
     title pennisula
 
+    aspect 200 70 50
+
+    grid 100 40 120  60 1
+    grid 120 50 150 100 1
+
     room   360 101, 360  42
 
     bench  316  56, 124  56, 102  42,
     bench  102  42,  77  42,  60  59,  60  84,  77 101, 102 101,
     bench  102 101, 124  88, 316  88
 
+    # stove base
+    color  dark-gray
+    obj  360  92, 312  92, 312 101
+
     # --------------------------------------
     # view blocks
-    color dark-gray
     pos  316   77 180
-    str  192
+    str  192 dark-gray
     pos  316   68 180
-    str  170
+    str  170 dark-gray
 
     # --------------------------------------
     pos 337  83 200
@@ -59,32 +67,57 @@
     # --------------------------------------
     # cont curve thru 2nd turnout
     mvto   B
-    color cyan
-    curve 47  -10
+    curve 47  -10 blue
     # 160
 
-    color orange
     str    1
 
     curve 28  -30
     # 200
-    str   10
+    str   6
     curve 28   20
 
     str   24
     lbl   C
 
     str  104
+    lbl   Z
 
+    str   31
+    lbl   W
+
+    # ----------------------------
+    # loop industries
+    curve 27 13  blue
+    str   20
+
+    # ----------------------------
+    # loop
+    mvto  W
+    str   13
+
+    curve 28  -39
+    str    2
+    curve 28   39
+    curve 28  180
+    curve 28   30
+    lbl    V
+
+    str   14
+    curve 28  -30
+    lbl    Q
+
+    # --------------------------------------
+    # uppper station 
     mvto  C
     # siding
     curve 47  10
     curve 47 -10
     str   10
     lbl   D
-    str   42
+    str   60
     lbl   E
-    str   20
+    str    2
     curve 47 -10
     curve 47  10
 
@@ -100,7 +133,46 @@
     str   24
 
     mvto E
-    curve 21  14
-    str   15
-    curve 21 -14
-    str   24
+    curve 21  13
+    curve 28  -10 red
+    str   40
+
+    # --------------------------------------
+    # staging entrance, beginning of turnout
+    mvto   V
+    str    1
+    curve 47  10 blue
+    str   10
+    lbl    x           1st turnout
+
+    # thru non-diveging path & outer curve
+    str   10
+    str    4
+    curve 28  -40
+    str   100
+
+    mvto   x
+    str    1
+    curve 47  -10 blue
+    lbl    y            2nd turnout
+    
+    # thru non-diveging path & middle curve
+    str   10
+    curve 28  -30
+    str   100
+
+    mvto   y
+    str    1
+
+    # thru diveging path & inner curve
+    curve 47  -10 blue
+    str    3
+    curve 28  -20
+    str   100
+
+    # --------------------------------------
+    # near station
+    mvto Q
+    str  48
+
+
