@@ -421,7 +421,7 @@ function curve (rad, dAng, dbg) {
 
 # --------------------------------------
 /lbl/ {
-    printf "# lbl: xPos %6d, yPos %d, dir %d\n", xPos, yPos, dir
+    printf "# lbl: %s, xPos %6d, yPos %d, dir %d\n", $2, xPos, yPos, dir
     lblX [$2] = xPos;  lblY [$2] = yPos; lblDir [$2] = dir
     anno(xPos, yPos, $2)
     next
