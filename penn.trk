@@ -5,15 +5,17 @@
     grid 100 40 120  60 1
     grid 120 50 150 100 1
 
-    room   360 101, 360  42
+    room   360  30, 360 120
 
-    bench  316  56, 124  56, 102  42,
+    bench  360  56, 124  56, 102  42,
     bench  102  42,  77  42,  60  59,  60  84,  77 101, 102 101,
-    bench  102 101, 124  88, 316  88
+    bench  102 101, 124  88, 360  88
 
     # stove base
     color  dark-gray
     obj  360  92, 312  92, 312 101
+    
+    obj  343 100, 321  97, 317 124
 
     # --------------------------------------
     # view blocks
@@ -23,24 +25,52 @@
     str  170 dark-gray
 
     # --------------------------------------
+    # from end eall
+    pos 354 104 -110
+    lbl A
+
+    # --------------------------------------
+    # mine spur
+    str   11
+    curve 28 26
+
+    lbl   m
+    str  17
+
+    mvto  m
+    curve 27  13
+    curve 27 -13
+    str    5
+
+    # --------------------------------------
+    # continue mainline
+    mvto   A
+    color cyan
+    curve 47  -10
+
+    color orange
+    str    1
+    curve 28  -40
+    # 160
+
+    str    1
+
+    # --------------------------------------
     pos 337  83 200
     lbl B
 
     # --------------------------------------
     # staging ladder - 180
-    str   19
+    str   16
 
     str    1
     lbl    a
 
     # 1st staging turnout
-    color cyan
     curve 47  -10
     # 160
 
     color orange
-    str    1
-
     str    1
     lbl    b
 
@@ -49,20 +79,18 @@
     curve 47  -10
     # 170
 
-    color orange
-    str    1
-    str   15
+    str   55
 
     mvto   b
-    str    4
+    str    8
     curve 38  -10
-    str   15
+    str   47
 
     mvto   a
     color  red
-    str    6
-    curve 40  -20
-    str   15
+    str    10
+    curve 46  -20
+    str   48
 
     # --------------------------------------
     # cont curve thru 2nd turnout
@@ -173,6 +201,92 @@
     # --------------------------------------
     # near station
     mvto Q
-    str  48
+    str  60
+    lbl  R
 
+    str 104
+
+    # siding
+    mvto R
+    curve 47  10
+    curve 47 -10
+
+    str 20
+    lbl  S
+
+    str 42
+    lbl  T
+    str 10
+
+    curve 47 -10
+    curve 47  10
+    lbl  U
+
+    # coal dealer
+    mvto R rev
+    curve 26 -12
+    str   30
+
+    # freight house
+    mvto S
+    curve 26  15
+    str 12
+    curve 26 -15
+    str 20
+
+    # multiple spots #2
+    mvto S rev
+    curve 26 -20
+    str   12
+    curve 26  20
+    str   20
+
+    # multiple spots #1
+    mvto U
+    curve 26  20
+    str    6
+    curve 26 -20
+
+    lbl  Y
+    str   10
+    lbl  tail
+    str   20
+
+    mvto Y rev
+    curve 20 -15
+    str   10
+    curve 20  15
+
+    str   10
+    lbl   E
+    str   10
+    lbl   D
+    str   10
+    lbl   C
+    str   10
+    lbl   B
+    str   10
+    lbl   A
+    str   10
+
+    # continue mainline
+    mvto U
+    str    36
+    curve  28  -90
+
+    lbl  W
+    curve  28  -90
+
+    # power plant
+    mvto W rev
+    str   10
+    curve 30 13
+
+    lbl    X
+    str   18
+
+    mvto   X
+    curve 26   12
+    curve 26  -12
+    str    7
 
