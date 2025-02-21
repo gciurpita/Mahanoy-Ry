@@ -47,6 +47,17 @@ function mark (x, y, dx, dy, color)  {
     printf " %8.4f  %8.4f\n", x+dx, y
 }
 
+# ------------------------------------------------
+# pic style, centered on y0
+function rect (x0, y0, dw, dh, color, label) {
+    printf "next\n"
+    printf " %8.4f %8.4f\n", x0,      y0
+    printf " %8.4f %8.4f\n", x0 + dw, y0
+    printf " %8.4f %8.4f\n", x0 + dw, y0 + dh
+    printf " %8.4f %8.4f\n", x0,      y0 + dh
+    printf " %8.4f %8.4f\n", x0,      y0
+}
+
 # --------------------------------------------------------------------
 # ------------------------------------------------
 function ladder (x0, y0, ang, rL, N, len, col) {
@@ -303,7 +314,7 @@ function turnout (x0, y0, ang) {
     x5   = x1 + rad * c
     y5   = y1 + rad * s
     line(x1, y1, x5, y5, col4)
-    printf "title_x: a2 %6.2f, x5 %6.2f\n", a2, x5
+  # printf "title_x: a2 %6.2f, x5 %6.2f\n", a2, x5
 }
 
 # ------------------------------------------------
@@ -362,6 +373,7 @@ function xyPairs (col, thick, label) {
     for (n = 2; n < NF; n += 2)
         printf " %8.2f %8.2f\n", $n, $(n+1)
 
+    printf "thickness = 1\n"
 }
 
 # ------------------------------------------------
@@ -369,10 +381,14 @@ function xyPairs (col, thick, label) {
 NF      { printf "# %s\n", $0 }
 /quit/  { exit }
 
-/bench/ { xyPairs("white", 2, $1);    next }
-/color/ { printf "color = %s\n", col=$2;  next }
-/obj/   { xyPairs("",  2, $1);    next }
-/room/  { xyPairs("blue",  2, $1);    next }
+/arc/   { arc($2, $3, $4, $5, $6, $7);      next }
+/rect/  { rect($2, $3, $4, $5);             next }
+/thick/ { printf "thickness = %s\n", $2;    next }
+
+/bench/ { xyPairs("white", 2, $1);          next }
+/color/ { printf "color = %s\n", ColTrk=$2;    next }
+/obj/   { xyPairs("",  2, $1);              next }
+/room/  { xyPairs("blue",  2, $1);          next }
 /title/ { printf "title  %s\n", substr($0, index($0, $2)); next }
 
 # ------------------------------------------------
@@ -452,7 +468,7 @@ function curve (rad, dAng, color) {
 
 # --------------------------------------
 /lbl/ {
-    printf "# lbl: %s, xPos %6d, yPos %d, dir %d\n", $2, xPos, yPos, dir
+    printf "# lbl: %s, xPos %6.2f, yPos %.2f, dir %.2f\n", $2, xPos, yPos, dir
     lblX [$2] = xPos;  lblY [$2] = yPos; lblDir [$2] = dir
     anno(xPos, yPos, $2)
     next
@@ -461,8 +477,9 @@ function curve (rad, dAng, color) {
 # --------------------------------------
 /mvto/ {
     lbl = $2
-    if ("" == lblX [lbl])
-        error()
+    if ("" == lblX [lbl])  {
+        error(sprintf("\"%s\" unknown", lbl))
+    }
 
     xPos = lblX [lbl]; yPos = lblY [lbl]; dir = lblDir [lbl]
 
@@ -474,9 +491,19 @@ function curve (rad, dAng, color) {
 }
 
 # --------------------------------------
+/mvtt/ {
+    dir  = $2
+
+    xPos = xTt + cos(dir * Pi / 180) * diaTt /2;
+    yPos = yTt + sin(dir * Pi / 180) * diaTt /2
+
+    printf "# mvtt: xPos %6d, yPos %d, dir %d\n", xPos, yPos, dir
+    next
+}
+
+# --------------------------------------
 /pos/   { xPos = $2; yPos = $3; dir = $4;
   # mark(xPos, yPos, 1, 1, "red")
-    printf "thickness = 1\n"
     next
 }
 
@@ -505,7 +532,7 @@ function curve (rad, dAng, color) {
         aspect = $6
 
     # black line establishing screen x/y ranges
-    printf "color = %s\n", "black"
+    col = "black"
     if (abs(dx) < abs(dy))  {
         dXd2 = (aspect * dy) / 2
         line(xC - dXd2, $3, xC + dXd2, $5, col)
@@ -569,6 +596,21 @@ function str (len, col) {
     if (! col)
         col = ColTrk
     line(x0, y0, xPos, yPos, col)
+}
+
+# --------------------------------------
+# turntable
+/tt/   {
+    diaTt = $2
+
+    if (! col)
+        col = ColTrk
+
+    xTt  = xPos + cos(dir * Pi / 180) * diaTt /2;
+    yTt  = yPos + sin(dir * Pi / 180) * diaTt /2
+    arc(xTt, yTt, 0, 360, diaTt /2, col)
+
+    next
 }
 
 # ------------------------------------------------

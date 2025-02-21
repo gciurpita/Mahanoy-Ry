@@ -1,19 +1,21 @@
 
-    Xgrs  = $(patsubst %.k, %.xgr, *.k)
-    Xgrs  = lavale.xgr loop.xgr staging.xgr
+	Trks = corner.trk penn.trk shelf.trk wall.trk water.trk
 
 %.xgr : %.trk
 	track.k $^ | tee $@
 
 %.xgr : %.k
 	$^ | tee $@
+	xgraph -ng -monitor_files 5 penn.xgr &
 
 # ----------------------------------------------------------
-all : $(Xgrs)
+all.xgr : $(Trks)
+	track.k $(Trks) | tee $@
 
 # ----------------------------------------------------------
 neat :
 	@ rm -f *~
+	@ echo $(Trks)
 
 clean : neat
-	rm -f *xgr
+	rm -f $(Xgrs) all.xgr
