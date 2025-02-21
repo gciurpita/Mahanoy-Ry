@@ -1,0 +1,35 @@
+# water shelf
+
+    room 210  0, 360  0, 360 48
+
+    bench 210 0, 210 16, 306 16
+
+    arc 329 12 0 360 9
+
+    # --------------------------------------
+    color green
+    pos 330.42 57.95 0
+
+    curve  28  -90
+
+    lbl  W
+    curve  28  -90
+
+    curve  28  -5
+    str   110
+
+    # ----------------------------
+    # power plant
+    mvto W rev
+    str   10
+    curve 30 13
+
+    lbl    X
+    str   18
+
+    mvto   X
+    curve 26   12
+    curve 26  -12
+
+    str    7
+

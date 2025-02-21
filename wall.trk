@@ -1,28 +1,26 @@
     title End Wall
-    space 0 0 144 -60
+    space 0 0 260 144
 
-    room   0 -80, 0 0, 144 0, 144 -60
+    room   312 144, 360 144, 360 90
 
+  # bench 280 88, 340 88
+  # bench 280 56, 330 56
+  # bench 280 16, 312 16
+
+    # stove platform
     color  dark-gray
-    obj   52   0, 52  -48,   0 -48
-    obj    9 -12,  9  -9, 12  -9
+    obj  360  92, 312 92, 312 144
+ #  obj   -12  9,  -9  9,  -9 12    corner of stove
 
-    bench 16 -80, 16 -50
-    bench 56   0, 56 -80
-    bench 88 -80, 88 -28, 100 -10, 130 -10
-
-    # --------------------------------------
-    # view blocks
     color dark-gray
-    pos   67  -80  90
-    str   60
-    pos   77  -80  90
-    str   60
+    obj  280 77, 300 77
+    obj  280 67, 330 67
 
     # --------------------------------------
     # trackage
     color orange
-    pos    2 -30,  90
+#   pos    2 -30,  90
+    pos  330 142,   0
 
     curve 28 -110
     # 110
@@ -108,51 +106,4 @@
     str    6
     curve 40  -20
     str   15
-
-    # ------------------------------------------------
-    # other side
-    pos   86  -30  90
-    lbl   O
-    curve 28  -70
-    lbl   X
-
-    curve 28 -130
-
-    # ----------------------------
-    # bi-way industry
-    mvto  X rev
-    curve 28 -13
-    lbl   Y
-
-    str   18
-
-    mvto  Y
-    curve 27 -13
-    curve 27  13
-    str    7
-
-    # ----------------------------
-    mvto  O rev
-
-    str   6
-    # industry spur switch
-    lbl   n
-
-    str  10
-    # siding
-    lbl   p
-
-    str  20
-
-    mvto  p
-    curve 48  -10
-    curve 48   10
-    str   10
-
-    # industry spur
-    mvto   n rev
-    curve 27  13
-    curve 27 -13
-    str   12
-
 
