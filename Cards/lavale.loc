@@ -1,0 +1,21 @@
+# locations
+
+    BRX  2  Maizeville freight
+    X    1  Maizeville Clothing (left)
+    X    1  Maizeville Machine  (left)
+    X    1  Maizeville Baking   (right)
+    X    1  Maizeville Lumber   (right)
+
+    U    10 East_Bear_Ridge
+
+    _    99 Staging Mahanoy_City
+    _    99 Staging Shamokin
+    _    99 Staging Tomaqua
+
+    BRX  2  Gliberton freight
+    H    1  Gliberton coal
+    X    1  Gliberton A
+    X    1  Gliberton B
+    X    1  Gliberton C
+    X    1  Gliberton D
+    X    1  Gliberton E
