@@ -1,0 +1,152 @@
+    title Shelf
+
+    space  0 -100 351 0  1.30
+    room   0 -100,  0   0, 351   0, 351 -96
+    bench  0  -96, 16 -96,  16 -20,  20 -16, 280 -16
+
+    color orange
+
+    pos   349 -30  90
+
+    curve  28  90
+    str    12
+    curve  28  20
+    str    25
+    curve  28 -20
+
+    str    10
+    lbl     A
+    str   102
+    lbl     B
+
+# station siding
+    mvto    A
+    curve  47 -10
+    curve  47  10
+    str    10
+    lbl     a
+    str    62
+    curve  47  10
+    curve  47 -10
+
+    mvto    a rev
+    curve  47  20
+    str    15
+
+# extend
+    mvto    B
+    str    30
+
+# yard ladder diagonal
+#a  lbl    t1
+#a  curve  27  -12
+#a  str    50
+
+#a  mvto   t1
+#a  str    10
+
+#a  lbl    t2
+#a  curve  27  -12
+#a  str    50
+
+#a  mvto   t2
+#a  str    10
+
+#a  lbl    t3
+#a  curve  27  -12
+#a  str    50
+
+#a  mvto   t3
+#a  str    10
+
+#a  lbl    t4
+#a  curve  27  -12
+#a  str    45
+
+#a  mvto   t4
+#a  str    10
+
+#a  lbl    t5
+#a  curve  27  -12
+#a  str    45
+
+#a  mvto   t5
+#a  str    10
+
+#a  lbl    t6
+#a  curve  27  -12
+#a  str    45
+
+#a  mvto   t6
+#a  str    10
+
+#a  lbl    t7
+#a  curve  27  -12
+#a  str    40
+
+#a  mvto   t7
+#a  str    10
+
+#a  lbl    t8
+#a  curve  27  -12
+#a  str    30
+
+#a  mvto   t8
+#a  str    10
+
+
+# yard ladder
+    lbl    t1
+    str   100
+
+    mvto   t1
+    curve  27  -12
+    lbl    t2
+
+    curve  27   12
+    str    60
+
+    # escape
+    curve 28   12
+    curve 28  -12
+
+    mvto   t2
+    str    10
+
+    lbl    t3
+    curve  27   12
+    str    80
+
+    mvto   t3
+    str    10
+
+    lbl    t4
+    curve  27   12
+    str    70
+
+    mvto   t4
+    str    10
+
+    lbl    t5
+    curve  27   12
+    str    60
+
+    mvto   t5
+    str    10
+
+    lbl    t6
+    curve  27   12
+    str    50
+
+    mvto   t6
+    str    10
+
+    lbl    t7
+    curve  27   12
+    str    40
+
+
+    color red
+    pos    46   -2 180
+    str     8
+    curve 28 80
