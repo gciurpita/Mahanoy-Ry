@@ -12,10 +12,8 @@
     type X   Box
     type _   any
 
-    G RDG      1806
 
 #   H LV       1400
-    H P&R      2424
 #   H P&R      2424
 #   H P&R     87267
 #   H PRR    220558
@@ -26,23 +24,30 @@
 #   H RDG     67710
 #   H RDG     73155
 
-    R MREX      200
-    R P&R    FastFr
-
-#   S WABASH  16422
-
     X CNJ     12502
     X DL&W    54704
     X ERIE   102003
+    R MREX      200
     X N&W      xxxx
     X NH      84263
+
     X NYC     27776
     X NYC    180190
+
     X NYO&W    6493
+
+    H P&R      2424
+    R P&R    FastFr
+
     X PRR     67890
+
+    G RDG      1806
+    H P&R      2424
     X RDG      5621
     X RDG    101195
     X RDG    101198
     X RDG    101199
     X RDG    102519
+
+    S WABASH  16422
     X WM       1135

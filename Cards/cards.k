@@ -2,6 +2,12 @@
 awk '
 BEGIN {
     Ncols = 5
+    C     = 0
+}
+
+# --------------------------------------------------------------------
+{
+  # print
 }
 
 # ------------------------------------------------
@@ -16,10 +22,10 @@ match(FILENAME, "car")  {
         type [$2] = $3
     }
     else {
-        car         = substr($0, index($0, $2))
-        cars   [car] = $1
-        carRR  [car] = $2
-        carNum [car] = $3
+        cars    [C]   = substr($0, index($0, $2))
+        carType [C]   = $1
+        carRR   [C]   = $2
+        carNum  [C++] = $3
     }
 }
 
@@ -31,14 +37,17 @@ match(FILENAME, "loc")  {
     towns [loc] = $3
     locs  [loc] = $1
 
-    nTypes [$1]++
+    for (n = 1; n <= length($1); n++)
+        nTypes [ substr($1, n, 1) ]++
+
+    nLocs++
 }
 
 # --------------------------------------------------------------------
 function listCars () {
     printf "cars:\n"
-    for (car in cars)
-        printf "    %s  %s %s\n", car, cars [car], type [cars [car]]
+    for (c = 0; c < C; c++)
+        printf "    %2d  %s  %s\n", c, carType [c], cars [c]
 }
 
 # ------------------------------------------------
@@ -49,7 +58,10 @@ function listLocs () {
 }
 
 # --------------------------------------------------------------------
-function genCard (car, list)  {
+function genCard (carIdx, list, nList)  {
+    if (dbg)
+        printf "genCard: %2d %s\n", carIdx, cars [carIdx]
+
     if (0 == nCard)
         printf "<table border=0>\n"
 
@@ -61,10 +73,14 @@ function genCard (car, list)  {
     # --------------------------------------
     Ncol = 3
     printf "  <table border=1 cellspacing=0 width=300>\n"
-    printf "    <tr> <th colspan=%d> %s - %s %s\n", Ncol+1, \
-                type [cars [car]], carRR  [car], carNum [car] 
+    if (0)
+        printf "    <tr> <th colspan=%d> %s - %s %s\n", Ncol+1, \
+                type [carType [c]], carRR [c], carNum [c]
+    else
+        printf "    <tr> <td> %d <th colspan=%d> %s - %s %s\n", \
+                carIdx+1, Ncol, type [carType [c]], carRR [c], carNum [c]
 
-    for (n = 0; n < 4; n++)  {
+    for (n = 0; n < nList; n++)  {
         printf "    <tr> <td width=20> %s\n", "&nbsp;"
         for (col = 1; col < Ncol; col++)
             printf "         <td width=20> %s\n", "&nbsp;"
@@ -81,48 +97,52 @@ function endCard ()  {
 }
 
 # ------------------------------------------------
-function route () {
+function route (nLoc) {
     cntMax = 1
-    for (car in cars)  {
-        if (! nTypes [cars [car]])
+    for (c = 0; c < C; c++)  {
+        if (! nTypes [carType [c]])
             continue
 
+        dbg = 0
         if (dbg)
-            printf "\n  %s  %s\n", car, cars [car]
+            printf "route:  %s\n", cars [c]
 
         locCnt = 0
         town   = ""
-        do {
+        while (4 > locCnt) {
             for (loc in locs)  {
-                if (match(locs [loc], cars [car]) || "_" == locs [loc])  {
-                    if (0.4 > rand())
+                if (match(locs [loc], carType [c]) || "_" == locs [loc])  {
+                    if (1/nLocs < rand())
                         continue
-    
-                    if (towns [loc] == town) {
-                        if (dbg)
-                            printf "%40s %s = %s\n", "***", towns [loc], town
-                        continue
+
+                    if (0) {
+                        if (towns [loc] == town) {
+                            if (dbg)
+                                printf "%40s %s = %s\n", "***", towns [loc], town
+                            continue
+                        }
                     }
 
                     list [locCnt] = loc
-    
+                    locUse [loc]++          # track # selected
+
                   # printf "    %-4s", locs [loc]
                     if (dbg)
                         printf "    %s\n", loc
-                    if (4 <= ++locCnt)   {
+                    if (nLoc <= ++locCnt)   {
                       # printf ".\n"
                         break
                     }
-    
+
                     town = towns [loc]
                 }
                 else {
                     if (dbg) printf "%40s %-4s %s\n", "**", locs [loc], loc
                 }
             }
-        } while (4 > locCnt)
+        }
 
-        genCard(car, list)
+        genCard(c, list, nLoc)
     }
 }
 
@@ -133,7 +153,27 @@ END {
         listCars()
     }
     else  {
-        route()
+        route(5)
         endCard()
+
+        if (1)  {
+            printf "<pre>\n"
+
+            printf "</pre>\n"
+        }
+
+        if (1)  {
+            printf "<pre>\n"
+            for (loc in locs)
+                printf "    %2d  %s\n", locUse [loc], loc
+            printf "</pre>\n"
+        }
+
+        if (0)  {
+            printf "<pre>\n"
+            for (t in type)
+                printf "   %s  %d\n", t, nTypes [t]
+            printf "</pre>\n"
+        }
     }
-}' $* | tee cards.htm
+}' $*
