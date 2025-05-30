@@ -109,35 +109,37 @@ function route (nLoc) {
 
         locCnt = 0
         town   = ""
-        while (4 > locCnt) {
+        while (nLoc > locCnt) {
             for (loc in locs)  {
                 if (match(locs [loc], carType [c]) || "_" == locs [loc])  {
-                    if (1/nLocs < rand())
+                    thresh = 1/nLocs
+
+                    if (0 < locCnt && loc == listUse [locCnt-1])     # same loc
+                        thresh /= 4
+                    else if (towns [loc] == town)
+                        thresh /= 3
+                    else if (towns [loc] != town)
+                        thresh /= 2
+
+                    # ----------------------------
+                    # decide
+                    if (thresh < rand())
                         continue
 
-                    if (0) {
-                        if (towns [loc] == town) {
-                            if (dbg)
-                                printf "%40s %s = %s\n", "***", towns [loc], town
-                            continue
-                        }
-                    }
-
                     list [locCnt] = loc
-                    locUse [loc]++          # track # selected
+                    town          = towns [loc]
+                    locUse [loc]++                  # track # selected
 
                   # printf "    %-4s", locs [loc]
                     if (dbg)
                         printf "    %s\n", loc
-                    if (nLoc <= ++locCnt)   {
-                      # printf ".\n"
-                        break
-                    }
 
-                    town = towns [loc]
+                    if (nLoc <= ++locCnt)
+                        break
                 }
                 else {
-                    if (dbg) printf "%40s %-4s %s\n", "**", locs [loc], loc
+                    if (dbg)
+                        printf "%40s %-4s %s\n", "**", locs [loc], loc
                 }
             }
         }
