@@ -82,7 +82,7 @@ function ladder (x0, y0, ang, rL, N, len, col) {
 
 # ------------------------------------------------
 function plug (x0, y0, col) {
-    printf "thickness = 3\n"
+    printf "thickness = 1.0\n"
     
     if (! col)
         col = "red"
