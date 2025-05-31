@@ -65,17 +65,18 @@ function genCard (carIdx, list, nList)  {
     if (0 == nCard)
         printf "<table border=0>\n"
 
-    if (! (nCard++ % 3))
-        printf "<tr> <td>\n"
-    else
-        printf "<td>\n"
+    if (! (nCard++ % 3)) {
+        printf "<tr>"
+    }
+
+    printf "<td width=33%>\n"
 
     # --------------------------------------
-    Ncol = 3
+    Ncol = 4
     printf "  <table border=1 cellspacing=0 width=300>\n"
-    if (0)
-        printf "    <tr> <th colspan=%d> %s - %s %s\n", Ncol+1, \
-                type [carType [c]], carRR [c], carNum [c]
+    if (1)
+        printf "    <tr> <th colspan=%d> %s <th> %s %s\n", \
+            Ncol, type [carType [c]], carRR [c], carNum [c]
     else
         printf "    <tr> <td> %d <th colspan=%d> %s - %s %s\n", \
                 carIdx+1, Ncol, type [carType [c]], carRR [c], carNum [c]
@@ -164,7 +165,7 @@ END {
             printf "</pre>\n"
         }
 
-        if (1)  {
+        if (0)  {
             printf "<pre>\n"
             for (loc in locs)
                 printf "    %2d  %s\n", locUse [loc], loc
