@@ -62,14 +62,11 @@ function genCard (carIdx, list, nList)  {
     if (dbg)
         printf "genCard: %2d %s\n", carIdx, cars [carIdx]
 
-    if (0 == nCard)
-        printf "<table border=0>\n"
 
-    if (! (nCard++ % 3)) {
-        printf "<tr>"
-    }
+    if (! (nCard++ % 3))
+        printf "<table border=0> <tr>\n"
 
-    printf "<td width=33%>\n"
+    printf " <td width=30%>\n"
 
     # --------------------------------------
     Ncol = 4
@@ -88,8 +85,21 @@ function genCard (carIdx, list, nList)  {
 
         printf "        <td> %s\n", list [n]
     }
-
     printf "  </table>\n"
+    printf "\n"
+
+    # --------------------------------------
+    if ((nCard % 3))  {
+        printf " <td width=3%> &nbsp;\n"
+        printf "\n"
+    }
+
+    # --------------------------------------
+    if (! (nCard % 3))  {
+        printf "</table>\n"
+        printf "<p>\n"
+        printf "\n"
+    }
 }
 
 # ------------------------------------------------
