@@ -1,21 +1,21 @@
 # locations
 
     BRSX 2  Maizeville freight
-    X    1  Maizeville Clothing (left)
-    XG   1  Maizeville Machine  (left)
-    X    1  Maizeville Baking   (right)
-    X    1  Maizeville Lumber   (right)
+    X    1  Sheldon Shirts     (left)
+    XG   1  Arnold Machine     (left)
+    XG   1  Farhad Foundry     (right)
+    X    1  Lawrence Lumber    (right)
 
     U    10 East_Bear_Ridge
 
-    _    99 Staging Mahanoy_City
+    _     1 Mahanoy_City
 #   _    99 Staging Shamokin
 #   _    99 Staging Tomaqua
 
     BRSX 2  Gliberton freight
     H    1  Gliberton coal
-    X    1  Gliberton A
-    X    1  Gliberton B
-    X    1  Gliberton C
-    X    1  Gliberton D
-    X    1  Gliberton E
+    X    1  ACME
+    X    1  Bradley Baking
+    X    1  Corey Clothing
+    X    1  Dennision Distillery
+    X    1  Wotring Electric
