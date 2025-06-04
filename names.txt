@@ -1,0 +1,75 @@
+acme
+bakery               bradley
+beer warehouse
+brewing
+building-supply
+canery
+clothing             cramer
+coal                 clifford
+dyes                 dennison
+electric-supply
+farm-supply
+feed
+food
+footware             fred
+foundry
+furnace
+furniture
+grain
+grocer
+hardware             horace
+i
+junk
+k
+lumber
+machine              mitchell
+meat
+mill (textile)
+milling
+n
+oil
+paper
+paper box
+piping
+piano
+planing
+plumbing
+pork
+pulpwood
+q
+r
+scapyard
+shirt
+silk                 sarah
+supply
+tools
+u
+valves
+warehouse
+x
+y
+z
+
+-- mahanoy city
+bob & baskind shirt factory
+mahanoy city gas co
+hardwood electric
+switft & co
+chas D kaie co brewey, ice & heating plant
+paper box factory
+hosiery mill
+ware house
+flour warehouse
+beer storage
+
+-- pottsville 1
+orchard brewery
+orchard milling co
+orchard iron works
+palo alto iron works
+penn diamond drill co
+pioneer furnaces
+pottsvilee spike works
+pottsvilee iron & steel co
+weed & sailor planing mill
+ulmers pork co
