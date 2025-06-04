@@ -1,8 +1,12 @@
 
 awk '
 BEGIN {
+    dbg   = 0
+
+    Ncard = 2
     Ncols = 5
     C     = 0
+    L     = 0
 
     printf "<html>\n"
     printf "<body>\n"
@@ -31,6 +35,8 @@ BEGIN {
 
 # ------------------------------------------------
 match(FILENAME, "car")  {
+    if (dbg) print
+
     if (/type/)  {
       # print
         type [$2] = $3
@@ -44,17 +50,19 @@ match(FILENAME, "car")  {
 }
 
 # ------------------------------------------------
+##    BRSX 2  Gliberton freight
 match(FILENAME, "loc")  {
-  # print
+    if (dbg) print
 
-    loc         = $3 " " $4
-    towns [loc] = $3
-    locs  [loc] = $1
+    locs     [L]   = $3 " " $4
+    towns    [L]   = $3
+    locSize  [L]   = $2
+    locTypes [L++] = $1
 
     for (n = 1; n <= length($1); n++)
         nTypes [ substr($1, n, 1) ]++
 
-    nLocs++
+    locMax += $2
 }
 
 # --------------------------------------------------------------------
@@ -67,8 +75,8 @@ function listCars () {
 # ------------------------------------------------
 function listLocs () {
     printf "locs:\n"
-    for (loc in locs)
-        printf "    %s\n", loc
+    for (l = 0; l < L; l++)
+        printf "    %s\n", locs [l]
 }
 
 # --------------------------------------------------------------------
@@ -76,8 +84,7 @@ function genCard (carIdx, list, nList)  {
     if (dbg)
         printf "genCard: %2d %s\n", carIdx, cars [carIdx]
 
-    Ncard = 2
-
+    # --------------------------------------
     if (! (nCard++ % Ncard))
         printf "<table border=0> <tr>\n"
 
@@ -98,7 +105,8 @@ function genCard (carIdx, list, nList)  {
         for (col = 1; col < Ncol; col++)
             printf "         <td width=20> %s\n", "&nbsp;"
 
-        printf "        <td> %s\n", list [n]
+        gsub("_", " ", list [n])
+        printf "        <td> &nbsp;%s\n", list [n]
     }
     printf "  </table>\n"
     printf "\n"
@@ -115,6 +123,10 @@ function genCard (carIdx, list, nList)  {
         printf "<p>\n"
         printf "\n"
     }
+
+    # --------------------------------------
+    if (! (nCard % 10))
+        printf "<div style=\"break-after:page\"></div>\n"
 }
 
 # ------------------------------------------------
@@ -123,28 +135,33 @@ function endCard ()  {
 }
 
 # ------------------------------------------------
-function route (nLoc) {
+function route (nLocPcard) {
+    if (dbg)
+        printf "route: nLoc %d\n", nLocPcard
+
     cntMax = 1
     for (c = 0; c < C; c++)  {
+        if (dbg)
+            printf "---- ---------------\nroute:  %s\n", cars [c]
+
         if (! nTypes [carType [c]])
             continue
 
-        dbg = 0
-        if (dbg)
-            printf "route:  %s\n", cars [c]
-
-        locCnt = 0
+        cnt = 0
         town   = ""
-        while (nLoc > locCnt) {
-            for (loc in locs)  {
-                if (match(locs [loc], carType [c]) || "_" == locs [loc])  {
-                    thresh = 1/nLocs
+        while (nLocPcard > cnt) {
+            for (l = 0; l < L; l++)  {
+                loc = locs [l]
 
-                    if (0 < locCnt && loc == listUse [locCnt-1])     # same loc
+                types = locTypes [l]
+                if (match(types, carType [c]) || "_" == types)  {
+                    thresh = 1/L
+
+                    if (0 < cnt && loc == listUse [cnt-1])     # same loc
                         thresh /= 4
-                    else if (towns [loc] == town)
+                    else if (towns [l] == town)
                         thresh /= 3
-                    else if (towns [loc] != town)
+                    else if (towns [l] != town)
                         thresh /= 2
 
                     # ----------------------------
@@ -152,30 +169,31 @@ function route (nLoc) {
                     if (thresh < rand())
                         continue
 
-                    list [locCnt] = loc
-                    town          = towns [loc]
+                    list [cnt] = loc
+                    town          = towns [l]
                     locUse [loc]++                  # track # selected
 
-                  # printf "    %-4s", locs [loc]
                     if (dbg)
                         printf "    %s\n", loc
 
-                    if (nLoc <= ++locCnt)
+                    if (nLocPcard <= ++cnt)
                         break
                 }
                 else {
-                    if (dbg)
-                        printf "%40s %-4s %s\n", "**", locs [loc], loc
+                    if (2 <= dbg)
+                        printf "%40s %-4s %s\n", "**", locs [l], loc
                 }
             }
         }
 
-        genCard(c, list, nLoc)
+        genCard(c, list, cnt)
     }
 }
 
 # ------------------------------------------------
 END {
+    if (dbg) printf "End:\n"
+
     if (0)  {
         listLocs()
         listCars()
@@ -183,12 +201,6 @@ END {
     else  {
         route(5)
         endCard()
-
-        if (1)  {
-            printf "<pre>\n"
-
-            printf "</pre>\n"
-        }
 
         if (0)  {
             printf "<pre>\n"
@@ -203,8 +215,11 @@ END {
                 printf "   %s  %d\n", t, nTypes [t]
             printf "</pre>\n"
         }
+
+        printf "<p> %d cars, %d maxLoc\n", C, locMax
     }
 
+    printf "<p> <i>version 250604a</i>\n"
     printf "</body>\n"
     printf "</html>\n"
 }' $*
