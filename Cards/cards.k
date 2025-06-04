@@ -3,6 +3,20 @@ awk '
 BEGIN {
     Ncols = 5
     C     = 0
+
+    printf "<html>\n"
+    printf "<body>\n"
+
+    printf "<style>\n"
+    printf "  td {\n"
+    printf "    font-family:Arial;\n"
+    printf "    font-size:20px;\n"
+    printf "  }\n"
+    printf "  th {\n"
+    printf "    font-family:Arial;\n"
+    printf "    font-size:24px;\n"
+    printf "  }\n"
+    printf "</style>\n"
 }
 
 # --------------------------------------------------------------------
@@ -62,15 +76,16 @@ function genCard (carIdx, list, nList)  {
     if (dbg)
         printf "genCard: %2d %s\n", carIdx, cars [carIdx]
 
+    Ncard = 2
 
-    if (! (nCard++ % 3))
+    if (! (nCard++ % Ncard))
         printf "<table border=0> <tr>\n"
 
     printf " <td width=30%>\n"
 
     # --------------------------------------
     Ncol = 4
-    printf "  <table border=1 cellspacing=0 width=300>\n"
+    printf "  <table border=1 cellspacing=0 width=400>\n"
     if (1)
         printf "    <tr> <th colspan=%d> %s <th> %s %s\n", \
             Ncol, type [carType [c]], carRR [c], carNum [c]
@@ -89,13 +104,13 @@ function genCard (carIdx, list, nList)  {
     printf "\n"
 
     # --------------------------------------
-    if ((nCard % 3))  {
+    if ((nCard % Ncard))  {
         printf " <td width=3%> &nbsp;\n"
         printf "\n"
     }
 
     # --------------------------------------
-    if (! (nCard % 3))  {
+    if (! (nCard % Ncard))  {
         printf "</table>\n"
         printf "<p>\n"
         printf "\n"
@@ -189,4 +204,7 @@ END {
             printf "</pre>\n"
         }
     }
+
+    printf "</body>\n"
+    printf "</html>\n"
 }' $*
