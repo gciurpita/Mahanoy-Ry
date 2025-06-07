@@ -104,20 +104,21 @@ function svgEnd (text)  {
 # --------------------------------------------------------------------
 BEGIN  {
     Pi       = atan2(0, -1)
-    PixPerFt = 150 / 12.5
+    PixPerIn = 96
+    PixPerFt = 150 / 12.5           # HO scale
+    PixPerFt = PixPerIn * 12 / 87
     Col      = "black"
 
     wB = 26 * Pi / 180;   cB = cos(wB);   sB = sin(wB)
     wB = 20 * Pi / 180;   cB = cos(wB);   sB = sin(wB)
 
-
     # bent height and spacing for coal trestle
 
-    WidBent = 8
-    HtBent  = 10
-    Sp = 12     # to 16
+    WidBent = 8         # ft
+    HtBent  = 10        # ft
+    Sp = 12             # ft
     Gr = 5.5
-    Beam = 1
+    Beam = 1/8 *87/12   # ft
 
     # first fw can just be stacks of beams
 
@@ -125,22 +126,39 @@ BEGIN  {
         ht   = n * Beam
         dist = ht / (Gr/100)
         printf "<!-- dist %6.1f, ht %6.2f -->\n", dist, ht
-        bent(WidBent, ht, 1, dist)
+        bent(WidBent, ht, Beam, dist)
     }
 
     for (dist += Sp; ; dist += Sp)  {
-        ht  = dist * Gr / 100
+        ht  = (dist * Gr / 100) - Beam     # account for longitudinals
         if (3 >= ht)
             continue
 
-        if (HtBent < ht)
+        if ((HtBent-Beam) < ht)
             break
 
         printf "<!-- dist %6.1f, ht %6.2f -->\n", dist, ht
-        bent(WidBent, ht, 1, dist)
+        bent(WidBent, ht, Beam, dist)
     }
 
-    bent(WidBent, HtBent, 1, dist)
+    for (n = 0; n < 5; n++)
+        bent(WidBent, HtBent-Beam, Beam, dist)
+
+    scale(3, 0.2)
+}
+
+# ------------------------------------------------
+function scale (wid, ht)  {
+    svgBegin(wid, ht, PixPerIn)
+
+    line(0, ht/2, wid, ht/2, Col)
+
+    for (x = 0; x <= wid; x ++)
+        line(x, 0, x, ht, Col)
+
+    anno(wid/10, 0, sprintf ("%.2f", PixPerFt))
+
+    svgEnd()
 }
 
 # ------------------------------------------------
@@ -166,7 +184,6 @@ function bent (wid, ht, sz, dist)  {
     printf ", xC %4.2f", xC
     printf " -->\n"
 
-
     # ----------------------------
     # stacks
     if (3*sz >= ht)  {
@@ -175,7 +192,8 @@ function bent (wid, ht, sz, dist)  {
         for (n = 0; n*sz < ht; n++)
             rectWh(xC-wid/2,  y0+n*sz,    wid,  sz, Col)
 
-        anno(0,     1, sprintf("%.0f", dist), 14)
+      # anno(0,     1, sprintf("%.0f", dist), 14)
+        anno(0,     1, sprintf("%.2f", dist* 12/87), 14)
 
         svgEnd()
         return
@@ -201,7 +219,8 @@ function bent (wid, ht, sz, dist)  {
 
     xF  = wid/4
 
-    anno(0,     1, sprintf("%.0f", dist), 14)
+  # anno(0,     1, sprintf("%.0f", dist), 14)
+    anno(0,     1, sprintf("%.2f", dist* 12/87), 14)
     anno(xC-xF, 1, sprintf("%.1f", wid2+0.05), 14)
     anno(xC+xF, 1, sprintf("%.2f", ht),   14)
 
