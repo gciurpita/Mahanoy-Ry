@@ -1,0 +1,80 @@
+<svg version="1.1" baseProfile="full"
+     width="842" height="1223"
+     xmlns="http://www.w3.org/2000/svg">
+  <line x1="0" y1="1223" x2="0" y2="639" style="stroke:black;stroke-width:1" />
+  <line x1="0" y1="639" x2="29" y2="627" style="stroke:black;stroke-width:1" />
+  <line x1="29" y1="627" x2="62" y2="639" style="stroke:black;stroke-width:1" />
+  <line x1="62" y1="639" x2="62" y2="693" style="stroke:black;stroke-width:1" />
+  <line x1="62" y1="693" x2="122" y2="735" style="stroke:black;stroke-width:1" />
+  <line x1="122" y1="735" x2="122" y2="1223" style="stroke:black;stroke-width:1" />
+  <line x1="122" y1="1223" x2="122" y2="702" style="stroke:black;stroke-width:1" />
+  <line x1="122" y1="702" x2="196" y2="782" style="stroke:black;stroke-width:1" />
+  <line x1="196" y1="782" x2="318" y2="782" style="stroke:black;stroke-width:1" />
+  <line x1="318" y1="782" x2="318" y2="1223" style="stroke:black;stroke-width:1" />
+  <line x1="318" y1="1223" x2="318" y2="755" style="stroke:black;stroke-width:1" />
+  <line x1="318" y1="755" x2="405" y2="782" style="stroke:black;stroke-width:1" />
+  <line x1="405" y1="782" x2="405" y2="812" style="stroke:black;stroke-width:1" />
+  <line x1="405" y1="812" x2="476" y2="842" style="stroke:black;stroke-width:1" />
+  <line x1="476" y1="842" x2="476" y2="916" style="stroke:black;stroke-width:1" />
+  <line x1="476" y1="916" x2="518" y2="946" style="stroke:black;stroke-width:1" />
+  <line x1="518" y1="946" x2="583" y2="985" style="stroke:black;stroke-width:1" />
+  <line x1="583" y1="985" x2="583" y2="961" style="stroke:black;stroke-width:1" />
+  <line x1="583" y1="961" x2="601" y2="955" style="stroke:black;stroke-width:1" />
+  <line x1="601" y1="955" x2="619" y2="961" style="stroke:black;stroke-width:1" />
+  <line x1="619" y1="961" x2="619" y2="1027" style="stroke:black;stroke-width:1" />
+  <line x1="619" y1="1027" x2="682" y2="1044" style="stroke:black;stroke-width:1" />
+  <line x1="682" y1="1044" x2="682" y2="1223" style="stroke:black;stroke-width:1" />
+  <text x="29" y="627" font-family="Verdana" font-size="12"> 0.93 18.62</text>
+  <text x="62" y="639" font-family="Verdana" font-size="12"> 1.96 18.25</text>
+  <text x="62" y="693" font-family="Verdana" font-size="12"> 1.96 16.57</text>
+  <text x="122" y="735" font-family="Verdana" font-size="12"> 3.82 15.27</text>
+  <text x="122" y="1223" font-family="Verdana" font-size="12"> 3.82  0.00</text>
+  <text x="122" y="702" font-family="Verdana" font-size="12"> 3.82 16.29</text>
+  <text x="196" y="782" font-family="Verdana" font-size="12"> 6.14 13.78</text>
+  <text x="318" y="1223" font-family="Verdana" font-size="12"> 9.96  0.00</text>
+  <text x="318" y="755" font-family="Verdana" font-size="12"> 9.96 14.62</text>
+  <text x="405" y="782" font-family="Verdana" font-size="12">12.66 13.78</text>
+  <text x="405" y="812" font-family="Verdana" font-size="12">12.66 12.85</text>
+  <text x="476" y="842" font-family="Verdana" font-size="12">14.90 11.92</text>
+  <text x="476" y="916" font-family="Verdana" font-size="12">14.90  9.59</text>
+  <text x="518" y="946" font-family="Verdana" font-size="12">16.20  8.66</text>
+  <text x="583" y="985" font-family="Verdana" font-size="12">18.25  7.45</text>
+  <text x="601" y="955" font-family="Verdana" font-size="12">18.81  8.38</text>
+  <text x="619" y="961" font-family="Verdana" font-size="12">19.37  8.19</text>
+  <text x="619" y="1027" font-family="Verdana" font-size="12">19.37  6.14</text>
+  <text x="682" y="1044" font-family="Verdana" font-size="12">21.32  5.59</text>
+  <text x="682" y="1223" font-family="Verdana" font-size="12">21.32  0.00</text>
+  <line x1="0" y1="407" x2="0" y2="252" style="stroke:black;stroke-width:1" />
+  <line x1="0" y1="407" x2="122" y2="407" style="stroke:black;stroke-width:1" />
+  <text x="122" y="407" font-family="Verdana" font-size="14">  3.82,   6.90</text>
+  <line x1="122" y1="407" x2="122" y2="517" style="stroke:black;stroke-width:1" />
+  <text x="122" y="517" font-family="Verdana" font-size="14">  3.82,   3.45</text>
+  <line x1="0" y1="252" x2="122" y2="252" style="stroke:black;stroke-width:1" />
+  <text x="122" y="252" font-family="Verdana" font-size="14">  3.82,  11.72</text>
+  <line x1="122" y1="252" x2="122" y2="142" style="stroke:black;stroke-width:1" />
+  <text x="122" y="142" font-family="Verdana" font-size="14">  3.82,  15.17</text>
+  <line x1="122" y1="517" x2="318" y2="517" style="stroke:black;stroke-width:1" />
+  <text x="318" y="517" font-family="Verdana" font-size="14">  9.96,   3.45</text>
+  <line x1="318" y1="517" x2="318" y2="627" style="stroke:black;stroke-width:1" />
+  <text x="318" y="627" font-family="Verdana" font-size="14">  9.96,   0.00</text>
+  <line x1="122" y1="142" x2="318" y2="142" style="stroke:black;stroke-width:1" />
+  <text x="318" y="142" font-family="Verdana" font-size="14">  9.96,  15.17</text>
+  <line x1="318" y1="142" x2="318" y2="32" style="stroke:black;stroke-width:1" />
+  <text x="318" y="32" font-family="Verdana" font-size="14">  9.96,  18.62</text>
+  <line x1="318" y1="627" x2="682" y2="627" style="stroke:black;stroke-width:1" />
+  <line x1="682" y1="627" x2="682" y2="32" style="stroke:black;stroke-width:1" />
+  <line x1="318" y1="32" x2="682" y2="32" style="stroke:black;stroke-width:1" />
+  <text x="682" y="32" font-family="Verdana" font-size="14"> 21.32,  18.62</text>
+ <!-- title/scale -->
+  <text x="32" y="32" font-family="Verdana" font-size="20">East Bear Ridge Breaker</text>
+  <text x="32" y="60" font-family="Verdana" font-size="14">inches 32</text>
+  <line x1="32" y1="64" x2="224" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="32" y1="72" x2="32" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="64" y1="72" x2="64" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="96" y1="72" x2="96" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="128" y1="72" x2="128" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="160" y1="72" x2="160" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="192" y1="72" x2="192" y2="64" style="stroke:black;stroke-width:1" />
+  <line x1="224" y1="72" x2="224" y2="64" style="stroke:black;stroke-width:1" />
+</svg>
+
