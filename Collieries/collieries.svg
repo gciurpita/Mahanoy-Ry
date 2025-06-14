@@ -1,0 +1,138 @@
+ <!--   0, 1870 - 1873, (1870 - 1873), West Lehigh -->
+ <!--   1, 1862 - 1875, (1862 - 1875), Oak Hollow -->
+ <!--   2, 1860 - 1875, (1860 - 1875), Hoffman -->
+ <!--   3, 1870 - 1875, (1860 - 1875), Trenton -->
+ <!--   4, 1862 - 1875, (1860 - 1875), Delano -->
+ <!--   5, 1868 - 1876, (1860 - 1876), East Mahanoy -->
+ <!--   6, 1869 - 1877, (1860 - 1877), Beaver -->
+ <!--   7, 1863 - 1877, (1860 - 1877), Grant -->
+ <!--   8, 1870 - 1879, (1860 - 1879), Barry, McNeil and Yatesville -->
+ <!--   9, 1874 - 1883, (1860 - 1883), Webster -->
+ <!--  10, 1859 - 1884, (1859 - 1884), Hartford -->
+ <!--  11, 1864 - 1884, (1859 - 1884), West Lehigh -->
+ <!--  12, 1871 - 1888, (1859 - 1888), Stanton -->
+ <!--  13, 1880 - 1890, (1859 - 1890), Laurel Ridge -->
+ <!--  14, 1862 - 1895, (1859 - 1895), Glendon -->
+ <!--  15, 1871 - 1896, (1859 - 1896), Elmwood -->
+ <!--  16, 1863 - 1896, (1859 - 1896), Bear Run -->
+ <!--  17, 1863 - 1897, (1859 - 1897), Schuylkill -->
+ <!--  18, 1893 - 1911, (1859 - 1911), Vulcan -->
+ <!--  19, 1869 - 1911, (1859 - 1911), Furnace -->
+ <!--  20, 1861 - 1913, (1859 - 1913), Primrose -->
+ <!--  21, 1863 - 1913, (1859 - 1913), West Bear Ridge -->
+ <!--  22, 1883 - 1917, (1859 - 1917), Park #1 -->
+ <!--  23, 1860 - 1922, (1859 - 1922), Suffolk -->
+ <!--  24, 1861 - 1922, (1859 - 1922), Knickerbocker -->
+ <!--  25, 1860 - 1926, (1859 - 1926), Draper -->
+ <!--  26, 1864 - 1927, (1859 - 1927), New Boston -->
+ <!--  27, 1861 - 1928, (1859 - 1928), Old St Nicholas -->
+ <!--  28, 1884 - 1930, (1859 - 1930), Buck Mountain -->
+ <!--  29, 1862 - 1930, (1859 - 1930), Ellengowen -->
+ <!--  30, 1862 - 1931, (1859 - 1931), Tunnel Ridge -->
+ <!--  31, 1858 - 1932, (1858 - 1932), North Mahanoy -->
+ <!--  32, 1888 - 1932, (1858 - 1932), Morea -->
+ <!--  33, 1868 - 1934, (1858 - 1934), Lawrence -->
+ <!--  34, 1885 - 1936, (1858 - 1936), Park #2 -->
+ <!--  35, 1862 - 1938, (1858 - 1938), Gilberton -->
+ <!--  36, 1863 - 1939, (1858 - 1939), Boston Run -->
+ <!--  37, 1834 - 1941, (1834 - 1941), East Bear Ridge -->
+ <!--  38, 1860 - 1953, (1834 - 1953), Mahanoy City -->
+ <!--  39, 1888 - 1954, (1834 - 1954), Maple Hill -->
+<svg version="1.1" baseProfile="full"
+     width="706" height="810"
+     xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="beige"/>
+  <text x="353" y="24" font-family="Verdana" text-anchor="middle" font-size="24">Mahanoy Valley Collieries</text>
+  <line   x1="46" y1="54" x2="49" y2="54" style="stroke:black;stroke-width:1" />
+  <text x="202" y="54" font-family="Verdana" font-size="18">1870 - 1873 West Lehigh</text>
+  <line   x1="38" y1="72" x2="51" y2="72" style="stroke:black;stroke-width:1" />
+  <text x="202" y="72" font-family="Verdana" font-size="18">1862 - 1875 Oak Hollow</text>
+  <line   x1="36" y1="90" x2="51" y2="90" style="stroke:black;stroke-width:1" />
+  <text x="202" y="90" font-family="Verdana" font-size="18">1860 - 1875 Hoffman</text>
+  <line   x1="46" y1="108" x2="51" y2="108" style="stroke:black;stroke-width:1" />
+  <text x="202" y="108" font-family="Verdana" font-size="18">1870 - 1875 Trenton</text>
+  <line   x1="38" y1="126" x2="51" y2="126" style="stroke:black;stroke-width:1" />
+  <text x="202" y="126" font-family="Verdana" font-size="18">1862 - 1875 Delano</text>
+  <line   x1="44" y1="144" x2="52" y2="144" style="stroke:black;stroke-width:1" />
+  <text x="202" y="144" font-family="Verdana" font-size="18">1868 - 1876 East Mahanoy</text>
+  <line   x1="45" y1="162" x2="53" y2="162" style="stroke:black;stroke-width:1" />
+  <text x="202" y="162" font-family="Verdana" font-size="18">1869 - 1877 Beaver</text>
+  <line   x1="39" y1="180" x2="53" y2="180" style="stroke:black;stroke-width:1" />
+  <text x="202" y="180" font-family="Verdana" font-size="18">1863 - 1877 Grant</text>
+  <line   x1="46" y1="198" x2="55" y2="198" style="stroke:black;stroke-width:1" />
+  <text x="202" y="198" font-family="Verdana" font-size="18">1870 - 1879 Barry, McNeil and Yatesville</text>
+  <line   x1="50" y1="216" x2="59" y2="216" style="stroke:black;stroke-width:1" />
+  <text x="202" y="216" font-family="Verdana" font-size="18">1874 - 1883 Webster</text>
+  <line   x1="35" y1="234" x2="60" y2="234" style="stroke:black;stroke-width:1" />
+  <text x="202" y="234" font-family="Verdana" font-size="18">1859 - 1884 Hartford</text>
+  <line   x1="40" y1="252" x2="60" y2="252" style="stroke:black;stroke-width:1" />
+  <text x="202" y="252" font-family="Verdana" font-size="18">1864 - 1884 West Lehigh</text>
+  <line   x1="47" y1="270" x2="64" y2="270" style="stroke:black;stroke-width:1" />
+  <text x="202" y="270" font-family="Verdana" font-size="18">1871 - 1888 Stanton</text>
+  <line   x1="56" y1="288" x2="66" y2="288" style="stroke:black;stroke-width:1" />
+  <text x="202" y="288" font-family="Verdana" font-size="18">1880 - 1890 Laurel Ridge</text>
+  <line   x1="38" y1="306" x2="71" y2="306" style="stroke:black;stroke-width:1" />
+  <text x="202" y="306" font-family="Verdana" font-size="18">1862 - 1895 Glendon</text>
+  <line   x1="47" y1="324" x2="72" y2="324" style="stroke:black;stroke-width:1" />
+  <text x="202" y="324" font-family="Verdana" font-size="18">1871 - 1896 Elmwood</text>
+  <line   x1="39" y1="342" x2="72" y2="342" style="stroke:black;stroke-width:1" />
+  <text x="202" y="342" font-family="Verdana" font-size="18">1863 - 1896 Bear Run</text>
+  <line   x1="39" y1="360" x2="73" y2="360" style="stroke:black;stroke-width:1" />
+  <text x="202" y="360" font-family="Verdana" font-size="18">1863 - 1897 Schuylkill</text>
+  <line   x1="69" y1="378" x2="87" y2="378" style="stroke:black;stroke-width:1" />
+  <text x="202" y="378" font-family="Verdana" font-size="18">1893 - 1911 Vulcan</text>
+  <line   x1="45" y1="396" x2="87" y2="396" style="stroke:black;stroke-width:1" />
+  <text x="202" y="396" font-family="Verdana" font-size="18">1869 - 1911 Furnace</text>
+  <line   x1="37" y1="414" x2="89" y2="414" style="stroke:black;stroke-width:1" />
+  <text x="202" y="414" font-family="Verdana" font-size="18">1861 - 1913 Primrose</text>
+  <line   x1="39" y1="432" x2="89" y2="432" style="stroke:black;stroke-width:1" />
+  <text x="202" y="432" font-family="Verdana" font-size="18">1863 - 1913 West Bear Ridge</text>
+  <line   x1="59" y1="450" x2="93" y2="450" style="stroke:black;stroke-width:1" />
+  <text x="202" y="450" font-family="Verdana" font-size="18">1883 - 1917 Park #1</text>
+  <line   x1="36" y1="468" x2="98" y2="468" style="stroke:black;stroke-width:1" />
+  <text x="202" y="468" font-family="Verdana" font-size="18">1860 - 1922 Suffolk</text>
+  <line   x1="37" y1="486" x2="98" y2="486" style="stroke:black;stroke-width:1" />
+  <text x="202" y="486" font-family="Verdana" font-size="18">1861 - 1922 Knickerbocker</text>
+  <line   x1="36" y1="504" x2="102" y2="504" style="stroke:black;stroke-width:1" />
+  <text x="202" y="504" font-family="Verdana" font-size="18">1860 - 1926 Draper</text>
+  <line   x1="40" y1="522" x2="103" y2="522" style="stroke:black;stroke-width:1" />
+  <text x="202" y="522" font-family="Verdana" font-size="18">1864 - 1927 New Boston</text>
+  <line   x1="37" y1="540" x2="104" y2="540" style="stroke:black;stroke-width:1" />
+  <text x="202" y="540" font-family="Verdana" font-size="18">1861 - 1928 Old St Nicholas</text>
+  <line   x1="60" y1="558" x2="106" y2="558" style="stroke:black;stroke-width:1" />
+  <text x="202" y="558" font-family="Verdana" font-size="18">1884 - 1930 Buck Mountain</text>
+  <line   x1="38" y1="576" x2="106" y2="576" style="stroke:black;stroke-width:1" />
+  <text x="202" y="576" font-family="Verdana" font-size="18">1862 - 1930 Ellengowen</text>
+  <line   x1="38" y1="594" x2="107" y2="594" style="stroke:black;stroke-width:1" />
+  <text x="202" y="594" font-family="Verdana" font-size="18">1862 - 1931 Tunnel Ridge</text>
+  <line   x1="34" y1="612" x2="108" y2="612" style="stroke:black;stroke-width:1" />
+  <text x="202" y="612" font-family="Verdana" font-size="18">1858 - 1932 North Mahanoy</text>
+  <line   x1="64" y1="630" x2="108" y2="630" style="stroke:black;stroke-width:1" />
+  <text x="202" y="630" font-family="Verdana" font-size="18">1888 - 1932 Morea</text>
+  <line   x1="44" y1="648" x2="110" y2="648" style="stroke:black;stroke-width:1" />
+  <text x="202" y="648" font-family="Verdana" font-size="18">1868 - 1934 Lawrence</text>
+  <line   x1="61" y1="666" x2="112" y2="666" style="stroke:black;stroke-width:1" />
+  <text x="202" y="666" font-family="Verdana" font-size="18">1885 - 1936 Park #2</text>
+  <line   x1="38" y1="684" x2="114" y2="684" style="stroke:black;stroke-width:1" />
+  <text x="202" y="684" font-family="Verdana" font-size="18">1862 - 1938 Gilberton</text>
+  <line   x1="39" y1="702" x2="115" y2="702" style="stroke:black;stroke-width:1" />
+  <text x="202" y="702" font-family="Verdana" font-size="18">1863 - 1939 Boston Run</text>
+  <line   x1="10" y1="720" x2="117" y2="720" style="stroke:black;stroke-width:1" />
+  <text x="202" y="720" font-family="Verdana" font-size="18">1834 - 1941 East Bear Ridge</text>
+  <line   x1="36" y1="738" x2="129" y2="738" style="stroke:black;stroke-width:1" />
+  <text x="202" y="738" font-family="Verdana" font-size="18">1860 - 1953 Mahanoy City</text>
+  <line   x1="64" y1="756" x2="130" y2="756" style="stroke:black;stroke-width:1" />
+  <text x="202" y="756" font-family="Verdana" font-size="18">1888 - 1954 Maple Hill</text>
+  <line   x1="26" y1="805" x2="26" y2="63" style="stroke:gray;stroke-width:1" />
+  <text x="26" y="805" font-family="Verdana" font-size="10">1850</text>
+  <line   x1="51" y1="796" x2="51" y2="63" style="stroke:gray;stroke-width:1" />
+  <text x="51" y="796" font-family="Verdana" font-size="10">1875</text>
+  <line   x1="76" y1="787" x2="76" y2="63" style="stroke:gray;stroke-width:1" />
+  <text x="76" y="787" font-family="Verdana" font-size="10">1900</text>
+  <line   x1="101" y1="778" x2="101" y2="63" style="stroke:gray;stroke-width:1" />
+  <text x="101" y="778" font-family="Verdana" font-size="10">1925</text>
+  <line   x1="126" y1="769" x2="126" y2="63" style="stroke:gray;stroke-width:1" />
+  <text x="126" y="769" font-family="Verdana" font-size="10">1950</text>
+</svg>
+
+ <!--  Wid 706, Ht 810, beg 1834, end 1954, maxLen 28, Font 18, nAct 12 -->
