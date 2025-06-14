@@ -4,7 +4,9 @@ BEGIN {
     dbg   = 0
 
     Ncard = 2
-    Ncols = 5
+    NcardPerPage = 8
+    Ncol  = 4
+    Nloc  = 8
     C     = 0
     L     = 0
 
@@ -91,7 +93,6 @@ function genCard (carIdx, list, nList)  {
     printf " <td width=30%>\n"
 
     # --------------------------------------
-    Ncol = 4
     printf "  <table border=1 cellspacing=0 width=400>\n"
     if (1)
         printf "    <tr> <th colspan=%d> %s <th> %s %s\n", \
@@ -125,8 +126,8 @@ function genCard (carIdx, list, nList)  {
     }
 
     # --------------------------------------
-    if (! (nCard % 10))
-        printf "<div style=\"break-after:page\"></div>\n"
+  # if (! (nCard % NcardPerPage))
+  #     printf "<div style=\"break-after:page\"></div>\n"
 }
 
 # ------------------------------------------------
@@ -199,7 +200,7 @@ END {
         listCars()
     }
     else  {
-        route(5)
+        route(Nloc)
         endCard()
 
         if (0)  {
