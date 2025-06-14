@@ -3,10 +3,10 @@
   Dscs  = $(shell echo *dsc)
 
 %.bld : %.dsc
-	mkBldg.k $^ | tee $@
+	Bin/mkBldg.k $^ | tee $@
 
 %.svg : %.bld
-	bldg.k $^ > $@
+	Bin/bldg.k $^ > $@
 
 # ----------------------------------------------------------
 all : bldg.html
