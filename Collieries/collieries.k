@@ -212,6 +212,9 @@ END {
     xName = xOff + end-beg + 4*Font
     Wid   = xName + maxLen*Font
 
+    x  = "1850 1875 1900 1925 1950"
+    A  = split(x, act, " ")
+
     svgBegin(Wid, Ht, 1)
 
     F1 = 24
@@ -222,28 +225,28 @@ END {
         x0 = xOff + yrBeg [n] - beg
         xN = xOff + yrEnd [n] - beg
 
-        # ----------------------------
-        # active collieries 1930
-        yrActive = 1930
-        if (yrBeg [n] <= yrActive && yrActive <= yrEnd [n])
-            ++nActive
-
         line(x0, y, xN, y, "black")
         anno(xName, y, \
             sprintf("%4s - %4s %s", yrBeg [n], yrEnd [n], name [n]), Font)
+
+        # ----------------------------
+        # active collieries 1930
+        for (a = 1; a <= A; a++)
+        if (yrBeg [n] <= act [a] && act [a] <= yrEnd [n])
+            actN [a]++
     }
 
     # ----------------------------
     # vertical lines
     y0 = Font * 0.25
     yN = Font * (N + 1 + 0.5)
-    x  = "1850 1875 1900 1925 1950"
-    F  = split(x, fld, " ")
 
-    for (f = 1; f <= F; f++)  {
-        x = xOff + fld [f] - beg
+    for (a = 1; a <= A; a++)  {
+        x = xOff + act [a] - beg
         line(x, y0, x , yN, "gray")
-        anno(x, y0, fld [f])
+
+        anno(x, y0, sprintf ("%d - %d", act [a], actN [a]))
+
         y0 += Font * 0.5
     }
 
