@@ -6,7 +6,7 @@ BEGIN {
     Ncard = 2
     NcardPerPage = 8
     Ncol  = 4
-    Nloc  = 8
+    Nloc  = 6
     C     = 0
     L     = 0
 
@@ -56,7 +56,7 @@ match(FILENAME, "car")  {
 match(FILENAME, "loc")  {
     if (dbg) print
 
-    locs     [L]   = $3 " " $4
+    locs     [L]   = substr($0, index($0, $3))
     towns    [L]   = $3
     locSize  [L]   = $2
     locTypes [L++] = $1

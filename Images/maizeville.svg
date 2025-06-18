@@ -22,9 +22,9 @@ ________\_/_________\__/__________
      xmlns="http://www.w3.org/2000/svg">
   <text x="210" y="11" font-family="Verdana" font-size="12">Freight</text>
   <text x="30" y="26" font-family="Verdana" font-size="12">Iron</text>
-  <text x="75" y="26" font-family="Verdana" font-size="12">Foundry</text>
-  <text x="390" y="26" font-family="Verdana" font-size="12">Machine</text>
-  <text x="465" y="26" font-family="Verdana" font-size="12">Hosiery</text>
+  <text x="75" y="26" font-family="Verdana" font-size="12">Beer </text>
+  <text x="390" y="26" font-family="Verdana" font-size="12">Foundry</text>
+  <text x="465" y="26" font-family="Verdana" font-size="12">Spike</text>
   <text x="210" y="57" font-family="Verdana" font-size="12">MAIZEVILLE</text>
   <line   x1="210" y1="15" x2="225" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="225" y1="15" x2="240" y2="15" style="stroke:black;stroke-width:2" />
