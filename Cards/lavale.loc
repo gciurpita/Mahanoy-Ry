@@ -1,21 +1,22 @@
 # locations
 
-    BRSX 2  Maizeville freight
-    X    1  Sheldon Shirts     (left)
-    XG   1  Arnold Machine     (left)
-    XG   1  Farhad Foundry     (right)
-    X    1  Lawrence Lumber    (right)
+    BRSX 2  Maizeville Freight House
+    X    1  Iron Works
+    XG   1  Beer Storage
+    XG   1  Fisher Foundry
+    XR   1  Spikes
 
     U    10 East_Bear_Ridge
 
-    _     1 Mahanoy_City
-#   _    99 Staging Shamokin
+    _    99 Mahanoy_City
+    _    99 Staging Shamokin
 #   _    99 Staging Tomaqua
 
-    BRSX 2  Gliberton freight
-    H    1  Gliberton coal
-    X    1  ACME
-    X    1  Bradley Baking
-    X    1  Corey Clothing
-    X    1  Dennision Distillery
+    BRSX 2  Gliberton Freight House
+    H    1  Coal Dealer
+    X    1  Arnold Machine
+    X    1  Bradely Baking
+    X    1  Perrin Shirts
+    X    1  Dennison Distillery
     X    1  Wotring Electric
+    X    1  Bradely Millworks
