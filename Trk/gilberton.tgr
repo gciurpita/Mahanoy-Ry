@@ -6,15 +6,16 @@ _____\___/__________\_____/________________
 # 34567890123456789012345678901234567890123456789012345678901234567890123456789
 #        1         2         3         4         5         6         7        
 
-text 17 1  ACME
-text 21 1  Bakery
-text 25 1  Clothing
+text  2 3  Coal Dealer
+
+text 17 1  Electric
+text 21 1  Baking
+text 25 1  Shirts
 text 29 1  Distillery
-text 33 1  Electric
+text 33 1  Machine
 
 text 14 2  Freight
 
-text  3 3  Coal
-text 41 3  Mill
+text 40 3  Millworks
 
 text 15 5  GILBERTON
