@@ -1,4 +1,4 @@
-# create .bld from building description
+# create .bld flag from dimensions and # stories
 
 awk '
 

@@ -1,4 +1,4 @@
-# svg drawing routines
+# crude bldg svg drawing prog: lines with doors/windows
 
 awk '
 # ------------------------------------------------
