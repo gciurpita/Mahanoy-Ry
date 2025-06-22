@@ -1,4 +1,4 @@
-# create .bld flag from dimensions and # stories
+# create .bld from building description
 
 awk '
 
@@ -103,12 +103,25 @@ END {
                 x0+x, deck, doorWid, doorHt, col
     }
 
+
     # ------------------------------------------------
     # windows
+
+    sp   = Wid / nWindow
+    y    = deck + 50
+
+    x    = sp - (sp + windWid)/2
+    printf "    window  %4d %4d %4d %4d %s\n", \
+                x0+x, y, windWid, windHt, col
+
+    x    = nWindow * sp - (sp + windWid)/2
+    printf "    window  %4d %4d %4d %4d %s\n", \
+                x0+x, y, windWid, windHt, col
+
     for (n = 1; n < nStory; n++)  {
         y = deck + n * HtStory + 50
         for (w = 1; w <= nWindow; w++)  {
-            x = w * Wid / (1 + nWindow) - windWid/2
+            x = w * sp - (sp + windWid)/2
             printf "    window  %4d %4d %4d %4d %s\n", \
                 x0+x, y, windWid, windHt, col
         }
