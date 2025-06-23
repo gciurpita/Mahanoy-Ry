@@ -4,7 +4,7 @@ BEGIN {
     dbg   = 0
 
     Ncard = 2
-    NcardPerPage = 8
+    NcardPerPage = 2
     Ncol  = 4
     Nloc  = 6
     C     = 0
@@ -114,8 +114,12 @@ function genCard (carIdx, list, nList)  {
 
     # --------------------------------------
     if ((nCard % Ncard))  {
-        printf " <td width=3%> &nbsp;\n"
-        printf "\n"
+        if (0)  {
+            printf " <td width=3%> &nbsp;\n"
+            printf "\n"
+        }
+        else
+            pageBrk()
     }
 
     # --------------------------------------
@@ -125,9 +129,11 @@ function genCard (carIdx, list, nList)  {
         printf "\n"
     }
 
-    # --------------------------------------
-  # if (! (nCard % NcardPerPage))
-  #     printf "<div style=\"break-after:page\"></div>\n"
+}
+
+# ------------------------------------------------
+function pageBrk ()  {
+    printf "<div style=\"break-after:page\"></div>\n"
 }
 
 # ------------------------------------------------

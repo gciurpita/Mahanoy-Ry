@@ -1,10 +1,12 @@
 # locations
 
     BRSX 2  Maizeville Freight House
-    X    1  Iron Works
+
     XG   1  Beer Storage
+    XR   1  Hadley's Hardware
+
+    X    1  Iron Works
     XG   1  Fisher Foundry
-    XR   1  Spikes
 
     U    10 East_Bear_Ridge
 
@@ -14,9 +16,11 @@
 
     BRSX 2  Gliberton Freight House
     H    1  Coal Dealer
+
     X    1  Arnold Machine
-    X    1  Bradely Baking
+    X    1  Bradley Baked Goods
     X    1  Perrin Shirts
     X    1  Dennison Distillery
     X    1  Wotring Electric
-    X    1  Bradely Millworks
+
+    X    1  Warekowski Millworks
