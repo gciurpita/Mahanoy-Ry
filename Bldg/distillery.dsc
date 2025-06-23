@@ -3,4 +3,4 @@
     sign      Dennision Distillery
     story     2
     width    45
-    windows   4  32  60
+    windows   5  32  60

@@ -110,6 +110,7 @@ END {
     sp   = Wid / nWindow
     y    = deck + 50
 
+    if (0) {
     x    = sp - (sp + windWid)/2
     printf "    window  %4d %4d %4d %4d %s\n", \
                 x0+x, y, windWid, windHt, col
@@ -117,10 +118,15 @@ END {
     x    = nWindow * sp - (sp + windWid)/2
     printf "    window  %4d %4d %4d %4d %s\n", \
                 x0+x, y, windWid, windHt, col
+    }
 
-    for (n = 1; n < nStory; n++)  {
+  # for (n = 1; n < nStory; n++)  {
+    for (n = 0; n < nStory; n++)  {
         y = deck + n * HtStory + 50
         for (w = 1; w <= nWindow; w++)  {
+            if (0 == n && w == int((nWindow+1)/2))
+                continue
+
             x = w * sp - (sp + windWid)/2
             printf "    window  %4d %4d %4d %4d %s\n", \
                 x0+x, y, windWid, windHt, col
@@ -129,9 +135,9 @@ END {
 
     # ------------------------------------------------
     # sign
-    FontSz = 20
+    FontSz = 28
     if (signTxt)  {
-        y = HtStory - FontSz + deck
+        y = deck + nStory * HtStory + 10
         printf "    sign    %4d %4d %3d %s\n", Wid/2, y, FontSz, signTxt
     }
 }' $*

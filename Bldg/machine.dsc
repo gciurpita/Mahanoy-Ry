@@ -3,4 +3,4 @@
     sign      Arnold Machine Co.
     story     2
     width    60
-    windows   4  32  60
+    windows   7  32  60
