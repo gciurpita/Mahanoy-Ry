@@ -5,6 +5,9 @@
 %.bld : %.dsc
 	Bin/mkBldg.k $^ | tee $@
 
+%.bld : %.k
+	$^ | tee $@
+
 %.svg : %.bld
 	Bin/bldg.k $^ > $@
 
