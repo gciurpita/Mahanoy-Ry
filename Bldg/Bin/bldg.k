@@ -168,42 +168,87 @@ function svgEnd (text)  {
 # --------------------------------------------------------------------
 BEGIN  {
     Pi = atan2(0, -1)
+    PixPerIn   = 96
+    PixPerScIn = PixPerIn * 1/87
 }
 
 # ------------------------------------------------
-function door (x, y, wid, ht, col)  {
+function door (x, y, wid, ht, col, _col, _row)  {
     rectWh(x,   y, wid,   ht,   col)
     rectWh(x+4, y, wid-8, ht-4, col)
 
-    dx = 4
-    N  = (wid-8) / dx
-    y1 = y+ht-4
+    if (_row && _col)  {
+        brdr = 3
+        wid2 = wid /2
+        ht2  = ht/3
+        x2   = x + wid/4
+        y2   = y + ht/2
 
-    for (n = 1; n <= N; n++)  {
-        x1 = x + dx*n
-        line(x1, y, x1, y1, "lightgray")
+        rectWh(x2, y2, wid2, ht2, col)
+
+        for (c = 1; c < _col; c++)  {
+            x = x2 + c * wid2 / _col
+            line(x, y2, x, y2+ht2, col)
+        }
+
+        for (r = 1; r < _row; r++)  {
+            y = y2 + r * ht2 / _row
+            line(x2, y, x2+wid2, y, col)
+        }
     }
+    else  {
+        dx = 4
+        N  = (wid-8) / dx
+        y1 = y+ht-4
 
-    x2 = x+ wid/2
-    line(x2, y, x2, y1, "black")
+        for (n = 1; n <= N; n++)  {
+            x1 = x + dx*n
+            line(x1, y, x1, y1, "lightgray")
+        }
+
+        x2 = x+ wid/2
+        line(x2, y, x2, y1, "black")
+    }
 }
 
 # ------------------------------------------------
-function window (x, y, wid, ht, col)  {
+function window (x, y, wid, ht, col, _col, _row)  {
+    comment(sprintf ("window: (%d, %d) <%d, %d> [%d, %d]", \
+                x, y, wid, ht, _col, _row))
+
+    x *= S; y *= S; wid *= S;  ht *= S
     rectWh(x, y, wid, ht, col)
 
     brdr = 3
     wid2 = wid - 2*brdr
     ht2  = ht/2  -   brdr
     x2   = x + brdr
-    rectWh(x2,     y+brdr, wid2,         ht2, col)
+    y2   = y + brdr
 
-    y2      = y + brdr+ ht2
-    rectWh(x2,     y2,     wid2,         ht2, col)
+    if (_row && _col)  {
+        ht2 = ht - 2*brdr
+        rectWh(x2, y2, wid2, ht2, col)
 
-    x3      = x + wid/2
-    line(x3, y2,       x3,        y2+ht2,   col)
-    line(x2, y2+ht2/2, x2+wid2, y2+ht2/2, col)
+        for (c = 1; c < _col; c++)  {
+            x = x2 + c * wid2 / _col
+            line(x, y2, x, y2+ht2, col)
+        }
+
+        for (r = 1; r < _row; r++)  {
+            y = y2 + r * ht2 / _row
+            line(x2, y, x2+wid2, y, col)
+        }
+    }
+    else  {
+        rectWh(x2,     y+brdr, wid2,         ht2, col)
+
+        y2      = y + brdr+ ht2
+        rectWh(x2,     y2,     wid2,         ht2, col)
+
+        x3      = x + wid/2
+        line(x3, y2,       x3,        y2+ht2,   col)
+        line(x2, y2+ht2/2, x2+wid2, y2+ht2/2, col)
+    }
 }
 
 # ------------------------------------------------
@@ -216,12 +261,12 @@ NF == 0 || $1 == "#"  {
     next
 }
 
-/bldg/   { cmnt($0); rectWh(   $2, $3, $4, $5, "black"); next }
-/door/   { door(     $2, $3, $4, $5, $6);    next }
-/line/   { line(     $2, $3, $4, $5, $6);    next }
+/bldg/   { cmnt($0); rectWh(   $2, $3, $4, $5, "black");     next }
+/door/   { door(     $2, $3, $4, $5, $6, $7, $8);            next }
+/line/   { line(     $2, $3, $4, $5, $6);                    next }
 /sign/   { annoC(    $2, $3, substr($0, index($0, $5)), $4); next }
-/space/  { svgBegin( $2, $3, 1); next }
-/window/ { window(   $2, $3, $4, $5, $6);    next }
+/space/  { svgBegin( $2, $3, PixPerScIn);                    next }
+/window/ { window(   $2, $3, $4, $5, $6, $7, $8);            next }
 
 # --------------------------------------------------------------------
 END {
