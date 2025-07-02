@@ -9,6 +9,7 @@ BEGIN {
     Nloc  = 6
     C     = 0
     L     = 0
+    locIdx = 0
 
     printf "<html>\n"
     printf "<body>\n"
@@ -114,7 +115,7 @@ function genCard (carIdx, list, nList)  {
 
     # --------------------------------------
     if ((nCard % Ncard))  {
-        if (0)  {
+        if (1)  {
             printf " <td width=3%> &nbsp;\n"
             printf "\n"
         }
@@ -157,10 +158,15 @@ function route (nLocPcard) {
         cnt = 0
         town   = ""
         while (nLocPcard > cnt) {
-            for (l = 0; l < L; l++)  {
-                loc = locs [l]
+          # for (l = 0; l < L; l++)  {
+            {
+                if (++locIdx >= L)
+                    locIdx = 0
+                l     = locIdx
 
+                loc   = locs [l]
                 types = locTypes [l]
+
                 if (match(types, carType [c]) || "_" == types)  {
                     thresh = 1/L
 
@@ -175,6 +181,8 @@ function route (nLocPcard) {
                     # decide
                     if (thresh < rand())
                         continue
+
+                    locCnt [loc]++
 
                     list [cnt] = loc
                     town          = towns [l]
@@ -226,7 +234,16 @@ END {
         printf "<p> %d cars, %d maxLoc\n", C, locMax
     }
 
-    printf "<p> <i>version 250604a</i>\n"
+    printf "  <i>version '`date +"%y%m%d-%H:%M"`'</i>\n"
     printf "</body>\n"
     printf "</html>\n"
+
+    # --------------------------------------
+    # report distribution
+    if (0)  {
+        for (l = 0; l < L; l++)  {
+            loc = locs [l]
+            printf " %6d  %-5s %s\n", locCnt [loc], locTypes [l],  loc
+        }
+    }
 }' $*
