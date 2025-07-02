@@ -2,25 +2,24 @@
 
     BRSX 2  Maizeville Freight House
 
-    XG   1  Beer Storage
-    XR   1  Hadley's Hardware
+    FX   1  Iron Works
+    FX   1  Gregory Machine
 
-    X    1  Iron Works
-    XG   1  Fisher Foundry
+    FGX  2  Fisher Foundry
 
     U    10 East_Bear_Ridge
 
     _    99 Mahanoy_City
-    _    99 Staging Shamokin
+    _    99 Shamokin
 #   _    99 Staging Tomaqua
 
     BRSX 2  Gliberton Freight House
     H    1  Coal Dealer
 
-    X    1  Arnold Machine
-    X    1  Bradley Baked Goods
+    X    1  Bradley Beer Storage
     X    1  Perrin Shirts
-    X    1  Dennison Distillery
     X    1  Wotring Electric
+    FX   1  Arnold Machine
+    X    1  Dennison Distillery
 
-    X    1  Warekowski Millworks
+    X    1  Warechowski Millworks
