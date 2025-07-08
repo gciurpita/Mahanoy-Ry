@@ -1,7 +1,7 @@
-
+    color     #754B3B
     deck      6
     door      1 120 120
-    sign      Perrin Shirts
-    story     3
+    sign      14 Perrin Shirts
+    story     3  12
     width    50
     windows   5  32  60

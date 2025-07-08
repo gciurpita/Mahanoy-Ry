@@ -1,143 +1,64 @@
 # create .bld from building description
 
 awk '
+BEGIN {
+    nStory = 1
+    color  = "tan"
+}
 
 # ------------------------------------------------
 NF == 0 || $1 == "#"  {
     next
 }
 
+/color/    { color    = $2; next }
 /deck/     { deck     = $2; next }
 /door/     { nDoor    = $2; doorWid = $3; doorHt = $4;next }
-/sign/     { signTxt = substr($0, index($0, $2)) };
-/story/    { nStory   = $2; next }
-/width/    { Wid      = $2; next }
+/sign/     { signWid  = $2; signText = substr($0, index($0, $3)) };
+/siding/   { sidingIn = $2;  next }
+/story/    { nStory   = $2; htStory = $3; next }
+/width/    { widFt    = $2; next }
 /windows/  { nWindow  = $2; windWid = $3; windHt = $4; next }
 
 # --------------------------------------------------------------------
-function prLine (x0, y0, x1, y1, col) {
-    printf "    line    %4d %4d %4d %4d %s\n", x0, y0, x1, y1, col
-}
-
-# --------------------------------------------------------------------
 END {
-    PixPerFt = 150 / 12.5
-    col      = "black"
-    x0       = y0 = 5
-    brdr     = 5
-    brdr2    = 2* brdr
+    x0 = 5;     y0 = 5
+                htFt = htStory * nStory + deck
+                pkFt = widFt / 3
 
-    HtStory  = 12 * PixPerFt
-    deck    *= PixPerFt
-    Wid     *= PixPerFt
-    htBldg   = nStory*HtStory + deck
-    htPeak   = htBldg + Wid/3
+    printf "    bldg %3d %3d  %4d %4d %4d  %s\n", \
+                    x0, y0, widFt, htFt, pkFt, color
 
-    Ht       = nStory*HtStory + htPeak + deck
+    if (sidingIn)
+        printf "    siding %.2f\n", sidingIn
 
-    printf "    space   %4d %4d\n", Wid + brdr2, htPeak + brdr2
+    if (deck)
+        printf "    dock   %.2f\n", deck
 
-    printf "    bldg    %4d %4d %4d %4d\n", x0, y0, Wid, htBldg
+    if (nWindow)  {
+        spFt = widFt / nWindow
+        y    = deck + 3
 
-    # ------------------------------------------------
-    # deck
-    if (deck)  {
-        deck2 = deck - PixPerFt /3
-        prLine(x0, deck2, x0+Wid, deck2, col)
-
-        yMid = deck2 /2
-        yHi  = yMid + PixPerFt / 3
-        yLo  = yMid - PixPerFt / 3
-
-        N    = int(Wid / deck)
-        wid  = Wid / N
-
-        xMid = wid / 2
-
-        for (n = 0; n < N; n++)  {
-            x  = brdr + n* wid
-            xL = xMid - PixPerFt/3
-            xR = xMid + PixPerFt/3
-
-            prLine(x, brdr, x+xL, yMid, col)
-            prLine(x, deck2, x+xL, yMid, col)
-
-            prLine(x+wid, brdr, x+xR, yMid, col)
-            prLine(x+wid, deck2, x+xR, yMid, col)
-
-            xL = x +       PixPerFt/2
-            xR = x + wid - PixPerFt/2
-
-            prLine(xL, brdr, x+xMid, yLo, col)
-            prLine(xR, brdr, x+xMid, yLo, col)
-
-            if (1) {
-            prLine(xL, deck2, x+xMid, yHi, col)
-            prLine(xR, deck2, x+xMid, yHi, col)
+        for (n = 0; n < nStory; n++)  {
+            x    = (spFt - windWid/12) /2 
+            for (w = 0; w <  nWindow; w++)  {
+                printf "    window  %6.2f %6.2f %6.2f %6.2f %s\n", \
+                    x, y, windWid, windHt, col
+                x += spFt
             }
+            y += htStory
         }
     }
 
-    # ------------------------------------------------
-    # gable
-    xMid     = x0 + Wid/2
-    xN       = x0 + Wid
-    ySide    = y0 + htBldg
-    yPeak    = y0 + htPeak
-    printf "    line    %4d %4d %4d %4d %s\n", x0, ySide, xMid, yPeak, col
-    printf "    line    %4d %4d %4d %4d %s\n", xN, ySide, xMid, yPeak, col
-
-    # ------------------------------------------------
-    # floors
-    for (n = 0; n < nStory; n++)  {
-        y = deck + n * HtStory
-        printf "    line    %4d %4d %4d %4d %s\n", x0, y, x0+Wid, y, col
+    if (nDoor)  {
+        x = (widFt - doorWid/12) / 2
+        printf "    door    %6.2f %6.2f %6.2f %6.2f %s\n", \
+                            x, deck, doorWid/12, doorHt/12, "red"
     }
 
-    # ------------------------------------------------
-    # doors
-    for (n = 0; n < nDoor; n++)  {
-        wid = Wid / nDoor
-        x   = n * wid + wid/2 - doorWid/2
-        printf "    door    %4d %4d %4d %4d %s\n", \
-                x0+x, deck, doorWid, doorHt, col
-    }
-
-
-    # ------------------------------------------------
-    # windows
-
-    sp   = Wid / nWindow
-    y    = deck + 50
-
-    if (0) {
-    x    = sp - (sp + windWid)/2
-    printf "    window  %4d %4d %4d %4d %s\n", \
-                x0+x, y, windWid, windHt, col
-
-    x    = nWindow * sp - (sp + windWid)/2
-    printf "    window  %4d %4d %4d %4d %s\n", \
-                x0+x, y, windWid, windHt, col
-    }
-
-  # for (n = 1; n < nStory; n++)  {
-    for (n = 0; n < nStory; n++)  {
-        y = deck + n * HtStory + 50
-        for (w = 1; w <= nWindow; w++)  {
-            if (0 == n && w == int((nWindow+1)/2))
-                continue
-
-            x = w * sp - (sp + windWid)/2
-            printf "    window  %4d %4d %4d %4d %s\n", \
-                x0+x, y, windWid, windHt, col
-        }
-    }
-
-    # ------------------------------------------------
-    # sign
-    FontSz = 28
-    if (signTxt)  {
-        y = deck + nStory * HtStory + 10
-        printf "    sign    %4d %4d %3d %s\n", Wid/2, y, FontSz, signTxt
+    if (signText)  {
+        fontSz = 28
+        printf "    sign  %3d %3d %4d %4d  %s\n", \
+                            widFt/2, htFt, signWid, fontSz, signText
     }
 }' $*

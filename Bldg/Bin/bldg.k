@@ -64,7 +64,7 @@ function arc (x0, y0, a0, a1, rad, col, a, x2, y2, x3, y3)  {
     printf "  <path d=\"M %4d %4d", x2, y2
     printf           "  A %4d %4d, %d, %d, %d, %4d %4d\"",\
                             S * rad, S * rad, rot, lrg, swp, x3, y3
-    printf         " style=\"stroke:%s; fill:none\"", col
+    printf         "         style=\"stroke:%s; fill:none\"", col
     printf "/>\n"
 }
 
@@ -78,10 +78,14 @@ function circle (x0, y0, rad, col, a)  {
 }
 
 # ------------------------------------------------
-function line (x0, y0, x1, y1, color)  {
+function line (x0, y0, x1, y1, color, strokeWid)  {
+    comment(sprintf("line: (%d, %d), (%d, %d) %s, strkWid %d", \
+                                x0, y0, x1, y1, color, strokeWid))
     printf "  <line   x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\"", \
-        S*x0, S*mapY(y0), S*x1, S*mapY(y1)
-    printf " style=\"stroke:%s;stroke-width:1\"", color
+        S*x0 +0.5, S*mapY(y0) +0.5, S*x1 +0.5, S*mapY(y1) +0.5
+    if (! strokeWid)
+        strokeWid = 1
+    printf " style=\"stroke:%s;stroke-width:%d\"", color, strokeWid
     printf " />\n"
 }
 
@@ -110,21 +114,29 @@ function marker () {
 }
 
 # --------------------------------------------------------------------
-function path (vecY, N, col) {
-    printf "<path d=\"M %d %d\n", 0, Ht - vecY [0]
+function path (vecX, vecY, N, stroke, strWid, fill) {
+    printf    "<path d=\"M %4d %4d", S*vecX [0], S*mapY(vecY [0])
     for (n = 1; n < N; n++) {
-        printf "  L %3d %4d\n", n, Ht - vecY [n]
-      # printf "  L %3d %8.4f\n", n,      vecY [n]
+        printf "\n         L %4d %4d", S*vecX [n], S*mapY(vecY [n])
     }
-    printf "\""
-    printf " stroke=\"%s\" stroke-width=\"2\" fill=\"none\" />\n", col
+    printf "\"\n"
+    printf "     stroke=\"%s\" stroke-width=\"%d\" fill=\"%s\" />\n", \
+                        stroke, strWid, fill
 }
 
 # ------------------------------------------------
-function rectWh (x0, y0, wid, ht, color)  {
+function rectWh (x0, y0, wid, ht, color, fill, strokeWid)  {
+    comment(sprintf("rectWh: (%d, %d) <%d, %d> %s, %s, stkWid %d", \
+                        x0, y0, wid, ht, color, fill, strokeWid))
+
     printf " <rect   x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"", \
-            S*x0, S*mapY(y0+ht), S*wid, S*ht
-    printf " style=\"fill:none;stroke:%s;stroke-width:1\"", color
+            S*x0 +0.5, S*mapY(y0+ht) +0.5, S*wid +0.5, S*ht +0.5
+    if (! fill)
+        fill = "none"
+    if ("" == strokeWid)
+        strokeWid = 1
+    printf " style=\"fill:%s;stroke:%s;stroke-width:%d\"", \
+                                            fill, color, strokeWid
     printf " />\n"
 }
 
@@ -138,15 +150,12 @@ function svgBegin (wid, ht, scale)  {
     Wid = wid
     Ht  = ht
     S   = scale
-    if (Html)  {
-        printf "\n"
-        printf "<p>"
-        printf "<table border=1 cellspacing=0 bgcolor=lightcyan> <tr> <td>\n"
-    }
+
+    comment(sprintf("svgBegin: scale %.2f, PixPwrScIn %.2f", S, PixPerScIn))
 
     printf "<svg version=\"1.1\" baseProfile=\"full\"\n"
-    printf "     width=\"%d\" height=\"%d\"\n", S*Wid, S*Ht
-    printf "     xmlns=\"http://www.w3.org/2000/svg\">\n"
+    printf "     width=\"%d\" height=\"%d\"", S*Wid, S*Ht
+    printf "  xmlns=\"http://www.w3.org/2000/svg\">\n"
 
   # bgCol = "beige"
     if (bgCol)
@@ -170,84 +179,89 @@ BEGIN  {
     Pi = atan2(0, -1)
     PixPerIn   = 96
     PixPerScIn = PixPerIn * 1/87
+    PixPerScFt = PixPerIn * 12/87
 }
 
 # ------------------------------------------------
 function door (x, y, wid, ht, col, _col, _row)  {
-    rectWh(x,   y, wid,   ht,   col)
-    rectWh(x+4, y, wid-8, ht-4, col)
+    comment(sprintf("       door:"))
+    x += x0;    y += y0
 
-    if (_row && _col)  {
-        brdr = 3
-        wid2 = wid /2
-        ht2  = ht/3
-        x2   = x + wid/4
-        y2   = y + ht/2
+    brdr = 4/12
+    wid1 = wid -2*brdr
+    wid2 = wid1 /2
+    ht1  = ht  -brdr
+    x1   = x +brdr
+    x2   = x +wid/2
+    xN   = x +wid -brdr
+    yN   = y +ht  - brdr
 
-        rectWh(x2, y2, wid2, ht2, col)
+    # blank out siding + outline
+    rectWh(x,  y, wid, ht, "gray", "white")
 
-        for (c = 1; c < _col; c++)  {
-            x = x2 + c * wid2 / _col
-            line(x, y2, x, y2+ht2, col)
-        }
+    # outlines of 2 doors
+    rectWh(x1, y, wid2, ht1, "black", "", 1)
+    rectWh(x2, y, wid2, ht1, "black", "", 1)
 
-        for (r = 1; r < _row; r++)  {
-            y = y2 + r * ht2 / _row
-            line(x2, y, x2+wid2, y, col)
-        }
-    }
-    else  {
-        dx = 4
-        N  = (wid-8) / dx
-        y1 = y+ht-4
+    printf "\n"
+    dx = 6/12
+    N  = int(wid2 / dx)
+    dx = (wid2 / N)
+    comment(sprintf("   door: wid2 %.1f N %.1f, dx %.1f", wid2, N, dx))
 
-        for (n = 1; n <= N; n++)  {
-            x1 = x + dx*n
-            line(x1, y, x1, y1, "lightgray")
-        }
+    for (n = 1; n < N; n++) {
+        x3 = x1 +n*dx
+        line(x3, y, x3, y +ht1, "gray")
 
-        x2 = x+ wid/2
-        line(x2, y, x2, y1, "black")
+        x4 = x2 +n*dx
+        line(x4, y, x4, y +ht1, "gray")
     }
 }
 
 # ------------------------------------------------
 function window (x, y, wid, ht, col, _col, _row)  {
-    comment(sprintf ("window: (%d, %d) <%d, %d> [%d, %d]", \
-                x, y, wid, ht, _col, _row))
+    printf "\n"
+    comment(sprintf ("        window: (%d, %d) <%.1f, %.1f> [%d, %d] S %.3f", \
+                x, y, wid, ht, _col, _row, S))
 
-    x *= S; y *= S; wid *= S;  ht *= S
-    rectWh(x, y, wid, ht, col)
+    x += x0;     y += y0
+    # ----------------------------
+    # interior glass
+    brdr = 4 / 12
+    x2   = x    +brdr
+    y2   = y    +brdr
+    wid2 = wid  -2*brdr
+    ht2  = ht   -2*brdr
 
-    brdr = 3
-    wid2 = wid - 2*brdr
-    ht2  = ht/2  -   brdr
-    x2   = x + brdr
-    y2   = y + brdr
+    rectWh(x,  y,  wid,  ht,  "gray", "white", 1)
+    rectWh(x2, y2, wid2, ht2, "none", "gray", 0)
 
+    # ----------------------------
+    # panes
+    dd = (1 /12) * PixPerScFt
     if (_row && _col)  {
-        ht2 = ht - 2*brdr
-        rectWh(x2, y2, wid2, ht2, col)
-
+        # verticals
+        dw = wid2/_col
         for (c = 1; c < _col; c++)  {
-            x = x2 + c * wid2 / _col
-            line(x, y2, x, y2+ht2, col)
+            x1 = x2+ c*dw
+            line(x1, y, x1, y +ht, "white", dd)
         }
 
+        # horizontals
         for (r = 1; r < _row; r++)  {
-            y = y2 + r * ht2 / _row
-            line(x2, y, x2+wid2, y, col)
+            y1 = y2 + r*ht/_row
+            line(x, y1, x +wid, y1, "white", dd)
         }
     }
     else  {
-        rectWh(x2,     y+brdr, wid2,         ht2, col)
+        printf "\n"
+        comment(sprintf("    window: panes, dd %d, wid %d", dd, wid));
+        # vertical
+        line(x +wid/2, y+ ht/2, x +wid/2, y +ht, "white", dd)
 
-        y2      = y + brdr+ ht2
-        rectWh(x2,     y2,     wid2,         ht2, col)
-
-        x3      = x + wid/2
-        line(x3, y2,       x3,        y2+ht2,   col)
-        line(x2, y2+ht2/2, x2+wid2, y2+ht2/2, col)
+        # horizontals
+        line(x, y+ ht/2,   x +wid, y +ht/2,   "white", dd+1)
+        line(x, y+ ht*3/4, x +wid, y +ht*3/4, "white", dd)
     }
 }
 
@@ -257,16 +271,95 @@ function cmnt (s) {
 }
 
 # ------------------------------------------------
+function bldg (x0, y0, widFt, htFt, peakFt, color) {
+    comment(sprintf("bldg: widFt %d, htFt %d, peakFt %d, %s", \
+                                        widFt, htFt, peakFt, color))
+
+    svgBegin(widFt +10, htFt +peakFt +10, PixPerScFt)
+    
+    n = 0; x = x0; y = y0; 
+    vecX [n] = x;           vecY [n++] = y
+    vecX [n] = x;           vecY [n++] = y + htFt
+    vecX [n] = x + widFt/2; vecY [n++] = y + htFt + peakFt
+    vecX [n] = x + widFt;   vecY [n++] = y + htFt
+    vecX [n] = x + widFt;   vecY [n++] = y
+    vecX [n] = x;           vecY [n++] = y
+    path(vecX, vecY, n, "none", 1, color)
+}
+
+# ------------------------------------------------
+function siding (size) {
+    ratio = peakFt / (widFt/2)
+
+    if (1)
+        for (y = y0; y < y0 + htFt; y += size/12)
+            line(x0, y, x0 + widFt, y, "gray")
+
+    for (y = y0 + htFt; y < y0 + htFt + peakFt; y += size/12)  {
+        dy = y - (y0 + htFt)
+        dx = dy / ratio
+        line(x0 + dx, y, x0 + widFt -dx, y, "gray")
+    }
+}
+
+# ------------------------------------------------
+function dock (dockHtFt) {
+    printf "\n"
+    deckThick = 0.5
+
+    y1 = y0 +dockHtFt -deckThick/2
+
+    # --------------------------------------
+    # spacing
+    dx   = 6                        # dist between posts
+    N    = int(widFt / dx)
+    dx   = (widFt / N)
+
+    dd   = 8/12                     # thickness of post
+    _x2  = x0 +dd/2
+    line(_x2, y0, _x2, y1, "gray", PixPerScFt*dd)
+
+    stroke = PixPerScFt*dd
+    for (n = 1; n <= N; n++)  {
+        _x1 = x0 + n*dx -dd/2
+        line(_x1, y0,   _x1, y1,  "gray", stroke)
+        line(_x2, y0,   _x1, y1,  "gray", stroke)
+        line(_x1, y0,   _x2, y1,  "gray", stroke)
+        _x2 = _x1
+    }
+
+    # --------------------------------------
+    # deck itself
+    line(x0, y1, x0 +widFt, y1, "black", PixPerScFt*deckThick)
+}
+
+# ------------------------------------------------
+function sign (x, y, wid, fontSz, text) {
+    comment(sprintf("sign: (%d, %d) font %d,  %s", x, y, fontSz, text))
+
+  # wid  *= PixPerScFt
+    dy    = fontSz / PixPerScFt
+
+    rectWh( x0 +x -wid/2, y0 +y, wid, dy, "white", "white")
+    annoC(x0+x, y0+y, text, fontSz)
+}
+
+# ------------------------------------------------
 NF == 0 || $1 == "#"  {
     next
 }
 
-/bldg/   { cmnt($0); rectWh(   $2, $3, $4, $5, "black");     next }
-/door/   { door(     $2, $3, $4, $5, $6, $7, $8);            next }
-/line/   { line(     $2, $3, $4, $5, $6);                    next }
-/sign/   { annoC(    $2, $3, substr($0, index($0, $5)), $4); next }
-/space/  { svgBegin( $2, $3, PixPerScIn);                    next }
-/window/ { window(   $2, $3, $4, $5, $6, $7, $8);            next }
+/bldg/   { 
+    x0    = $2;  y0   = $3
+    widFt = $4;  htFt = $5;  peakFt = $6;  color = $7
+    bldg( x0, y0, widFt, htFt, peakFt, color);              next }
+/dock/   { dock(     $2);                                   next }
+/door/   { door(     $2, $3, $4, $5, $6, $7, $8);           next }
+/line/   { line(     $2, $3, $4, $5, $6, $7);               next }
+/siding/ { siding(   $2);                                   next }
+/sign/   { sign(     $2, $3, $4, $5, substr($0, index($0, $6))); next }
+/space/  {                                                  next }
+/window/ { window(   $2, $3, $4/12, $5/12, $6, $7, $8);           next }
 
 # --------------------------------------------------------------------
 END {
