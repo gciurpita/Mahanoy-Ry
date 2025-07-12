@@ -201,7 +201,7 @@ function door (x, y, wid, ht, col, _col, _row)  {
     yN   = y +ht  - brdr
 
     # blank out siding + outline
-    rectWh(x,  y, wid, ht, "gray", "white")
+    rectWh(x,  y, wid, ht, "gray", "#685c54")       # darker brown
 
     # outlines of 2 doors
     rectWh(x1, y, wid2, ht1, "black", "", 1)
@@ -360,9 +360,9 @@ function siding (size) {
         for (y = y0; y < y0 + htFt; y += size/12)
             line(x0, y, x0 + widFt, y, "gray")
 
-    for (y = y0 + htFt; y < y0 + htFt + peakFt; y += size/12)  {
+    for (y = y0 + htFt; y < y0 +htFt +peakFt -1; y += size/12)  {
         dy = y - (y0 + htFt)
-        dx = dy / ratio
+        dx = 0.8 +dy /ratio         # adjust for border
         line(x0 + dx, y, x0 + widFt -dx, y, "gray")
     }
 }
