@@ -2,6 +2,7 @@
     deck      5
     door      1 120 120
     sign      21 Arnold Machine Co.
+    siding    8
     story     2  12
     width    60
     windows   7  32  60
