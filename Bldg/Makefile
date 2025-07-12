@@ -21,10 +21,9 @@ bldg.html : $(Svgs)
 	@ echo "<meta http-equiv=\"refresh\" content=\"5\">" > $@
 	cat $(Svgs) >> $@
 
-.PHONY : foo.svg
-foo.svg : foo.dsc
-	mkBldg.k      foo.dsc  | tee foo.bld
-	bldg.k        foo.bld  | tee $@
+.PHONY : foo.htm
+foo.htm : foo.dsc
+	mkBldg.k foo.dsc | tee foo.bld | bldg.k foo.bld  | tee $@
 
 .PHONY : foundry.htm
 foundry.htm : foundry.pts Bin/ptsSvg.k
@@ -35,7 +34,7 @@ test.htm : test.bld Bin/bldg.k
 	bldg.k test.bld | tee $@
 
 window :
-	windows.k | bldg.k | tee windows.svg
+	Bin/windows.k | Bin/bldg.k | tee windows.svg
 
 # ----------------------------------------------------------
 check :
