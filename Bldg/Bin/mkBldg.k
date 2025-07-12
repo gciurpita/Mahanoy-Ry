@@ -11,14 +11,22 @@ NF == 0 || $1 == "#"  {
     next
 }
 
-/color/    { color    = $2; next }
-/deck/     { deck     = $2; next }
-/door/     { nDoor    = $2; doorWid = $3; doorHt = $4;next }
-/sign/     { signWid  = $2; signText = substr($0, index($0, $3)) };
-/siding/   { sidingIn = $2;  next }
-/story/    { nStory   = $2; htStory = $3; next }
-/width/    { widFt    = $2; next }
-/windows/  { nWindow  = $2; windWid = $3; windHt = $4; next }
+/color/    { color    = $2;                                         next }
+/brick/    { brick    = 1;                                          next }
+/deck/     { deck     = $2;                                         next }
+/door/     { nDoor    = $2; doorWid = $3; doorHt = $4;              next }
+/sign/     { signWid  = $2; signText = substr($0, index($0, $3));   next }
+/siding/   { sidingIn = $2;                                         next }
+/story/    { nStory   = $2; htStory = $3;                           next }
+/width/    { widFt    = $2;                                         next }
+/windows/  { nWindow  = $2; windWid = $3; windHt = $4;              next }
+
+# --------------------------------------
+{
+    printf "Error: mkBldg unknown - "
+    print
+    err++; exit
+}
 
 # --------------------------------------------------------------------
 END {
@@ -26,11 +34,16 @@ END {
                 htFt = htStory * nStory + deck
                 pkFt = widFt / 3
 
+    if (brick)
+        color = "#C04657"   # "#792933"           #
+
     printf "    bldg %3d %3d  %4d %4d %4d  %s\n", \
                     x0, y0, widFt, htFt, pkFt, color
 
     if (sidingIn)
         printf "    siding %.2f\n", sidingIn
+    else if (brick)
+        printf "    brick\n"
 
     if (deck)
         printf "    dock   %.2f\n", deck
