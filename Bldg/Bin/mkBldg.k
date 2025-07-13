@@ -15,6 +15,7 @@ NF == 0 || $1 == "#"  {
 /brick/    { brick    = 1;                                          next }
 /deck/     { deck     = $2;                                         next }
 /door/     { nDoor    = $2; doorWid = $3; doorHt = $4;              next }
+/peak/     { peak     = $2;                                         next }
 /sign/     { signWid  = $2; signText = substr($0, index($0, $3));   next }
 /siding/   { sidingIn = $2;                                         next }
 /story/    { nStory   = $2; htStory = $3;                           next }
@@ -32,7 +33,8 @@ NF == 0 || $1 == "#"  {
 END {
     x0 = 5;     y0 = 5
                 htFt = htStory * nStory + deck
-                pkFt = widFt / 3
+    if (peak)
+                pkFt = widFt / peak
 
     if (brick)
         color = "#C04657"   # "#792933"           #
@@ -72,6 +74,6 @@ END {
     if (signText)  {
         fontSz = 28
         printf "    sign  %3d %3d %4d %4d  %s\n", \
-                            widFt/2, htFt, signWid, fontSz, signText
+                            widFt/2, htFt -fontSz/12, signWid, fontSz, signText
     }
 }' $*
