@@ -1,6 +1,8 @@
 
-  Svgs  = $(patsubst %.dsc, %.svg, $(Dscs))
   Dscs  = $(shell echo *dsc)
+  Ptss  = $(shell echo *pts)
+  Svgs  = $(patsubst %.dsc, %.svg, $(Dscs))
+  Svgs += $(patsubst %.pts, %.svg, $(Ptss))
 
 %.bld : %.dsc
 	Bin/mkBldg.k $^ | tee $@
@@ -15,10 +17,10 @@
 	Bin/ptsSvg.k $^ | tee $@
 
 # ----------------------------------------------------------
-all : bldg.html foundry.htm
+all : bldg.html $(Svgs)
 
 bldg.html : $(Svgs)
-	@ echo "<meta http-equiv=\"refresh\" content=\"5\">" > $@
+	@ echo "<meta http-equiv=\"refresh\" content=\"9\">" > $@
 	cat $(Svgs) >> $@
 
 .PHONY : foo.htm
