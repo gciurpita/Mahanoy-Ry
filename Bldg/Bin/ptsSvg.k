@@ -120,6 +120,8 @@ function svgBegin (wid, ht, scale)  {
     Ht  = ht
     S   = scale
 
+    comment(sprintf(" svgBegin: wid %.1f, ht %.1f, scale %.1f", wid, ht, scale))
+
     printf "<svg version=\"1.1\" baseProfile=\"full\"\n"
     printf "     width=\"%d\" height=\"%d\"\n", S*Wid, S*Ht
     printf "     xmlns=\"http://www.w3.org/2000/svg\">\n"
@@ -143,24 +145,37 @@ function dispPt (p) {
 }
 
 # --------------------------------------------------------------------
+function getPtX (p) { return val ["x" substr(p, 2, 2)] }
+function getPtY (p) { return val ["y" substr(p, 5, 2)] }
+function getPtZ (p) { return val ["z" substr(p, 8, 2)] }
+
+# --------------------------------------------------------------------
 function dump () {
     printf "<!--\n"
-    printf "  dump: vals\n"
-    for (sym in val)
-        printf "    %6s %6.2f\n", sym, val [sym]
-
     printf "  dump: pts\n"
     for (p in pt)  {
         printf "    %6s", p
-        printf " %6.2f", val ["x" substr(p, 2, 1)]
-        printf " %6.2f", val ["y" substr(p, 3, 1)]
-        printf " %6.2f", val ["z" substr(p, 4, 1)]
+        printf " %6.2f", getPtX(p)
+        printf " %6.2f", getPtY(p)
+        printf " %6.2f", getPtZ(p)
         printf "\n"
+    }
+
+    if (1) {
+        printf "  dump: vals\n"
+        for (sym in val)
+            printf "    %6s %6.2f\n", sym, val [sym]
     }
 
     printf "  dump: conns\n"
     for (c = 0; c < C; c++)
         printf "    %6s - %6s\n", p0 [c], p1 [c]
+
+    printf "  dump: conns\n"
+    printf "    %6.1f x\n", max ["x"]
+    printf "    %6.1f y\n", max ["y"]
+    printf "    %6.1f z\n", max ["z"]
+
     printf " -->\n\n"
 }
 
@@ -194,8 +209,6 @@ BEGIN  {
     bar60      = bar20 bar20 bar20
     dbg        = 1
     minX = minY = minZ = 99
-
-    printf "<meta http-equiv=\"refresh\" content=\"5\">\n"
 }
 
 # ------------------------------------------------
@@ -207,10 +220,6 @@ BEGIN  {
 
 # ------------------------------------------------
 "=" == $2  {
-    if (1 < dbg)  {
-        printf "assign: "; print
-    }
-
     val [$1] = valOf($3)
 
     for (n = 4; n <= NF; n+= 2)   {
@@ -222,6 +231,11 @@ BEGIN  {
             val [$1] -= valOf($(n+1))
         else
             error("unknown operator")
+    }
+
+    if (1 < dbg)  {
+        printf "assign: %3s %6.2f - ", $1, val [$1];
+        print
     }
 
     c = substr($1, 1, 1)        # x, y, z
@@ -241,6 +255,18 @@ BEGIN  {
 
     p0 [C]   = $1
     p1 [C++] = $3
+    next
+}
+
+# ------------------------------------------------
+"+" == $1 {
+    if (1 < dbg)
+        comment($0)
+
+    pt [$2]++
+
+    p0 [C]   = p1 [C-1]
+    p1 [C++] = $2
     next
 }
 
@@ -291,6 +317,12 @@ function arrow (x0, y0, x1, y1, col) {
 }
 
 # ------------------------------------------------
+function markPts () {
+    for (sym in x)
+        mark( x [sym], y [sym], 1, "black")
+}
+
+# ------------------------------------------------
 function measure (x0, y0, x1, y1) {
     len = sqrt((x0 - x1)^2 + (y0 - y1)^2)
 
@@ -315,20 +347,22 @@ function connPts (_x0, _y0, _z0, _x1, _y1, _z1) {
     if (wid < max ["x"])
         wid = max ["x"]
 
-    svgBegin(wid, max ["y"] +5, PixPerScFt)
+    svgBegin(wid +10, max ["y"] +1, PixPerScFt)
 
     # front view
     if (1) {
         printf "\n"
         comment("connPts: front view")
         for (c = 0; c < C; c++)  {
-            _x0 = val ["x" substr(p0 [c], 2, 1)]
-            _y0 = val ["y" substr(p0 [c], 3, 1)]
+            _x0 = val ["x" substr(p0 [c], 2, 2)]
+            _x0 = val ["x" substr(p0 [c], 2, 2)]
+            _y0 = val ["y" substr(p0 [c], 5, 2)]
     
-            _x1 = val ["x" substr(p1 [c], 2, 1)]
-            _y1 = val ["y" substr(p1 [c], 3, 1)]
+            _x1 = val ["x" substr(p1 [c], 2, 2)]
+            _y1 = val ["y" substr(p1 [c], 5, 2)]
     
             line(_x0, _y0, _x1, _y1, Color)
+            anno(_x1, _y1, sprintf("%d, %d", _x1, _y1), 14)
         }
     }
 
@@ -338,11 +372,11 @@ function connPts (_x0, _y0, _z0, _x1, _y1, _z1) {
         comment("connPts: side view")
         z1 = val ["z1" ]
         for (c = 0; c < C; c++)  {
-            _z0 = val ["z" substr(p0 [c], 4, 1)]
-            _y0 = val ["y" substr(p0 [c], 3, 1)]
+            _z0 = val ["z" substr(p0 [c], 8, 2)]
+            _y0 = val ["y" substr(p0 [c], 5, 2)]
     
-            _z1 = val ["z" substr(p1 [c], 4, 1)]
-            _y1 = val ["y" substr(p1 [c], 3, 1)]
+            _z1 = val ["z" substr(p1 [c], 8, 2)]
+            _y1 = val ["y" substr(p1 [c], 5, 2)]
 
             if (0 == _z0)
                 continue
@@ -361,42 +395,36 @@ function frontView (_x0, _y0, _z0, _x1, _y1, _z1) {
         printf "\n"
         comment("connPts: front view")
         for (c = 0; c < C; c++)  {
-            _x0 = val ["x" substr(p0 [c], 2, 1)]
-            _y0 = val ["y" substr(p0 [c], 3, 1)]
+            _x0 = val ["x" substr(p0 [c], 2, 2)]
+            _y0 = val ["y" substr(p0 [c], 5, 2)]
     
-            _x1 = val ["x" substr(p1 [c], 2, 1)]
-            _y1 = val ["y" substr(p1 [c], 3, 1)]
+            _x1 = val ["x" substr(p1 [c], 2, 2)]
+            _y1 = val ["y" substr(p1 [c], 5, 2)]
     
             line(_x0, _y0, _x1, _y1, Color)
+            anno(_x1, _y1, sprintf("%d, %d", _x1, _y1, 14))
         }
 }
 
 # -----------------------------------------------n-
 function sideView (_x0, _y0, _z0, _x1, _y1, _z1) {
         printf "\n"
-        comment("connPts: side view")
+        comment(sprintf("connPts: side view - C %d", C))
         z1 = val ["z1" ]
         for (c = 0; c < C; c++)  {
-            _z0 = val ["z" substr(p0 [c], 4, 1)]
-            _y0 = val ["y" substr(p0 [c], 3, 1)]
-    
-            _z1 = val ["z" substr(p1 [c], 4, 1)]
-            _y1 = val ["y" substr(p1 [c], 3, 1)]
-
-            if (0 == _z0)
+            if (0 != getPtX(p0 [c]))
                 continue
+    
+            _z0 = getPtZ(p0 [c])
+            _y0 = getPtY(p0 [c])
+    
+            _z1 = getPtZ(p1 [c])
+            _y1 = getPtY(p1 [c])
     
             comment(sprintf("connPts: %s - %s", p0 [c], p1 [c]))
             line(_z0, _y0, _z1, _y1, Color)
             anno(_z1, _y1, sprintf("%d, %d", _z1 - z1, _y1), 14)
         }
-    svgEnd(title)
-}
-
-# ------------------------------------------------
-function markPts () {
-    for (sym in x)
-        mark( x [sym], y [sym], 1, "black")
 }
 
 # ------------------------------------------------
@@ -404,9 +432,9 @@ END {
     if (dbg)
         dump()
 
-    wid = max ["z"]
-    if (wid < max ["x"])
-        wid = max ["x"]
+    wid = max ["x"]
+    if (match(view, "S"))
+        wid = max ["z"]
 
     svgBegin(wid, max ["y"] +5, PixPerScFt)
 
@@ -417,6 +445,4 @@ END {
         sideView()
 
     svgEnd(title)
-
-  # connPts()
 }' $*
