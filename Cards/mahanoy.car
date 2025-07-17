@@ -17,7 +17,6 @@
 #   H P&R      2424
 #   H P&R     87267
 #   H PRR    220558
-#   H RDG     66718
 #   H RDG     66722
 #   H RDG     66731
 #   H RDG     66739
@@ -40,15 +39,18 @@
 
     X PRR     67890
 
+    H P&R      2424
+    H RDG     66718
     F RDG      9440
     F RDG     40121
     G RDG      1806
-    H P&R      2424
     X RDG      5621
     X RDG    101195
     X RDG    101198
     X RDG    101199
     X RDG    102519
 
+    T UTLX    17842
+
     X WM       1135
-#   S WABASH  16422
+    S WABASH  16422

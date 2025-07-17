@@ -1,8 +1,8 @@
 
 all : cards.htm
 
-cards.htm : lavale.loc lavale.car cards.k
-	cards.k lavale.loc lavale.car | tee $@
+cards.htm : mahanoy.loc mahanoy.car cards.k
+	cards.k mahanoy.loc mahanoy.car | tee $@
 
 
 clean :
