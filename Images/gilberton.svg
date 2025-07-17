@@ -1,9 +1,10 @@
 <!--
- size 43 x 4, 21
+ size 43 x 4, 22
                 ___________________
              ___                   \
  ____     __/_______       _________\_____
 _____\___/__________\_____/________________
+
 
 
 
@@ -33,6 +34,7 @@ _____\___/__________\_____/________________
   <text x="495" y="11" font-family="Verdana" font-size="12">Distillery</text>
   <text x="210" y="26" font-family="Verdana" font-size="12">Freight</text>
   <text x="600" y="42" font-family="Verdana" font-size="12">Millworks</text>
+  <text x="615" y="57" font-family="Verdana" font-size="12">Fuel Oil</text>
   <text x="225" y="72" font-family="Verdana" font-size="12">GILBERTON</text>
   <line   x1="255" y1="15" x2="270" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="270" y1="15" x2="285" y2="15" style="stroke:black;stroke-width:2" />

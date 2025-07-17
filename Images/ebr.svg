@@ -1,9 +1,7 @@
 <!--
- size 27 x 3, 9
+ size 27 x 2, 7
 ___________________________
-    \  \_________/
-     \________________
-
+       \_________/
 
 
 
@@ -11,11 +9,10 @@ ___________________________
 
  -->
 <svg version="1.1" baseProfile="full"
-     width="420" height="60"
+     width="420" height="45"
      xmlns="http://www.w3.org/2000/svg">
   <text x="180" y="11" font-family="Verdana" font-size="12">Breaker</text>
   <text x="330" y="11" font-family="Verdana" font-size="12">MT storage</text>
-  <text x="255" y="42" font-family="Verdana" font-size="12">loaded storage</text>
   <line   x1="15" y1="15" x2="30" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="30" y1="15" x2="45" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="45" y1="15" x2="60" y2="15" style="stroke:black;stroke-width:2" />
@@ -44,7 +41,6 @@ ___________________________
   <line   x1="390" y1="15" x2="405" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="405" y1="15" x2="420" y2="15" style="stroke:black;stroke-width:2" />
 
-  <line   x1="75" y1="15" x2="90" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="120" y1="15" x2="135" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="135" y1="30" x2="150" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="150" y1="30" x2="165" y2="30" style="stroke:black;stroke-width:2" />
@@ -56,24 +52,6 @@ ___________________________
   <line   x1="240" y1="30" x2="255" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="255" y1="30" x2="270" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="270" y1="30" x2="285" y2="15" style="stroke:black;stroke-width:2" />
-
-  <line   x1="90" y1="30" x2="105" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="105" y1="45" x2="120" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="120" y1="45" x2="135" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="135" y1="45" x2="150" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="150" y1="45" x2="165" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="165" y1="45" x2="180" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="180" y1="45" x2="195" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="195" y1="45" x2="210" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="210" y1="45" x2="225" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="225" y1="45" x2="240" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="240" y1="45" x2="255" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="255" y1="45" x2="270" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="270" y1="45" x2="285" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="285" y1="45" x2="300" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="300" y1="45" x2="315" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="315" y1="45" x2="330" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="330" y1="45" x2="345" y2="45" style="stroke:black;stroke-width:2" />
 
 </svg>
 
