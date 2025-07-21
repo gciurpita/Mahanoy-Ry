@@ -70,10 +70,12 @@ function arc (x0, y0, a0, a1, rad, col, a, x2, y2, x3, y3)  {
 }
 
 # ------------------------------------------------
-function line (x0, y0, x1, y1, color)  {
+function line (x0, y0, x1, y1, color, wid)  {
     printf "  <line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\"", \
         S*x0, S*mapY(y0), S*x1, S*mapY(y1)
-    printf " style=\"stroke:%s;stroke-width:1\"", color
+    if ("" == wid)
+        wid = 1
+    printf " style=\"stroke:%s;stroke-width:%d\"", color, wid
     printf " />\n"
 }
 
@@ -186,23 +188,10 @@ function path (vecX, vecY, N, col, prXy) {
 }
 
 # ------------------------------------------------
-function rect (x0, y0, wid, ht, col, _vecX, _vecY, _N)  {
-    if (1) {
-        printf " <rect   x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"", \
+function rect (x0, y0, wid, ht, col, fill)  {
+    printf " <rect   x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"", \
                 S*x0, S*mapY(y0), S*wid, S*ht
-        printf " style=\"fill:none;stroke:%s;stroke-width:1\"", col
-    }
-    else  {
-        _N = 0;
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-        _vecX [_N] = x0;          _vecY [_N++] = y0 + ht
-        _vecX [_N] = x0 + wid;    _vecY [_N++] = y0 + ht
-        _vecX [_N] = x0 + wid;    _vecY [_N++] = y0
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-
-        path(_vecX, _vecY, _N, col)
-    }
-    printf " />\n"
+        printf " style=\"fill:%s;stroke:%s;stroke-width:1\"/>\n", fill, col
 }
 
 # ------------------------------------------------
@@ -336,8 +325,18 @@ function windows (x0, y0, widFt, col, _wid) {
     y1  = y0 +deck +(84 - widHt)/12
     x1 += x0
     for (n = 0; n <  nStory; n++)  {
-        for (m = 0; m < nW; m += 2)
-            rect(x1 + m*windWid, y1, windWid, windHt, col)
+        for (m = 0; m < nW; m += 2)  {
+            x = x1 + m*windWid
+            rect(x, y1, windWid, windHt, "none", col)
+
+            for (dx = 0; dx <= windWid; dx +=  windWid/4) {
+                x2 = x+dx
+                line(x2, y1, x2, y1-windHt, "gray", 2)
+            }
+
+            for (y = y1; y >= y1-windHt; y -= windHt/4)
+                line(x, y, x+windWid, y, "gray", 2)
+        }
         y1 += htStory
     }
 }
