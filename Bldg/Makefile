@@ -13,6 +13,12 @@
 %.svg : %.bld
 	Bin/bldg.k $^ | tee $@
 
+%.htm : %.pln
+	Bin/mkPlan.k $^ | tee $@
+
+%.svg : %.pln
+	Bin/mkPlan.k $^ | tee $@
+
 %.svg : %.pts
 	Bin/ptsSvg.k $^ | tee $@
 

@@ -172,18 +172,22 @@ function measure (x0, y0, x1, y1, algn, col, _len) {
 }
 
 # --------------------------------------------------------------------
-function path (vecX, vecY, N, col) {
-    printf "<path d=\"M %d %d\n",  S*vecX [0], S*mapY(vecY [0])
+function path (vecX, vecY, N, col, prXy) {
+    printf "<path d=\"M %d %d",  S*vecX [0], S*mapY(vecY [0])
     for (n = 1; n < N; n++) {
-        printf "         L %3d %4d\n", S*vecX [n], S*mapY(vecY [n])
+        printf "\n         L %3d %4d", S*vecX [n], S*mapY(vecY [n])
     }
-    printf "\""
-    printf " stroke=\"%s\" stroke-width=\"2\" fill=\"none\" />\n", col
+    printf "\"\n       stroke=\"%s\" stroke-width=\"2\" fill=\"none\" />\n", col
+
+    if (prXy)
+        for (n = 0; n < N; n++)
+            anno(vecX [n] +0.2, vecY [n] +0.2, \
+                    sprintf("%d, %d", vecX [n] -vecX [0], vecY [n] -vecY [0]))
 }
 
 # ------------------------------------------------
 function rect (x0, y0, wid, ht, col, _vecX, _vecY, _N)  {
-    if (0) {
+    if (1) {
         printf " <rect   x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"", \
                 S*x0, S*mapY(y0), S*wid, S*ht
         printf " style=\"fill:none;stroke:%s;stroke-width:1\"", col
@@ -202,7 +206,7 @@ function rect (x0, y0, wid, ht, col, _vecX, _vecY, _N)  {
 }
 
 # ------------------------------------------------
-function svgBegin (wid, ht, scale)  {
+function svgBegin (wid, ht, scale, bgCol)  {
     Wid = wid
     Ht  = ht
     S   = scale
@@ -226,96 +230,133 @@ function svgEnd (text)  {
 
 # --------------------------------------------------------------------
 # --------------------------------------------------------------------
-function peak (x0, y0, wid, ht, pk, col, side, _vecX, _vecY, _N, _xMid) {
-    comment(sprintf("\npeak: wid %.2f, ht %.2f, pk %.2f", wid, ht, pk))
-    _N = 0;
-    if (side)  {
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-        if ("l" == side)  {
-            _vecX [_N] = x0;          _vecY [_N++] = y0 + ht + pk
-            _vecX [_N] = x0 + wid;    _vecY [_N++] = y0 + ht
-            measure(x0,    y0, x0,     y0+ht+pk, 1)
-        }
-        else if ("r" == side) {
-            _vecX [_N] = x0;          _vecY [_N++] = y0 + ht
-            _vecX [_N] = x0 + wid;    _vecY [_N++] = y0 + ht + pk
-            measure(x0 +wid, y0, x0 +wid, y0+ht+pk, 1)
-        }
-        _vecX [_N] = x0 + wid;    _vecY [_N++] = y0
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-
-    }
-    else {
-        _xMid = x0 + wid/2
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-        _vecX [_N] = x0;          _vecY [_N++] = y0 + ht
-        _vecX [_N] = _xMid;       _vecY [_N++] = y0 + ht + pk
-        _vecX [_N] = x0 + wid;    _vecY [_N++] = y0 + ht
-        _vecX [_N] = x0 + wid;    _vecY [_N++] = y0
-        _vecX [_N] = x0;          _vecY [_N++] = y0
-
-        measure(x0,    y0, x0,     y0+ht,    1)
-        measure(_xMid, y0, _xMid,  y0+ht+pk)
-    }
-
-    path(_vecX, _vecY, _N, col)
-    measure(x0,    y0, x0+wid, y0,      -1)
-}
-
-# ------------------------------------------------
-function rectM (x0, y0, wid, ht, pcol, _vecX, _vecY, _N, _xMid) {
-    comment(sprintf("\nrectM: wid %.2f, ht %.2f", wid, ht))
-    rect(x, y0, wid, ht, col)
-
-    measure(x0,    y0, x0,     y0+ht,    1)
-    measure(x0,    y0, x0+wid, y0,      -1)
-}
-
-# ------------------------------------------------
 BEGIN  {
     Pi       = atan2(0, -1)
     PixPerIn = 96
     PixPerFt = PixPerIn * 12 / 87       # scale feet
-
 }
 
 # ------------------------------------------------
-function draw (len, wid, ht, pk, title)  {
-    Wid = 5+ 2*wid +len
-    Ht  = 5+ ht + abs(pk)
-    col = "black"
-    y0  = 3
-    
-    svgBegin(Wid, Ht, PixPerFt)
-        x  = 1
-        if (0 > pk)
-            peak( x, y0, wid, ht, abs(pk), col, "l")
-        else
-            peak( x, y0, wid, ht, pk, col)
+{   comment($0)  }
 
-        x += wid;   rectM(x, y0, len, ht, col)
+NF == 0 || $1 == "#"  {
+    next
+}
 
-        x += len
-        if (0 > pk)
-            peak( x, y0, wid, ht, abs(pk), col, "r")
-        else
-            peak( x, y0, wid, ht, pk, col)
+/deck/     { deck     = $2;                                         next }
+/depth/    { depth    = $2;                                         next }
+/door/     { nDoor    = $2; doorWid = $3; doorHt = $4;              next }
+/peak/     { peak     = $2;                                         next }
+/story/    { nStory   = $2; htStory = $3;                           next }
+/width/    { widFt    = $2;                                         next }
+/windows/  { nWindow  = $2; windWid = $3/12; windHt = $4/12;        next }
 
-      # x += wid;   rectM(x, y0, len, ht, col)
-    svgEnd(title)
+# --------------------------------------
+{
+    printf "Error: mkBldg unknown - "
+    print
+    err++; exit
+}
+
+# --------------------------------------------------------------------
+function pr () {
+    comment(sprintf("  sv: %6d %6d", vecX [N-1], vecY [N-1]))
+}
+
+# --------------------------------------------------------------------
+function frontView (x0, y0, wid, htFt,  col) {
+    printf "\n"
+    comment("frontView:")
+
+    N = 0
+    vecX [N] = x0;                  vecY [N++] = y0;                pr()
+    vecX [N] = vecX [N-1] + wid;    vecY [N++] = vecY [N-1];        pr()
+    vecX [N] = vecX [N-1];          vecY [N++] = vecY [N-1] + htFt; pr()
+    vecX [N] = vecX [0];            vecY [N++] = vecY [N-1];        pr()
+    vecX [N] = vecX [0];            vecY [N++] = vecY [0];          pr()
+
+    path(vecX, vecY, N, col, 0)
+
+    anno(vecX [1], vecY [1], sprintf("%d, %d", \
+                            vecX [1]-vecX [0], vecY [1]-vecY [0]))
+
+    anno(vecX [2], vecY [2], sprintf("%d, %d", \
+                            vecX [2]-vecX [0], vecY [2]-vecY [0]))
+
+    _y   = y0 + deck
+    for (n = 0; n <= nStory; n++)  {
+        line(x0, _y, x0+wid, _y, col)
+        anno(x0 +wid +0.2, _y, sprintf("%d, %d", wid, _y-y0))
+        _y  += htStory
+    }
+
+    windows(x0, y0, wid, col)
+}
+
+# --------------------------------------------------------------------
+function sideView (x0, y0, wid, htFt, pkFt, col, _y) {
+    printf "\n"
+    comment("sideView:")
+
+    N = 0
+    vecX [N] = x0;                  vecY [N++] = y0;                pr()
+    vecX [N] = vecX [N-1] + wid;    vecY [N++] = vecY [N-1];        pr()
+    vecX [N] = vecX [N-1];          vecY [N++] = vecY [N-1] + htFt; pr()
+    vecX [N] = vecX [N-1] - wid/2;  vecY [N++] = vecY [N-1] + pkFt; pr()
+    vecX [N] = vecX [N-1] - wid/2;  vecY [N++] = vecY [N-1] - pkFt; pr()
+    vecX [N] = vecX [0];            vecY [N++] = vecY [0];          pr()
+
+    path(vecX, vecY, N, col, 1)
+
+    _y   = y0 + deck
+    for (n = 0; n <= nStory; n++)  {
+        line(x0, _y, x0+wid, _y, col)
+        _y  += htStory
+    }
+
+    windows(x0, y0, wid, col)
 }
 
 # ------------------------------------------------
-NF && ! /^ *#/ {
-    dbg = 0
-    draw($1, $2, $3, $4)
+function windows (x0, y0, widFt, col, _wid) {
+    printf "\n"
+    comment(sprintf(" windows: wid %.2f, ht %.2f", windWid,windHt))
+
+    nW   =  int((widFt -2) /windWid)      # 2 = guaranteed space
+
+    _wid = nW * windWid
+    if (! (nW % 2))
+        _wid -= windWid
+
+    x1 = (widFt -_wid) / 2
+
+    comment(sprintf(" windows %.1f, nW %2d, _wid %.2f, x1 %.2f", \
+                        depth, nW, _wid, x1))
+
+    y1  = y0 +deck +(84 - widHt)/12
+    x1 += x0
+    for (n = 0; n <  nStory; n++)  {
+        for (m = 0; m < nW; m += 2)
+            rect(x1 + m*windWid, y1, windWid, windHt, col)
+        y1 += htStory
+    }
 }
 
 # ------------------------------------------------
 END {
-}' $* << **END** | tee mkPlan.htm
-#   len wid ht  pk
-    50  16  31   8  Iron Works
-    50  16  19   8  Loading
-    20  18  10  -6  Office
-**END**
+  # print "<meta http-equiv=\"refresh\" content=\"4\">"
+
+    col = "black"; x0 = 2;  y0 = 2;
+
+    wid    = widFt
+    pkFt   = depth /3
+    htFt   = deck + nStory*htStory
+    htPkFt = htFt + pkFt
+
+    svgBegin(5 +widFt +depth, htPkFt+5, PixPerFt)
+
+    sideView( x0,        y0, depth, htFt, pkFt, col)
+    frontView(x0 +depth, y0, widFt, htFt,       col)
+
+    svgEnd(title)
+}' $* 
