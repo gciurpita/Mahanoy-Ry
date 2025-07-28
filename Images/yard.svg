@@ -1,8 +1,8 @@
 <!--
- size 40 x 8, 17
+ size 40 x 8, 16
 
  _______________________________________
-      __/___________________________/
+       \____________________________/
        ____________________________/
       ____________________________/
      ____________________________/
@@ -16,19 +16,17 @@
 
 
 
-
  -->
 <svg version="1.1" baseProfile="full"
      width="615" height="135"
      xmlns="http://www.w3.org/2000/svg">
-  <text x="225" y="26" font-family="Verdana" font-size="12">Trk-1</text>
-  <text x="225" y="42" font-family="Verdana" font-size="12">Trk-2</text>
-  <text x="300" y="42" font-family="Verdana" font-size="12">Arrival</text>
-  <text x="225" y="57" font-family="Verdana" font-size="12">Trk-3</text>
-  <text x="225" y="72" font-family="Verdana" font-size="12">Trk-4</text>
-  <text x="225" y="87" font-family="Verdana" font-size="12">Trk-5</text>
-  <text x="225" y="102" font-family="Verdana" font-size="12">Trk-6</text>
-  <text x="225" y="117" font-family="Verdana" font-size="12">Trk-7</text>
+  <text x="225" y="26" font-family="Verdana" font-size="12">Trk 1</text>
+  <text x="225" y="42" font-family="Verdana" font-size="12">Trk 2 -- Arrival</text>
+  <text x="225" y="57" font-family="Verdana" font-size="12">Trk 3 -- Girardville</text>
+  <text x="225" y="72" font-family="Verdana" font-size="12">Trk 4 -- Mahanoy Plane</text>
+  <text x="225" y="87" font-family="Verdana" font-size="12">Trk 5 -- Maizeville</text>
+  <text x="225" y="102" font-family="Verdana" font-size="12">Trk 6 -- Gileberton</text>
+  <text x="225" y="117" font-family="Verdana" font-size="12">Trk 7 -- overflow</text>
 
   <line   x1="30" y1="30" x2="45" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="45" y1="30" x2="60" y2="30" style="stroke:black;stroke-width:2" />
@@ -70,11 +68,9 @@
   <line   x1="585" y1="30" x2="600" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="600" y1="30" x2="615" y2="30" style="stroke:black;stroke-width:2" />
 
-  <line   x1="105" y1="45" x2="120" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="120" y1="45" x2="135" y2="45" style="stroke:black;stroke-width:2" />
-  <line   x1="135" y1="45" x2="150" y2="30" style="stroke:black;stroke-width:2" />
-  <line   x1="150" y1="45" x2="165" y2="45" style="stroke:black;stroke-width:2" />
+  <line   x1="120" y1="30" x2="135" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="135" y1="45" x2="150" y2="45" style="stroke:black;stroke-width:2" />
+  <line   x1="150" y1="45" x2="165" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="165" y1="45" x2="180" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="180" y1="45" x2="195" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="195" y1="45" x2="210" y2="45" style="stroke:black;stroke-width:2" />
