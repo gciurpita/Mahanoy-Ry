@@ -180,6 +180,8 @@ function svgEnd (text)  {
 BEGIN  {
     Pi = atan2(0, -1)
 
+    color = "black"
+
     if (0)  {
         Sc     = 50
         Stroke = 5
@@ -196,6 +198,8 @@ BEGIN  {
 NF == 0 || $1 == "#"  {
     next
 }
+
+/color/ { color = $2; next }
 
 /text/ {
     textX  [NR] = $2
@@ -246,20 +250,20 @@ END {
             c   = substr(s, i, 1)
 
             if ("_" == c) {
-                line(i, y, i+1, y, "black", Stroke)
+                line(i, y, i+1, y, color, Stroke)
 
                 if ("/" == pre)
-                    line(i-1, y, i, y,   "black", Stroke)
+                    line(i-1, y, i, y,   color, Stroke)
             }
 
             else if ("/" == c)
-                line(i, y, i+1, y+1, "black", Stroke)
+                line(i, y, i+1, y+1, color, Stroke)
 
             else if ("\\" == c)  {
-                line(i, y+1, i+1, y, "black", Stroke)
+                line(i, y+1, i+1, y, color, Stroke)
 
                 if ("_" == pre)
-                    line(i, y,   i+1, y, "black", Stroke)
+                    line(i, y,   i+1, y, color, Stroke)
             }
 
             else if ("|" == c)  {
@@ -270,7 +274,7 @@ END {
                 else if ("/" == a)
                     x [i] = i
 
-                line(x[i], y, x[i], y+1, "black", Stroke)
+                line(x[i], y, x[i], y+1, color, Stroke)
             }
         }
         printf "\n"
