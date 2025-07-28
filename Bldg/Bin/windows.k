@@ -9,7 +9,7 @@ BEGIN {
     # ------------------------------------------------
     # windows
     printf "# windows\n"
-    if (1) {
+    if (0) {
         dw  = 36;    dh = 60
         dx  = dw / 12
         for (rows = 2; rows > 0; rows--)  {
@@ -31,7 +31,7 @@ BEGIN {
         y  -= 1 +dh/12
         for (n = 4; 0 < n; n--)  {
           # printf "#  industrial windows: n %d, WidFt %.2f\n", n, WidFt
-            for (x = 5; x < WidFt - dx; x += dx)  {
+            for (x = 0; x < WidFt - dx; x += dx)  {
                 printf "#   industrial windows: n %d, x %d\n", n, x
                 printf "    window %6d %6d  %3d %3d black  5 6\n", \
                                             x, y, dw, dh
