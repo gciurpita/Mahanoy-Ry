@@ -149,7 +149,7 @@ function dispPt (p) {
 # --------------------------------------------------------------------
 function getPtX (p) {
     split(substr(p, 2), fld, "/")
-    res = val ["x" fld [1]] + xOff
+    res = val ["x" fld [1]] - xOff
 
   # printf "# getPtX: p %s, res %s\n", p, res
     return res
@@ -221,6 +221,7 @@ BEGIN  {
     HoSc       = 12/87        # ft to inches
     PixPerScFt = PixPerIn * HoSc
     Color      = "black"
+    Xmargin    = 5
     font       = 14
 
     C          = 0
@@ -376,8 +377,8 @@ function frontView (_x0, _y0, _z0, _x1, _y1, _z1) {
             _x1 = getPtX(p1 [c])
             _y1 = getPtY(p1 [c])
     
-            line(_x0, _y0, _x1, _y1, Color)
-            anno(_x1, _y1, sprintf("%d, %d",     _x1, _y1),         font)
+            line(Xmargin+_x0, _y0, Xmargin+_x1, _y1, Color)
+            anno(Xmargin+_x1, _y1, sprintf("%d, %d", _x1, _y1), font)
           # anno(_x1, _y1, sprintf("%d, %d  %s", _x1, _y1, p0 [c]), font)
         }
 }
