@@ -4,11 +4,13 @@ awk '
 # ------------------------------------------------
 function error (msg)  {
     printf " ** Error: %s - %s\n", msg, $0
+    err++
     exit
 }
 
 # ------------------------------------------------
 function anno (x, y, text, font)  {
+  # comment(sprintf("anno: %d, %d, %s, %d", x, y, text, font))
     if (! font)
         font=10
     printf "  <text x=\"%d\" y=\"%d\"", S*x, S*mapY(y)
@@ -30,7 +32,7 @@ function annoC (x, y, text, font)  {
 
 # ------------------------------------------------
 function comment (text)  {
-    printf " <!-- %s -->\n", text
+    printf "  <!-- %s -->\n", text
 }
 
 # ------------------------------------------------
@@ -135,7 +137,7 @@ function svgBegin (wid, ht, scale)  {
 # ------------------------------------------------
 function svgEnd (text)  {
     if (text)
-        annoC(Wid/2, Ht - 24/S, text, 24)
+        annoC(Wid/2, Ht - 24/S, text, font+10)
     printf "</svg>\n"
 }
 
@@ -145,9 +147,30 @@ function dispPt (p) {
 }
 
 # --------------------------------------------------------------------
-function getPtX (p) { return val ["x" substr(p, 2, 2)] }
-function getPtY (p) { return val ["y" substr(p, 5, 2)] }
-function getPtZ (p) { return val ["z" substr(p, 8, 2)] }
+function getPtX (p) {
+    split(substr(p, 2), fld, "/")
+    res = val ["x" fld [1]] + xOff
+
+  # printf "# getPtX: p %s, res %s\n", p, res
+    return res
+}
+
+function getPtY (p) {
+    split(substr(p, 2), fld, "/")
+    res = val ["y" fld [2]]
+
+  # printf "# getPtY: p %s, res %s\n", p, res
+    return res
+}
+
+function getPtZ (p) {
+    split(substr(p, 2), fld, "/")
+    res = val ["z" fld [3]]
+
+  # printf "# getPtZ: p %s, res %s\n", p, res
+    return res
+}
+
 
 # --------------------------------------------------------------------
 function dump () {
@@ -198,7 +221,7 @@ BEGIN  {
     HoSc       = 12/87        # ft to inches
     PixPerScFt = PixPerIn * HoSc
     Color      = "black"
-    F          = 14
+    font       = 14
 
     C          = 0
     N          = 0
@@ -214,9 +237,14 @@ BEGIN  {
 # ------------------------------------------------
 ! NF || /^ *#/ { next }
 
-/title/      { title = substr($0, index($0, $2));         next }
-/color/      { color = $2; if (Sc) printf "\n%s\n", $0;   next }
-/quit/       { exit }
+/color/ { color = $2; if (Sc) printf "\n%s\n", $0;  next }
+/font/  { font = $2;                                next }
+/front/ { view = view "F";                          next }
+/quit/  {                                           exit }
+/scale/ { scX = $2; scY = $3; scLen= $4; scHt = $5; next }
+/side/  { view = view "S";                          next }
+/title/ { title = substr($0, index($0, $2));        next }
+/xOff/  { xOff = $2;                                next }
 
 # ------------------------------------------------
 "=" == $2  {
@@ -269,10 +297,6 @@ BEGIN  {
     p1 [C++] = $2
     next
 }
-
-# ------------------------------------------------
-/front/ { view = view "F";  next }
-/side/  { view = view "S";  next }
 
 # ------------------------------------------------
 {
@@ -342,74 +366,26 @@ function measure (x0, y0, x1, y1) {
 }
 
 # -----------------------------------------------n-
-function connPts (_x0, _y0, _z0, _x1, _y1, _z1) {
-    wid = max ["z"]
-    if (wid < max ["x"])
-        wid = max ["x"]
-
-    svgBegin(wid +10, max ["y"] +1, PixPerScFt)
-
-    # front view
-    if (1) {
-        printf "\n"
-        comment("connPts: front view")
-        for (c = 0; c < C; c++)  {
-            _x0 = val ["x" substr(p0 [c], 2, 2)]
-            _x0 = val ["x" substr(p0 [c], 2, 2)]
-            _y0 = val ["y" substr(p0 [c], 5, 2)]
-    
-            _x1 = val ["x" substr(p1 [c], 2, 2)]
-            _y1 = val ["y" substr(p1 [c], 5, 2)]
-    
-            line(_x0, _y0, _x1, _y1, Color)
-            anno(_x1, _y1, sprintf("%d, %d", _x1, _y1), 14)
-        }
-    }
-
-    # side view
-    if (1)  {
-        printf "\n"
-        comment("connPts: side view")
-        z1 = val ["z1" ]
-        for (c = 0; c < C; c++)  {
-            _z0 = val ["z" substr(p0 [c], 8, 2)]
-            _y0 = val ["y" substr(p0 [c], 5, 2)]
-    
-            _z1 = val ["z" substr(p1 [c], 8, 2)]
-            _y1 = val ["y" substr(p1 [c], 5, 2)]
-
-            if (0 == _z0)
-                continue
-    
-            comment(sprintf("connPts: %s - %s", p0 [c], p1 [c]))
-            line(_z0, _y0, _z1, _y1, Color)
-            anno(_z1, _y1, sprintf("%d, %d", _z1 - z1, _y1), 14)
-        }
-    }
-
-    svgEnd(title)
-}
-
-# -----------------------------------------------n-
 function frontView (_x0, _y0, _z0, _x1, _y1, _z1) {
         printf "\n"
-        comment("connPts: front view")
+        comment(sprintf("frontView: font %s", font))
         for (c = 0; c < C; c++)  {
-            _x0 = val ["x" substr(p0 [c], 2, 2)]
-            _y0 = val ["y" substr(p0 [c], 5, 2)]
+            _x0 = getPtX(p0 [c])
+            _y0 = getPtY(p0 [c])
     
-            _x1 = val ["x" substr(p1 [c], 2, 2)]
-            _y1 = val ["y" substr(p1 [c], 5, 2)]
+            _x1 = getPtX(p1 [c])
+            _y1 = getPtY(p1 [c])
     
             line(_x0, _y0, _x1, _y1, Color)
-            anno(_x1, _y1, sprintf("%d, %d", _x1, _y1, 14))
+            anno(_x1, _y1, sprintf("%d, %d",     _x1, _y1),         font)
+          # anno(_x1, _y1, sprintf("%d, %d  %s", _x1, _y1, p0 [c]), font)
         }
 }
 
 # -----------------------------------------------n-
 function sideView (_x0, _y0, _z0, _x1, _y1, _z1) {
         printf "\n"
-        comment(sprintf("connPts: side view - C %d", C))
+        comment(sprintf("sideView: - C %d", C))
         z1 = val ["z1" ]
         for (c = 0; c < C; c++)  {
             if (0 != getPtX(p0 [c]))
@@ -423,12 +399,36 @@ function sideView (_x0, _y0, _z0, _x1, _y1, _z1) {
     
             comment(sprintf("connPts: %s - %s", p0 [c], p1 [c]))
             line(_z0, _y0, _z1, _y1, Color)
-            anno(_z1, _y1, sprintf("%d, %d", _z1 - z1, _y1), 14)
+            anno(_z1, _y1, sprintf("%d, %d", _z1 - z1, _y1), font)
         }
 }
 
 # ------------------------------------------------
+function scale (x0, y0, len, ht) {
+    printf "\n"
+    comment("scale:")
+
+    N  = 10
+    x1 = x0 + len
+
+    line(x0, y0, x1, y0, "black")
+
+    if (1) {
+    for (n = 0; n <= N; n++)  {
+        dx = len*n/N
+        x  = x0 + dx
+        line(x, y0, x, y0+ht, "black")
+        anno(x, y0+ht, dx, font)
+    }
+    anno(0,0, sprintf("scale: %d pix/inch", PixPerIn))
+    }
+}
+
+# ------------------------------------------------
 END {
+    if (err)
+        exit
+
     if (dbg)
         dump()
 
@@ -443,6 +443,9 @@ END {
 
     if (match(view, "S"))
         sideView()
+
+    if (scX)
+        scale(scX, scY, scLen, scHt)
 
     svgEnd(title)
 }' $*
