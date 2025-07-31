@@ -2,6 +2,7 @@
 
 awk '
 BEGIN {
+    dbg= 0
     if (dbg) print "nu:"
     C = L = 0
 
@@ -24,7 +25,14 @@ BEGIN {
 }
 
 # ----------------------------------------------------------
-dbg {   print }
+filename != FILENAME {
+    filename = FILENAME
+    if (dbg)
+        printf "# -------------------- %s --------------------\n", filename
+}
+
+# --------------------------------------
+1 < dbg {   print }
 
 # --------------------------------------
 NF && match(FILENAME, "car") {
@@ -167,7 +175,10 @@ function select (N, type, road, number) {
 
 # ----------------------------------------------------------
 END  {
-    if (dbg) printf "END: C %d, L %d\n", C, L
+    if (dbg)  {
+        printf "# -------------------- %s --------------------\n", "END"
+        printf "END: C %d, L %d\n", C, L
+    }
 
   # hyst(100)
 
@@ -179,7 +190,7 @@ END  {
 
   # dumpLocs()
   # dumpCars()
-}' mahanoy.car mahanoy.loc $* | tee cards.out | 
+}' $* | tee cards.out |
 
 # ------------------------------------------------------------------------------
 # script to format
