@@ -1,6 +1,6 @@
     deck      5
     door      1 120 120
-    peak      2
+    peak      3
     siding    10
     sign      18 Wotring Electric
     story     2  12
