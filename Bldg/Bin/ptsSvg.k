@@ -136,8 +136,9 @@ function svgBegin (wid, ht, scale)  {
 
 # ------------------------------------------------
 function svgEnd (text)  {
+    _font = font + 10
     if (text)
-        annoC(Wid/2, Ht - 24/S, text, font+10)
+        annoC(Wid/2, Ht - _font/S, text, _font)
     printf "</svg>\n"
 }
 
@@ -426,6 +427,46 @@ function scale (x0, y0, len, ht) {
 }
 
 # ------------------------------------------------
+function setMinMax (s)  {
+    _x = getPtX(s)
+    if (xMin > _x) xMin = _x
+    if (xMax < _x) xMax = _x
+
+    _y = getPtY(s)
+    if (yMin > _y) yMin = _y
+    if (yMax < _y) yMax = _y
+
+    _z = getPtZ(s)
+    if (zMin > _z) zMin = _z
+    if (zMax < _z) zMax = _z
+
+    if (0) {
+        printf "setMinMax: _x %4d, _y %4d, _z %4d\n", _x, _y, _z
+        printf"   %4d - %4d\n", xMin, xMax
+        printf"   %4d - %4d\n", yMin, yMax
+        printf"   %4d - %4d\n", zMin, zMax
+    }
+}
+
+# ------------------------------------------------
+function getSizes ()  {
+    xMin = xMax = getPtX(p0 [0])
+    yMin = yMax = getPtY(p0 [0])
+    zMin = zMax = getPtZ(p0 [0])
+
+    for (c = 0; c < C; c++)  {
+        setMinMax(p0 [c])
+        setMinMax(p1 [c])
+    }
+
+    if (1)  {
+        comment(sprintf("getSizes: x %4d - %4d", xMin, xMax))
+        comment(sprintf("getSizes: y %4d - %4d", yMin, yMax))
+        comment(sprintf("getSizes: z %4d - %4d", zMin, zMax))
+    }
+}
+
+# ------------------------------------------------
 END {
     if (err)
         exit
@@ -433,11 +474,13 @@ END {
     if (dbg)
         dump()
 
-    wid = max ["x"]
-    if (match(view, "S"))
-        wid = max ["z"]
+    getSizes()
 
-    svgBegin(wid, max ["y"] +5, PixPerScFt)
+    wid = xMax
+    if (match(view, "S"))
+        wid = zMax
+
+    svgBegin(wid +3*Xmargin, yMax +10, PixPerScFt)
 
     if (match(view, "F"))
         frontView()
