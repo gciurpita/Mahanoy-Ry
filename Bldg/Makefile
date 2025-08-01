@@ -26,7 +26,7 @@
 all : bldg.html $(Svgs)
 
 bldg.html : $(Svgs)
-	@ echo "<meta http-equiv=\"refresh\" content=\"9\">" > $@
+#	@ echo "<meta http-equiv=\"refresh\" content=\"9\">" > $@
 	cat $(Svgs) >> $@
 
 .PHONY : foo.htm
