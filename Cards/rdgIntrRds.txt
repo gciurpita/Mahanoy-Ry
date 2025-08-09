@@ -1,0 +1,108 @@
+CNJ	Central of New Jersey	Bound Brook
+CNJ	Central of New Jersey	Manville
+CNJ	Central of New Jersey	Port Reading Crossing
+CRPA	Central of New Jersey	Bethlehem
+CRPA	Central of New Jersey	Allentown Station
+CRPA	Central of New Jersey	Allentown Yard
+CRPA	Central of New Jersey	Haucks
+CRPA	Central of New Jersey	Tamaqua
+NYC	New York Central	Newberry Junction
+DL&W	Delaware, Lackawanna & Western	Danville
+DL&W	Delaware, Lackawanna & Western	Rupert
+ERIE	Erie	Newberry Junction
+L&NE	Lehigh & New England	Tamaqua
+L&NE	Lehigh & New England	Catasauqua
+L&NE	Lehigh & New England	Slatington
+LV	Lehigh Valley	Allentown Station
+LV	Lehigh Valley	Manville
+LV	Lehigh Valley	Catasauqua
+LV	Lehigh Valley	East Penn Junction
+LV	Lehigh Valley	Bethlehem
+LV	Lehigh Valley	Ashland
+LV	Lehigh Valley	Mahanoy City
+LV	Lehigh Valley	Quakake
+LV	Lehigh Valley	Raven Run
+LV	Lehigh Valley	Westwood
+LV	Lehigh Valley	Slatington
+PRR	Pennsylvania	Belmont
+PRR	Pennsylvania	Bridesburg
+PRR	Pennsylvania	Downingtown
+PRR	Pennsylvania	East Conshohocken
+PRR	Pennsylvania	East Trenton
+PRR	Pennsylvania	Eddystone
+PRR	Pennsylvania	Erie Avenue
+PRR	Pennsylvania	Essington
+PRR	Pennsylvania	Fort Mifflin
+PRR	Pennsylvania	Grays Ferry
+PRR	Pennsylvania	Howellsville Devault
+PRR	Pennsylvania	Marcus Hook
+PRR	Pennsylvania	Mill Lane
+PRR	Pennsylvania	Nicetown
+PRR	Pennsylvania	Norristown
+PRR	Pennsylvania	Penncoyd
+PRR	Pennsylvania
+Philadelphia Perishable Produce Terminal
+
+PRR	Pennsylvania	Plymouth Meeting
+PRR	Pennsylvania	Richmond Junction
+PRR	Pennsylvania	Philadelphia / 16th Street Junction
+PRR	Pennsylvania	Summerdale Sears
+PRR	Pennsylvania	Thurlow
+PRR	Pennsylvania	Willow & Noble Streets
+PRR	Pennsylvania	Birdsboro
+PRR	Pennsylvania	Camp Hill
+PRR	Pennsylvania	Carlisle
+PRR	Pennsylvania	Chadds Ford Junction
+PRR	Pennsylvania	Coatesville
+PRR	Pennsylvania	Columbia
+PRR	Pennsylvania	Harrisburg
+PRR	Pennsylvania	Lancaster
+PRR	Pennsylvania	Lebanon
+PRR	Pennsylvania	Middletown
+PRR	Pennsylvania	New Castle
+PRR	Pennsylvania	Oaks
+PRR	Pennsylvania	Phoenixville
+PRR	Pennsylvania	Pottstown
+PRR	Pennsylvania	Shippensburg
+PRR	Pennsylvania	Supplee
+PRR	Pennsylvania	Swedeland
+PRR	Pennsylvania	West Reading
+PRR	Pennsylvania	Wilmington
+PRR	Pennsylvania	Milton
+PRR	Pennsylvania	Montgomery
+PRR	Pennsylvania	Natalie
+PRR	Pennsylvania	Williamsport
+PRR	Pennsylvania	Oak Hill Colliery
+PRR	Pennsylvania	Paper Mill
+PRR	Pennsylvania	Pottsville
+PRR	Pennsylvania	Repplier Colliery (Darkwater)
+PRR	Pennsylvania	Shamokin
+PRR	Pennsylvania	Sunbury
+PRR	Pennsylvania	Newberry Junction
+PRSL	Pennsylvania-Reading Seashore Lines	Camden / Bulson Street
+PRSL	Pennsylvania-Reading Seashore Lines	Camden / Kaighn's Point
+PRSL	Pennsylvania-Reading Seashore Lines	Camden / Detour
+PRSL	Pennsylvania-Reading Seashore Lines	Camden / Linden Street
+PRSL	Pennsylvania-Reading Seashore Lines	Philadelphia / Chestnut Street
+PRSL	Pennsylvania-Reading Seashore Lines	Carney's Point
+PRSL	Pennsylvania-Reading Seashore Lines	Gibbstown
+IRN	Ironton	Catasauqua
+B&O	Baltimore & Ohio	Arch Street
+B&O	Baltimore & Ohio	East Side Yard / Through Trains
+B&O	Baltimore & Ohio	Eastwicks
+B&O	Baltimore & Ohio	Eddystone
+B&O	Baltimore & Ohio	Camden / Linden Street
+B&O	Baltimore & Ohio	Park Junction
+B&O	Baltimore & Ohio	Philadelphia Perishable Produce Terminal
+B&O	Baltimore & Ohio	Willow & Noble Streets
+B&O	Baltimore & Ohio	Elsmere Junction
+B&O	Baltimore & Ohio	Wilmington
+WM	Western Maryland	Gettysburg
+WM	Western Maryland	Lurgan
+WM	Western Maryland	Shippensburg
+UMP	Upper Merion & Plymouth	Conshohocken
+UMP	Upper Merion & Plymouth	West Conshohocken
+UMP	Upper Merion & Plymouth	Swedeland
+CORN	Cornwall	Lebanon
+PBNE	Philadelphia, Bethlehem & New England (Bethlehem Steel)	Bethlehem
+SH	Steelton & Highspire (Bethlehem Steel)
