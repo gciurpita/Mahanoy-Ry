@@ -5,6 +5,7 @@
     type H   Hopper
     type L   Lumber
     type N   Caboose
+    type P   Blasting Powder
     type R   Reefer
     type S   Livestock
     type T   Tank
@@ -32,14 +33,12 @@
 
     X NYC     27776
     X NYC    180190
-
     X NYO&W    6493
 
     R P&R    FastFr
-
+    H P&R     87267
     X PRR     67890
 
-    H P&R     87267
     H RDG     66718
     F RDG      9440
     F RDG     40121
@@ -54,3 +53,9 @@
 
     X WM       1135
     S WABASH  16422
+
+    X B&LE    90105
+    X WM      26538
+    X WM      28123
+
+    P HPCX      575

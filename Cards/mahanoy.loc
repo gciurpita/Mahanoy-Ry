@@ -7,7 +7,7 @@
 
     FGHX 2  M  Fisher Foundry
 
-#   U    10 C  East_Bear_Ridge
+    P    10 C  East_Bear_Ridge
 
     _    99 O  Mahanoy City
     _    99 O  Shamokin
@@ -16,7 +16,7 @@
     BRSX 2  G  Gliberton Freight House
     H    2  G  Coal Dealer
 
-    BX   1  G  Bradley Beer Storage
+    BRX  1  G  Bradley Beer Storage
     X    1  G  Perrin Shirts
     X    1  G  Wotring Electric
     FX   1  G  Arnold Machine
