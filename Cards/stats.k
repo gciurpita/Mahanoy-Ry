@@ -16,7 +16,9 @@ BEGIN {
 
 /select/ {
     Ncar++
-    name [Ncar] = sprintf("%-5s%6s %s", $3, $4, $2)
+    name [Ncar] = sprintf("%-6s%6s %s", $3, $4, $2)
+    s           = sprintf("%s %s", $3, $4)
+    name [Ncar] = sprintf("%-12s %s", s, $2)
     idx   = 0
     next
 }
