@@ -47,6 +47,8 @@ NF && match(FILENAME, "car") {
 }
 
 # --------------------------------------
+#  BRSX 2  M  Maizeville Freight House
+
 NF && match(FILENAME, "loc") {
     if (dbg) print
 
@@ -55,10 +57,10 @@ NF && match(FILENAME, "loc") {
 
     locType [L]   = $1
     locSize [L]   = $2
-    locArea [L]   = $3
+    locTown [L]   = $3
     locName [L++] = substr($0, index($0, $4))
 
-    areas [$3]++
+    towns [$3]++
 }
 
 # ----------------------------------------------------------
@@ -73,7 +75,7 @@ function dumpLocs ()  {
     printf "dumpLocs:\n"
     for (l = 0; l < L; l++)
         printf "   %2d: %s  %6s %3d  %s\n", \
-            l, locArea [l],  locType [l], locSize [l], locName [l]
+            l, locTown [l],  locType [l], locSize [l], locName [l]
 }
 
 # ------------------------------------------------
@@ -94,14 +96,28 @@ function hyst (N) {
 }
 
 # ------------------------------------------------
-function select (N, type, road, number) {
+function select (N, c,  type, road, number) {
+    type   = carType [c]
+    road   = carRoad [c]
+    number = carNum [c]
+
     printf "select: %s %6s %6s\n", type, road, number
 
-    for (a in area)
-        area [a] = 0
+    # reset town and location cnts
+    for (t in town)
+        town [t] = 0
 
-    for (l = 0; l < L; l++)
+    locCnt = 0
+    for (l = 0; l < L; l++)  {
         loc [l] = 0
+        if (type == locType [l] || "_" == locType [l])
+            locCnt++
+    }
+    locLmt = N / locCnt
+
+    dbg= 0
+    if (dbg)
+        printf " select: dbg, c %d, locCnt %d, locLmt %.2f\n", c, locCnt, locLmt
 
     # ----------------------------
     # select N locations
@@ -111,38 +127,58 @@ function select (N, type, road, number) {
 
             if ("_" != locType [l] && ! match(locType [l], type))  {
                 if (dbg)
-                    printf " no-match: %s %5s %s\n", \
+                    printf "   wrong type: %s %5s %s\n", \
                         type, locType [l], locName [l]
                 continue
             }
 
-            r = rand()
-            p = 1 / (1 +area [locArea [l]])
+            # ----------------------------
+            # distributed assignments
+            if (dbg)
+                printf "  select: c %d, n %d, l %d, loc [] %d\n", \
+                    c, n, l, loc [l]
 
-            am1 = locArea [route [n -1]]
-            a   = locArea [l]
+            # skip location if already selected
+            if (locLmt < loc [l])  {
+                if (dbg)
+                    printf "   lmt: loc %d, %s\n", loc [l], locName [l]
+                continue
+            }
+
+            # get random value and probability
+            r = rand()
+            p = 1 / (1 +town [locTown [l]])
+
+            # get previous and current town
+            am1 = locTown [route [n -1]]
+            a   = locTown [l]
 
             if (dbg)   {
                 printf "    %.3f  %.3f  %2d  %d %s (%s)  %s", \
-                        r, p, l, area [locArea [l]], a, am1, locName [l]
+                        r, p, l, town [locTown [l]], a, am1, locName [l]
             }
 
+            # randomly w/in probabilty skip location
             if (1 > p && r > p)  {
                 if (dbg) printf " -- p\n"
                 continue
             }
 
+            # randonly skip location if town as last
             if (0 < n && am1 == a && r > p/2)  {
                 if (dbg) printf " -- a\n"
                 continue
             }
 
+            # select this location by breaking out of while loop
+            loc [l]++
             if (dbg) printf "\n"
             break
         }
 
         route [n] = l
-        area [locArea [l]]++
+        town  [locTown [l]]++
+        loc   [l]++
     }
 
     # ----------------------------
@@ -150,24 +186,24 @@ function select (N, type, road, number) {
     for (n = 0; n < N; n++)  {
         l = route [n]
         if (0)  {
-            if ("M" == locArea [l])
+            if ("M" == locTown [l])
                 printf Red
-            else if ("G" == locArea [l])
+            else if ("G" == locTown [l])
                 printf Blue
         }
 
         printf " %6d  %s %d  %s\n",  \
-                route [n], locArea [l], area [locArea [l]],  locName [l]
+                route [n], locTown [l], town [locTown [l]],  locName [l]
         if (0)
             printf Normal
     }
 
     if (0)  {
         printf "    "
-        for (a in area)
-            printf " %d", area [a]
+        for (a in town)
+            printf " %d", town [a]
         printf "    "
-        for (a in area)
+        for (a in town)
             printf " %s", a
         printf "\n"
     }
@@ -186,7 +222,7 @@ END  {
   #     select(8)
 
     for (c = 0; c < C; c++)
-        select(6, carType [c], carRoad [c], carNum [c])
+        select(6, c)
 
   # dumpLocs()
   # dumpCars()
@@ -260,6 +296,8 @@ function genCard () {
 }
 
 # ------------------------------------------------
+/dbg/ { exit }
+
 /select/ {
     if (0 < N)
         genCard()
