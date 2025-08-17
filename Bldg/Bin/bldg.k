@@ -12,13 +12,15 @@ function anno (x, y, text, font)  {
 }
 
 # ------------------------------------------------
-function annoC (x, y, text, font)  {
+function annoC (x, y, text, font, color)  {
     if (! font)
         font = 10
     printf "  <text x=\"%d\" y=\"%d\"", S*x, S*mapY(y)
     printf " font-family=\"Verdana\""
     printf " text-anchor=\"middle\""
     printf " font-size=\"%d\"", font
+    if (color)
+        printf " fill=\"%s\"", color
     printf ">%s</text>\n", text
 }
 
@@ -153,7 +155,7 @@ function svgBegin (wid, ht, scale, bgCol)  {
     if ("" == scale || 0 == scale)
         S = scale = PixPerScFt
 
-    comment(sprintf("svgBegin: wid %d, ht %d, scale %.2f, PixPwrScFt %.2f", \
+    comment(sprintf("svgBegin: wid %d, ht %d, scale %.2f, PixPerScFt %.2f", \
                     wid, ht, scale, PixPerScFt))
 
     printf "<svg version=\"1.1\" baseProfile=\"full\"\n"
@@ -291,6 +293,7 @@ function bldg (x0, y0, widFt, htFt, peakFt, color) {
     vecX [n] = x + widFt;   vecY [n++] = y + htFt
     vecX [n] = x + widFt;   vecY [n++] = y
     vecX [n] = x;           vecY [n++] = y
+    path(vecX, vecY, n, color, 1, "none")
     path(vecX, vecY, n, "none", 1, color)
 
     if (peakFt)  {
@@ -323,20 +326,21 @@ function scale () {
         line(x, y0, x, y0+0.5, "black")
         anno(x, y0+0.5, n)
     }
-    anno(0,0, sprintf("scale: %d pix/inch", PixPerIn))
+    anno(0, y0-0.2, sprintf("scale: %.3f pix/inch", PixPerIn))
     }
 }
 
 # ------------------------------------------------
-function scaleScFt () {
+function scaleScFt (x0) {
     comment("scale:")
 
     # scale is PixPerScFt, open 80 x 10 ft space
     N  = 80
-    anno(0,0, "PixPerScFt")
 
-    x0 = 1;         x1 = x0 + N
-    y0 = 5
+    if ("" == x0)
+        x0 = 5;
+    x1 = x0 + N
+    y0 = 1
     line(x0, y0, x1, y0, "black")
 
     dx = 10
@@ -344,11 +348,12 @@ function scaleScFt () {
         x = x0 + n
         if (! (n % 10))  {
             line(x, y0, x, y0+2, "black")
-            anno(x, y0+2, n)
+            annoC(x, y0+2, n)
         }
         else
             line(x, y0, x, y0+1, "black")
     }
+    anno(0, y0-0.8, sprintf("PixPerScFt %.3f", PixPerScFt))
 }
 
 # ------------------------------------------------
@@ -463,8 +468,8 @@ function sign (x, y, wid, fontSz, text) {
   # wid  *= PixPerScFt
     dy    = fontSz / PixPerScFt
 
-    rectWh( x0 +x -wid/2, y0 +y, wid, dy, "white", "white")
-    annoC(x0+x, y0+y, text, fontSz)
+    rectWh( x0 +x -wid/2, y0 +y, wid, dy, "gray", "gray")
+    annoC(x0+x, y0+y, text, fontSz, "white")
 }
 
 # ------------------------------------------------
@@ -482,7 +487,7 @@ NF == 0 || $1 == "#"  {
 /line/   { line(     $2, $3, $4, $5, $6, $7);               next }
 /siding/ { siding(   $2);                                   next }
 /sign/   { sign(     $2, $3, $4, $5, substr($0, index($0, $6))); next }
-/scale/  { scaleScFt();                                     next }
+/scale/  { scaleScFt($2);                                     next }
 /space/  { svgBegin($2, $3, $4);                            next }
 /window/ { window(   $2, $3, $4/12, $5/12, $6, $7, $8);     next }
 
