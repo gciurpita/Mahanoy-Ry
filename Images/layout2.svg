@@ -1,8 +1,8 @@
 <!--
  size 49 x 14, 29
      _________________________________________  
-    /    \________________/   \___________/   \ 
-   /   __________________/                     \ 
+    /    \________________//  \___________/   \ 
+   /   __________________//                    \ 
   /                                            | 
  /|                                            | 
  ||      ____                                  /
@@ -40,7 +40,7 @@
   <text x="420" y="117" font-family="Verdana" font-size="12">Maizeville</text>
   <text x="150" y="147" font-family="Verdana" font-size="12">East</text>
   <text x="135" y="162" font-family="Verdana" font-size="12">Bear Ridge Colliery</text>
-  <text x="285" y="162" font-family="Verdana" font-size="12">staging</text>
+  <text x="450" y="147" font-family="Verdana" font-size="12">staging</text>
   <text x="420" y="192" font-family="Verdana" font-size="12">Gilberton</text>
   <line   x1="90" y1="15" x2="105" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="105" y1="15" x2="120" y2="15" style="stroke:black;stroke-width:2" />
@@ -103,6 +103,7 @@
   <line   x1="375" y1="30" x2="390" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="390" y1="30" x2="405" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="405" y1="30" x2="420" y2="15" style="stroke:black;stroke-width:2" />
+  <line   x1="420" y1="30" x2="435" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="465" y1="15" x2="480" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="480" y1="30" x2="495" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="495" y1="30" x2="510" y2="30" style="stroke:black;stroke-width:2" />
@@ -138,6 +139,7 @@
   <line   x1="360" y1="45" x2="375" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="375" y1="45" x2="390" y2="45" style="stroke:black;stroke-width:2" />
   <line   x1="390" y1="45" x2="405" y2="30" style="stroke:black;stroke-width:2" />
+  <line   x1="405" y1="45" x2="420" y2="30" style="stroke:black;stroke-width:2" />
   <line   x1="720" y1="30" x2="735" y2="45" style="stroke:black;stroke-width:2" />
 
   <line   x1="45" y1="60" x2="60" y2="45" style="stroke:black;stroke-width:2" />
