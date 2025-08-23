@@ -286,12 +286,14 @@ function table (type, road, number, dest, N, side) {
 
 # ------------------------------------------------
 function genCard () {
-    printf "<!-- cnt %d -->\n", cnt
     if (cnt)
-        if (! (cnt % 8))
-            print "<hr>\n<div class=\"page-break\"></div>"
+        if (! (cnt % 8))  {
+            print "<table width=100%> <tr><td> </table>"
+            print "<div class=\"page-break\"></div>"
+        }
     cnt++
 
+    printf "<!-- cnt %d -->\n", cnt
     table(type, road, number, dest, N, "left")
 }
 
