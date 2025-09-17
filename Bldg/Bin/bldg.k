@@ -2,6 +2,13 @@
 
 awk '
 # ------------------------------------------------
+function error (msg)  {
+    printf " ** Error: %s - %s\n", msg, $0
+    err++
+    exit
+}
+
+# ------------------------------------------------
 function anno (x, y, text, font)  {
     if (! font)
         font=10
@@ -128,7 +135,7 @@ function path (vecX, vecY, N, stroke, strWid, fill) {
 
 # ------------------------------------------------
 function rectWh (x0, y0, wid, ht, color, fill, strokeWid)  {
-    comment(sprintf("rectWh: (%d, %d) <%d, %d> %s, %s, stkWid %d", \
+    comment(sprintf("rectWh: (%0.1f, %0.1f) <%d, %d> %s, %s, stkWid %d", \
                         x0, y0, wid, ht, color, fill, strokeWid))
 
     printf " <rect   x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"", \
@@ -179,6 +186,18 @@ function svgEnd (text)  {
     printf "\n"
 }
 
+# ------------------------------------------------
+function val (tok, _v) {
+    c = substr(tok, 1, 1)
+    if ("0" <= c && c <= "9")
+        return tok
+
+    _v = vals [tok]
+    if ("" == _v)
+        error(sprintf("undefined tok: %s", tok))
+    return _v
+}
+
 # --------------------------------------------------------------------
 BEGIN  {
     Pi = atan2(0, -1)
@@ -227,13 +246,14 @@ function door (x, y, wid, ht, col, _col, _row)  {
 # ------------------------------------------------
 function window (x, y, wid, ht, col, _col, _row)  {
     printf "\n"
-    comment(sprintf ("        window: (%d, %d) <%.1f, %.1f> [%d, %d] S %.3f", \
-                x, y, wid, ht, _col, _row, S))
+    comment(sprintf ( \
+        "        window: (%.1f, %.1f) <%.1f, %.1f> [%d, %d] S %.3f, %s", \
+                x, y, wid, ht, _col, _row, S, col))
 
     x += x0;     y += y0
     # ----------------------------
     # interior glass
-    brdr = 4 / 12
+    brdr = 2 / 12
     x2   = x    +brdr
     y2   = y    +brdr
     wid2 = wid  -2*brdr
@@ -258,7 +278,7 @@ function window (x, y, wid, ht, col, _col, _row)  {
 
         # horizontals
         for (r = 1; r < _row; r++)  {
-            y1 = y2 + r*ht/_row
+            y1 = y2 + r*ht2/_row
             line(x, y1, x +wid, y1, "white", dd)
         }
     }
@@ -331,7 +351,7 @@ function scale () {
 }
 
 # ------------------------------------------------
-function scaleScFt (x0) {
+function scaleScFt (x0, y0) {
     comment("scale:")
 
     # scale is PixPerScFt, open 80 x 10 ft space
@@ -483,13 +503,57 @@ NF == 0 || $1 == "#"  {
     bldg( x0, y0, widFt, htFt, peakFt, color);              next }
 /brick/  { brick();                                         next }
 /dock/   { dock(     $2);                                   next }
-/door/   { door(     $2, $3, $4, $5, $6, $7, $8);           next }
-/line/   { line(     $2, $3, $4, $5, $6, $7);               next }
+
+/door/   {
+    door(val($2), val($3), val($4), val($5), val($6), val($7), val($8))
+    next
+}
+
+/line/   {
+    line(val($2), val($3), val($4), val($5), $6, $7)
+    next
+}
+
 /siding/ { siding(   $2);                                   next }
 /sign/   { sign(     $2, $3, $4, $5, substr($0, index($0, $6))); next }
-/scale/  { scaleScFt($2);                                     next }
-/space/  { svgBegin($2, $3, $4);                            next }
-/window/ { window(   $2, $3, $4/12, $5/12, $6, $7, $8);     next }
+/scale/  { scaleScFt(val($2), val($3));                     next }
+/space/  { svgBegin($2, $3, $4, $5);                        next }
+/window/ {
+    comment(sprintf("wind: %s %s,  %.1f %.1f", $2, $3, val($2), val($3)))
+    window(val($2), val($3), val($4)/12, val($5)/12, $6, $7, $8)
+    next
+}
+
+# ------------------------------------------------
+"=" == $2  {
+    vals [$1] = val($3)
+
+    for (n = 4; n <= NF; n+= 2)   {
+        if ("#" == $n)
+            break
+        else if ("*" == $n)
+            vals [$1] *= val($(n+1))
+        else if ("/" == $n)
+            vals [$1] /= val($(n+1))
+        else if ("+" == $n)
+            vals [$1] += val($(n+1))
+        else if ("-" == $n)
+            vals [$1] -= val($(n+1))
+        else
+            error("unknown operator")
+    }
+
+    if (1 < dbg)  {
+        printf "assign: %3s %6.2f - ", $1, vals [$1];
+        print
+    }
+
+    c = substr($1, 1, 1)        # x, y, z
+    if (max [c] < vals [$1])
+        max [c] = vals [$1]
+
+    next
+}
 
 # --------------------------------------
 {

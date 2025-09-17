@@ -1,6 +1,22 @@
 awk '
+# ------------------------------------------------
+function windows (Nrow, Ncol, dw, dh, NpaneX, NpaneY, color )  {
+  # printf "#  industrial windows: n %d, WidFt %.2f\n", n, WidFt
+    for (row = 0; Nrow > row; row++)  {
+        y -= dh/12
+        x = 0
+        for (col = 0; Ncol > col; col++) {
+            printf "    window %6d %6d  %3d %3d %s %d %d\n", \
+                                            x, y, dw, dh, color, NpaneX, NpaneY
+            x += dw/12
+        }
+        printf "\n"
+    }
+}
+
+# --------------------------------------------------------------------
 BEGIN {
-    WidFt = 50;                      HtFt = 50
+    WidFt = 50;            HtFt = 90
     Wid   = 9;             Ht   = 6
     printf "    space   %6d %6d\n", WidFt, HtFt
 
@@ -8,38 +24,23 @@ BEGIN {
 
     # ------------------------------------------------
     # windows
-    printf "# windows\n"
     if (0) {
+        printf "# windows\n"
         dw  = 36;    dh = 60
         dx  = dw / 12
         for (rows = 2; rows > 0; rows--)  {
             y  -= 1 + +dh / 12
             for (x = 5; x < WidFt - dx; x += dx)  {
-                printf "    window %6.2f %6.2f  %5.2f %5.2f  black\n", \
-                                x, y, dw, dh
+                printf "    window %6.2f %6.2f  %5.2f %5.2f %s\n", \
+                                x, y, dw, dh, col
             }
             printf "\n"
         }
     }
 
     # ------------------------------------------------
-    # industrial windows
-    printf "# industrial windows\n"
-    if (1)  {
-        dw  = 72;    dh = 72
-        dx = dw / 12
-        y  -= 1 +dh/12
-        for (n = 4; 0 < n; n--)  {
-          # printf "#  industrial windows: n %d, WidFt %.2f\n", n, WidFt
-            for (x = 0; x < WidFt - dx; x += dx)  {
-                printf "#   industrial windows: n %d, x %d\n", n, x
-                printf "    window %6d %6d  %3d %3d black  5 6\n", \
-                                            x, y, dw, dh
-            }
-            printf "\n"
-            y -= 1 +dh/12
-        }
-    }
+    windows(Nrow=16, Ncol=21, wid=24, ht=48, NpaneX=2, NpaneY=4, "gray") 
+
 
     # ------------------------------------------------
     # doors
@@ -52,5 +53,5 @@ BEGIN {
     }
 
     # ------------------------------------------------
-    printf "    scale\n"
+  # printf "    scale\n"
 }'

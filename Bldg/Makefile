@@ -1,8 +1,11 @@
 
+  Blds  = $(shell echo *bld)
   Dscs  = $(shell echo *dsc)
   Ptss  = $(shell echo *pts)
+
   Svgs  = $(patsubst %.dsc, %.svg, $(Dscs))
   Svgs += $(patsubst %.pts, %.svg, $(Ptss))
+  Svgs += $(patsubst %.bld, %.svg, $(Blds))
 
 %.bld : %.dsc
 	Bin/mkBldg.k $^ | tee $@
@@ -46,9 +49,10 @@ window :
 
 # ----------------------------------------------------------
 check :
+	@echo "  bld: " $(Blds)
 	@echo "  dsc: " $(Dscs)
 	@echo "  svg: " $(Svgs)
 
 # ----------------------------------------------------------
 clean :
-	rm -f  *bld *htm *html *.svg
+	rm -f   *htm  *.svg *.xgr
