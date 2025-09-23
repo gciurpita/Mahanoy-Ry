@@ -331,13 +331,11 @@ function bldg (x0, y0, widFt, htFt, peakFt, color) {
 }
 
 # ------------------------------------------------
-function scale () {
-    comment("scale:")
+function scale (x0, y0) {
+    comment(sprintf("scale: %d, %d", x0, y0))
 
     N  = 6
-
-    x0 = 1;         x1 = x0 + N
-    y0 = 0.5
+    x1 = x0 + N
     line(x0, y0, x1, y0, "black")
 
     if (1) {
@@ -352,7 +350,7 @@ function scale () {
 
 # ------------------------------------------------
 function scaleScFt (x0, y0) {
-    comment("scale:")
+    comment(sprintf("scaleScFt: %d, %d", x0, y0))
 
     # scale is PixPerScFt, open 80 x 10 ft space
     N  = 80
@@ -360,7 +358,6 @@ function scaleScFt (x0, y0) {
     if ("" == x0)
         x0 = 5;
     x1 = x0 + N
-    y0 = 1
     line(x0, y0, x1, y0, "black")
 
     dx = 10
