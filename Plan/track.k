@@ -522,8 +522,10 @@ function curve (rad, dAng, color) {
 }
 
 # --------------------------------------
-/pos/   { xPos = $2; yPos = $3; dir = $4;
+/pos/   {
+    xPos = $2; yPos = $3; dir = $4;
   # mark(xPos, yPos, 1, 1, "red")
+    printf "thickness = 1.5\n"
     next
 }
 
