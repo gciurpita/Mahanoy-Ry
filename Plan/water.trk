@@ -4,7 +4,9 @@
 
     bench 210 0, 210 16, 306 16
 
-    arc 329 12 0 360 9 red
+    arc  329 12 0 360 9 red
+    text 325 13 water
+    text 325  9 pump
 
     # --------------------------------------
     color green
