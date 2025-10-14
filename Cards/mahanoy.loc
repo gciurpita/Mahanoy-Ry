@@ -1,6 +1,6 @@
 # locations
 
-    BRSX 2  M  Maizeville Freight House
+   BERSX 2  M  Maizeville Freight House
 
     FX   1  M  Iron Works
     FX   1  M  Gregory Machine
@@ -9,10 +9,12 @@
     FGHX 2  M  Fisher Foundry
 
     P    10 C  East_Bear_Ridge
+    E    1  C  East_Bear_Ridge
 
     _    99 O  Mahanoy City
     _    99 O  Shamokin
 #   _    99 O  Staging Tomaqua
+
 
     BRSX 2  G  Gliberton Freight House
     H    2  G  Coal Dealer

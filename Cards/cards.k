@@ -95,117 +95,40 @@ function hyst (N) {
     }
 }
 
-# ------------------------------------------------
-function select (N, c,  type, road, number) {
-    type   = carType [c]
-    road   = carRoad [c]
-    number = carNum [c]
+# ------------------------------------------------------------------------------
+    ## select: H    RDG  66722
+	##      10  G 2  Coal Dealer
+	##       7  O 3  Mahanoy City
+	##       4  M 1  Fisher Foundry
+	##       8  O 3  Shamokin
+	##      10  G 2  Coal Dealer
+	##       7  O 3  Mahanoy City
 
-    printf "select: %s %6s %6s\n", type, road, number
+function dumpCar (c, N)  {
+    printf "select: %s %6s %6s\n", carType [c], carRoad [c], carNum [c]
 
-    # reset town and location cnts
-    for (t in town)
-        town [t] = 0
-
-    locCnt = 0
-    for (l = 0; l < L; l++)  {
-        loc [l] = 0
-        if (type == locType [l] || "_" == locType [l])
-            locCnt++
-    }
-    locLmt = N / locCnt
-
-    dbg= 0
-    if (dbg)
-        printf " select: dbg, c %d, locCnt %d, locLmt %.2f\n", c, locCnt, locLmt
-
-    # ----------------------------
-    # select N locations
     for (n = 0; n < N; n++)  {
-        while (1)  {
-            l = int(rand() * L)         # pick random location
+        l = dest [c, n]
 
-            if ("_" != locType [l] && ! match(locType [l], type))  {
-                if (dbg)
-                    printf "   wrong type: %s %5s %s\n", \
-                        type, locType [l], locName [l]
-                continue
-            }
-
-            # ----------------------------
-            # distributed assignments
-            if (dbg)
-                printf "  select: c %d, n %d, l %d, loc [] %d\n", \
-                    c, n, l, loc [l]
-
-            # skip location if already selected
-            if (locLmt < loc [l])  {
-                if (dbg)
-                    printf "   lmt: loc %d, %s\n", loc [l], locName [l]
-                continue
-            }
-
-            # get random value and probability
-            r = rand()
-            p = 1 / (1 +town [locTown [l]])
-
-            # get previous and current town
-            am1 = locTown [route [n -1]]
-            a   = locTown [l]
-
-            if (dbg)   {
-                printf "    %.3f  %.3f  %2d  %d %s (%s)  %s", \
-                        r, p, l, town [locTown [l]], a, am1, locName [l]
-            }
-
-            # randomly w/in probabilty skip location
-            if (1 > p && r > p)  {
-                if (dbg) printf " -- p\n"
-                continue
-            }
-
-            # randonly skip location if town as last
-            if (0 < n && am1 == a && r > p/2)  {
-                if (dbg) printf " -- a\n"
-                continue
-            }
-
-            # select this location by breaking out of while loop
-            loc [l]++
-            if (dbg) printf "\n"
-            break
-        }
-
-        route [n] = l
-        town  [locTown [l]]++
-        loc   [l]++
+        printf " %6d  %s  _  %s\n",  \
+                dest [c, n], locTown [l],   locName [l]
     }
+}
 
-    # ----------------------------
-    # report
-    for (n = 0; n < N; n++)  {
-        l = route [n]
-        if (0)  {
-            if ("M" == locTown [l])
-                printf Red
-            else if ("G" == locTown [l])
-                printf Blue
-        }
+# --------------------------------------------------------------------
+function assign (c, N)  {
+    type = carType [c]
 
-        printf " %6d  %s %d  %s\n",  \
-                route [n], locTown [l], town [locTown [l]],  locName [l]
-        if (0)
-            printf Normal
-    }
+    do {
+        if (L <= ++idx [type])
+            idx [type] = 0
+    } while (! match(locType [idx [type]], carType [c]))
 
-    if (0)  {
-        printf "    "
-        for (a in town)
-            printf " %d", town [a]
-        printf "    "
-        for (a in town)
-            printf " %s", a
-        printf "\n"
+    dest [c, N] = l = idx [type]
+
+    if (dbg)  {
+        printf "# assign: %d %2d - %s %-6s", N, c, carType [c], carRoad [c]
+        printf "  %2d %5s %s\n", l, locType [l], locName [l]
     }
 }
 
@@ -218,106 +141,15 @@ END  {
 
   # hyst(100)
 
-  # for (i = 0; i < 20; i++)
-  #     select(8)
+    # sequentially assign a location for each iteration and car
+    N = 6
+    for (n = 0; n < N; n++)
+        for (c = 0; c < C; c++)
+            assign(c, n)
 
     for (c = 0; c < C; c++)
-        select(6, c)
+        dumpCar(c, n)
 
   # dumpLocs()
   # dumpCars()
-}' $* | tee cards.out |
-
-# ------------------------------------------------------------------------------
-# script to format
-awk '
-BEGIN {
-    x = "F G H R X"
-    y = "Flat Gondola Hopper Reefer Box"
-    F = split(x, sym, " ")
-    F = split(y, fld, " ")
-    for (f = 1; f <= F; f++)
-        typeName [sym [f]] = fld [f]
-
-    cnt = 0;
-    Wid = 350
-    hdr()
-}
-
-# ------------------------------------------------
-function hdr () {
-    printf "<html>\n"
-    printf "<body>\n"
-    printf "<style>\n"
-    printf "  td {\n"
-    printf "    font-family:Arial;\n"
-    printf "    font-size:20px;\n"
-    printf "  }\n"
-    printf "  th {\n"
-    printf "    font-family:Arial;\n"
-    printf "    font-size:24px;\n"
-    printf "  }\n"
-    printf "</style>\n"
-
-    print "<style>"
-    print "    @media print {"
-    print "        .page, .page-break { break-after: page; }"
-    print "    }"
-    print "</style>"
-}
-
-# ------------------------------------------------
-function table (type, road, number, dest, N, side) {
-    Col = 4
-  # printf "<p>\n"
-    printf "<table border=1 cellspacing=0 width=%d align=%s>\n", Wid, side
-    printf "    <tr> <th colspan=%d> %s <th> %s &nbsp;&nbsp;&nbsp; %s\n", \
-                                        Col, typeName [type], road, number
-
-    for (n = 0; n < N; n++)  {
-        printf "    <tr> <td width=20> &nbsp;\n"
-        for (c = 1; c < Col; c++)
-            printf "         <td width=20> &nbsp;\n"
-        printf "        <td> &nbsp;%s\n", dest [n]
-    }
-    printf "</table>\n"
-    printf "\n"
-}
-
-# ------------------------------------------------
-function genCard () {
-    if (cnt)
-        if (! (cnt % 8))  {
-            print "<table width=100%> <tr><td> </table>"
-            print "<div class=\"page-break\"></div>"
-        }
-    cnt++
-
-    printf "<!-- cnt %d -->\n", cnt
-    table(type, road, number, dest, N, "left")
-}
-
-# ------------------------------------------------
-/dbg/ { exit }
-
-/select/ {
-    if (0 < N)
-        genCard()
-
-    N      = 0
-    type   = $2
-    road   = $3
-    number = $4
-    next
-}
-
-# ----------------------------
-{
-    dest [N++] = substr($0, index($0, $4))
-  # print
-}
-
-# ------------------------------------------------
-END {
-    genCard()
-}' | tee cards.htm
+}' $*

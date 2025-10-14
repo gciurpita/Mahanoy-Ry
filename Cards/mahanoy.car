@@ -1,18 +1,29 @@
-    type B   Beer
-    type C   Cement
-    type F   Flatcar
-    type G   Gondola
-    type H   Hopper
-    type L   Lumber
-    type N   Caboose
-    type P   Blasting Powder
-    type R   Reefer
-    type S   Livestock
-    type T   Tank
-    type V   Ventilated (fruit-vegetable)
-    type X   Box
-    type _   any
+type B   Beer
+type C   Cement
+type E   Explosive
+type F   Flatcar
+type G   Gondola
+type H   Hopper
+type L   Lumber
+type N   Caboose
+type P   Blasting Powder
+type R   Reefer
+type S   Livestock
+type T   Tank
+type V   Ventilated (fruit-vegetable)
+type X   Box
+type _   any
 
+    E HPCX      575
+
+    F RDG      9440
+    F RDG     40121
+
+    G RDG      1806
+
+    H P&R     87267
+    H RDG     66722
+    H RDG     67718
 
 #   H LV       1400
 #   H P&R      2424
@@ -24,43 +35,43 @@
 #   H RDG     67710
 #   H RDG     73155
 
+    R MREX      200
+    R P&R    FastFr
+
+    S WABASH  16422
+
+    T UTLX    17842
+
+    X ACl     20707
+    X B&LE    90105
+    X B&O     37600
+    X B&O    293823
+    X B&O    382000
+
+    X CB&Q    35789
     X CNJ     12502
     X DL&W    54704
     X ERIE   102003
-    R MREX      200
+    X ERIE    60592
+
+    X LNE      7025
     X N&W      xxxx
     X NH      84263
-
+    X NP      25244
     X NYC     27776
+
+    X NYC     97056
     X NYC    180190
     X NYO&W    6493
-
-    R P&R    FastFr
-    H P&R     87267
     X PRR     67890
 
-    H RDG     66718
-    F RDG      9440
-    F RDG     40121
-    G RDG      1806
     X RDG      5621
     X RDG    101195
     X RDG    101198
     X RDG    101199
     X RDG    102519
 
-    T UTLX    17842
-
+    X UP     113803
     X WM       1135
-    S WABASH  16422
-
-    X B&LE    90105
     X WM      26538
     X WM      28123
-
-    P HPCX      575
-
-    X B&O    293823
-    X LNE      7025
-    X NP      25244
-    X UP     113803

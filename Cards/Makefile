@@ -1,12 +1,14 @@
 
 all : cards.htm
 
-cards.htm : mahanoy.loc mahanoy.car cards.k
+cards.htm : cards.out
+	cardsFmt.k cards.out | tee $@
+
+.phony : cards.out
+cards.out : mahanoy.loc mahanoy.car cards.k
 	cards.k mahanoy.loc mahanoy.car | tee $@
 
-.phony : cards
-cards : mahanoy.loc mahanoy.car cards.k
-	cards.k mahanoy.loc mahanoy.car
+stats : cards.out
 	stats.k
 
 clean :
