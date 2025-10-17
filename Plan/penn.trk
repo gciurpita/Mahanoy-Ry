@@ -76,33 +76,29 @@
 
     # --------------------------------------
     # staging ladder - 180
-    str   16
-
-    str    1
+    str   12.25
     lbl    a
 
     # 1st staging turnout
     curve 47  -10
-    # 160
 
     str    1
     lbl    b
 
     # 2nd staging turnout
     curve 47  -10
-    # 170
-
-    str   55
+    str   59
 
     mvto   b
-    str    8
+    str    9
     curve 38  -10
-    str   47
+    str   50
 
     mvto   a
-    str    10
+    str    11
+
     curve 46  -20
-    str   48
+    str   50
 
     # --------------------------------------
     # cont curve thru 2nd turnout
