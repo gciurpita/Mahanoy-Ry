@@ -58,6 +58,15 @@ function rect (x0, y0, dw, dh, color, label) {
     printf " %8.4f %8.4f\n", x0,      y0
 }
 
+# ------------------------------------------------
+function measure (x0, y0, x1, y1, sz, ang)  {
+    printf "arrow  %8.4f %8.4f  %8.4f %8.4f  %f %f\n", x0, y0, x1, y1, sz, ang
+    printf "arrow  %8.4f %8.4f  %8.4f %8.4f  %f %f\n", x1, y1, x0, y0, sz, ang
+
+    _len = sqrt( (x1-x0)^2 + (y1-y0)^2)
+    printf "anno %8.4f %8.4f  %.1f ft\n", (x1+x0)/2, (y0+y1)/2, _len/12
+}
+
 # --------------------------------------------------------------------
 # ------------------------------------------------
 function ladder (x0, y0, ang, rL, N, len, col) {
@@ -353,8 +362,6 @@ BEGIN  {
 
     AngSdg = 10
     ColTrk = "orange"
-
-    printf "title_x \n"
 }
 
 # ------------------------------------------------
@@ -400,6 +407,7 @@ NF      { printf "# %s\n", $0 }
 /quit/  { exit }
 
 /arc/   { arc($2, $3, $4, $5, $6, $7);      next }
+/measure/ { measure($2, $3, $4, $5, $6, $7); next }
 /rect/  { rect($2, $3, $4, $5);             next }
 /thick/ { printf "thickness = %s\n", $2;    next }
 
@@ -409,6 +417,7 @@ NF      { printf "# %s\n", $0 }
 /plug/  { plug($2, $3, $4);                 next }
 /room/  { xyPairs(2, "blue");               next }
 /text/  { anno($2, $3, substr($0, index($0, $4)));         next }
+/text/  { printf "anno %d %d %s\n", $2, $3, substr($0, index($0, $4)); next }
 /title/ { printf "title  %s\n", substr($0, index($0, $2)); next }
 
 # ------------------------------------------------
@@ -488,9 +497,10 @@ function curve (rad, dAng, color) {
 
 # --------------------------------------
 /lbl/ {
-    printf "# lbl: %s, xPos %6.2f, yPos %.2f, dir %.2f\n", $2, xPos, yPos, dir
-    lblX [$2] = xPos;  lblY [$2] = yPos; lblDir [$2] = dir
-    anno(xPos, yPos, $2)
+    lbl = $2
+    printf "# lbl: %s, xPos %6.2f, yPos %.2f, dir %.2f\n", lbl, xPos, yPos, dir
+    lblX [lbl] = xPos;  lblY [lbl] = yPos; lblDir [lbl] = dir
+    anno(xPos, yPos, lbl)
     next
 }
 
