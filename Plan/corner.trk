@@ -1,8 +1,7 @@
     title Corner
-    space   0 0 120 144 
+    space   0 30  40 144 
 
     room   0 30, 0 144,  60 144
-
     bench 0 40,  18 40,  24 46,  24 110,  36 128,  60 128
 
     color orange
@@ -71,19 +70,10 @@
 
 # corner section
     mvto   P
-  # curve 15 -21
-  # curve 15  21
-  # str   26
 
     str   16
     lbl    q
     str    4
-  # curve 15  40
-  # str   20
-
-  # mvto   q
-  # curve 15  40
-  # str   24
 
     mvto   q
     str   10
