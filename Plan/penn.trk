@@ -20,6 +20,7 @@
     str  170 dark-gray
 
     # --------------------------------------
+    # DCC jacks
     plug 230  124
     plug 120  124
     plug  24  100
@@ -33,12 +34,7 @@
 
     plug 260  16
 
-    # ----------------------------------------------------------
-    # from end wall
-    color orange
-    pos 355.97 103.48 -110
-    lbl A
-
+    # --------------------------------------
     text   5  32 Giradville
     text 130 120 Mahanoy Plane
     text 200  90 Maizeville
@@ -46,18 +42,23 @@
     text 200  50 Gilberton
     text 220  20 Mahanoy City
 
-    # --------------------------------------
-    # mine spur
-    str   11
-    curve 28 26
+#   # ----------------------------------------------------------
+#   # from end wall
+#   color orange
+#   pos 355.97 103.48 -110
+#   lbl A
 
-    lbl   m
-    str  17
+#   # mine spur
+#   str   11
+#   curve 28 26
 
-    mvto  m
-    curve 27  13
-    curve 27 -13
-    str    5
+#   lbl   m
+#   str  17
+
+#   mvto  m
+#   curve 27  13
+#   curve 27 -13
+#   str    5
 
     # --------------------------------------
     # continue mainline
@@ -112,7 +113,23 @@
     # 200
     str   10
     curve 28   20
+    lbl   b
 
+    # ----------------------------
+    # alternate trackage to consumer-producer
+    color pink
+    mvto  b  rev
+    str   28
+    curve 28  -20
+    str    8
+
+    color  green
+    curve 18  -40
+    str    9
+    curve 18  -20
+
+    # ----------------------------
+    mvto  b
     str   24
     lbl   C
 
@@ -122,7 +139,6 @@
     str   26
     lbl   W
 
-    # ----------------------------
     # loop industries
     curve 27 13  blue
     str   20
