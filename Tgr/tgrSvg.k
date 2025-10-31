@@ -81,11 +81,12 @@ function arc (x0, y0, a0, a1, rad, col, a, x2, y2, x3, y3)  {
 }
 
 # ------------------------------------------------
-function circle (x0, y0, rad, col, a)  {
+function circle (x0, y0, rad, col, stroke, a)  {
     printf " <circle cx=\"%d\" cy=\"%d\" r=\"%d\"", S*x0, S*mapY(y0), S*rad
-    printf " stroke=\"black\""
-    printf " stroke-width=\"1\""
-    printf " fill=\"%s\"", col
+    printf " stroke=\"%s\"", col
+    printf " stroke-width=\"%d\"", stroke
+  # printf " fill=\"%s\"", col
+    printf " fill=\"%s\"", "none"
     printf "/>\n"
 }
 
@@ -176,9 +177,37 @@ function svgEnd (text)  {
     printf "\n"
 }
 
+# ------------------------------------------------
+function turntable(x, y, rad, color, Stroke)  {
+    ttX = x;     ttY = y;     ttRad = rad
+    circle(ttX, ttY, ttRad, color, Stroke)
+
+    if (0)  {
+        for (a = 0; a < 360; a += 10)  {
+            c = cos(a * Pi / 180)
+            s = sin(a * Pi / 180)
+
+            _x0 = ttX +c*ttRad;      _y0 = ttY +s*ttRad
+            _x1 = ttX +c*ttRad*2;    _y1 = ttY +s*ttRad*2
+            line(_x0, _y0, _x1, _y1, color)
+        }
+    }
+}
+
+# ------------------------------------------------
+function ttTrk (a, rad, color, stroke)  {
+    c = cos(a * Pi / 180)
+    s = sin(a * Pi / 180)
+    _x0 = ttX +s*ttRad;        _y0 = ttY +c*ttRad
+    _x1 = ttX +s*(ttRad+rad);  _y1 = ttY +c*(ttRad+rad);
+    line(_x0, _y0, _x1, _y1, color, stroke)
+}
+
 # --------------------------------------------------------------------
 BEGIN  {
     Pi = atan2(0, -1)
+
+    NttTrk = 0
 
     color = "black"
 
@@ -199,13 +228,20 @@ NF == 0 || $1 == "#"  {
     next
 }
 
+# ------------------------------------------------
 /color/ { color = $2; next }
 
+# ------------------------------------------------
 /text/ {
     textX  [NR] = $2
-    textY  [NR] = maxRow - $3 + 1.2
 
-    if (0 < $4 && $4 < 100)  {
+    if ("+" == substr($3, 1, 1))
+        dy += substr($3, 2)
+    else
+        dy  = $3
+    textY  [NR] = maxRow - dy + 1.2
+
+    if ("-f" == substr($4, 1, 2))  {
         textF  [NR] = textF [NR] = $4
         text   [NR] = substr($0, index($0, $5))
     }
@@ -216,6 +252,17 @@ NF == 0 || $1 == "#"  {
     next
 }
 
+# ------------------------------------------------
+/ttTrk/  {
+    ang = 0
+    for (n = 2; n <= NF; n+=2)  {
+        ttTrkAng [NttTrk]   = ang   += $n
+        ttTrkRad [NttTrk++] = $(n+1)
+    }
+    next
+}
+
+# ------------------------------------------------
 {
     row [NR] = $0
     col = length($0)
@@ -243,7 +290,6 @@ END {
         y = maxRow+1 - nr
         s = row [nr]
 
-
         c = ""
         for (i = 1; i <= length(s); i++) {
             pre = c
@@ -262,8 +308,26 @@ END {
             else if ("\\" == c)  {
                 line(i, y+1, i+1, y, color, Stroke)
 
-                if ("_" == pre)
+                if ("_" == pre || "/" == substr(row [nr+1], i-1, 1))
                     line(i, y,   i+1, y, color, Stroke)
+            }
+
+            # westbound signals
+            else if ("<" == c)  {
+                line(i+0.9, y+0.2,  i+0.9,   y+0.8,  "black", 1)
+                line(i+0.9, y+0.5,  i+0.5, y+0.5,  "black", 1)
+                circle(i+0.3, y+0.5, 0.25, "none")
+
+                line(i, y, i+1, y, "black", Stroke)
+            }
+
+            # eastbound signals
+            else if (">" == c)  {
+                line(i+0.1, y+0.2,  i+0.1,     y+0.8,  "black", 1)
+                line(i+0.1, y+0.5,  i+0.5, y+0.5,  "black", 1)
+                circle(i+0.7, y+0.5, 0.25, "none")
+                if ("_" == pre)
+                    line(i, y,   i+1, y, "black", Stroke)
             }
 
             else if ("|" == c)  {
@@ -273,12 +337,24 @@ END {
                     x [i]= i+1
                 else if ("/" == a)
                     x [i] = i
+                else
+                    x [i] = i
 
                 line(x[i], y, x[i], y+1, color, Stroke)
+            }
+            else if ("*" == c)  {
+                turntable(i, y, 3, color, Stroke)
             }
         }
         printf "\n"
     }
 
+    # ------------------------------------------------
+    comment("ttTrk");
+    for (n = 0; n < NttTrk; n++)  {
+        ttTrk(ttTrkAng [n], ttTrkRad [n], color, Stroke)
+    }
+
+    # ------------------------------------------------
     svgEnd()
 }' $*
