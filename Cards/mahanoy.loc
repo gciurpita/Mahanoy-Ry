@@ -7,6 +7,7 @@
 
     RX   1  M  Walnut Brewery
     FGHX 2  M  Fisher Foundry
+    FX   1  M  Sawmill
 
     P    10 C  East_Bear_Ridge
     E    1  C  East_Bear_Ridge
@@ -25,5 +26,7 @@
     FX   1  G  Arnold Machine
     X    1  G  Dennison Distillery
 
+    X    1  G  Warehouse 24
+    X    1  G  Piney Mt Bakery
     X    1  G  Warechowski Millworks
     T    1  G  Gilberton Fuel
