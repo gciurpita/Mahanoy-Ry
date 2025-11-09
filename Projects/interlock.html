@@ -1,0 +1,65 @@
+<center> Ardiono Interlock Controller </center>
+<h4> Ardiono Interlock Controller </h4>
+
+Bill Lupoli's <i>New Haven Railway</i>
+has a large multi-track passenger station
+with interlocks on both the west and east sides.
+
+<img height=150 src=Images/west_7-1-21.png>
+<img height=150 src=Images/nhPanel.png>
+<img align=right height=300 src=Images/IMG_1329.JPG>
+
+<p>
+Geoff Green wrote the code if not helped build the east side controller,
+shown at right, using an Arduino,
+I/O expander, relay driver and relay boards to control Toroise machines.
+Ironically, the relays required more current than the Tortise machines and
+required relay drivers that could provide the current.
+The Arduino code was a series of if statements that checked for
+combinations of button presses that then aligne the route
+by switching  specific Tortise machines.
+
+<p>
+There were several  routing mistakes with the initial code.
+It was helpful to develop a list of routings from the code
+in a format that Bill could more easily review and correct.
+Corrections just required reprogramming the Arduino.
+
+<p>
+See
+<a href=https://github.com/gciurpita/NhEast>
+East Interlock</a> for the code.
+
+<!-- ----------------------------------------------------------------------- -->
+<table width=100%> <tr><td> </table>
+
+<img align=left  height=250 src=Images/FehZLT5.gif>
+<img align=right height=150 src=Images/DSC02441a.jpg>
+
+But the hardware for the east interlock seemed excessive and
+I believe was ~$400.
+A less expensive and simpler approach was taken for the west interlock.
+Tortoise machines require less current than an LED, ~10ma.
+An LM324 op-amp circuit was used to drive a single or pair of Tortise machines.
+Four op-amps could drive 8 pairs of machines.
+
+<p>
+A PCB board was designed with an MC23017 I2C I/O expander
+to control the LM324s as well as have eight inputs to monitor buttons.
+The photo shows the Arduino, regulator and
+three of the PCBs plus one spare mounted on a masonite board.
+The initial connections were made and tested using a solderless breadboard.
+I estimated the cost at ~$40.
+
+<p>
+See
+<a href=https://github.com/gciurpita/Interlock>
+Interlock</a> for the west interlock code.
+
+<!-- ----------------------------------------------------------------------- -->
+<table width=100%> <tr><td> </table>
+
+BIll did a very nice job finalizing the wiring and builing the panel.
+<p>
+<img width=48% src=Images/20220221_200448.jpg>
+<img width=48% src=Images/westPnl.jpg>
