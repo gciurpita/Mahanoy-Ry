@@ -7,7 +7,7 @@
 </style>
 
 <table align=right>
-  <tr> <td> Nov 8, 2025 <br> Greg Ciurpita <br> Sheldon
+  <tr> <td> Nov 9, 2025 <br> Greg Ciurpita <br> Sheldon
 </table>
 <h2> Sheldon's Control System </h2>
 
@@ -125,9 +125,42 @@ Trak-DT - Basic current Detector</a>
 <table width=100%> <tr><td> </table>
 
 <!-- -----------------------------------------------------  ---------------- -->
+<hr>
 <h4> Signal Circuit </h4>
 
 TBD
+
+<!-- -----------------------------------------------------  ---------------- -->
+<hr>
+<img align=right width=500 src=Images/cabSel1a.jpg>
+
+<h4> Cab Selection </h4>
+
+A relay is needed to route a throttle to each block.
+Selecting any throttle needs to release any throttle relay currently set.
+
+<p>
+That relay is <i>held</i> using a NO contact on that relay in series with
+an NC contact on each of the other throttle relays.
+NC contacts from pairs of relays can be wired together to provide power
+to the opposite pair of relays, minimizing the number of contacts needed.
+
+<p>
+One or more NC push-buttons can be wired in series with power as a reset.
+
+<table width=100%> <tr><td> </table>
+<a href=Images/cabSel2b.jpg>
+  <img align=right width=500 src=Images/cabSel2b.jpg></a>
+
+The Circuit Board Schematic shows the wiring connections
+using a 4-pole relay with the pinout shown below.
+The relays in the above diagram on in the left column.
+
+<p>
+It's not clear what the relays in the right column are for.
+
+<p>
+<img src=Images/GR110PIN4P_Circuit.gif>
 
 <table width=100%> <tr><td> </table>
 <!-- -----------------------------------------------------  ---------------- -->
