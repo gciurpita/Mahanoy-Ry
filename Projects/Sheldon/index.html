@@ -92,7 +92,7 @@ create a dead zone when different throttles are assigned to adjacent blocks.
 
 <h3> Interlock </h3>
 
-The interlocking blocks are wired so that turnout position route the power of the two adjacent blocks. The south rail thru the interlocking is powered from the block to the west. The north rail is powered from the block to the east. 
+The interlocking blocks are wired so that turnout position route the power of the two adjacent blocks. The south rail thru the interlocking is powered from the block to the west. The north rail is powered from the block to the east.
 <p>
 The blocks at each end of the route selected thru the interlocking
 must be assigned to the same throttle or there is no complete circuit
@@ -107,6 +107,42 @@ This is all it takes to redirect the power thru the interlocking
 based on the route.
 The two turnouts only move together in this case.
 <table width=100%> <tr><td> </table>
+
+<!-- -----------------------------------------------------  ---------------- -->
+<hr>
+
+<h3> Turnout Control </h3>
+
+The two turnout control diagrams you have, C-002 (updated) and C-003 are the basis for nearly all applications.
+
+<p>
+C-002 will control a single turnout, a single crossover or scissors double crossover. Two of these circuits can be paired and interlocked with each other for several other track configurations.
+
+<p>
+C-003 will control a wye or two back to back crossovers.
+
+<p>
+Basic rules and features of turnout controls:
+<ul>
+  <li> All circuits contain a "default" position at startup. The "normal" route is powered at startup, reverse route or routes are selected as needed.
+
+  <li> The buttons are positioned in the track diagrams as shown in some of the example sketches you have. They light up to display the selected route.
+  <li> Additional lighted buttons are added in parallel as desired in the track diagram for operator convenience and clarity. Example, in a double track single crossover, there are only two possible routes, crossover selected or both routes straight thru. A button will be available on both straight routes, but electrically that is the same button/action.
+  <li> Switch machine driver circuits are added as needed, some crossovers are operated with just one switch machine and the accessory cable drive from Circuitron.
+  <li> Turnouts not affected by the current selected route return to their default position.
+  <li> Tortoise machine contacts are used to power frogs.
+  <li> In most cases, turnout controls are only on their tower panel and the dispatchers panel. But additional control station locations can be added for operator convenience .
+  <li> The turnout controls only require only one wire per turnout with the two power supply wires feeding a group of turnout buttons. So by example, a single CAT5 cable can remotely control six routes, and a second cable using the same power feed can control 8 more routes. The single wire provides both control and indication.
+  <li> All the relays and logic wiring are on a logic panel below the turnout location/tower panel. So wiring distances to the turnouts and to the tower panel controls are short.
+  <li> Relay contacts not used for the route selection logic and to power the switch motors are used for power distribution logic and signal logic. In some cases additional contacts are needed and repeater relays are added. But in any case, there is a relay energized for each route, and one or more not energized. Any available set of contacts that create the correct logic for signal logic or power distribution can be used as needed.
+</ul>
+
+
+I generally do not develop specific diagrams until layout construction and preliminary track wiring is underway. At that time the specific requirement of each interlocking or turnout location is established and documented.
+<p>
+The large interlocking at Russell junction is a special case, it has very complex interlocking of the various routes and turnouts. That schematic is partly done but not formally drawn yet. I will surely share it when it is complete.
+<p>
+Let me know if you have other specific questions.
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
