@@ -1,3 +1,6 @@
+ <meta http-equiv="refresh" content="5">
+<!-- 
+  -->
 <title> Sheldon's Control System </title>
 
 <style>
@@ -28,6 +31,7 @@
     <li> <a href=#hardware>             Hardware</a>
     <li> <a href=#layout>               Layout</a>
     <li> <a href=#relayPanels>          Relay Panels</a>
+    <li> <a href=#signals>              Signals</a>
     <li> <a href=#trackDiagrams>        Track Diagrams</a>
     <li> <a href=#turnout>              Turnout</a>
     <li> <a href=#turnoutSignalControl> Turnout &amp; Signal Control</a>
@@ -130,28 +134,47 @@ Optical sensors will light two LED's on each of the storage track, one to indica
 
 <table width=100%> <tr><td> </table>
 <!-- -----------------------------------------------------  ---------------- -->
-
+<hr>
+<a name=signals></a>
 <h4> Signals </h4>
-
-This shows the signal wiring for the east bound signals at a single crossover
-using LEDs.
-Using my dual voltage power supply a single wire changes polarity to provide red or green/yellow for each signal head.
+There are three possible signals aspects:
 <p>
-So for a signal to display clear/green you need, otherise red:
+  <table width=400>
+    <tr> <th> STOP         <td> red or red/red
+    <tr> <th> CLEAR        <td> green or green/red
+    <tr> <th> <a href=https://www.trainweb.us/cprr/NORACSig.html>
+              MEDIUM-CLEAR</a> <td> red/green (diverging route)
+  </table>
+
+<p>
+Red/green Pairs of LED signals are wired through a resistor
+to a common ground and
+controlled with a +/- voltage such that only one is lit.
+The red LED is active by with a negative "(-)" voltage.
+
+<p>
+The diagrams illustrate the logic driving the signals,
+essentually the ORing of three conditions.
+A <i>NOT</i> condition closes a contact to "(-)" voltage.
+
+<p>
+For a signal on the trailing point of a cross-over,
+it will be red when
 <ul>
-  <li> No train already in the block
-  <li> permission from the dispatcher (this comes from a separate circuit I will describe later)
-  <li> correct route alignment
+  <li> the switch is reversed
+  <li> permission is not granted, or
+  <li> the block is occupied
 </ul>
 
+Permission signals are generated when the same throttle is selected
+for both the blocks before and after the signal.
+
 <p>
-The drawing shows both straight routes clear.
+<a href=Images/signals.jpg>
+   <img align=right width=500 src=Images/signals.jpg> </a>
 
-<blockquote>
-<a href=Images/signals.webp>
-  <img width=80% src=Images/signals.jpg></a>
+<img width=500 src=Images/sigRlys.png> </a>
 
-</blockquote>
 
 <table width=100%> <tr><td> </table>
 <!-- -----------------------------------------------------  ---------------- -->
