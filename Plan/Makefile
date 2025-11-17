@@ -2,6 +2,7 @@
 	Trks = corner.trk penn.trk shelf.trk wall.trk water.trk
 	Trk2 = corner.trk penn.trk shelf7.trk wall.trk water.trk
 	Trk3 = corner.trk  shelf8.trk wall.trk
+	Trk4 = corner.trk penn.trk shelf9.trk wall.trk water.trk
 
 %.xgr : %.trk
 	track.k $^ | tee $@
@@ -19,6 +20,9 @@ all2.xgr : $(Trk2)
 
 all3.xgr : $(Trk3)
 	track.k $(Trk3) | tee $@
+
+all4.xgr : $(Trk4)
+	track.k $(Trk4) | tee $@
 
 # ----------------------------------------------------------
 neat :
