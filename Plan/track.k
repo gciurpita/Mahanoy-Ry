@@ -444,6 +444,8 @@ NF      { printf "# %s\n", $0 }
 function curve (rad, dAng, color) {
     printf "# curve: rad %.1f, dAng %.1f, color %s\n", red, dAng, color
 
+    trkLen += rad*Pi *dAng/180
+
     if (0 < dAng)  {
         a0   = dir - 90
         a1   = a0 + dAng
@@ -500,7 +502,8 @@ function curve (rad, dAng, color) {
     lbl = $2
     printf "# lbl: %s, xPos %6.2f, yPos %.2f, dir %.2f\n", lbl, xPos, yPos, dir
     lblX [lbl] = xPos;  lblY [lbl] = yPos; lblDir [lbl] = dir
-    anno(xPos, yPos, lbl)
+    if ("_" != substr(lbl, 1, 1))
+        anno(xPos, yPos, lbl)
     next
 }
 
@@ -536,6 +539,8 @@ function curve (rad, dAng, color) {
     xPos = $2; yPos = $3; dir = $4;
   # mark(xPos, yPos, 1, 1, "red")
     printf "thickness = 1.5\n"
+
+    trkLen = 0
     next
 }
 
@@ -626,6 +631,8 @@ function spur (len, right, sp) {
 
 # ----------------------------
 function str (len, col) {
+    trkLen += len
+
     printf "# str: xPos %6d, yPos %d, dir %d, len %.2f\n", xPos, yPos, dir, len
     x0   = xPos;                  y0   = yPos
     c    = cos(dir * Pi / 180);   s    = sin(dir * Pi / 180)
@@ -663,4 +670,6 @@ END {
 
     printf "left_boundary  = %6.2f\n", 0.5
     printf "right_boundary = %6.2f\n", 10.75
+
+    printf "title_x  track length %.1f ft\n", trkLen /12
 }' $*

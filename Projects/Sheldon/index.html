@@ -18,35 +18,42 @@
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
 <table> <tr>
-  <td>
+  <td width=250>
     <h4> Contents </h4>
-
     <ul>
-    <li> <a href=#autoTrStop>           Automatic Train Stop</a>
-    <li> <a href=#cabSelection>         Cab Selection</a>
-    <li> <a href=#circuitDiagrams>      Circuit Diagrams</a>
-    <li> <a href=#connectingThrottle>   Connecting Throttle</a>
-    <li> <a href=#design>               Design</a>
-    <li> <a href=#detectors>            Detectors</a>
-    <li> <a href=#hardware>             Hardware</a>
-    <li> <a href=#layout>               Layout</a>
-    <li> <a href=#relayPanels>          Relay Panels</a>
-    <li> <a href=#signals>              Signals</a>
-    <li> <a href=#trackDiagrams>        Track Diagrams</a>
-    <li> <a href=#turnout>              Turnout</a>
-    <li> <a href=#turnoutSignalControl> Turnout &amp; Signal Control</a>
+      <li> <a href=design>                         Design</a>
+        <ul>
+          <li> <a href=connectingThrottle>         Connecting Throttles</a>
+          <li> <a href=cabSelection>               Cab Selection</a>
+          <li> <a href=autoTrStop>                 Auto-Train Stop</a>
+          <li> <a href=turnout>                    Turnout</a>
+          <li> <a href=signals>                    Signals</a>
+          <li> <a href=turnoutSignalControl>       Turnout & Signals</a>
+          <li> <a href=detectors>                  Detectors</a>
+          <li> <a href=permission>                 Permission</a>
+        </ul>
+      <li> <a href=layout>                         Layout</a>
+      <li> <a href=relayPanels>                    Relay Panels</a>
+      <li> <a href=circuitDiagrams>                Circuit Diagrams</a>
+      <li> <a href=trackDiagrams>                  Track Diagrams</a>
+      <li> <a href=hardware>                       Hardware</a>
     </ul>
 
   <td valign=top>
     <h3> Overview </h3>
-    Relay based model RR control system using wireless DC throttle supporting
-    inductive detection:
+    Relay logic based model RR control system
+    using wireless DC throttle supporting inductive detection:
 
     <ol>
-        <li> push button throttle block assignment
-      <li> push button turnout route alignment
-      <li> integrated turnout and signal circuit
-      <li> staggered gaps stop trains entering blocks not assigned to throttle
+      <li> throttle assignment using push button at every block
+      <li> staggering regquired gaps stop trains in blocks
+            with mis-matched throttle assignments
+      <li> throttles generate high frequency signal supporting
+                inductive block detection
+      <li> push button turnout alignment support Tortoise machines
+      <li> signals determined by route, permission and occupancy
+                (no APPROACH logic)
+      <li> permission ??
     </ol>
 </table>
 
@@ -55,136 +62,10 @@
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
-<a name=layout></a>
-<h4> Layout </h4>
+<a name=design></a>
+<h3> Design (how is does it) </h3>
 
-<a href=Images/layout-15a.webp>
-  <img align=right width=100% src=Images/layout-15a.webp></a>
-
-<h4> Freight Yard &amp; Industrial Areas Wiring </h4>
-
-Each yard track is divided in half with staggered gaps (i.e. auto-stop) and
-and each half powered from the ladder track at each end
-based on turnout routing.
-
-Both halves will be assigned to the same throttle
-if the same throttle is assigned to both ladders and
-the same track selected at both ends.
-But the entire track is assigned to a throttle
-if routed to from just one end.
-(Requires two relays per track and a good bit of wiring);
-
-<p>
-The diesel engine terminal will belong to the west end, and the steam terminal/roundhouse will belong to the east end.
-
-<p>
-The industrial areas will similarly be powered from the east and west ladders.
-The main freight yard, industrial areas and diesel engine terminal
-will use manual turnouts made from slide switches providing power.
-The steam terminal will likely need remote turnout.
-
-<p>
-While tracks not routed to thru a turnout is un-powered,
-engine terminals tracks will be powered thru toggle switches. 
-
-<p>
-See <i>X sections</i> in Symposium on Electronics column
-of November 1988 Model Railroader, page 142.
-
-
-<table width=100%> <tr><td> </table>
-<img align=right height=600 src=Images/lowerStaging.jpg></a>
-
-<table width=100%> <tr><td> </table>
-<img align=right height=600 src=Images/pennisula.jpg></a>
-
-The large stub end staging yard off the wye
-is mostly visible in my workshop area.
-It, and the thru staging, will be controlled
-from from a panel to the right of the Webster Junction control.
-
-<p>
-There will be single cab selector for the stub yard and
-a push button for each track that will align the route and direct power.
-A special detection system will show operators when they have reached
-the end of the yard when entering.
-
-<!--
-<table width=100%> <tr><td> </table>
 <!-- -----------------------------------------------------  ---------------- -->
-
-<h4> Thru-Staging Detection </h4>
-
-There are three sets of staging sidings along the hidden part of the mainline as it makes a second loop around the room.
-At each location the double track mainline becomes 6 tracks, with two storage siding for each direction. 
-Traffic in the hidden section of the mainline is right hand rule only. 
-
-<p>
-A single button will select the desired track. It will set the turnout route at both ends and power the track to the selected throttle.
-<p>
-Much like the passenger terminal it will effectively feed from the middle out to the ends of the block. But in the area of the sidings only the selected track, mainline or one of the sidings will be powered.
-
-<p>
-Optical sensors will light two LED's on each of the storage track, one to indicate that you are in the block and your should stop, the second to warn you if you go too far. you will know that your train is safely in the block when the primary detection light for the mainline goes out.
-
-<blockquote>
-<a href=Images/stagingThru.jpg>
-  <img width=80% src=Images/stagingThru.jpg></a>
-</blockquote>
-
-<table width=100%> <tr><td> </table>
-<!-- -----------------------------------------------------  ---------------- -->
-<hr>
-<a name=signals></a>
-<h4> Signals </h4>
-There are three possible signals aspects:
-<p>
-  <table width=400>
-    <tr> <th> STOP         <td> red or red/red
-    <tr> <th> CLEAR        <td> green or green/red
-    <tr> <th> <a href=https://www.trainweb.us/cprr/NORACSig.html>
-              MEDIUM-CLEAR</a> <td> red/green (diverging route)
-  </table>
-
-<p>
-Red/green Pairs of LED signals are wired through a resistor
-to a common ground and
-controlled with a +/- voltage such that only one is lit.
-The red LED is active by with a negative "(-)" voltage.
-
-<p>
-The diagrams illustrate the logic driving the signals,
-essentually the ORing of three conditions.
-A <i>NOT</i> condition closes a contact to "(-)" voltage.
-
-<p>
-For a signal on the trailing point of a cross-over,
-it will be red when
-<ul>
-  <li> the switch is reversed
-  <li> permission is not granted, or
-  <li> the block is occupied
-</ul>
-
-Permission signals are generated when the same throttle is selected
-for both the blocks before and after the signal.
-
-<p>
-<img align=right width=500 src=Images/sigRlys.png> </a>
-
-<a href=Images/signals.jpg>
-   <img width=500 src=Images/signals.jpg> </a>
-
-<p>
-An APPROACH signal can be implemented by placing a signal
-not associated with a turnout before a regular signal (as described above)
-that displays a yellow signal when the regular signal displays a red signal,
-otherwise it displays green.
-
-
-<table width=100%> <tr><td> </table>
-<!-- -----------------------------------------------------  ---------------- -->
-<hr>
 <a name=connectingThrottle></a>
 <h4> Connecting throttle</h4>
 
@@ -204,8 +85,37 @@ at a dispatcher panel allowing for remote throttle assignments.
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
-<a name=design></a>
-<h3> Design (how is does it) </h3>
+<a name=cabSelection></a>
+<img align=right width=500 src=Images/cabSel1a.jpg>
+
+<h4> Cab Selection </h4>
+
+A relay is needed to route a throttle to each block.
+Selecting any throttle needs to release any throttle relay currently set.
+
+<p>
+That relay is <i>held</i> using a NO contact on that relay in series with
+an NC contact on each of the other throttle relays.
+NC contacts from pairs of relays can be wired together to provide power
+to the opposite pair of relays, minimizing the number of contacts needed.
+
+<p>
+One or more NC push-buttons can be wired in series with power as a reset.
+
+<table width=100%> <tr><td> </table>
+<a href=Images/cabSel2b.jpg>
+  <img align=right width=500 src=Images/cabSel2b.jpg></a>
+
+The Circuit Board Schematic shows the wiring connections
+using a 4-pole relay with the pinout shown below.
+The relays in the above diagram on in the left column.
+
+<p>
+It's not clear what the relays in the right column are for.
+
+<p>
+<img src=Images/GR110PIN4P_Circuit.gif>
+<table width=100%> <tr><td> </table>
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
@@ -294,6 +204,56 @@ Let me know if you have other specific questions.
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
+<a name=signals></a>
+<h4> Signals </h4>
+There are three possible signals aspects:
+<p>
+  <table width=400>
+    <tr> <th> STOP         <td> red or red/red
+    <tr> <th> CLEAR        <td> green or green/red
+    <tr> <th> <a href=https://www.trainweb.us/cprr/NORACSig.html>
+              MEDIUM-CLEAR</a> <td> red/green (diverging route)
+  </table>
+
+<p>
+Red/green Pairs of LED signals are wired through a resistor
+to a common ground and
+controlled with a +/- voltage such that only one is lit.
+The red LED is active by with a negative "(-)" voltage.
+
+<p>
+The diagrams illustrate the logic driving the signals,
+essentually the ORing of three conditions.
+A <i>NOT</i> condition closes a contact to "(-)" voltage.
+
+<p>
+For a signal on the trailing point of a cross-over,
+it will be red when
+<ul>
+  <li> the switch is reversed
+  <li> permission is not granted, or
+  <li> the block is occupied
+</ul>
+
+Permission signals are generated when the same throttle is selected
+for both the blocks before and after the signal.
+
+<p>
+<img align=right width=500 src=Images/sigRlys.png> </a>
+
+<a href=Images/signals.jpg>
+   <img width=500 src=Images/signals.jpg> </a>
+
+<p>
+An APPROACH signal can be implemented by placing a signal
+not associated with a turnout before a regular signal (as described above)
+that displays a yellow signal when the regular signal displays a red signal,
+otherwise it displays green.
+
+
+<table width=100%> <tr><td> </table>
+<!-- -----------------------------------------------------  ---------------- -->
+<hr>
 <a name=turnoutSignalControl></a>
 <a href=Images/toSigCtl.png>
   <img align=right width=400 src=Images/toSigCtl.png></a>
@@ -327,52 +287,177 @@ a higher frequency AC signal generated by each throttle.
 <a href=https://www.dallee.com/Trak-DT-Basic-Current-Detector-DO-NOT-ORDER-out-of-stock--365>
 Trak-DT - Basic current Detector</a>
 
+<!-- -----------------------------------------------------  ---------------- -->
+<hr>
+<a name=permission></a>
+<h4> Permission Circuit </h4>
+
+<table align=right> <tr><td>
+    <a href=Images/permission1.jpg>
+      <img width=500 src=Images/permission1.jpg></a>
+    <br>
+    <a href=Images/permission2.jpg>
+      <img width=500 src=Images/permission2.jpg></a>
+    <br>
+    <a href=Images/permission3.jpg>
+      <img width=500 src=Images/permission3.jpg></a>
+</table>
+
+The permission circuit compares the status of the cabs selected for each possible route thru the interlocking.
+If the east and west blocks of a given route are assigned to the same cab/throttle, the permission relay for that route is energized giving a possible clear indication when the route and detection are also correct.
+
+<p>
+The permission circuit get this information by tapping the energize/hold wire of the cab selection circuits of each block.
+A one end of the route these wire energize a set of repeater relays.
+From the other end of the route these wires run to contacts on the repeaters.
+
+<p>
+A matched cab selection completes a circuit to energize the permission relay for that route. Separate contacts on the permission relay provide permission for both east and west signals on that route.
+Because there are four sets of contacts on the repeaters, four routes starting at the block with the repeaters can be handled without additional relays.
+
+<p>
+Here are some drawings based on the same single crossover we have been using for the other parts of the system. I have updated the signal drawing to number the permission relay contacts to match the permission circuit drawings.
+Additionally, the numbered wires on the permission circuit drawings correspond to the cab selection schematic.
+
+<blockquote>
+(This is a bit of wire - BUT, the cab selection push button circuits are already near the turnout/signaling relay panel under each tower panel. So it is easy to create a terminal strip for these wires from the cab selector boards, and tap them for the permission circuits on their way to the tower panel buttons.
+<p>
+So all of this wiring happens on the relay panel that has the turnout controls and signaling for the interlocking. And the result repeats to the tower panel lights and dispatcher panel lights with no extra wires.
+Virtually all control wiring is done with multi conductor cable like CAT5, labeled and documented.)
+</blockquote>
+
 <table width=100%> <tr><td> </table>
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
-<h4> Signal Circuit </h4>
+<a name=junction></a>
+<h4> A Junction </h4>
 
-TBD
+<table align=right>  <tr><th>
+  <a href=Images/blk1.png>
+    <img right width=600 src=Images/blk1.png></a>
+    <br> Block Diagram 1
+</table>
+
+The track diagram shows a turnout and track leading to different destinations,
+not a siding.
+The blocks are labled B1, B2 and B4.
+Two eastbound signals indicate STOP, CLEAR and MEDIUM-CLEAR
+for the diverging route to B4;
+Westbound signals simply indicate STOP or CLEAR.
+
+<p>
+There are cab selection buttons for 4 cabs and reset.
+On the left to select the cab for blocks B2 or B4 based on the route selected
+and on the right for block B1.
+There are two buttons for the turnout to select the Normal or Reverse route.
+
+<p>
+The block diagram attempts to show the various and number
+of circuits required for a common junction and
+the interconnections between them
+illustrating how they combine to support signaling.
+
+<ul>
+  <li> The turnout circuit controls the turnout and
+        provids input to the signal circuits.
+  <li> Detectors provide occupancy inputs to the signals
+  <li> Permission circuits verify that
+        the same cab is selected on either side of the turnout route
+</ul>
+
+
+<table width=100%> <tr><td> </table>
 
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
-<a name=cabSelection></a>
-<img align=right width=500 src=Images/cabSel1a.jpg>
+<a name=layout></a>
+<h4> Layout </h4>
 
-<h4> Cab Selection </h4>
+<a href=Images/layout-15a.webp>
+  <img align=right width=100% src=Images/layout-15a.webp></a>
 
-A relay is needed to route a throttle to each block.
-Selecting any throttle needs to release any throttle relay currently set.
+<h4> Freight Yard &amp; Industrial Areas Wiring </h4>
+
+Each yard track is divided in half with staggered gaps (i.e. auto-stop) and
+and each half powered from the ladder track at each end
+based on turnout routing.
+
+Both halves will be assigned to the same throttle
+if the same throttle is assigned to both ladders and
+the same track selected at both ends.
+But the entire track is assigned to a throttle
+if routed to from just one end.
+(Requires two relays per track and a good bit of wiring);
 
 <p>
-That relay is <i>held</i> using a NO contact on that relay in series with
-an NC contact on each of the other throttle relays.
-NC contacts from pairs of relays can be wired together to provide power
-to the opposite pair of relays, minimizing the number of contacts needed.
+The diesel engine terminal will belong to the west end, and the steam terminal/roundhouse will belong to the east end.
 
 <p>
-One or more NC push-buttons can be wired in series with power as a reset.
+The industrial areas will similarly be powered from the east and west ladders.
+The main freight yard, industrial areas and diesel engine terminal
+will use manual turnouts made from slide switches providing power.
+The steam terminal will likely need remote turnout.
+
+<p>
+While tracks not routed to thru a turnout is un-powered,
+engine terminals tracks will be powered thru toggle switches. 
+
+<p>
+See <i>X sections</i> in Symposium on Electronics column
+of November 1988 Model Railroader, page 142.
+
 
 <table width=100%> <tr><td> </table>
-<a href=Images/cabSel2b.jpg>
-  <img align=right width=500 src=Images/cabSel2b.jpg></a>
+<img align=right height=600 src=Images/lowerStaging.jpg></a>
 
-The Circuit Board Schematic shows the wiring connections
-using a 4-pole relay with the pinout shown below.
-The relays in the above diagram on in the left column.
+<table width=100%> <tr><td> </table>
+<img align=right height=600 src=Images/pennisula.jpg></a>
+
+The large stub end staging yard off the wye
+is mostly visible in my workshop area.
+It, and the thru staging, will be controlled
+from from a panel to the right of the Webster Junction control.
 
 <p>
-It's not clear what the relays in the right column are for.
+There will be single cab selector for the stub yard and
+a push button for each track that will align the route and direct power.
+A special detection system will show operators when they have reached
+the end of the yard when entering.
+
+<!--
+<table width=100%> <tr><td> </table>
+<!-- -----------------------------------------------------  ---------------- -->
+
+<h4> Thru-Staging Detection </h4>
+
+There are three sets of staging sidings along the hidden part of the mainline as it makes a second loop around the room.
+At each location the double track mainline becomes 6 tracks, with two storage siding for each direction. 
+Traffic in the hidden section of the mainline is right hand rule only. 
 
 <p>
-<img src=Images/GR110PIN4P_Circuit.gif>
+A single button will select the desired track. It will set the turnout route at both ends and power the track to the selected throttle.
+<p>
+Much like the passenger terminal it will effectively feed from the middle out to the ends of the block. But in the area of the sidings only the selected track, mainline or one of the sidings will be powered.
+
+<p>
+Optical sensors will light two LED's on each of the storage track, one to indicate that you are in the block and your should stop, the second to warn you if you go too far. you will know that your train is safely in the block when the primary detection light for the mainline goes out.
+
+<blockquote>
+<a href=Images/stagingThru.jpg>
+  <img width=80% src=Images/stagingThru.jpg></a>
+</blockquote>
 
 <table width=100%> <tr><td> </table>
 <!-- -----------------------------------------------------  ---------------- -->
 <hr>
 <a name=relayPanels></a>
 <h3> Relay Panels </h3>
+
+<table align=right> <tr><th>
+    <img height=200 src=Images/rusJct.jpg></a>
+    <br> Russel Jct
+</table>
 
 Numbers of panels:
 <blockquote>
@@ -399,12 +484,6 @@ The number of relays is roughly equal to the number of routes
 There are ~60 CTC controlled turnouts, ~10 relays per tower panel.
 
 <p>
-<table align=right> <tr><th>
-    <img align=right height=200 src=Images/rusJct.jpg></a>
-    <br> Russel Jct
-</table>
-
-<p>
 Only the five track <i>Russel Jct</i> interlocking requires extra relays.
 That interlocking requires about 30 relays to select, signal and direct power for twelve routes. It also prevents routes that are not logical and returns turnouts to their default when they are not part of a selected route.
 
@@ -424,6 +503,35 @@ The main freight yard, passenger terminal and industrial trackage differ.
 Only the passenger terminal is signaled with powered turnouts.
 The remaining trackage use ground throws that route track power.
 Those areas have simplified cab selection without signaling
+
+<p>
+<b>How many relays?</b>
+
+<p>
+<table align=right border=1 cellspacing=0>
+ <tr> <td> 
+</table>
+
+This version of the ATLANTIC CENTRAL will require
+<ul>
+  <li> ~600 relays total,
+  <li> 256 relays for 32 cab assignment circuit boards.
+</ul>
+
+<p>
+How much power?
+<ul>
+  <li> 375 ma/relay
+  <li> 180 relays (??)
+  <li> 20%-30% active
+  <li> 162W (600 x 0.3 x .0375 x 24)
+<p>
+Of course there are about 28 detectors, 600 LED push buttons (about 30% lit at any given time), and about 200 LED panel lights. The detectors draw about 45 mA when activated.
+<p>
+The dispatchers panel requires no additional relay hardware - just wire, buttons, LED's and resistors. All just a duplicate of info and controls from the local panels.
+<p>
+Dollar cost average purchase price of relays over the 20 year history of the system and its development - Less that $2 each.
+
 
 <p align=right>
 <i>November 2025</i>
@@ -484,3 +592,47 @@ Those areas have simplified cab selection without signaling
 
 <p align=right>
 <i>July 2023</i>
+
+<!-- -----------------------------------------------------  ---------------- -->
+<hr>
+<a name=features></a>
+<h3> Features & Limitations </h3>
+
+(From 
+<a href=https://forum.trains.com/t/where-is-the-hobby-going/417829/75>
+Where is the hobby going?</a>)
+
+<p>
+Features:
+
+<ul> <i>
+  <li> Wireless radio walk around throttles - up to 10 fully independent channels
+  <li> Full voltage pulse width modulation speed control
+  <li> Simple easy to use throttles that can be operated by feel, keeping you eyes on the train
+  <li> One button route control of turnouts thru most interlockings
+  <li> Detection, signals, CTC operation with a dispatcher
+  <li> OR, optional walk around tower operation controlled by the operators
+  <li> Automatic Train Stop for violated red signals
+  <li> Full brightness headlights that come on before the train move
+  <li> In CTC mode engineers simply control their train - no block toggles, no turnouts to control
+  <li> 50% of the blocks are automated based on turnout position
+  <li> Turnout controls are repeated on tower panels and the CTC panel
+  <li> Route selection also restores other turnouts to their default as needed
+  <li> All turnouts return to default on layout start up
+  <li> Cab assignments/block authority also controlled with push buttons, duplicated on the CTC panel and tower panels
+  <li> Wiring is made simpler by decentralizing control elements
+  <li> Inductive detection not in the propulsion circuit
+  <li> Supports LED or incandescent signals
+  <li> Separate 4 amp (or larger if desired) power supply for each throttle
+  <li> And all of this is done with no computers or processors, and just a few off the shelf solid state devices. The rest is done with LED lighted pushbuttons and relays.
+</ul> </i>
+
+Limitations:
+
+<ul> <i>
+  <li> No sound - if I wanted sound I would have switched to DCC 25 years ago
+  <li> No consisting - well DC locos all go the same direction the track tells them to
+  <li> No speed matching - never needed that in the 27 years before DCC - most of my trains are powered by 2-4 powered units
+  <li> No head on collisions
+  <li> No automatic reverse loops - but we do semi-automate them
+<ul> </i>
