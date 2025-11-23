@@ -1,0 +1,248 @@
+    title   Shelf8
+
+  # space    0 -100 351 0  1.30
+    room     0  120,  0 144, 360 144,  360 110
+    bench            36 128, 310 128
+
+    # ------------------------------------------------
+    # stove platform
+    color  dark-gray
+    obj  360  92, 312 92, 312 144
+
+    # stove
+    text 325 112 wood
+    text 325 107 stove
+
+    arc  350 124 0 360 4 yellow
+    obj   343 100, 321  97, 317 124, 339 127, 343 100,
+
+    # ------------------------------------------------
+    pos   330 142 180
+    color green
+    lbl     Y
+
+    mvto    Y rev
+  # curve  28 -90
+
+    str     4
+    color   red
+    curve  24 -90
+    lbl    24"
+
+    # ----------------------------
+    mvto    Y
+    str     8
+
+    curve  47   8
+    curve  47  -8
+
+    str    10
+    lbl     A
+
+    str    48
+    lbl     a
+
+    str    10
+    lbl     b
+
+    # mainline
+    str    66
+    curve  47  -8
+    curve  47   8
+    str   105
+
+    # ------------------------------------------------
+    # curve into Girardville
+
+    pos  56  142  180
+    lbl    P
+    str    8
+    curve 28 80
+
+    # corner Turntable
+    mvto   P
+    str   16
+
+    color  yellow
+    lbl    q
+    str    4
+
+    mvto   q
+    str   10
+    curve 28  30
+
+    tt    12.4  blue
+
+    mvtt  -105
+    str    12
+
+    mvtt  -90
+    str    12
+
+    mvtt  -75
+    str    12
+
+    mvtt  -60
+    str    10
+
+    mvtt    0
+    str    10
+
+    mvtt   15
+    str    12
+
+    # ------------------------------------------------
+    # mahanoy plane siding
+    color green
+    mvto    A
+    curve  47  10
+    curve  47 -10
+
+    str    72
+
+    curve  47 -10
+    curve  47  10
+
+    color  pink
+    mvto   a rev
+    curve  28   12
+    curve  28  -12
+    lbl    building-flats
+    str    45
+
+    mvto   b
+    curve  28  -12
+    curve  28   12
+    str    30
+    lbl    building-flats
+    str    30
+
+    # ------------------------------------------------
+    # track to yard
+    color  orange
+    mvto    Y
+
+    curve  27   10
+    str    40
+    curve  40  -10
+
+    str     4
+    lbl     f
+
+    str   118
+
+    lbl     r
+    str    10
+    lbl     e
+
+    # engine terminal track
+    curve  27  -12
+    str    10
+
+    str    21
+    curve  27   12
+
+    # arrival/departure
+    mvto    f
+    curve  27   12
+    str     4
+    curve  27  -12
+
+    str    45
+    lbl    arrival_95"
+    str    40
+
+    curve  27  -12
+    str     4
+    curve  27   12
+
+    # rip
+    mvto    r
+    curve  27 -12
+    str    15
+    lbl    rip-track
+    str    15
+
+    # caboose track
+    mvto    f
+    str    10
+    curve  28  -12
+    curve  28   12
+    str    45
+    lbl    caboose/engine-pocket
+    str    10
+    curve  28   12
+    curve  28  -12
+
+# ----------------------------------------------------------
+# bifurcated yard
+  # pos   170 134.2  180
+    color  red
+    mvto   e
+
+    str    10
+    lbl    c
+
+    str     10
+    lbl     a1
+
+    str     82
+    lbl     16cars
+
+    str     10
+    lbl     92"
+
+    # --------------------------------------
+    mvto    a1
+    curve  27  12
+
+    str     4
+    lbl    a3
+
+    str    10
+    lbl    a5
+
+    mvto   a3
+    curve  27  -12
+    str    80
+    lbl    80"
+
+    mvto   a5
+    curve  27  -12
+    str    72
+    lbl    72"
+
+    # --------------------------------------
+    mvto    c
+    curve  27  -12
+
+    str     4
+    lbl    b2
+
+    str    10
+    lbl    b4
+
+    str    10
+    lbl    b6
+
+
+    mvto   b2
+    curve  27   12
+    str    84
+    lbl    84"
+
+    mvto   b4
+    curve  27   12
+    str    72
+    lbl    72"
+
+    mvto   b6
+    curve  27   12
+    str    55
+    lbl    55"
+
+# ------------------------------------------------
+    color white
+    measure  34 126  134 126  1 3
+    measure 170 129  264 129  1 3
+

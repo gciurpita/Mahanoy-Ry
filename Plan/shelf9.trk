@@ -1,0 +1,309 @@
+    title   Shelf-9
+
+  # space    0 -100 351 0  1.30
+    room     0  120,  0 144, 360 144,  360 110
+    bench   20  114, 36 124,  90 124, 120 128, 280 128, 310 138
+
+    # ------------------------------------------------
+    # stove platform
+    color  dark-gray
+    obj  360  92, 312 92, 312 144
+
+    # stove
+    text 325 112 wood
+    text 325 107 stove
+
+    arc  350 124 0 360 4 yellow
+    obj   343 100, 321  97, 317 124, 339 127, 343 100,
+
+    # ------------------------------------------------
+    pos   330 142 180
+    color green
+    lbl     _Y
+
+    mvto    _Y rev
+  # curve  28 -90
+
+    str     4
+    color   red
+    curve  24 -90
+    lbl    24"
+
+    # ----------------------------
+    mvto    _Y
+    str     8
+
+    curve  47   8
+    curve  47  -8
+
+    str     6
+    lbl    _x
+    str    14
+    lbl    _A
+
+    str    48
+    lbl    _a
+
+    str    10
+    lbl    _b
+
+    # mainline
+    str    66
+    curve  47  -8
+    curve  47   8
+  # str   105
+    str    95
+
+    # ------------------------------------------------
+    # curve into Girardville
+
+    pos  56  142  180
+    lbl    P
+    str    8
+    curve 28 80
+
+    # corner Turntable
+    mvto   P
+    str   16
+
+    color  yellow
+    lbl    q
+    str    4
+
+    mvto   q
+    str   10
+    curve 28  30
+
+    tt    12.4  blue
+
+    mvtt  -105
+    str    12
+
+    mvtt  -90
+    str    12
+
+    mvtt  -75
+    str    12
+
+    mvtt  -60
+    str    10
+
+    mvtt    0
+    str    10
+
+    mvtt   15
+    str    12
+
+    # ------------------------------------------------
+    # mahanoy plane siding
+    mvto   _A
+    color  red
+    curve  47  10
+    curve  47 -10
+
+    str    72
+
+    curve  47 -10
+    curve  47  10
+
+    color  pink
+    mvto  _a rev
+    curve  28   12
+    curve  28  -12
+    lbl    building-flats
+    str    45
+
+    mvto   _b
+    curve  28  -12
+    curve  28   12
+    str    30
+    lbl    building-flats
+    str    30
+
+    # ------------------------------------------------
+    # track to yard
+
+    color  cyan
+    mvto    _x
+    curve  27   25
+    str     5
+    lbl    _z
+
+    curve  27  -25
+
+    # - - - - - - - - -
+ #  color  orange
+ #  mvto    Y
+
+ #  curve  27   10
+ #  str    40
+ #  lbl     d
+
+ #  curve  40  -10
+ #  str     4
+
+    str     4
+    lbl    _f
+
+    str   114
+
+    lbl    _r
+    str    10
+    lbl    _e
+
+    # engine terminal track
+    curve  27  -12
+    str    10
+
+    str    21
+    curve  27   12
+
+    # arrival/departure
+  # mvto    f
+  # curve  27   12
+  # str     4
+  # curve  27  -12
+
+ #  mvto    d
+ #  str    12
+ #  curve  27  -10
+
+    # - - - - - - - - -
+    mvto   _z
+    str     6
+    curve  27  -25
+
+    str    45
+    lbl    arrival_95"
+    str    48
+
+    curve  27  -12
+    str     4
+    curve  27   12
+
+    measure 174 125  270 125  1 2
+
+    # rip
+    mvto   _r
+    curve  27 -12
+    str    15
+    lbl    rip-track
+    str    15
+
+    # caboose track
+    mvto   _f
+    str    10
+    curve  28  -12
+    curve  28   12
+    str    45
+    lbl    caboose-trk
+    str    10
+    curve  28   12
+    curve  28  -12
+
+# ----------------------------------------------------------
+# bifurcated yard
+  # pos   170 134.2  180
+    color  orange
+    mvto   _e
+
+    str    10
+    lbl    _c
+
+    str    10
+    lbl    _a1
+
+    str    56
+    lbl    T4
+    str    26
+    lbl    16cars
+
+    str    10
+    lbl    92"
+
+    # --------------------------------------
+    mvto   _a1
+    curve  27  12
+
+    str     4
+    lbl    _a3
+
+    str    10
+    lbl    _a5
+
+    str    10
+    lbl    _a6
+
+    str    10
+    lbl    _a7
+
+    mvto   _a3
+    curve  27  -12
+    str    43
+    lbl    T5
+    str    37
+    lbl    80"
+
+    mvto   _a5
+    curve  27  -12
+    str    36
+    lbl    T6
+    str    36
+    lbl    72"
+
+    mvto   _a6
+    curve  27  -12
+    str    31
+    lbl    T7
+    str    31
+    lbl    62"
+
+    mvto   _a7
+    curve  27  -12
+    str    27
+    lbl    T8
+    str    27
+    lbl    54"
+
+    # --------------------------------------
+    mvto    _c
+    curve  27  -12
+
+    str     4
+    lbl    _b2
+
+    str    10
+    lbl    _b4
+
+    str    10
+    lbl    _b6
+
+
+    mvto   _b2
+    curve  27   12
+    str    48
+    lbl    T3
+    str    36
+    lbl    84"
+
+    mvto   _b4
+    curve  27   12
+    str    36
+    lbl    T2
+    str    36
+    lbl    72"
+
+    mvto   _b6
+    curve  27   12
+    str    23
+    lbl    T1
+    str    22
+    lbl    55"
+
+# ------------------------------------------------
+    color white
+    measure  32 116  134 116  1 2
+
+    measure 312 120  216 120  1 2
+    measure 216 120  120 120  1 2
+    measure 120 120   24 120  1 2
