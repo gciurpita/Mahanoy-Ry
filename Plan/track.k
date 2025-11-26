@@ -444,7 +444,8 @@ NF      { printf "# %s\n", $0 }
 function curve (rad, dAng, color) {
     printf "# curve: rad %.1f, dAng %.1f, color %s\n", red, dAng, color
 
-    trkLen += rad*Pi *dAng/180
+    printf "# trkLen  %8.2f, x %6.2f, y %6.1f\n", \
+                            trkLen += abs(rad*Pi *dAng/180), xPos, yPos
 
     if (0 < dAng)  {
         a0   = dir - 90
@@ -498,9 +499,16 @@ function curve (rad, dAng, color) {
 }
 
 # --------------------------------------
+function pr (tag)  {
+    printf "# %-5s  %-5s xPos %6.2f, yPos %6.2f, dir %6.1f, trkLen %8.2f\n", \
+            tag, lbl, xPos, yPos, dir, trkLen
+}
+
+# --------------------------------------
 /lbl/ {
     lbl = $2
-    printf "# lbl: %s, xPos %6.2f, yPos %.2f, dir %.2f\n", lbl, xPos, yPos, dir
+    pr("lbl:")
+
     lblX [lbl] = xPos;  lblY [lbl] = yPos; lblDir [lbl] = dir
     if ("_" != substr(lbl, 1, 1))
         anno(xPos, yPos, lbl)
@@ -519,7 +527,7 @@ function curve (rad, dAng, color) {
     if ("rev" == $3)
         dir = (dir + 180) % 360
 
-    printf "# mvto: xPos %6d, yPos %d, dir %d\n", xPos, yPos, dir
+    pr("mvto:")
     next
 }
 
@@ -631,8 +639,6 @@ function spur (len, right, sp) {
 
 # ----------------------------
 function str (len, col) {
-    trkLen += len
-
     printf "# str: xPos %6d, yPos %d, dir %d, len %.2f\n", xPos, yPos, dir, len
     x0   = xPos;                  y0   = yPos
     c    = cos(dir * Pi / 180);   s    = sin(dir * Pi / 180)
@@ -641,6 +647,15 @@ function str (len, col) {
     if (! col)
         col = ColTrk
     line(x0, y0, xPos, yPos, col)
+
+    printf "# trkLen  %8.2f, x %6.2f, y %6.1f\n", trkLen += len, xPos, yPos
+}
+
+# --------------------------------------
+/trkLen/ {
+    printf "# trkLen: %.1f\n", trkLen
+    anno(xPos, yPos, sprintf("%.1f", trkLen))
+    next
 }
 
 # --------------------------------------

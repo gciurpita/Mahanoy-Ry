@@ -60,16 +60,16 @@
 #   curve 27 -13
 #   str    5
 
-    # --------------------------------------
-    # continue mainline
-    mvto   A
-    curve 47  -10
+#   # --------------------------------------
+#   # continue mainline
+#   mvto   A
+#   curve 47  -10
 
-    str    1
-    curve 28  -40
-    # 160
+#   str    1
+#   curve 28  -40
+#   # 160
 
-    str    1
+#   str    1
 
     # --------------------------------------
     pos 336.4  82.54 200
@@ -131,13 +131,13 @@
     # ----------------------------
     mvto  b
     str   24
-    lbl   C
+    lbl   c
 
     str  104
-    lbl   Z
+    lbl   f
 
     str   26
-    lbl   W
+    lbl   g
 
     # loop industries
     curve 27 13  blue
@@ -145,7 +145,7 @@
 
     # ----------------------------
     # loop
-    mvto  W
+    mvto  g
     str   13
 
     curve 28  -39
@@ -161,30 +161,30 @@
 
     # --------------------------------------
     # uppper station 
-    mvto  C
+    mvto  c
     # siding
     curve 47  10
     curve 47 -10
     str   10
-    lbl   D
+    lbl   d
     str   60
-    lbl   E
+    lbl   e
     str    2
     curve 47 -10
     curve 47  10
 
-    mvto D rev
+    mvto  d rev
     curve 21 -14
     curve 21  14
     str   24
 
-    mvto D
+    mvto  d
     curve 21  14
     str   10
     curve 21 -14
     str   24
 
-    mvto E
+    mvto  e
     curve 21  13
     curve 28  -10 red
     str   40

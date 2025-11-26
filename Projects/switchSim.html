@@ -1,0 +1,311 @@
+<title>Switching Method Simulation</title>
+<h3>Switching Method Simulation</h3>
+
+For the purpose of evaluating switching methods, 
+a description of switch trackage and destinations is needed.
+
+<p>
+The following provides absolute of relative distances
+to labeled location on the track plan below
+starting with label "c" in the upper right.
+
+<blockquote><pre>
+   loc  c      372  Maizeville-East
+   loc  f      476  Maizeville-West
+   loc  V      684  Staging-Jct
+   loc  d-c     26  Iron-Machine-Freight
+   loc  e-c     86  Foundry
+   loc  R-V    463  Gilberton-West
+   loc  s-R     24  Coal-Dealer
+   loc  S-R     36  Freight-House
+   loc  U     1618  Gilberton-Eest
+   loc  Y-U     24  switchback(??)
+</blockquote></pre>
+
+The above does include all locations
+including the switch-back track in Gilerton and
+the Maizeville track shared
+by the Iron Works, Gregory Machine and Brewery.
+
+<p>
+<img width=100% src=../Images/penn.png>
+
+<!-- -------------------------------------------  -------------------------- -->
+<hr>
+<h4>Cars &amp; Destinations</h4>
+
+<blockquote><pre>
+select: E   HPCX    575
+      7  C  _  East_Bear_Ridge
+      0  M  _  Maizeville Freight House
+      7  C  _  East_Bear_Ridge
+      0  M  _  Maizeville Freight House
+      7  C  _  East_Bear_Ridge
+      0  M  _  Maizeville Freight House
+select: F    RDG   9440
+      1  M  _  Iron Works
+      4  M  _  Fisher Foundry
+     15  G  _  Arnold Machine
+      2  M  _  Gregory Machine
+      5  M  _  Sawmill
+      1  M  _  Iron Works
+select: F    RDG  40121
+      2  M  _  Gregory Machine
+      5  M  _  Sawmill
+      1  M  _  Iron Works
+      4  M  _  Fisher Foundry
+     15  G  _  Arnold Machine
+      2  M  _  Gregory Machine
+select: G    RDG   1806
+      4  M  _  Fisher Foundry
+      4  M  _  Fisher Foundry
+      4  M  _  Fisher Foundry
+      4  M  _  Fisher Foundry
+      4  M  _  Fisher Foundry
+      4  M  _  Fisher Foundry
+select: H    P&R  87267
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+select: H    RDG  66722
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+select: H    RDG  67718
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+      4  M  _  Fisher Foundry
+     11  G  _  Coal Dealer
+select: R   MREX    200
+      3  M  _  Walnut Brewery
+     12  G  _  Bradley Beer Storage
+      3  M  _  Walnut Brewery
+     12  G  _  Bradley Beer Storage
+      3  M  _  Walnut Brewery
+     12  G  _  Bradley Beer Storage
+select: R    P&R FastFr
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+select: S WABASH  16422
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+     10  G  _  Gliberton Freight House
+      0  M  _  Maizeville Freight House
+select: T   UTLX  17842
+     20  G  _  Gilberton Fuel
+     20  G  _  Gilberton Fuel
+     20  G  _  Gilberton Fuel
+     20  G  _  Gilberton Fuel
+     20  G  _  Gilberton Fuel
+     20  G  _  Gilberton Fuel
+select: X    ACl  20707
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+select: X   B&LE  90105
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+select: X    B&O  37600
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+select: X    B&O 293823
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+select: X    B&O 382000
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+select: X   CB&Q  35789
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+select: X    CNJ  12502
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+select: X   DL&W  54704
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+select: X   ERIE 102003
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+select: X   ERIE  60592
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+select: X    LNE   7025
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+select: X    N&W   xxxx
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+select: X     NH  84263
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+select: X     NP  25244
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+select: X    NYC  27776
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+select: X    NYC  97056
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+select: X    NYC 180190
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+select: X  NYO&W   6493
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+select: X    PRR  67890
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+select: X    RDG   5621
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+select: X    RDG 101195
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+select: X    RDG 101198
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+     17  G  _  Warehouse 24
+select: X    RDG 101199
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+     18  G  _  Piney Mt Bakery
+select: X    RDG 102519
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+     19  G  _  Warechowski Millworks
+select: X     UP 113803
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+      0  M  _  Maizeville Freight House
+select: X     WM   1135
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+      1  M  _  Iron Works
+select: X     WM  26538
+     17  G  _  Warehouse 24
+     15  G  _  Arnold Machine
+     13  G  _  Perrin Shirts
+     10  G  _  Gliberton Freight House
+      4  M  _  Fisher Foundry
+      2  M  _  Gregory Machine
+select: X     WM  28123
+     18  G  _  Piney Mt Bakery
+     16  G  _  Dennison Distillery
+     14  G  _  Wotring Electric
+     12  G  _  Bradley Beer Storage
+      5  M  _  Sawmill
+      3  M  _  Walnut Brewery
+</blockquote></pre>
