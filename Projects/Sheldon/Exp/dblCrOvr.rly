@@ -1,0 +1,429 @@
+# block diagram
+#                              B5  B6
+#                             o/  o/
+#                            o/  o/
+#                           o/  o/
+#   _B1_____________________/___/__ooo__B3
+#          s1 ooo    /     T3  /
+#   _B2_____________/_________/____ooo__B4
+#      s2 ooo ooo  T1         T2
+
+    space 20 13
+# ----------------------------
+# track diagram
+    pos     1  6
+    lbl    B1
+    line    2 0
+    lbl    _s1
+    line    8 0
+    lbl    _t2
+    line   13 0
+    lbl    B3
+
+    mvto   B1
+    move    0  -3
+    lbl    B2
+    line    2 0
+    lbl    _s2
+    line    4 0
+    lbl    _t1
+    line    4 0
+    lbl    _t3
+    line   13 0
+    lbl    B4
+
+    # branches
+    mvto   _t2
+    line   4 4
+    lbl    B5
+    mvto   _t2
+    move    0 -1.2
+    lbl    T2
+
+    mvto   _t3
+    line   6 6
+    lbl    B6
+    mvto   _t3
+    move    0 -1.2
+    lbl    T3
+
+    # cross-over
+    mvto   _t1
+    line   3 3
+    mvto   _t1
+    move    0  1
+    lbl    T1
+
+    # ----------------------------
+    # signals
+
+    # s1
+    mvto   _s1
+    move    1.0  -0.9
+    lbl    s1
+    move    1.0   0
+    sig     0.15
+
+    # s2
+    mvto   _s2
+    move   -0.9  -0.9
+    lbl    s2
+    move    1.0   0
+    sig     0.15
+    move    0.5  0
+    sig     0.15
+
+    # s3
+    mvto   B3
+    move   -2.5   0.4
+    sig     0.15 r
+    lbl    s3
+
+    # s4
+    mvto   B4
+    move   -2.5   0.4
+    sig     0.15 r
+    lbl    s4
+
+    # s5
+    mvto   B5
+    move   -3.0  -2.5
+    sig     0.15 0.15 r
+    lbl    s5
+
+    # s6
+    mvto   B6
+    move   -3.0  -2.5
+    sig     0.15 0.15 r
+    lbl    s5
+
+    # ------------------------------------------------
+    # signal circuits
+
+    # sc1
+    mvto   B1
+    move   2     4
+    lbl   _sc1
+    rect   1   5 s1
+
+    mvto  _sc1
+    move  -2.5 2.0
+    lbl    T1
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc1
+    move  -2.5   0.5
+    lbl    cabB1
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB5
+    
+    mvto  _sc1
+    move  -2.5  -0.25
+    lbl    detB5
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc1
+    move  -2.5 -1
+    lbl    T2
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc1
+    move  -2.5  -1.75
+    lbl    detB3
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc1
+    move  -2.5  -2.5
+    lbl    cabB1
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB3
+    
+    # ----------------------------
+    # sc5
+    mvto   B5
+    move  -4.5   5
+    lbl   _sc5
+    rect   1   5 s5
+
+    mvto  _sc5
+    move  -2.5  1.5
+    lbl    cabB1
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB5
+    
+    mvto  _sc5
+    move  -2.5  0.75
+    lbl    detB1
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc5
+    move  -2.5 0
+    lbl    T1
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc5
+    move  -2.5 -0.75
+    lbl    detB2
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc5
+    move  -2.5 -1.5
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB5
+    
+
+    mvto  _sc5
+    move  -2.5 -2.25
+    lbl    T2
+    move   1.5 0.25
+    line   1   0
+
+    # ----------------------------
+    # sc6
+    mvto   B6
+    move   1     6
+    lbl   _sc6
+    rect   1   2 s6
+
+    mvto  _sc6
+    move  -2.5 0.5
+    lbl    T3
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc6
+    move  -2.5 -0.25
+    lbl    detB2
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc6
+    move  -2.5 -1
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB6
+    
+    # ----------------------------
+    # sc4
+    mvto   B3
+    move  -2.5   5
+    lbl   _sc3
+    rect   1   5 s3
+
+    mvto  _sc3
+    move  -3   1.5
+    lbl    T2
+    move   2   0.25
+    line   1   0
+
+    mvto  _sc3
+    move  -2.5  0.75
+    lbl    cabB1
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB3
+    
+    mvto  _sc3
+    move  -2.5  0
+    lbl    detB1
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc3
+    move  -3.0 -1
+    lbl    T1
+    move   2.0  0.5
+    line   1   0
+
+    
+    mvto  _sc3
+    move  -2.5 -1.75
+    lbl    detB2
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc3
+    move  -2.5 -2.5 
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB3
+
+    # ----------------------------
+    # sc4
+    mvto   B4
+    move  -2.5  -3
+    lbl   _sc4
+    rect   1   2 s4
+
+    mvto  _sc4
+    move  -2.5 0.5
+    lbl    T3
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc4
+    move  -2.5 -0.25
+    lbl    detB2
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc4
+    move  -2.5 -1
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB4
+    
+    
+    # ----------------------------
+    # sc2
+    mvto   B2
+    move   2    -6
+    lbl   _sc2
+    rect   1   9 s2
+
+
+    mvto  _sc2
+    move  -2.5  3.75
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB5
+
+    mvto  _sc2
+    move  -2.5  3
+    lbl    detB5
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -3.0  2.25
+    lbl    T2
+    move   2.0 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -2.5  1.55
+    lbl    detB3
+    move   1.5 0.25
+    line   1   0
+
+    mvto  _sc2
+    move  -2.5  0.75
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB3
+    
+
+    mvto  _sc2
+    move  -3.5 0
+    lbl    T1
+    move   2.5 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -2.5 -0.75
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB6
+
+    mvto  _sc2
+    move  -2.5 -1.5
+    lbl    detB6
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -3.0 -2.25
+    lbl    T3
+    move   2.0 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -2.5 -3
+    lbl    detB4
+    move   1.5 0.25
+    line   1   0
+
+
+    mvto  _sc2
+    move  -2.5 -3.75
+    lbl    cabB2
+    move   1.5 0.25
+    line   1   0
+
+    move   1   0
+    line   0.5   0
+    move   0.2  -0.15
+    lbl    cabB4
