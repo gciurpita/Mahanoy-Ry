@@ -14,17 +14,22 @@
     text 325 107 stove
 
     # pennisula
-    color  light-gray
-    obj  360  88, 310 88
+  # color  light-gray
+  # obj  360  88, 310 88
 
     # --------------------------------------
-    # trackage
-    color orange
-    pos  300 142,   0
+    # trackage - from shelf
+    pos   330, 142
+    lbl   x
 
+    # straight track to shelf
+    color orange
     thick  1.5
-    str   30
-    lbl    x
+    mvto  x rev
+    str   20
+
+    # curve around stove
+    mvto    x
 
     color  cyan
     curve 28  -90
@@ -33,16 +38,19 @@
     # --------------------------------------
     # constant curve
     mvto   y
-    color  orange
+    color  red
     str    4
     lbl    4"
 
-    color  cyan
+    color  orange
     curve 28 -50
-    lbl    50°
+  # lbl    28"_50°
 
+    trkLen
+
+    color  green
     curve 28 -22
-    lbl    72°
+    lbl    28"_72°
 
 #   # --------------------------------------
 #   # old curve
