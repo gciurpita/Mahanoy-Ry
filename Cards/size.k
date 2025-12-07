@@ -9,11 +9,16 @@ match(FILENAME,"IntrRd") {
 }
 
 # ------------------------------------------------
+# type C   Cement
 #   X WM      26538
 match (FILENAME, "car")  {
-    if (/type/)
+    if (/type/)  {
+        typeName [$2] = substr($0, index($0, $3))
         next
+    }
+
     nCar ++
+    carType [$1]++
 
     if ("RDG" == $2)
         rdgCar++
@@ -27,8 +32,9 @@ match (FILENAME, "car")  {
 match (FILENAME, "loc")  {
     if (/_/)
         next
-    nLoc ++
     town [$3] ++
+    locTown [++nLoc] = $3
+    locName [nLoc]   = substr($0, index($0, $4))
     next
 }
 
@@ -41,13 +47,25 @@ END {
     printf " %6d    RDG cars\n",     rdgCar
     printf " %6d    IntrChg cars\n", intCar
     printf " %6d    foreign cars\n", nCar - rdgCar - intCar
+    printf "\n"
+
+    for (t in carType)
+        printf " %6d      %s\n", carType [t], typeName [t]
+    printf "\n"
 
     printf " %6d  locs\n", nLoc
-    for (t in town)
+    for (t in town)  {
         printf " %6d    %s\n", town [t], t
+        for (n = 1; n <= nLoc; n++)
+            if (t == locTown [n])
+                printf "%12s %s\n", "", locName [n]
+    }
+    printf "\n"
 
-    pctOcc = 100 *(nCar/3) /nLoc
-    printf " %6d%% occupied\n",  pctOcc
+    Nset   = 4
+    printf " %6d   Nset\n",  Nset
+    pctOcc = 100 *(nCar/Nset) /nLoc
+    printf " %6d%%  occupied\n",  pctOcc
     for (t in town)
         printf " %6d    %s\n", 0.5 + town [t] *pctOcc/100, t
 }' rdgIntrRds.txt  mahanoy.car mahanoy.loc

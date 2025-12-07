@@ -1,32 +1,32 @@
 # locations
 
-   BERSX 2  M  Maizeville Freight House
+    BERSX   2  M  Maizeville Freight House
 
-    FX   1  M  Iron Works
-    FX   1  M  Gregory Machine
+    FX      1  M  Iron Works
+    FX      1  M  Gregory Machine
+    RX      1  M  Walnut Brewery
 
-    RX   1  M  Walnut Brewery
-    FGHX 2  M  Fisher Foundry
-    FX   1  M  Sawmill
+    FGHTX   2  M  Fisher Foundry
+#   FX      1  M  Sawmill
 
-    P    10 C  East_Bear_Ridge
-    E    1  C  East_Bear_Ridge
+    P       10 C  East_Bear_Ridge
+    E       1  C  East_Bear_Ridge
 
-    _    99 O  Mahanoy City
-    _    99 O  Shamokin
-#   _    99 O  Staging Tomaqua
+    _       99 O  Mahanoy City
+    _       99 O  Shamokin
+#   _       99 O  Staging Tomaqua
 
 
-    BRSX 2  G  Gliberton Freight House
-    H    2  G  Coal Dealer
+    BRSX    2  G  Gliberton Freight House
+    H       2  G  Coal Dealer
 
-    BRX  1  G  Bradley Beer Storage
-    X    1  G  Perrin Shirts
-    X    1  G  Wotring Electric
-    FX   1  G  Arnold Machine
-    X    1  G  Dennison Distillery
+    BRX     1  G  Bradley Beer Storage
+    X       1  G  Perrin Shirts
+    X       1  G  Wotring Electric
+    FX      1  G  Arnold Machine
+    X       1  G  Dennison Distillery
 
-    X    1  G  Warehouse 24
-    X    1  G  Piney Mt Bakery
-    X    1  G  Warechowski Millworks
-    T    1  G  Gilberton Fuel
+    X       1  G  Warehouse 24
+    X       1  G  Piney Mt Bakery
+    X       1  G  Warechowski Millworks
+    T       2  G  Gilberton Fuel

@@ -8,6 +8,9 @@ cards.htm : cards.out
 cards.out : mahanoy.loc mahanoy.car cards.k
 	cards.k mahanoy.loc mahanoy.car | tee $@
 
+dbg:
+	cards.k dbg=1 mahanoy.loc mahanoy.car 
+
 stats : cards.out
 	stats.k
 

@@ -60,6 +60,13 @@ NF && match(FILENAME, "loc") {
     locTown [L]   = $3
     locName [L++] = substr($0, index($0, $4))
 
+    for (n = 1; n <= length(locType [L-1]); n++)  {
+        t = substr(locType [L-1], n, 1)
+        nLocType [t]++
+        if (2 <dbg) printf "             %d %6s %s %2d\n", \
+                            n, locType [L-1], t, locType [t]
+    }
+
     towns [$3]++
 }
 
@@ -76,6 +83,13 @@ function dumpLocs ()  {
     for (l = 0; l < L; l++)
         printf "   %2d: %s  %6s %3d  %s\n", \
             l, locTown [l],  locType [l], locSize [l], locName [l]
+}
+
+# --------------------------------------
+function dumpLocTypes ()  {
+    printf "dumpLocTypes:\n"
+    for (t in nLocType)
+        printf "    %6d  %s\n", nLocType [t], t
 }
 
 # ------------------------------------------------
@@ -119,16 +133,35 @@ function dumpCar (c, N)  {
 function assign (c, N)  {
     type = carType [c]
 
+    if (dbg)  {
+        printf "# assign: N %d", N
+        printf "  [%2d] %s %-6s", c, carType [c], carRoad [c]
+        printf "\n"
+    }
+    
+#   if (1 < nLocType [type] && 0 < N)  {
+#     # printf "# assign: check\n"
+#       if (dest [c, N-1] == idx [type])  {
+#           ++idx [type]
+#           printf "                    # assign: skip %d\n", idx [type]
+#       }
+#   }
+
     do {
-        if (L <= ++idx [type])
-            idx [type] = 0
-    } while (! match(locType [idx [type]], carType [c]))
+        do {
+            if (L <= ++idx [type])
+                idx [type] = 0
+        } while (! match(locType [idx [type]], carType [c]))
+    } while (1 < nLocType [type] && 0 < N && dest [c, N-1] == idx [type])
 
     dest [c, N] = l = idx [type]
 
     if (dbg)  {
-        printf "# assign: %d %2d - %s %-6s", N, c, carType [c], carRoad [c]
-        printf "  %2d %5s %s\n", l, locType [l], locName [l]
+        printf "#  assign: %d", N
+        printf "  %2d %s", idx [type], type
+        printf "  [%2d] %s %-6s", c, carType [c], carRoad [c]
+        printf "  [%2d] %5s %s",  l, locType [l], locName [l]
+        printf "\n"
     }
 }
 
@@ -142,14 +175,18 @@ END  {
   # hyst(100)
 
     # sequentially assign a location for each iteration and car
-    N = 6
-    for (n = 0; n < N; n++)
+    N = 4
+    for (n = 0; n < N; n++)  {
         for (c = 0; c < C; c++)
             assign(c, n)
+        if (dbg)
+            printf "\n"
+    }
 
     for (c = 0; c < C; c++)
         dumpCar(c, n)
 
   # dumpLocs()
   # dumpCars()
+  # dumpLocTypes()
 }' $*
