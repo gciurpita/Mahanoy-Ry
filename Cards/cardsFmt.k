@@ -71,6 +71,9 @@ function genCard () {
 # ------------------------------------------------
 /dbg/ { exit }
 
+# ------------------------------------------------
+##  select: X    PRR  67890
+
 /select/ {
     if (0 < N)
         genCard()
@@ -83,8 +86,12 @@ function genCard () {
 }
 
 # ----------------------------
+##        9  G  _  Gliberton Freight House
+##       11  G  _  Bradley Beer Storage
+##       12  G  _  Perrin Shirts
+##       13  G  _  Wotring Electric
 {
-    dest [N++] = substr($0, index($0, $4))
+    dest [N++] = $2 " " substr($0, index($0, $4))
   # print
 }
 
