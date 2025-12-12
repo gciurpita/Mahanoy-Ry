@@ -6,6 +6,9 @@
 	Stove =            stgB.trk wall.trk
 	Corner= corner.trk          shelf8a.trk
 
+%.svg : %.trk
+	trkSvg.k $^ | tee $@
+
 %.xgr : %.trk
 	track.k $^ | tee $@
 

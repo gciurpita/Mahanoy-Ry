@@ -21,18 +21,18 @@
 
     # --------------------------------------
     # DCC jacks
-    plug 230  124
-    plug 120  124
-    plug  24  100
+#   plug 230  124
+#   plug 120  124
+#   plug  24  100
 
-    plug 130  90
-    plug 250  90
+#   plug 130  90
+#   plug 250  90
 
-    plug 330  51  yellow
-    plug 250  51
-    plug 130  51
+#   plug 330  51  yellow
+#   plug 250  51
+#   plug 130  51
 
-    plug 260  16
+#   plug 260  16
 
     # --------------------------------------
     text   5  32 Giradville
