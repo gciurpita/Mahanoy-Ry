@@ -1,0 +1,671 @@
+ <!-- filename shelf9.trk -->
+                                                             <!-- line    1 -     title   Shelf-9 -->
+                                                             <!-- line    3 -     space    0  114  360 144 5 -->
+ <!-- space y0 114, ht 144, Ht 30 -->
+<svg version="1.1" baseProfile="full"
+     width="1800" height="150"
+     xmlns="http://www.w3.org/2000/svg">
+                                                             <!-- line    5 -     room     0  120,  0 144, 360 144,  360 110 -->
+<path d="M 0 120
+  L   0    0
+  L 1800    0
+  L 1800  170
+" stroke="blue" stroke-width="2" fill="none" />
+                                                             <!-- line    7 -     bench            36 124,  90 124, 120 128, 280 128, 310 138 -->
+<path d="M 180 100
+  L 450  100
+  L 600   80
+  L 1400   80
+  L 1550   30
+" stroke="white" stroke-width="2" fill="none" />
+                                                             <!-- line   11 -     color  dark-gray -->
+                                                             <!-- line   15 -     text 325 112 wood -->
+  <text x="1625" y="160" font-family="Verdana" font-size="10">wood</text>
+                                                             <!-- line   16 -     text 325 107 stove -->
+  <text x="1625" y="185" font-family="Verdana" font-size="10">stove</text>
+                                                             <!-- line   22 -     pos   330 142 180 -->
+                                                             <!-- line   23 -     color green -->
+                                                             <!-- line   24 -     lbl     _Y -->
+ <!-- # lbl:   _Y    xPos 330.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+  <text x="1650" y="10" font-family="Verdana" font-size="10">_Y</text>
+                                                             <!-- line   26 -     mvto    _Y rev -->
+ <!-- # mvto:  _Y    xPos 330.00, yPos 142.00, dir    0.0, trkLen     0.00
+ -->
+                                                             <!-- line   29 -     str     4 -->
+  <line   x1="1650" y1="10" x2="1670" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   30 -     color   red -->
+                                                             <!-- line   31 -     curve  24 -90 -->
+ <!-- curve: dirLst 0, a0 90, a1 0, dir -90 -->
+ <!-- curve: xPos 334, yPos 142, xC 334, yC 118, x1 358, y1 118 -->
+ <!-- path: x0 334, y0 142, xRad 24, yRad 24, rot 0, smallArc 0, cw 1, x1 358, y1 118 -->
+  <path d="M 1670   10  A  120  120 0 0 1 1790  130" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   32 -     lbl    24" -->
+ <!-- # lbl:   24"   xPos 358.00, yPos 118.00, dir  -90.0, trkLen     0.00
+ -->
+  <text x="1790" y="130" font-family="Verdana" font-size="10">24"</text>
+                                                             <!-- line   35 -     mvto    _Y -->
+ <!-- # mvto:  _Y    xPos 330.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line   36 -     str     8 -->
+  <line   x1="1650" y1="10" x2="1610" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   38 -     curve  47   8 -->
+ <!-- curve: dirLst 180, a0 90, a1 98, dir 188 -->
+ <!-- curve: xPos 322, yPos 142, xC 322, yC 95, x1 315, y1 141 -->
+ <!-- path: x0 322, y0 142, xRad 47, yRad 47, rot 0, smallArc 0, cw 0, x1 315, y1 141 -->
+  <path d="M 1610   10  A  235  235 0 0 0 1577   12" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   39 -     curve  47  -8 -->
+ <!-- curve: dirLst 188, a0 278, a1 270, dir 180 -->
+ <!-- curve: xPos 315, yPos 141, xC 308, yC 188, x1 308, y1 141 -->
+ <!-- path: x0 315, y0 141, xRad 47, yRad 47, rot 0, smallArc 0, cw 1, x1 308, y1 141 -->
+  <path d="M 1577   12  A  235  235 0 0 1 1544   14" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   41 -     str     6 -->
+  <line   x1="1544" y1="14" x2="1514" y2="14" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   42 -     lbl    _x -->
+ <!-- # lbl:   _x    xPos 302.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+  <text x="1514" y="14" font-family="Verdana" font-size="10">_x</text>
+                                                             <!-- line   43 -     str    14 -->
+  <line   x1="1514" y1="14" x2="1444" y2="14" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   44 -     lbl    _A -->
+ <!-- # lbl:   _A    xPos 288.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+  <text x="1444" y="14" font-family="Verdana" font-size="10">_A</text>
+                                                             <!-- line   46 -     str    48 -->
+  <line   x1="1444" y1="14" x2="1204" y2="14" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   47 -     lbl    _a -->
+ <!-- # lbl:   _a    xPos 240.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+  <text x="1204" y="14" font-family="Verdana" font-size="10">_a</text>
+                                                             <!-- line   49 -     str    10 -->
+  <line   x1="1204" y1="14" x2="1154" y2="14" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   50 -     lbl    _b -->
+ <!-- # lbl:   _b    xPos 230.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+  <text x="1154" y="14" font-family="Verdana" font-size="10">_b</text>
+                                                             <!-- line   53 -     str    66 -->
+  <line   x1="1154" y1="14" x2="824" y2="14" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   54 -     curve  47  -8 -->
+ <!-- curve: dirLst 180, a0 270, a1 262, dir 172 -->
+ <!-- curve: xPos 164, yPos 141, xC 164, yC 188, x1 158, y1 141 -->
+ <!-- path: x0 164, y0 141, xRad 47, yRad 47, rot 0, smallArc 0, cw 1, x1 158, y1 141 -->
+  <path d="M  824   14  A  235  235 0 0 1  791   12" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   55 -     curve  47   8 -->
+ <!-- curve: dirLst 172, a0 82, a1 90, dir 180 -->
+ <!-- curve: xPos 158, yPos 141, xC 151, yC 95, x1 151, y1 142 -->
+ <!-- path: x0 158, y0 141, xRad 47, yRad 47, rot 0, smallArc 0, cw 0, x1 151, y1 142 -->
+  <path d="M  791   12  A  235  235 0 0 0  759   10" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   57 -     str    95 -->
+  <line   x1="759" y1="10" x2="284" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   62 -     pos  56  142  180 -->
+                                                             <!-- line   63 -     lbl    P -->
+ <!-- # lbl:   P     xPos  56.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+  <text x="280" y="10" font-family="Verdana" font-size="10">P</text>
+                                                             <!-- line   64 -     str    8 -->
+  <line   x1="280" y1="10" x2="240" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   65 -     curve 28 80 -->
+ <!-- curve: dirLst 180, a0 90, a1 170, dir 260 -->
+ <!-- curve: xPos 48, yPos 142, xC 48, yC 114, x1 20, y1 118 -->
+ <!-- path: x0 48, y0 142, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 20, y1 118 -->
+  <path d="M  240   10  A  140  140 0 0 0  102  125" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   68 -     mvto   P -->
+ <!-- # mvto:  P     xPos  56.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line   69 -     str   16 -->
+  <line   x1="280" y1="10" x2="200" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   71 -     color  yellow -->
+                                                             <!-- line   72 -     lbl    q -->
+ <!-- # lbl:   q     xPos  40.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+  <text x="200" y="10" font-family="Verdana" font-size="10">q</text>
+                                                             <!-- line   73 -     str    4 -->
+  <line   x1="200" y1="10" x2="180" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   75 -     mvto   q -->
+ <!-- # mvto:  q     xPos  40.00, yPos 142.00, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line   76 -     str   10 -->
+  <line   x1="200" y1="10" x2="150" y2="10" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   77 -     curve 28  30 -->
+ <!-- curve: dirLst 180, a0 90, a1 120, dir 210 -->
+ <!-- curve: xPos 30, yPos 142, xC 30, yC 114, x1 16, y1 138 -->
+ <!-- path: x0 30, y0 142, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 16, y1 138 -->
+  <path d="M  150   10  A  140  140 0 0 0   80   28" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line   79 -     tt    12.4  blue -->
+ <circle cx="53" cy="44" r="31" stroke="black" stroke-width="2" fill="none"/>
+                                                             <!-- line   81 -     mvtt  -105 -->
+                                                             <!-- line   82 -     str    12 -->
+  <line   x1="45" y1="74" x2="29" y2="132" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   84 -     mvtt  -90 -->
+                                                             <!-- line   85 -     str    12 -->
+  <line   x1="53" y1="75" x2="53" y2="135" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   87 -     mvtt  -75 -->
+                                                             <!-- line   88 -     str    12 -->
+  <line   x1="61" y1="74" x2="76" y2="132" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   90 -     mvtt  -60 -->
+                                                             <!-- line   91 -     str    10 -->
+  <line   x1="68" y1="71" x2="93" y2="114" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   93 -     mvtt    0 -->
+                                                             <!-- line   94 -     str    10 -->
+  <line   x1="84" y1="44" x2="134" y2="44" style="stroke:black;stroke-width:2" />
+                                                             <!-- line   96 -     mvtt   15 -->
+                                                             <!-- line   97 -     str    12 -->
+  <line   x1="83" y1="36" x2="141" y2="20" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  101 -     mvto   _A -->
+ <!-- # mvto:  _A    xPos 288.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  102 -     color  red -->
+                                                             <!-- line  103 -     curve  47  10 -->
+ <!-- curve: dirLst 180, a0 90, a1 100, dir 190 -->
+ <!-- curve: xPos 288, yPos 141, xC 288, yC 94, x1 280, y1 140 -->
+ <!-- path: x0 288, y0 141, xRad 47, yRad 47, rot 0, smallArc 0, cw 0, x1 280, y1 140 -->
+  <path d="M 1444   14  A  235  235 0 0 0 1403   18" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  104 -     curve  47 -10 -->
+ <!-- curve: dirLst 190, a0 280, a1 270, dir 180 -->
+ <!-- curve: xPos 280, yPos 140, xC 272, yC 186, x1 272, y1 139 -->
+ <!-- path: x0 280, y0 140, xRad 47, yRad 47, rot 0, smallArc 0, cw 1, x1 272, y1 139 -->
+  <path d="M 1403   18  A  235  235 0 0 1 1362   21" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  106 -     str    72 -->
+  <line   x1="1362" y1="21" x2="1002" y2="21" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  108 -     curve  47 -10 -->
+ <!-- curve: dirLst 180, a0 270, a1 260, dir 170 -->
+ <!-- curve: xPos 200, yPos 139, xC 200, yC 186, x1 192, y1 140 -->
+ <!-- path: x0 200, y0 139, xRad 47, yRad 47, rot 0, smallArc 0, cw 1, x1 192, y1 140 -->
+  <path d="M 1002   21  A  235  235 0 0 1  962   18" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  109 -     curve  47  10 -->
+ <!-- curve: dirLst 170, a0 80, a1 90, dir 180 -->
+ <!-- curve: xPos 192, yPos 140, xC 184, yC 94, x1 184, y1 141 -->
+ <!-- path: x0 192, y0 140, xRad 47, yRad 47, rot 0, smallArc 0, cw 0, x1 184, y1 141 -->
+  <path d="M  962   18  A  235  235 0 0 0  921   14" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  111 -     color  pink -->
+                                                             <!-- line  112 -     mvto  _a rev -->
+ <!-- # mvto:  _a    xPos 240.92, yPos 141.09, dir    0.0, trkLen     0.00
+ -->
+                                                             <!-- line  113 -     curve  28   12 -->
+ <!-- curve: dirLst 0, a0 -90, a1 -78, dir 12 -->
+ <!-- curve: xPos 240, yPos 141, xC 240, yC 169, x1 246, y1 141 -->
+ <!-- path: x0 240, y0 141, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 246, y1 141 -->
+  <path d="M 1204   14  A  140  140 0 0 0 1233   11" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  114 -     curve  28  -12 -->
+ <!-- curve: dirLst 12, a0 102, a1 90, dir 0 -->
+ <!-- curve: xPos 246, yPos 141, xC 252, yC 114, x1 252, y1 142 -->
+ <!-- path: x0 246, y0 141, xRad 28, yRad 28, rot 0, smallArc 0, cw 1, x1 252, y1 142 -->
+  <path d="M 1233   11  A  140  140 0 0 1 1262    8" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  115 -     lbl    building-flats -->
+ <!-- # lbl:   building-flats xPos 252.56, yPos 142.31, dir    0.0, trkLen     0.00
+ -->
+  <text x="1262" y="8" font-family="Verdana" font-size="10">building-flats</text>
+                                                             <!-- line  116 -     str    45 -->
+  <line   x1="1262" y1="8" x2="1487" y2="8" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  118 -     mvto   _b -->
+ <!-- # mvto:  _b    xPos 230.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  119 -     curve  28  -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 230, yPos 141, xC 230, yC 169, x1 225, y1 141 -->
+ <!-- path: x0 230, y0 141, xRad 28, yRad 28, rot 0, smallArc 0, cw 1, x1 225, y1 141 -->
+  <path d="M 1154   14  A  140  140 0 0 1 1125   11" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  120 -     curve  28   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 225, yPos 141, xC 219, yC 114, x1 219, y1 142 -->
+ <!-- path: x0 225, y0 141, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 219, y1 142 -->
+  <path d="M 1125   11  A  140  140 0 0 0 1096    8" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  121 -     str    30 -->
+  <line   x1="1096" y1="8" x2="946" y2="8" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  122 -     lbl    building-flats -->
+ <!-- # lbl:   building-flats xPos 189.27, yPos 142.31, dir  180.0, trkLen     0.00
+ -->
+  <text x="946" y="8" font-family="Verdana" font-size="10">building-flats</text>
+                                                             <!-- line  123 -     str    30 -->
+  <line   x1="946" y1="8" x2="796" y2="8" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  128 -     color  cyan -->
+                                                             <!-- line  129 -     mvto    _x -->
+ <!-- # mvto:  _x    xPos 302.92, yPos 141.09, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  130 -     curve  27   25 -->
+ <!-- curve: dirLst 180, a0 90, a1 115, dir 205 -->
+ <!-- curve: xPos 302, yPos 141, xC 302, yC 114, x1 291, y1 138 -->
+ <!-- path: x0 302, y0 141, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 291, y1 138 -->
+  <path d="M 1514   14  A  135  135 0 0 0 1457   27" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  131 -     str     5 -->
+  <line   x1="1457" y1="27" x2="1434" y2="37" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  132 -     lbl    _z -->
+ <!-- # lbl:   _z    xPos 286.98, yPos 136.44, dir  205.0, trkLen     0.00
+ -->
+  <text x="1434" y="37" font-family="Verdana" font-size="10">_z</text>
+                                                             <!-- line  134 -     curve  27  -25 -->
+ <!-- curve: dirLst 205, a0 295, a1 270, dir 180 -->
+ <!-- curve: xPos 286, yPos 136, xC 275, yC 160, x1 275, y1 133 -->
+ <!-- path: x0 286, y0 136, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 275, y1 133 -->
+  <path d="M 1434   37  A  135  135 0 0 1 1377   50" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  147 -     str     4 -->
+  <line   x1="1377" y1="50" x2="1357" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  148 -     lbl    _f -->
+ <!-- # lbl:   _f    xPos 271.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="1357" y="50" font-family="Verdana" font-size="10">_f</text>
+                                                             <!-- line  150 -     str   114 -->
+  <line   x1="1357" y1="50" x2="787" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  152 -     lbl    _r -->
+ <!-- # lbl:   _r    xPos 157.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="787" y="50" font-family="Verdana" font-size="10">_r</text>
+                                                             <!-- line  153 -     str    10 -->
+  <line   x1="787" y1="50" x2="737" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  154 -     lbl    _e -->
+ <!-- # lbl:   _e    xPos 147.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="737" y="50" font-family="Verdana" font-size="10">_e</text>
+                                                             <!-- line  157 -     curve  27  -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 147, yPos 133, xC 147, yC 160, x1 141, y1 134 -->
+ <!-- path: x0 147, y0 133, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 141, y1 134 -->
+  <path d="M  737   50  A  135  135 0 0 1  709   47" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  158 -     str    12.2 -->
+  <line   x1="709" y1="47" x2="650" y2="34" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  160 -     str    21 -->
+  <line   x1="650" y1="34" x2="547" y2="12" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  161 -     curve  27   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 109, yPos 141, xC 103, yC 114, x1 103, y1 141 -->
+ <!-- path: x0 109, y0 141, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 103, y1 141 -->
+  <path d="M  547   12  A  135  135 0 0 0  519   10" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  174 -     mvto   _z -->
+ <!-- # mvto:  _z    xPos 286.98, yPos 136.44, dir  205.0, trkLen     0.00
+ -->
+                                                             <!-- line  175 -     str     6 -->
+  <line   x1="1434" y1="37" x2="1407" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  176 -     curve  27  -25 -->
+ <!-- curve: dirLst 205, a0 295, a1 270, dir 180 -->
+ <!-- curve: xPos 281, yPos 133, xC 270, yC 158, x1 270, y1 131 -->
+ <!-- path: x0 281, y0 133, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 270, y1 131 -->
+  <path d="M 1407   50  A  135  135 0 0 1 1350   63" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  178 -     str    45 -->
+  <line   x1="1350" y1="63" x2="1125" y2="63" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  179 -     lbl    arrival_95" -->
+ <!-- # lbl:   arrival_95" xPos 225.13, yPos 131.38, dir  180.0, trkLen     0.00
+ -->
+  <text x="1125" y="63" font-family="Verdana" font-size="10">arrival_95"</text>
+                                                             <!-- line  180 -     str    48 -->
+  <line   x1="1125" y1="63" x2="885" y2="63" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  182 -     curve  27  -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 177, yPos 131, xC 177, yC 158, x1 171, y1 131 -->
+ <!-- path: x0 177, y0 131, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 171, y1 131 -->
+  <path d="M  885   63  A  135  135 0 0 1  857   60" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  183 -     str     4 -->
+  <line   x1="857" y1="60" x2="838" y2="56" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  184 -     curve  27   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 167, yPos 132, xC 161, yC 106, x1 161, y1 133 -->
+ <!-- path: x0 167, y0 132, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 161, y1 133 -->
+  <path d="M  838   56  A  135  135 0 0 0  809   53" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  186 -     measure 174 125  270 125  1 2 -->
+  <line   x1="870" y1="95" x2="1350" y2="95" style="stroke:black;stroke-width:1" />
+  <line   x1="870" y1="95" x2="887" y2="91" style="stroke:black;stroke-width:1" />
+  <line   x1="870" y1="95" x2="887" y2="98" style="stroke:black;stroke-width:1" />
+  <line   x1="1350" y1="95" x2="1332" y2="91" style="stroke:black;stroke-width:1" />
+  <line   x1="1350" y1="95" x2="1332" y2="98" style="stroke:black;stroke-width:1" />
+  <text x="1110" y="95" font-family="Verdana" text-anchor="middle" font-size="10">96.00</text>
+                                                             <!-- line  189 -     mvto   _r -->
+ <!-- # mvto:  _r    xPos 157.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  190 -     curve  27 -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 157, yPos 133, xC 157, yC 160, x1 151, y1 134 -->
+ <!-- path: x0 157, y0 133, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 151, y1 134 -->
+  <path d="M  787   50  A  135  135 0 0 1  759   47" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  191 -     str    15 -->
+  <line   x1="759" y1="47" x2="686" y2="31" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  192 -     lbl    rip-track -->
+ <!-- # lbl:   rip-track xPos 137.28, yPos 137.62, dir  168.0, trkLen     0.00
+ -->
+  <text x="686" y="31" font-family="Verdana" font-size="10">rip-track</text>
+                                                             <!-- line  193 -     str    15 -->
+  <line   x1="686" y1="31" x2="613" y2="16" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  196 -     mvto   _f -->
+ <!-- # mvto:  _f    xPos 271.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  197 -     str    10 -->
+  <line   x1="1357" y1="50" x2="1307" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  198 -     curve  28  -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 261, yPos 133, xC 261, yC 161, x1 255, y1 134 -->
+ <!-- path: x0 261, y0 133, xRad 28, yRad 28, rot 0, smallArc 0, cw 1, x1 255, y1 134 -->
+  <path d="M 1307   50  A  140  140 0 0 1 1278   47" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  199 -     curve  28   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 255, yPos 134, xC 249, yC 107, x1 249, y1 135 -->
+ <!-- path: x0 255, y0 134, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 249, y1 135 -->
+  <path d="M 1278   47  A  140  140 0 0 0 1249   44" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  200 -     str    45 -->
+  <line   x1="1249" y1="44" x2="1024" y2="44" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  201 -     lbl    caboose-trk -->
+ <!-- # lbl:   caboose-trk xPos 204.92, yPos 135.14, dir  180.0, trkLen     0.00
+ -->
+  <text x="1024" y="44" font-family="Verdana" font-size="10">caboose-trk</text>
+                                                             <!-- line  202 -     str    10 -->
+  <line   x1="1024" y1="44" x2="974" y2="44" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  203 -     curve  28   12 -->
+ <!-- curve: dirLst 180, a0 90, a1 102, dir 192 -->
+ <!-- curve: xPos 194, yPos 135, xC 194, yC 107, x1 189, y1 134 -->
+ <!-- path: x0 194, y0 135, xRad 28, yRad 28, rot 0, smallArc 0, cw 0, x1 189, y1 134 -->
+  <path d="M  974   44  A  140  140 0 0 0  945   47" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  204 -     curve  28  -12 -->
+ <!-- curve: dirLst 192, a0 282, a1 270, dir 180 -->
+ <!-- curve: xPos 189, yPos 134, xC 183, yC 161, x1 183, y1 133 -->
+ <!-- path: x0 189, y0 134, xRad 28, yRad 28, rot 0, smallArc 0, cw 1, x1 183, y1 133 -->
+  <path d="M  945   47  A  140  140 0 0 1  916   50" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  209 -     color  orange -->
+                                                             <!-- line  210 -     mvto   _e -->
+ <!-- # mvto:  _e    xPos 147.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  212 -     str    10 -->
+  <line   x1="737" y1="50" x2="687" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  213 -     lbl    _c -->
+ <!-- # lbl:   _c    xPos 137.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="687" y="50" font-family="Verdana" font-size="10">_c</text>
+                                                             <!-- line  215 -     str    10 -->
+  <line   x1="687" y1="50" x2="637" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  216 -     lbl    _a1 -->
+ <!-- # lbl:   _a1   xPos 127.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="637" y="50" font-family="Verdana" font-size="10">_a1</text>
+                                                             <!-- line  218 -     str    56 -->
+  <line   x1="637" y1="50" x2="357" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  219 -     lbl    T4 -->
+ <!-- # lbl:   T4    xPos  71.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="357" y="50" font-family="Verdana" font-size="10">T4</text>
+                                                             <!-- line  220 -     str    26 -->
+  <line   x1="357" y1="50" x2="227" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  221 -     lbl    16cars -->
+ <!-- # lbl:   16cars xPos  45.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="227" y="50" font-family="Verdana" font-size="10">16cars</text>
+                                                             <!-- line  223 -     str    10 -->
+  <line   x1="227" y1="50" x2="177" y2="50" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  224 -     lbl    92" -->
+ <!-- # lbl:   92"   xPos  35.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+  <text x="177" y="50" font-family="Verdana" font-size="10">92"</text>
+                                                             <!-- line  227 -     mvto   _a1 -->
+ <!-- # mvto:  _a1   xPos 127.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  228 -     curve  27  12 -->
+ <!-- curve: dirLst 180, a0 90, a1 102, dir 192 -->
+ <!-- curve: xPos 127, yPos 133, xC 127, yC 106, x1 121, y1 133 -->
+ <!-- path: x0 127, y0 133, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 121, y1 133 -->
+  <path d="M  637   50  A  135  135 0 0 0  609   53" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  230 -     str     4 -->
+  <line   x1="609" y1="53" x2="590" y2="57" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  231 -     lbl    _a3 -->
+ <!-- # lbl:   _a3   xPos 118.04, yPos 132.49, dir  192.0, trkLen     0.00
+ -->
+  <text x="590" y="57" font-family="Verdana" font-size="10">_a3</text>
+                                                             <!-- line  233 -     str    10 -->
+  <line   x1="590" y1="57" x2="541" y2="67" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  234 -     lbl    _a5 -->
+ <!-- # lbl:   _a5   xPos 108.26, yPos 130.41, dir  192.0, trkLen     0.00
+ -->
+  <text x="541" y="67" font-family="Verdana" font-size="10">_a5</text>
+                                                             <!-- line  236 -     str    10 -->
+  <line   x1="541" y1="67" x2="492" y2="78" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  237 -     lbl    _a6 -->
+ <!-- # lbl:   _a6   xPos  98.48, yPos 128.33, dir  192.0, trkLen     0.00
+ -->
+  <text x="492" y="78" font-family="Verdana" font-size="10">_a6</text>
+                                                             <!-- line  239 -     str    10 -->
+  <line   x1="492" y1="78" x2="443" y2="88" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  240 -     lbl    _a7 -->
+ <!-- # lbl:   _a7   xPos  88.69, yPos 126.25, dir  192.0, trkLen     0.00
+ -->
+  <text x="443" y="88" font-family="Verdana" font-size="10">_a7</text>
+                                                             <!-- line  242 -     mvto   _a3 -->
+ <!-- # mvto:  _a3   xPos 118.04, yPos 132.49, dir  192.0, trkLen     0.00
+ -->
+                                                             <!-- line  243 -     curve  27  -12 -->
+ <!-- curve: dirLst 192, a0 282, a1 270, dir 180 -->
+ <!-- curve: xPos 118, yPos 132, xC 112, yC 158, x1 112, y1 131 -->
+ <!-- path: x0 118, y0 132, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 112, y1 131 -->
+  <path d="M  590   57  A  135  135 0 0 1  562   60" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  244 -     str    43 -->
+  <line   x1="562" y1="60" x2="347" y2="60" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  245 -     lbl    T5 -->
+ <!-- # lbl:   T5    xPos  69.42, yPos 131.90, dir  180.0, trkLen     0.00
+ -->
+  <text x="347" y="60" font-family="Verdana" font-size="10">T5</text>
+                                                             <!-- line  246 -     str    37 -->
+  <line   x1="347" y1="60" x2="162" y2="60" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  247 -     lbl    80" -->
+ <!-- # lbl:   80"   xPos  32.42, yPos 131.90, dir  180.0, trkLen     0.00
+ -->
+  <text x="162" y="60" font-family="Verdana" font-size="10">80"</text>
+                                                             <!-- line  249 -     mvto   _a5 -->
+ <!-- # mvto:  _a5   xPos 108.26, yPos 130.41, dir  192.0, trkLen     0.00
+ -->
+                                                             <!-- line  250 -     curve  27  -12 -->
+ <!-- curve: dirLst 192, a0 282, a1 270, dir 180 -->
+ <!-- curve: xPos 108, yPos 130, xC 102, yC 156, x1 102, y1 129 -->
+ <!-- path: x0 108, y0 130, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 102, y1 129 -->
+  <path d="M  541   67  A  135  135 0 0 1  513   70" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  251 -     str    36 -->
+  <line   x1="513" y1="70" x2="333" y2="70" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  252 -     lbl    T6 -->
+ <!-- # lbl:   T6    xPos  66.64, yPos 129.82, dir  180.0, trkLen     0.00
+ -->
+  <text x="333" y="70" font-family="Verdana" font-size="10">T6</text>
+                                                             <!-- line  253 -     str    36 -->
+  <line   x1="333" y1="70" x2="153" y2="70" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  254 -     lbl    72" -->
+ <!-- # lbl:   72"   xPos  30.64, yPos 129.82, dir  180.0, trkLen     0.00
+ -->
+  <text x="153" y="70" font-family="Verdana" font-size="10">72"</text>
+                                                             <!-- line  256 -     mvto   _a6 -->
+ <!-- # mvto:  _a6   xPos  98.48, yPos 128.33, dir  192.0, trkLen     0.00
+ -->
+                                                             <!-- line  257 -     curve  27  -12 -->
+ <!-- curve: dirLst 192, a0 282, a1 270, dir 180 -->
+ <!-- curve: xPos 98, yPos 128, xC 92, yC 154, x1 92, y1 127 -->
+ <!-- path: x0 98, y0 128, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 92, y1 127 -->
+  <path d="M  492   78  A  135  135 0 0 1  464   81" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  258 -     str    31 -->
+  <line   x1="464" y1="81" x2="309" y2="81" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  259 -     lbl    T7 -->
+ <!-- # lbl:   T7    xPos  61.86, yPos 127.74, dir  180.0, trkLen     0.00
+ -->
+  <text x="309" y="81" font-family="Verdana" font-size="10">T7</text>
+                                                             <!-- line  260 -     str    31 -->
+  <line   x1="309" y1="81" x2="154" y2="81" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  261 -     lbl    62" -->
+ <!-- # lbl:   62"   xPos  30.86, yPos 127.74, dir  180.0, trkLen     0.00
+ -->
+  <text x="154" y="81" font-family="Verdana" font-size="10">62"</text>
+                                                             <!-- line  263 -     mvto   _a7 -->
+ <!-- # mvto:  _a7   xPos  88.69, yPos 126.25, dir  192.0, trkLen     0.00
+ -->
+                                                             <!-- line  264 -     curve  27  -12 -->
+ <!-- curve: dirLst 192, a0 282, a1 270, dir 180 -->
+ <!-- curve: xPos 88, yPos 126, xC 83, yC 152, x1 83, y1 125 -->
+ <!-- path: x0 88, y0 126, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 83, y1 125 -->
+  <path d="M  443   88  A  135  135 0 0 1  415   91" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  265 -     str    27 -->
+  <line   x1="415" y1="91" x2="280" y2="91" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  266 -     lbl    T8 -->
+ <!-- # lbl:   T8    xPos  56.08, yPos 125.66, dir  180.0, trkLen     0.00
+ -->
+  <text x="280" y="91" font-family="Verdana" font-size="10">T8</text>
+                                                             <!-- line  267 -     str    27 -->
+  <line   x1="280" y1="91" x2="145" y2="91" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  268 -     lbl    54" -->
+ <!-- # lbl:   54"   xPos  29.08, yPos 125.66, dir  180.0, trkLen     0.00
+ -->
+  <text x="145" y="91" font-family="Verdana" font-size="10">54"</text>
+                                                             <!-- line  271 -     mvto    _c -->
+ <!-- # mvto:  _c    xPos 137.56, yPos 133.91, dir  180.0, trkLen     0.00
+ -->
+                                                             <!-- line  272 -     curve  27  -12 -->
+ <!-- curve: dirLst 180, a0 270, a1 258, dir 168 -->
+ <!-- curve: xPos 137, yPos 133, xC 137, yC 160, x1 131, y1 134 -->
+ <!-- path: x0 137, y0 133, xRad 27, yRad 27, rot 0, smallArc 0, cw 1, x1 131, y1 134 -->
+  <path d="M  687   50  A  135  135 0 0 1  659   47" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  274 -     str     4 -->
+  <line   x1="659" y1="47" x2="640" y2="43" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  275 -     lbl    _b2 -->
+ <!-- # lbl:   _b2   xPos 128.04, yPos 135.33, dir  168.0, trkLen     0.00
+ -->
+  <text x="640" y="43" font-family="Verdana" font-size="10">_b2</text>
+                                                             <!-- line  277 -     str    10 -->
+  <line   x1="640" y1="43" x2="591" y2="32" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  278 -     lbl    _b4 -->
+ <!-- # lbl:   _b4   xPos 118.26, yPos 137.41, dir  168.0, trkLen     0.00
+ -->
+  <text x="591" y="32" font-family="Verdana" font-size="10">_b4</text>
+                                                             <!-- line  280 -     str    10 -->
+  <line   x1="591" y1="32" x2="542" y2="22" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  281 -     lbl    _b6 -->
+ <!-- # lbl:   _b6   xPos 108.48, yPos 139.49, dir  168.0, trkLen     0.00
+ -->
+  <text x="542" y="22" font-family="Verdana" font-size="10">_b6</text>
+                                                             <!-- line  284 -     mvto   _b2 -->
+ <!-- # mvto:  _b2   xPos 128.04, yPos 135.33, dir  168.0, trkLen     0.00
+ -->
+                                                             <!-- line  285 -     curve  27   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 128, yPos 135, xC 122, yC 108, x1 122, y1 135 -->
+ <!-- path: x0 128, y0 135, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 122, y1 135 -->
+  <path d="M  640   43  A  135  135 0 0 0  612   40" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  286 -     str    48 -->
+  <line   x1="612" y1="40" x2="372" y2="40" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  287 -     lbl    T3 -->
+ <!-- # lbl:   T3    xPos  74.42, yPos 135.92, dir  180.0, trkLen     0.00
+ -->
+  <text x="372" y="40" font-family="Verdana" font-size="10">T3</text>
+                                                             <!-- line  288 -     str    36 -->
+  <line   x1="372" y1="40" x2="192" y2="40" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  289 -     lbl    84" -->
+ <!-- # lbl:   84"   xPos  38.42, yPos 135.92, dir  180.0, trkLen     0.00
+ -->
+  <text x="192" y="40" font-family="Verdana" font-size="10">84"</text>
+                                                             <!-- line  291 -     mvto   _b4 -->
+ <!-- # mvto:  _b4   xPos 118.26, yPos 137.41, dir  168.0, trkLen     0.00
+ -->
+                                                             <!-- line  292 -     curve  27   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 118, yPos 137, xC 112, yC 111, x1 112, y1 138 -->
+ <!-- path: x0 118, y0 137, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 112, y1 138 -->
+  <path d="M  591   32  A  135  135 0 0 0  563   29" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  293 -     str    36 -->
+  <line   x1="563" y1="29" x2="383" y2="29" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  294 -     lbl    T2 -->
+ <!-- # lbl:   T2    xPos  76.64, yPos 138.00, dir  180.0, trkLen     0.00
+ -->
+  <text x="383" y="29" font-family="Verdana" font-size="10">T2</text>
+                                                             <!-- line  295 -     str    36 -->
+  <line   x1="383" y1="29" x2="203" y2="29" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  296 -     lbl    72" -->
+ <!-- # lbl:   72"   xPos  40.64, yPos 138.00, dir  180.0, trkLen     0.00
+ -->
+  <text x="203" y="29" font-family="Verdana" font-size="10">72"</text>
+                                                             <!-- line  298 -     mvto   _b6 -->
+ <!-- # mvto:  _b6   xPos 108.48, yPos 139.49, dir  168.0, trkLen     0.00
+ -->
+                                                             <!-- line  299 -     curve  27   12 -->
+ <!-- curve: dirLst 168, a0 78, a1 90, dir 180 -->
+ <!-- curve: xPos 108, yPos 139, xC 102, yC 113, x1 102, y1 140 -->
+ <!-- path: x0 108, y0 139, xRad 27, yRad 27, rot 0, smallArc 0, cw 0, x1 102, y1 140 -->
+  <path d="M  542   22  A  135  135 0 0 0  514   19" stroke="black" stroke-width="2" fill="none" />
+/>
+                                                             <!-- line  300 -     str    23 -->
+  <line   x1="514" y1="19" x2="399" y2="19" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  301 -     lbl    T1 -->
+ <!-- # lbl:   T1    xPos  79.86, yPos 140.08, dir  180.0, trkLen     0.00
+ -->
+  <text x="399" y="19" font-family="Verdana" font-size="10">T1</text>
+                                                             <!-- line  302 -     str    37 -->
+  <line   x1="399" y1="19" x2="214" y2="19" style="stroke:black;stroke-width:2" />
+                                                             <!-- line  303 -     lbl    70" -->
+ <!-- # lbl:   70"   xPos  42.86, yPos 140.08, dir  180.0, trkLen     0.00
+ -->
+  <text x="214" y="19" font-family="Verdana" font-size="10">70"</text>
+                                                             <!-- line  306 -     color white -->
+                                                             <!-- line  307 -     measure 312 122  216 122  1 1.5 -->
+  <line   x1="1560" y1="110" x2="1080" y2="110" style="stroke:black;stroke-width:1" />
+  <line   x1="1560" y1="110" x2="1542" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="1560" y1="110" x2="1542" y2="113" style="stroke:black;stroke-width:1" />
+  <line   x1="1080" y1="110" x2="1097" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="1080" y1="110" x2="1097" y2="113" style="stroke:black;stroke-width:1" />
+  <text x="1320" y="110" font-family="Verdana" text-anchor="middle" font-size="10">96.00</text>
+                                                             <!-- line  308 -     measure 216 122  120 122  1 1.5 -->
+  <line   x1="1080" y1="110" x2="600" y2="110" style="stroke:black;stroke-width:1" />
+  <line   x1="1080" y1="110" x2="1062" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="1080" y1="110" x2="1062" y2="113" style="stroke:black;stroke-width:1" />
+  <line   x1="600" y1="110" x2="617" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="600" y1="110" x2="617" y2="113" style="stroke:black;stroke-width:1" />
+  <text x="840" y="110" font-family="Verdana" text-anchor="middle" font-size="10">96.00</text>
+                                                             <!-- line  309 -     measure 120 122   24 122  1 1.5 -->
+  <line   x1="600" y1="110" x2="120" y2="110" style="stroke:black;stroke-width:1" />
+  <line   x1="600" y1="110" x2="582" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="600" y1="110" x2="582" y2="113" style="stroke:black;stroke-width:1" />
+  <line   x1="120" y1="110" x2="137" y2="106" style="stroke:black;stroke-width:1" />
+  <line   x1="120" y1="110" x2="137" y2="113" style="stroke:black;stroke-width:1" />
+  <text x="360" y="110" font-family="Verdana" text-anchor="middle" font-size="10">96.00</text>
+                                                             <!-- line  311 -     measure   0 118   30 118  1 1.5 -->
+  <line   x1="0" y1="130" x2="150" y2="130" style="stroke:black;stroke-width:1" />
+  <line   x1="0" y1="130" x2="17" y2="126" style="stroke:black;stroke-width:1" />
+  <line   x1="0" y1="130" x2="17" y2="133" style="stroke:black;stroke-width:1" />
+  <line   x1="150" y1="130" x2="132" y2="126" style="stroke:black;stroke-width:1" />
+  <line   x1="150" y1="130" x2="132" y2="133" style="stroke:black;stroke-width:1" />
+  <text x="75" y="130" font-family="Verdana" text-anchor="middle" font-size="10">30.00</text>
+                                                             <!-- line  313 -     measure   0 116  134 116  1 1.5 -->
+  <line   x1="0" y1="140" x2="670" y2="140" style="stroke:black;stroke-width:1" />
+  <line   x1="0" y1="140" x2="17" y2="136" style="stroke:black;stroke-width:1" />
+  <line   x1="0" y1="140" x2="17" y2="143" style="stroke:black;stroke-width:1" />
+  <line   x1="670" y1="140" x2="652" y2="136" style="stroke:black;stroke-width:1" />
+  <line   x1="670" y1="140" x2="652" y2="143" style="stroke:black;stroke-width:1" />
+  <text x="335" y="140" font-family="Verdana" text-anchor="middle" font-size="10">134.00</text>
+                                                             <!-- line  314 -     measure 134 116  162 116  1 1.5 -->
+  <line   x1="670" y1="140" x2="810" y2="140" style="stroke:black;stroke-width:1" />
+  <line   x1="670" y1="140" x2="687" y2="136" style="stroke:black;stroke-width:1" />
+  <line   x1="670" y1="140" x2="687" y2="143" style="stroke:black;stroke-width:1" />
+  <line   x1="810" y1="140" x2="792" y2="136" style="stroke:black;stroke-width:1" />
+  <line   x1="810" y1="140" x2="792" y2="143" style="stroke:black;stroke-width:1" />
+  <text x="740" y="140" font-family="Verdana" text-anchor="middle" font-size="10">28.00</text>
+</svg>
+
