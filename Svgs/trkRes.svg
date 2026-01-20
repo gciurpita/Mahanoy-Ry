@@ -1,0 +1,95 @@
+ <!-- findRanges: xScMin -0.900, xScMax  9.900 -->
+ <!-- findRanges: yScMin -0.002, yScMax  0.120 -->
+ <!-- findRanges: xOff    0.900, yOff    0.010 -->
+<svg version="1.1" baseProfile="full"
+     width="600" height="400"
+     xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="beige"/>
+ <!-- END: Wid 600.000, Ht 400.00 -->
+ <!-- END: xS 55, yS 3258 -->
+
+  <line   x1="49" y1="366" x2="550" y2="366" style="stroke:blue;stroke-width:1" />
+  <line   x1="105" y1="366" x2="105" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="105" y="379" font-family="Verdana" text-anchor="middle" font-size="10">1</text>
+  <line   x1="161" y1="366" x2="161" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="161" y="379" font-family="Verdana" text-anchor="middle" font-size="10">2</text>
+  <line   x1="216" y1="366" x2="216" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="216" y="379" font-family="Verdana" text-anchor="middle" font-size="10">3</text>
+  <line   x1="272" y1="366" x2="272" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="272" y="379" font-family="Verdana" text-anchor="middle" font-size="10">4</text>
+  <line   x1="327" y1="366" x2="327" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="327" y="379" font-family="Verdana" text-anchor="middle" font-size="10">5</text>
+  <line   x1="383" y1="366" x2="383" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="383" y="379" font-family="Verdana" text-anchor="middle" font-size="10">6</text>
+  <line   x1="438" y1="366" x2="438" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="438" y="379" font-family="Verdana" text-anchor="middle" font-size="10">7</text>
+  <line   x1="494" y1="366" x2="494" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="494" y="379" font-family="Verdana" text-anchor="middle" font-size="10">8</text>
+  <line   x1="550" y1="366" x2="550" y2="362" style="stroke:blue;stroke-width:1" />
+  <text x="550" y="379" font-family="Verdana" text-anchor="middle" font-size="10">9</text>
+
+  <line   x1="49" y1="366" x2="49" y2="33" style="stroke:blue;stroke-width:1" />
+  <line   x1="49" y1="359" x2="56" y2="359" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="359" font-family="Verdana" text-anchor="end" font-size="10">0.01</text>
+  <line   x1="49" y1="327" x2="56" y2="327" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="327" font-family="Verdana" text-anchor="end" font-size="10">0.02</text>
+  <line   x1="49" y1="294" x2="56" y2="294" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="294" font-family="Verdana" text-anchor="end" font-size="10">0.03</text>
+  <line   x1="49" y1="262" x2="56" y2="262" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="262" font-family="Verdana" text-anchor="end" font-size="10">0.04</text>
+  <line   x1="49" y1="229" x2="56" y2="229" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="229" font-family="Verdana" text-anchor="end" font-size="10">0.05</text>
+  <line   x1="49" y1="196" x2="56" y2="196" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="196" font-family="Verdana" text-anchor="end" font-size="10">0.06</text>
+  <line   x1="49" y1="164" x2="56" y2="164" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="164" font-family="Verdana" text-anchor="end" font-size="10">0.07</text>
+  <line   x1="49" y1="131" x2="56" y2="131" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="131" font-family="Verdana" text-anchor="end" font-size="10">0.08</text>
+  <line   x1="49" y1="99" x2="56" y2="99" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="99" font-family="Verdana" text-anchor="end" font-size="10">0.09</text>
+  <line   x1="49" y1="66" x2="56" y2="66" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="66" font-family="Verdana" text-anchor="end" font-size="10">0.1</text>
+  <line   x1="49" y1="33" x2="56" y2="33" style="stroke:blue;stroke-width:1" />
+  <text x="31" y="33" font-family="Verdana" text-anchor="end" font-size="10">0.11</text>
+ <!--   dY 0.1023, e -2.00   0.12 -->
+
+<path d="M 49 366
+  L  63  335
+  L  77  305
+  L  91  277
+  L 105  250
+  L 119  225
+  L 133  202
+  L 147  180
+  L 161  159
+  L 174  140
+  L 188  123
+  L 202  107
+  L 216   93
+  L 230   80
+  L 244   69
+  L 258   59
+  L 272   51
+  L 286   44
+  L 300   39
+  L 313   35
+  L 327   33
+  L 341   33
+  L 355   34
+  L 369   36
+  L 383   41
+  L 397   47
+  L 411   54
+  L 425   62
+  L 438   73
+  L 452   84
+  L 466   98
+  L 480  113
+  L 494  129
+  L 508  147
+  L 522  167
+  L 536  188
+  L 550  210
+" stroke="black" stroke-width="2" fill="none" />
+</svg>
+
