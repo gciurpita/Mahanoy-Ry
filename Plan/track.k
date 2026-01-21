@@ -92,7 +92,7 @@ function ladder (x0, y0, ang, rL, N, len, col) {
 # ------------------------------------------------
 function plug (x0, y0, col) {
     printf "thickness = 1.0\n"
-    
+
     if (! col)
         col = "red"
     printf "color = %s\n", col
@@ -242,7 +242,7 @@ function to (x0, y0, ang, rL, toRight, col) {
             printf "# ! rL\n"
             xC = xA + ToRad * s
             yC = yA - ToRad * c
-            a0 =  90 - ang 
+            a0 =  90 - ang
             a1 =  a0 + ToAng
             a  = ang + ToAng
         }
@@ -505,12 +505,14 @@ function pr (tag)  {
 }
 
 # --------------------------------------
+/lbls/ { lbls = 1;              next }
+
 /lbl/ {
     lbl = $2
     pr("lbl:")
 
     lblX [lbl] = xPos;  lblY [lbl] = yPos; lblDir [lbl] = dir
-    if ("_" != substr(lbl, 1, 1))
+    if ("_" != substr(lbl, 1, 1) || lbls)
         anno(xPos, yPos, lbl)
     next
 }
@@ -553,7 +555,7 @@ function pr (tag)  {
 }
 
 # --------------------------------------
-/sdg/ { 
+/sdg/ {
     len   = $2
     right = $3
     sp    = $4
@@ -568,7 +570,7 @@ function pr (tag)  {
 }
 
 # --------------------------------------
-/space/ { 
+/space/ {
     dx  = $4 - $2;   xC = ($2+$4) / 2
     dy  = $5 - $3;   yC = ($3+$5) / 2
 
@@ -580,28 +582,32 @@ function pr (tag)  {
                     dx, dy, xC, yC, aspect
 
     # black line establishing screen x/y ranges
-    col = "black"
-    if ($6)
-        col = $6
+    if (0) {
+        col = "black"
+        if ($6)
+            col = $6
 
-    if (abs(dx) < abs(dy))  {
-        dXd2 = (aspect * dy) / 2
-        line(xC - dXd2, $3, xC + dXd2, $5, col)
-        rad = dx/2
-    }
-    else  {
-        dYd2 = (dy / aspect) / 2
-        line($2, yC - dYd2, $2+dx, yC + dYd2, col)
-        rad = dy/2
+        if (abs(dx) < abs(dy))  {
+            dXd2 = (aspect * dy) / 2
+            line(xC - dXd2, $3, xC + dXd2, $5, col)
+            rad = dx/2
+        }
+        else  {
+            dYd2 = (dy / aspect) / 2
+            line($2, yC - dYd2, $2+dx, yC + dYd2, col)
+            rad = dy/2
+        }
     }
 
     # aspect circle
-    printf "# rad %6.2f, dx %6.2f, dy %6.2f\n", rad, dx, dy
-    cn = 33
-    printf "set_color %d = ( %d, %d, %d )\n", cn, 50, 50, 50
+    if (0) {
+        printf "# rad %6.2f, dx %6.2f, dy %6.2f\n", rad, dx, dy
+        cn = 33
+        printf "set_color %d = ( %d, %d, %d )\n", cn, 50, 50, 50
 
-    printf "color = %s\n", cn
-    arc(($4+$2)/2, ($5+$3)/2, 0, 360, rad, cn)
+        printf "color = %s\n", cn
+        arc(($4+$2)/2, ($5+$3)/2, 0, 360, rad, cn)
+    }
 
     next
 }
@@ -673,8 +679,14 @@ function str (len, col) {
     next
 }
 
+# --------------------------------------
+/xy/   {
+    anno(xPos, yPos, sprintf("%6.2f, %6.2f", xPos, yPos))
+    next
+}
+
 # ------------------------------------------------
-NF { 
+NF {
     error("unkown")
 }
 
