@@ -44,7 +44,7 @@ type _   any
     R MREX      200     3.7     42'
     R P&R    FastFr     2.9     38'
 
-    S WABASH  16422     1.7     42'
+    S WABASH  16422     4.0     42'
 
     T CSOX     2554     3.1     38'     no-card
     T GATX     6217     2.5     42'     no-card   celanese
@@ -53,7 +53,7 @@ type _   any
 
     X ACL     20707     2.7     42'
     X B&LE    90105     2.0     42'
-    X B&O     37600     2.5     41'
+    X B&O     37600     3.5     41'
     X B&O    293823
     X B&O    382000     2.5     42'
 
@@ -80,7 +80,7 @@ type _   any
     X RDG    101199     3.0     42'
     X RDG    102519     3.7     42'
 
-    X UP     113803     5.6     trk-clean
+    X UP     113803     5.6     40'     trk-clean
     X WM       1135     2.6     42'
     X WM      26538     3.5     41'
     X WM      28123     2.2     42'
