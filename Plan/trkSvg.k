@@ -114,13 +114,15 @@ function marker () {
 }
 
 # --------------------------------------------------------------------
-function pathVec (vecX, vecY, N, col) {
-    printf "<path d=\"M %d %d\n", mapX(vecX [0]), mapY(vecY [0])
+function pathVec (vecX, vecY, N, col, fill) {
+    if ("" == fill)
+        fill = "none"
+    printf "<path d=\"M %4d %4d\n", mapX(vecX [0]), mapY(vecY [0])
     for (n = 1; n < N; n++)   {
-        printf "  L %3d %4d\n",   mapX(vecX [n]), mapY(vecY [n])
+        printf "         L %4d %4d\n",   mapX(vecX [n]), mapY(vecY [n])
     }
     printf "\""
-    printf " stroke=\"%s\" stroke-width=\"2\" fill=\"none\" />\n", col
+    printf " stroke=\"%s\" stroke-width=\"2\" fill=\"%s\" />\n", col, fill
 }
 
 # --------------------------------------------------------------------
@@ -134,7 +136,7 @@ function path (x0, y0, xRad, yRad, rot, largeArc, cw, x1, y1, col)  {
     printf           "  A %4d %4d %d %d %d", S*rad, S*rad, rot, largeArc, cw
     printf           " %4d %4d\"",  mapX(x1), mapY(y1)
     printf " stroke=\"%s\" stroke-width=\"2\" fill=\"none\" />\n", col
-    printf "/>\n"
+ #  printf "/>\n"
 }
 
 # ------------------------------------------------
@@ -283,7 +285,7 @@ function measure (x0, y0, x1, y1, sz, ang)  {
 }
 
 # ------------------------------------------------
-function xyPairs (thick, col) {
+function xyPairs (thick, col, fill) {
     idx = 0;
     for (n = 2; n < NF; n += 2)  {
         _vecX [idx] = int($n)
@@ -291,7 +293,7 @@ function xyPairs (thick, col) {
         idx++
     }
 
-    pathVec(_vecX, _vecY, idx, col)
+    pathVec(_vecX, _vecY, idx, col, fill)
 }
 
 # ------------------------------------------------
@@ -309,8 +311,14 @@ NF      { printf "%60s", "";  comment(sprintf("line %4d - %s", NR, $0)) }
 /rect/  { rect($2, $3, $4, $5);             next }
 /thick/ {                                   next }
 
-/bench/ { xyPairs(2, "white");              next }
-/color/ { if ("black" != ColTrk) ColTrk=$2; next }
+/fill/  { fill = $2;                        next }
+/bench/ {
+    xyPairs(2, "dark-gray", fill)
+    next
+}
+
+# /color/ { if ("black" != ColTrk) ColTrk=$2; next }
+/color/ { ColTrk=$2;                        next }
 /obj/   { xyPairs(2, "");                   next }
 /plug/  { plug($2, $3, $4);                 next }
 /room/  { xyPairs(2, "blue");               next }
@@ -472,7 +480,8 @@ function pr (tag)  {
 
 # --------------------------------------
 /space/ { 
-    svgBegin($2, $3, $4, $5, $6, $7)
+    if (! spaceCnt++)
+        svgBegin($2, $3, $4, $5, $6, $7)
     next
 }
 
