@@ -17,6 +17,9 @@
 	xgraph -ng -monitor_files 5 penn.xgr &
 
 # ----------------------------------------------------------
+../Svgs/layout.svg : space.trk $(All4)
+	trkSvg.k space.trk $(All4) | tee $@
+
 all.xgr : $(Alls)
 	track.k $(Alls) | tee $@
 
