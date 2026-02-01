@@ -1,14 +1,11 @@
-  Dir   = ../Images
+  Dir   = ../Svgs
   Svgs  = $(patsubst %.tgr, $(Dir)/%.svg, $(Tgrs))
 # Svgs += $(patsubst %.trk, %.svg, $(Trks))
 # Trks  = $(shell echo *trk)
   Tgrs  = $(shell echo *tgr)
 
-$(Dir)/%.svg : %.tgr
+%.svg : %.tgr
 	tgrSvg.k $^ >  $@
-
-%.svg : %.trk
-	trkSvg.k $^ >  $@
 
 # ------------------------------------------------
 all : $(Svgs)
