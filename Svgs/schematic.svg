@@ -1,10 +1,10 @@
 <!--
- size 57 x 7, 21
+ size 68 x 7, 22
                            _________________
                           /                 \
                          /                   |
-  ____         ____     /  _____     ___     |     ____
-_/____\_______/____\___/__/_____\___/_______/_____/____\_
+  ____         ____     /  _____     ___     |     ____       ____
+_/____\_______/____\___/__/_____\___/_______/_____/____\_____/____\_
       __ \           /
       __\_\_________/
 
@@ -21,9 +21,10 @@ _/____\_______/____\___/__/_____\___/_______/_____/____\_
 
 
 
+
  -->
 <svg version="1.1" baseProfile="full"
-     width="870" height="120"
+     width="1035" height="120"
      xmlns="http://www.w3.org/2000/svg">
   <text x="510" y="26" font-family="Verdana" font-size="12">staging</text>
   <text x="45" y="57" font-family="Verdana" font-size="12">Girardville</text>
@@ -31,7 +32,8 @@ _/____\_______/____\___/__/_____\___/_______/_____/____\_
   <text x="420" y="57" font-family="Verdana" font-size="12">Maizeville</text>
   <text x="540" y="57" font-family="Verdana" font-size="12">Bear Ridge Breaker</text>
   <text x="780" y="57" font-family="Verdana" font-size="12">Gilberton</text>
-  <text x="180" y="117" font-family="Verdana" font-size="12">Mahanoy Plane Yard</text>
+  <text x="960" y="57" font-family="Verdana" font-size="12">???</text>
+  <text x="150" y="117" font-family="Verdana" font-size="12">Mahanoy Plane Yard</text>
   <line   x1="420" y1="15" x2="435" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="435" y1="15" x2="450" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="450" y1="15" x2="465" y2="15" style="stroke:black;stroke-width:2" />
@@ -78,6 +80,10 @@ _/____\_______/____\___/__/_____\___/_______/_____/____\_
   <line   x1="795" y1="60" x2="810" y2="60" style="stroke:black;stroke-width:2" />
   <line   x1="810" y1="60" x2="825" y2="60" style="stroke:black;stroke-width:2" />
   <line   x1="825" y1="60" x2="840" y2="60" style="stroke:black;stroke-width:2" />
+  <line   x1="945" y1="60" x2="960" y2="60" style="stroke:black;stroke-width:2" />
+  <line   x1="960" y1="60" x2="975" y2="60" style="stroke:black;stroke-width:2" />
+  <line   x1="975" y1="60" x2="990" y2="60" style="stroke:black;stroke-width:2" />
+  <line   x1="990" y1="60" x2="1005" y2="60" style="stroke:black;stroke-width:2" />
 
   <line   x1="15" y1="75" x2="30" y2="75" style="stroke:black;stroke-width:2" />
   <line   x1="30" y1="75" x2="45" y2="60" style="stroke:black;stroke-width:2" />
@@ -147,6 +153,19 @@ _/____\_______/____\___/__/_____\___/_______/_____/____\_
   <line   x1="840" y1="60" x2="855" y2="75" style="stroke:black;stroke-width:2" />
   <line   x1="840" y1="75" x2="855" y2="75" style="stroke:black;stroke-width:2" />
   <line   x1="855" y1="75" x2="870" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="870" y1="75" x2="885" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="885" y1="75" x2="900" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="900" y1="75" x2="915" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="915" y1="75" x2="930" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="930" y1="75" x2="945" y2="60" style="stroke:black;stroke-width:2" />
+  <line   x1="945" y1="75" x2="960" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="930" y1="75" x2="945" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="960" y1="75" x2="975" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="975" y1="75" x2="990" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="990" y1="75" x2="1005" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="1005" y1="60" x2="1020" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="1005" y1="75" x2="1020" y2="75" style="stroke:black;stroke-width:2" />
+  <line   x1="1020" y1="75" x2="1035" y2="75" style="stroke:black;stroke-width:2" />
 
   <line   x1="105" y1="90" x2="120" y2="90" style="stroke:black;stroke-width:2" />
   <line   x1="120" y1="90" x2="135" y2="90" style="stroke:black;stroke-width:2" />

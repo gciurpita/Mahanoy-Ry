@@ -6,6 +6,7 @@ building-supply
 canery
 clothing             cramer
 coal                 clifford
+distributer
 dyes                 dennison
 electric-supply
 farm-supply
@@ -32,7 +33,7 @@ paper
 paper box
 piping
 piano
-planeing
+planing
 plumbing
 pork
 pulpwood
@@ -41,6 +42,7 @@ r
 scapyard
 shirt
 silk                 sarah
+silk mill
 supply
 tools
 u

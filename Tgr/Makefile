@@ -4,6 +4,9 @@
 # Trks  = $(shell echo *trk)
   Tgrs  = $(shell echo *tgr)
 
+$(Dir)/%.svg : %.tgr
+	tgrSvg.k $^ >  $@
+
 %.svg : %.tgr
 	tgrSvg.k $^ >  $@
 
