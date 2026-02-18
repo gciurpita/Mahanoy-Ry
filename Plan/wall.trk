@@ -19,7 +19,7 @@
 
     # --------------------------------------
     # starting at shelf
-    color black
+    color orange
     pos   310, 142
 
     str   20

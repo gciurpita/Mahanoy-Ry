@@ -4,34 +4,16 @@
 
     room     0  120,  0 144, 360 144,  360 110
   # bench   20  114, 36 124,  90 124, 120 128, 280 128, 310 138
-    bench            36 124,  90 124, 120 128, 280 128, 310 138
-
-    # ------------------------------------------------
-    # stove platform
-    color  dark-gray
- #  obj  360  92, 312 92, 312 144
-
-    # stove
-    text 325 112 wood
-    text 325 107 stove
-
- #  arc  350 124 0 360 4 yellow
- #  obj   343 100, 321  97, 317 124, 339 127, 343 100,
+  # bench            36 124,  90 124, 120 128, 280 128, 310 138
+  # bench   24 128, 312 128, 312 144,  24 144,  24 128
+    bench   24 128, 300 128, 312 136, 312 144,  24 144,  24 128
 
     # ------------------------------------------------
     pos   330 142 180
-    color green
     lbl     _Y
 
-    mvto    _Y rev
-  # curve  28 -90
-
-    str     4
-    color   red
-    curve  24 -90
-    lbl    24"
-
     # ----------------------------
+    color orange
     mvto    _Y
     str     8
 
@@ -57,6 +39,30 @@
     str    95
 
     # ------------------------------------------------
+    # mahanoy plane siding
+    mvto   _A
+    curve  47  10
+    curve  47 -10
+
+    str    72
+
+    curve  47 -10
+    curve  47  10
+
+    mvto  _a rev
+    curve  28   12
+    curve  28  -12
+    lbl    building-flats
+    str    45
+
+    mvto   _b
+    curve  28  -12
+    curve  28   12
+    str    30
+    lbl    building-flats
+    str    30
+
+    # ------------------------------------------------
     # curve into Girardville
 
     pos  56  142  180
@@ -64,11 +70,12 @@
     str    8
     curve 28 80
 
-    # corner Turntable
+    # ------------------------------------------------
+    # engine terminal
     mvto   P
     str   16
 
-    color  yellow
+    color green
     lbl    q
     str    4
 
@@ -97,35 +104,9 @@
     str    12
 
     # ------------------------------------------------
-    # mahanoy plane siding
-    mvto   _A
-    color  red
-    curve  47  10
-    curve  47 -10
-
-    str    72
-
-    curve  47 -10
-    curve  47  10
-
-    color  pink
-    mvto  _a rev
-    curve  28   12
-    curve  28  -12
-    lbl    building-flats
-    str    45
-
-    mvto   _b
-    curve  28  -12
-    curve  28   12
-    str    30
-    lbl    building-flats
-    str    30
-
-    # ------------------------------------------------
     # track to yard
 
-    color  cyan
+    color  blue
     mvto    _x
     curve  27   25
     str     5
@@ -206,7 +187,7 @@
 # ----------------------------------------------------------
 # bifurcated yard
   # pos   170 134.2  180
-    color  orange
+    color  blue
     mvto   _e
 
     str    10
@@ -303,7 +284,7 @@
     lbl    70"
 
 # ------------------------------------------------
-    color white
+    color blue
     measure 312 122  216 122  1 1.5
     measure 216 122  120 122  1 1.5
     measure 120 122   24 122  1 1.5
