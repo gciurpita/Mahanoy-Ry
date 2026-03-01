@@ -5,6 +5,7 @@ BEGIN {
     dbg= 0
     if (dbg) print "nu:"
     C = L = 0
+    N = 4
 
         Normal    = "\033[0m"
         Bold      = "\033[1m"
@@ -36,7 +37,7 @@ filename != FILENAME {
 
 # --------------------------------------
 NF && match(FILENAME, "car") {
-    if (/#/ || /type/)
+    if (/#/ || /type/ || "N" == $1)
         next
 
     if (dbg) print
@@ -124,7 +125,7 @@ function dumpCar (c, N)  {
     for (n = 0; n < N; n++)  {
         l = dest [c, n]
 
-        printf " %6d  %s  _  %s\n",  \
+        printf " %6d  %-2s  _  %s\n",  \
                 dest [c, n], locTown [l],   locName [l]
     }
 }
@@ -135,7 +136,7 @@ function assign (c, N)  {
 
     if (dbg)  {
         printf "# assign: N %d", N
-        printf "  [%2d] %s %-6s", c, carType [c], carRoad [c]
+        printf ", c %2d, %s %6s %d", c, carType [c], carRoad [c], carNum [c]
         printf "\n"
     }
     
@@ -147,10 +148,21 @@ function assign (c, N)  {
 #       }
 #   }
 
+    cntOuter = 100
+    cntInner = 40
     do {
+        if (0 >= --cntOuter)
+            assignError(c, N, type, "outer")
         do {
+            if (0 >= --cntInner)
+                assignError(c, N, type, "inner")
+
             if (L <= ++idx [type])
                 idx [type] = 0
+
+            if (dbg)
+                printf "   L %d, idx [%s] %d\n", L, type, idx [type]
+
         } while (! match(locType [idx [type]], carType [c]))
     } while (1 < nLocType [type] && 0 < N && dest [c, N-1] == idx [type])
 
@@ -166,6 +178,19 @@ function assign (c, N)  {
 }
 
 # ----------------------------------------------------------
+function assignError (c, N, type, fault)  {
+    type = carType [c]
+    i    = int(idx [type])
+    printf "**** Error: %s - car [%d] %s %s %s\n", fault, \
+                                c, carType [c], carRoad [c], carNum [c]
+    printf "%10s idx %d, loc type %s, name %s\n", "", i, locType [i], locName [i]
+    printf "%10s loc %s, type %s\n", "", locName [i], locType [i]
+    printf "%10s L %d, type %s, idx %d\n", "", L, type, idx [type]
+    printf "\n"
+    exit
+}
+
+# ----------------------------------------------------------
 END  {
     if (dbg)  {
         printf "# -------------------- %s --------------------\n", "END"
@@ -175,7 +200,6 @@ END  {
   # hyst(100)
 
     # sequentially assign a location for each iteration and car
-    N = 4
     for (n = 0; n < N; n++)  {
         for (c = 0; c < C; c++)
             assign(c, n)

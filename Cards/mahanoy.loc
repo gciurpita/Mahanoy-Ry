@@ -1,4 +1,11 @@
 # locations
+    X       1  MP  Herbaugh Plumbing
+    X       1  MP  Desire Footware
+    X       1  MP  Clark Clothing
+
+    X       1  MP  Aria Furniture
+    RX      1  MP  Hampson Hardware
+    RX      1  MP  Mahanoy Meats
 
     BERSX   2  M  Maizeville Freight House
 
@@ -21,7 +28,7 @@
     H       2  G  Coal Dealer
 
     BRX     1  G  Bradley Beer Storage
-    X       1  G  Perrin Shirts
+    X       1  G  Perridin Shirts
     X       1  G  Wotring Electric
     FX      1  G  Arnold Machine
     X       1  G  Dennison Distillery

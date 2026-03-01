@@ -11,7 +11,9 @@ BEGIN {
         typeName [sym [f]] = fld [f]
 
     cnt = 0;
+    Col = 4
     Wid = 350
+    NperPg = 10
     hdr()
 }
 
@@ -39,11 +41,11 @@ function hdr () {
 
 # ------------------------------------------------
 function table (type, road, number, dest, N, side) {
-    Col = 4
   # printf "<p>\n"
     printf "<table border=1 cellspacing=0 width=%d align=%s>\n", Wid, side
     printf "    <tr> <th colspan=%d> %s <th> %s &nbsp;&nbsp;&nbsp; %s\n", \
-                                        Col, typeName [type], road, number
+                                        Col, type, road, number
+                                     #  Col, typeName [type], road, number
 
     for (n = 0; n < N; n++)  {
         printf "    <tr> <td width=20> &nbsp;\n"
@@ -58,7 +60,7 @@ function table (type, road, number, dest, N, side) {
 # ------------------------------------------------
 function genCard () {
     if (cnt)
-        if (! (cnt % 8))  {
+        if (! (cnt % NperPg))  {
             print "<table width=100%> <tr><td> </table>"
             print "<div class=\"page-break\"></div>"
         }

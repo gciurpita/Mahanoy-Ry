@@ -21,7 +21,7 @@ match(FILENAME, ".car") && NF && ! /#/ {
 function listCars () {
     printf "car inventory:\n"
     for (type in cars)  {
-        printf " %6d  %s\n", cars [type], typeName [type]
+        printf " %6d  %s  %s\n", cars [type], type,  typeName [type]
         carTotal += cars [type]
     }
     printf " %6d  %s\n", carTotal, "Total"

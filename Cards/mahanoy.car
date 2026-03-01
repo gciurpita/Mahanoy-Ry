@@ -7,6 +7,7 @@ type H   Hopper
 type L   Lumber
 type N   Caboose
 type P   Blasting Powder
+type Q   Cleaning Car
 type R   Reefer
 type S   Livestock
 type T   Tank
@@ -14,48 +15,50 @@ type V   Ventilated (fruit-vegetable)
 type X   Box
 type _   any
 
-    E HPCX      575     2.5     38'
+    E HPCX      575     2.8     38'
 
-    F RDG      9440     2.3     41'
-    F RDG     40121     3.3     50'
+    F RDG      9440     2.7     41'
+    F RDG     40121     3.9     50'
 
-    G RDG      1806     2.5     42'
+    G RDG      1806     3.2     42'
 
     H P&R     87267     2.0     30'
     H RDG     66722
-    H RDG     67718     1.6     32'
+    H RDG     67718     2.7     32'
 
 #   H LV       1400       ?     34'
 #   H P&R      2424
-#   H P&R     87267       ?     30'
+#   H P&R     87267d      ?     30'
 #   H PRR    220558       ?     34'
-#   H RDG     66722
+#   H RDG     66722d
 #   H RDG     66731
 #   H RDG     66739       ?     32'
 #   H RDG     67710       ?     34'
 #   H RDG     73155       ?     30'
 
-#   N RDG       102     1.5
-#   N RDG       506     2.5
-#   N RDG       516     2.8
-#   N RDG     92780     2.0
-#   N RDG     92830     1.4
+    N RDG       102     1.5
+    N RDG       506     2.5
+    N RDG       516     2.8
+    N RDG     92780     2.0
+    N RDG     92830     1.4
 
-    R MREX      200     3.7     42'
+    R MRBX      200     3.7     42'
     R P&R    FastFr     2.9     38'
 
     S WABASH  16422     4.0     42'
 
-    T CSOX     2554     3.1     38'     no-card
-    T GATX     6217     2.5     42'     no-card   celanese
-    T PRR    498007     2.1     42'     no-card
-    T UTLX    17842     3.1     40'
+    T ____     ____     ___     38'     no-card   no-name
+    T CSOX     2554     3.1     38'     no-card   cities
+    T GATX      992     3.9     42'     no-card   roma wines
+    T GATX     6217     2.6     42'     no-card   celanese
+    T PRR    498007     2.5     42'     no-card
+    T UTLX    17842     3.1     40'               cleaning car
 
     X ACL     20707     2.7     42'
-    X B&LE    90105     2.0     42'
+    X B&LE    90105     3.4     42'
     X B&O     37600     3.5     41'
     X B&O    293823
-    X B&O    382000     2.5     42'
+    X B&O    382000     4.0     42'
 
     X CB&Q    35789     3.0     42'
     X CNJ     12502     3.5     38'
@@ -76,11 +79,15 @@ type _   any
 
     X RDG      5621     3.7     42'
     X RDG    101195     3.8     42'
-    X RDG    101198     2.7     42'
+    X RDG    101198     3.3     42'
     X RDG    101199     3.0     42'
     X RDG    102519     3.7     42'
 
     X UP     113803     5.6     40'     trk-clean
-    X WM       1135     2.6     42'
+    X WM       1135     3.8     42'
     X WM      26538     3.5     41'
-    X WM      28123     2.2     42'
+    X WM      28123     3.7     42'
+
+    X D&H     17799     3.2     42'
+    X EV       5620     3.5     42'
+    X RDG    109300     
