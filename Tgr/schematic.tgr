@@ -1,8 +1,8 @@
                            _________________
                           /                 \
                          /                   |
-  ____         ____     /  _____     ___     |     ____       ____
-_/____\_______/____\___/__/_____\___/_______/_____/____\_____/____\_
+  ____         ____     /  _____     _____   |   ____  ______
+_/____\_______/____\___/__/_____\___/_______/___/____\____/__
       __ \           /
       __\_\_________/
 
@@ -15,8 +15,10 @@ text 34 2  staging
 text  3 4  Girardville
 text 15 4  Mahanoy Plane
 text 28 4  Maizeville
-text 36 4  Bear Ridge Breaker
-text 52 4  Gilberton
-text 64 4  ???
+
+text 39 3  East Bear
+text 38 4  Ridge Breaker
+text 50 4  Gilberton
+
 
 text 10 8  Mahanoy Plane Yard

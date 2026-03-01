@@ -1,8 +1,9 @@
 <!--
- size 49 x 3, 17
+ size 49 x 3, 18
  ____________     ___   ________      _______
             _\___/_____/___          /_______
 ___________/_______________\________/____________
+
 
 
 
@@ -22,11 +23,11 @@ ___________/_______________\________/____________
      width="750" height="60"
      xmlns="http://www.w3.org/2000/svg">
   <text x="285" y="11" font-family="Verdana" font-size="12">Freight</text>
-  <text x="30" y="26" font-family="Verdana" font-size="12">Iron</text>
-  <text x="75" y="26" font-family="Verdana" font-size="12">Machine</text>
-  <text x="135" y="26" font-family="Verdana" font-size="12">Brewery</text>
-  <text x="435" y="26" font-family="Verdana" font-size="12">Foundry</text>
-  <text x="600" y="11" font-family="Verdana" font-size="12">E Bear Ridge</text>
+  <text x="30" y="11" font-family="Verdana" font-size="12">Iron</text>
+  <text x="75" y="11" font-family="Verdana" font-size="12">Machine</text>
+  <text x="135" y="11" font-family="Verdana" font-size="12">Brewery</text>
+  <text x="435" y="11" font-family="Verdana" font-size="12">Foundry</text>
+  <text x="600" y="26" font-family="Verdana" font-size="12">E Bear Ridge</text>
   <text x="270" y="57" font-family="Verdana" font-size="12">MAIZEVILLE</text>
   <line   x1="30" y1="15" x2="45" y2="15" style="stroke:black;stroke-width:2" />
   <line   x1="45" y1="15" x2="60" y2="15" style="stroke:black;stroke-width:2" />

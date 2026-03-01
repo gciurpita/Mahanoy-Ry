@@ -1,22 +1,26 @@
-                ___________________
-             ___                   \
- ____     __/_______       _________\_____
-_____\___/__________\_____/________________
+             _________________
+                              \
+ _________   ___            ___\______________
+          \_/_______       /
+_________/__________\_____/___________________
 
 # 34567890123456789012345678901234567890123456789012345678901234567890123456789
-#        1         2         3         4         5         6         7        
+#        1         2         3         4         5         6         7
 
 text  2 3  Coal Dealer
 
-text 17 1  Beer
+text 14 1  Beer
+text 17 1  Distillery
 text 21 1  Shirts
-text 25 1  Electric
-text 29 1  Machine
-text 33 1  Distillery
+text 24 1  Electric
+text 28 1  Machine
 
-text 14 2  Freight
+text 14 3  Freight
 
-text 40 3  Millworks
-text 41 4  Fuel Oil
+text 34 3  Bakery
+text 38 3  Warehouse
+text 43 3  Millworks
 
-text 15 5  GILBERTON
+text 40 5  Fuel Oil
+
+text 14 6  GILBERTON

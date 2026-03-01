@@ -8,10 +8,11 @@ ___________/_______________\________/____________
 
 text 19 1  Freight
 
-text  2 2  Iron
-text  5 2  Machine
-text  9 2  Brewery
-text 29 2  Foundry
-text 40 1  E Bear Ridge
+text  2 1  Iron
+text  5 1  Machine
+text  9 1  Brewery
+text 29 1  Foundry
+
+text 40 2  E Bear Ridge
 
 text 18 4  MAIZEVILLE
