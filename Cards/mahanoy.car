@@ -4,6 +4,7 @@ type E   Explosive
 type F   Flatcar
 type G   Gondola
 type H   Hopper
+type I   Hopper Covered
 type L   Lumber
 type N   Caboose
 type P   Blasting Powder
@@ -42,6 +43,8 @@ type _   any
     N RDG     92780     2.0
     N RDG     92830     1.4
 
+#   I ILD       317     4.0
+
     R MRBX      200     3.7     42'
     R P&R    FastFr     2.9     38'
 
@@ -52,7 +55,7 @@ type _   any
     T GATX      992     3.9     42'     no-card   roma wines
     T GATX     6217     2.6     42'     no-card   celanese
     T PRR    498007     2.5     42'     no-card
-    T UTLX    17842     3.1     40'               cleaning car
+    T UTLX    17842     3.1     40'               trk-clean
 
     X ACL     20707     2.7     42'
     X B&LE    90105     3.4     42'
@@ -67,6 +70,7 @@ type _   any
     X ERIE    60592     3.2
 
     X LNE      7025     3.6     40'
+
     X N&W      xxxx     4.8     42'     gyro
     X NH      84263     3.6     42'
     X NP      25244     3.7     42'
@@ -91,3 +95,6 @@ type _   any
     X D&H     17799     3.2     42'
     X EV       5620     3.5     42'
     X RDG    109300     
+
+    X DL&W    55579
+    X MJ&E    60934
