@@ -2,7 +2,7 @@
 
 awk '
 BEGIN {
-    Ratio = 4
+    Ratio = 3
     nCar  = 0
     nLoc  = 0
     C     = 0;
@@ -117,19 +117,20 @@ function sizing () {
     pctOcc = 100 *(nCar/Ratio) /nSpots
 
     printf " Local Size:\n"
-    printf " %6d   Ratio\n", Ratio
-    printf " %6d   Cars\n",  nCar
-    printf " %6d   Spots\n", nSpots
-    printf " %6d   Occupied Spots\n", nCar/Ratio
-    printf " %6d %% Occupancy\n", pctOcc
+    printf " %6d    Ratio\n", Ratio
+    printf " %6d    Cars\n",  nCar
+    printf " %6d    Spots\n", nSpots
+    printf " %8.1f  Occupied Spots\n", nCar/Ratio
+    printf " %6d %%  Occupancy\n", pctOcc
+    printf " %8.1f  cars in staging\n", (Ratio-2) *nCar/Ratio
     printf "\n"
 
     printf "  Train Size\n"
     for (t in town)  {
         occ = 0.5 + nSpot [t] *pctOcc/100
         occ =       nSpot [t] *pctOcc/100
-      # printf " %6.1f %% spots %2d   %s\n", occ, nSpot [t], name [t]
-        printf " %6.1f  %s\n", occ, name [t]
+      # printf " %8.1f %% spots %2d   %s\n", occ, nSpot [t], name [t]
+        printf " %8.1f  %s\n", occ, name [t]
     }
 }
 
