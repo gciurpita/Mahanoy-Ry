@@ -21,11 +21,11 @@ ______/______________________\_____
 <svg version="1.1" baseProfile="full"
      width="540" height="60"
      xmlns="http://www.w3.org/2000/svg">
-  <text x="45" y="11" font-family="Verdana" font-size="12">Furniture</text>
+  <text x="45" y="11" font-family="Verdana" font-size="12">Hardware</text>
   <text x="120" y="11" font-family="Verdana" font-size="12">Clothing</text>
-  <text x="180" y="11" font-family="Verdana" font-size="12">Hardware</text>
-  <text x="315" y="11" font-family="Verdana" font-size="12">Footware</text>
-  <text x="390" y="11" font-family="Verdana" font-size="12">Plumbing</text>
+  <text x="180" y="11" font-family="Verdana" font-size="12">Furniture</text>
+  <text x="315" y="11" font-family="Verdana" font-size="12">Plumbing</text>
+  <text x="390" y="11" font-family="Verdana" font-size="12">Footware</text>
   <text x="465" y="11" font-family="Verdana" font-size="12">Meats</text>
   <text x="225" y="57" font-family="Verdana" font-size="12">MAHANOY PLANE</text>
   <line   x1="45" y1="15" x2="60" y2="15" style="stroke:black;stroke-width:2" />
