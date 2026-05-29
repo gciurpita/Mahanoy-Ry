@@ -10,7 +10,7 @@
 
 <table width=100%> <tr><td> </table>
 
-<img width=400 align=right src=arRelay.svg>
+<img width=400 align=right src=../Svgs/arRelay.svg>
 
 What makes this a DIYer project is the use of a solderless prototype board
 to avoid any soldering, using an Arduino Nano (Pro Micro) as a processor and
@@ -32,7 +32,7 @@ The block diagram illustrates the components:
 <h4>Short Detection</h4>
 
 <table border=0 cellspacing=10 align=left> <tr><td>
-  <img width=300 src=arDetCap.png>
+  <img width=300 src=https://i.imgur.com/PUkjFfX.png>
 </table>
 
 The key circuit is to detect the short.
@@ -91,7 +91,7 @@ Separate coils are used to switch the contacts to either position.
 he EA2-5T relay coils are 178 Ω, drawing ~28 ma.
 
 <p>
-<img align=right width=300 src=pwr8v.png>
+<img align=right width=300 src=https://i.imgur.com/gc9UHAr.png>
 
 On startup, the processor will initialize the relay state
 along with an internal variable matching the state.
@@ -164,8 +164,10 @@ The breadboard has the following
   <li> red LED/resistor indicator power bus voltage
   <li> iuF power circuit capacitor
 
+<table width=100%> <tr><td> </table>
 <!-- -------------------------------------------------- -------------------- -->
-<h4> References </h4>
+<hr>
+<h4> Arduino Pro Micro Code </h4>
 <blockquote><pre>
 // auto-reverser using latching relay
 
@@ -287,6 +289,7 @@ void setup ()
 
 
 <!-- -------------------------------------------------- -------------------- -->
+<hr>
 <h4> References </h4>
 <blockquote>
  <table>
