@@ -20,6 +20,9 @@
 ../Svgs/layout.svg : space.trk $(All4)
 	trkSvg.k space.trk $(All4) | tee $@
 
+layoutX.svg : space.trk $(All4)
+	trkSvg.k space.trk $(All4) | tee $@
+
 all.xgr : $(Alls)
 	track.k $(Alls) | tee $@
 
@@ -37,6 +40,11 @@ stove.xgr : $(Stove)
 
 corner.xgr : $(Corner)
 	track.k $(Corner) | tee $@
+
+ladder2.svg : ladder2.trk
+	trkSvg.k           ladder2.trk | tee $@
+#	trkSvg.k space.trk ladder2.trk | tee $@
+#	trkSvg.k           ladder2.trk | tee $@
 
 # ----------------------------------------------------------
 neat :

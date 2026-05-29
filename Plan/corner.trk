@@ -1,17 +1,21 @@
     title Corner
-    space   0 30  60 144 4
+    space   0 30  60 144 8
+    fill   lightGray
 
     room   0 30, 0 144,  60 144
   # bench  0 40,  18 40,  24 46,  24 144,  0 144, 0 40
     bench  0 40,  18 40,  24 46,  24 120, 32 128,  32 144, 0 144, 0 40
 
-    measure -10 40 -10 144  1 1
-    measure   0 35  24  35  1 1.5
+    measure   0 128  17 128  1 1.5
+    measure   0  40  20  40  1 1.5
+    measure   0  35  24  35  1 1.5
+    measure  20  40  20 144  1 1
 
     color orange
 
     pos    56 142, 180
     pos    82 142, 180
+    lbl    A
 
     str   26
     lbl    P

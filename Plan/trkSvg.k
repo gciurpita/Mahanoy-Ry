@@ -4,7 +4,7 @@ awk '
 # ------------------------------------------------
 function anno (x, y, text, font)  {
     if (! font)
-        font=10
+        font=20
     printf "  <text x=\"%d\" y=\"%d\"", mapX(x), mapY(y)
     printf " font-family=\"Verdana\""
     printf " font-size=\"%d\"", font
@@ -307,6 +307,7 @@ NF      { printf "%60s", "";  comment(sprintf("line %4d - %s", NR, $0)) }
 /quit/  { exit }
 
 /arc/   { arc($2, $3, $4, $5, $6, $7);      next }
+/anno/  { if (! annoFlg) annoFlg = 1; else annoFlg = 0; next }
 /measure/ { measure($2, $3, $4, $5, $6, $7); next }
 /rect/  { rect($2, $3, $4, $5);             next }
 /thick/ {                                   next }
@@ -419,10 +420,17 @@ function pr (tag)  {
 /lbl/ {
     lbl = $2
     pr("lbl:")
+    pr(annoFlg)
 
     lblX [lbl] = xPos;  lblY [lbl] = yPos; lblDir [lbl] = dir
-  # if ("_" != substr(lbl, 1, 1))
+    if (annoFlg && "_" != substr(lbl, 1, 1))
         anno(xPos, yPos, lbl)
+    next
+}
+
+# --------------------------------------
+/mark/ {
+    anno(xPos, yPos, sprintf("%.1f %.1f", xPos, yPos))
     next
 }
 
@@ -549,6 +557,8 @@ function str (len, col) {
     xTt  = xPos + cos(dir * Pi / 180) * diaTt /2;
     yTt  = yPos + sin(dir * Pi / 180) * diaTt /2
     circle(xTt, yTt, diaTt/2, col)
+
+    xPos = xTt;     yPos = yTt
 
     next
 }

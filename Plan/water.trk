@@ -17,9 +17,92 @@
 
     lbl  W
     curve  28  -90
+    str   20
 
-    curve  28  -5
+    anno
+    lbl   A
+
     str   110
+    lbl   B
+
+    mvto  A
+    curve 47 -9
+    curve 47  9
+
+    str   72
+
+    curve 47  9
+    lbl   c
+    curve 47 -9
+
+    mvto  c rev
+    str   10
+    curve 28 20
+    tt     9
+
+    mvtt   165
+    str   10
+
+    mvtt   180
+    str   10
+
+    mvtt   195
+    str   10
+
+
+    # ----------------------------
+    # yard
+    color green
+
+    mvto  B
+    str   20
+    lbl   t20
+
+    curve 26 -13
+    str    3
+    lbl   t21
+
+    str   10
+    lbl   t22
+
+    str   10
+    lbl   t23
+
+    str   10
+    lbl   t24
+
+    str   10
+    lbl   t25
+
+    # ------------------
+    mvto  t20
+    str   120
+    lbl    x
+    str    10
+
+    mvto   x rev
+    curve 26  13
+    curve 26 -13
+
+    mvto  t21
+    curve 26  13
+    str   116
+
+    mvto  t22
+    curve 26  13
+    str   106
+
+    mvto  t23
+    curve 26  13
+    str    96
+
+    mvto  t24
+    curve 26  13
+    str    86
+
+    mvto  t25
+    curve 26  13
+    str    76
 
     # ----------------------------
     # power plant
