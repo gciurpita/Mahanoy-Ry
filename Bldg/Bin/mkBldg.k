@@ -22,6 +22,8 @@ NF == 0 || $1 == "#"  {
 /width/    { widFt    = $2;                                         next }
 /windows/  { nWindow  = $2; windWid = $3; windHt = $4;              next }
 
+/space/    { next }
+
 # --------------------------------------
 {
     printf "Error: mkBldg unknown - "
