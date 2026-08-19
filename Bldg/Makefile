@@ -7,6 +7,10 @@
   Svgs += $(patsubst %.pts, %.svg, $(Ptss))
   Svgs += $(patsubst %.bld, %.svg, $(Blds))
 
+  Svgs2  = cloth.svg foot.svg furn.svg hard.svg meat.svg plumb.svg 
+  Svgs2 += $(patsubst %.pts, %.svg, $(Ptss))
+  Svgs2 += $(patsubst %.bld, %.svg, $(Blds))
+
 %.bld : %.dsc
 	Bin/mkBldg.k $^ | tee $@
 
@@ -26,7 +30,9 @@
 	Bin/ptsSvg.k $^ | tee $@
 
 # ----------------------------------------------------------
-all : bldg.html $(Svgs)
+all2 : $(Svgs2)
+
+all0 : bldg.html $(Svgs)
 
 bldg.html : $(Svgs)
 #	@ echo "<meta http-equiv=\"refresh\" content=\"9\">" > $@
