@@ -244,6 +244,37 @@ function door (x, y, wid, ht, col, _col, _row)  {
 }
 
 # ------------------------------------------------
+function door2 (x, y, wid, ht, col, _col, _row)  {
+    printf "\n"
+    comment(sprintf ( \
+        "        door2: (%.1f, %.1f) <%.1f, %.1f> [%d, %d] S %.3f, %s", \
+                x, y, wid, ht, _col, _row, S, col))
+
+    x += x0;     y += y0
+    # ----------------------------
+    # door frame
+    brdr = 2 / 12
+    x2   = x    +brdr
+    y2   = y    +brdr
+    wid2 = wid  -2*brdr
+    ht2  = ht   -2*brdr
+
+    if ("" == col)
+        col = "black"
+
+    rectWh(x,  y,  wid,  ht,  "gray", "white", 1)
+    rectWh(x2, y2, wid2, ht2, "gray", "white", 0)
+
+    brdr = 4 /12
+    ht   = 40 /12
+    x3   = x2 + brdr
+    y3   = y  + ht
+    wid3 = wid2 -2*brdr
+    ht3  = ht2  -ht -brdr
+    rectWh(x3, y3, wid3, ht3, "gray", "gray", 0)
+}
+
+# ------------------------------------------------
 function window (x, y, wid, ht, col, _col, _row)  {
     printf "\n"
     comment(sprintf ( \
@@ -501,8 +532,14 @@ NF == 0 || $1 == "#"  {
 /brick/  { brick();                                         next }
 /dock/   { dock(     $2);                                   next }
 
+/door2/   {
+    door2(val($2), val($3), val($4), val($5), $6)
+    next
+}
+
 /door/   {
-    door(val($2), val($3), val($4), val($5), val($6), val($7), val($8))
+  # door(val($2), val($3), val($4), val($5), val($6), val($7), val($8))
+    door(val($2), val($3), val($4), val($5), $6)
     next
 }
 
