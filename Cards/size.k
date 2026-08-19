@@ -2,7 +2,6 @@
 
 awk '
 BEGIN {
-    Ratio = 3
     nCar  = 0
     nLoc  = 0
     C     = 0;
@@ -110,28 +109,61 @@ function locs ()  {
 }
 
 # ------------------------------------------------
-function sizing () {
+function sizing (HoldPickup) {
     if (C)
         nCar = C
 
-    pctOcc = 100 *(nCar/Ratio) /nSpots
+    Ratio = 3
 
-    printf " Local Size:\n"
-    printf " %6d    Ratio\n", Ratio
+    printf "------------------------------\n"
+    printf " Local Size:"
+    if (HoldPickup)  {
+        printf " Hold/Pickup"
+        Ratio = 4
+    }
+    printf "\n"
+
     printf " %6d    Cars\n",  nCar
+    printf " %6d    Ratio\n", Ratio
+
+    spotted = nCar  / Ratio
+    if (HoldPickup) 
+        spotted *= 2
+
+    pctOcc  = 100 *spotted/nSpots
+    pctSw   = pctOcc
+    if (HoldPickup) 
+        pctSw   /= 2
+
+    printf " %8.1f  Occupied Spots (nCar/Ratio)\n", spotted
+    printf "\n"
+
+
     printf " %6d    Spots\n", nSpots
-    printf " %8.1f  Occupied Spots\n", nCar/Ratio
     printf " %6d %%  Occupancy\n", pctOcc
-    printf " %8.1f  cars in staging\n", (Ratio-2) *nCar/Ratio
+    printf "\n"
+
+  # printf " %8.1f  cars switched\n", (Ratio-2) *nCar/Ratio
+  # printf " %8.1f  cars in staging\n", (Ratio-2) *nCar/Ratio
+    printf " %8.1f  cars switched\n",   nCar/Ratio
+    printf " %8.1f  cars in staging\n", nCar/Ratio
     printf "\n"
 
     printf "  Train Size\n"
+    sum = 0;
     for (t in town)  {
         occ = 0.5 + nSpot [t] *pctOcc/100
-        occ =       nSpot [t] *pctOcc/100
-      # printf " %8.1f %% spots %2d   %s\n", occ, nSpot [t], name [t]
-        printf " %8.1f  %s\n", occ, name [t]
+        sw  =       nSpot [t] *pctSw/100
+
+        printf " %8.1f", sw
+        printf " %3d",   nSpot [t] * pctOcc/100
+        printf " %3d",   nSpot [t]
+        printf " %s\n",  name  [t]
+
+        sum   += sw
     }
+    printf " %8.1f\n", sum
+    printf "\n"
 }
 
 # --------------------------------------------------------------------
@@ -147,6 +179,7 @@ END {
         cars()
         locs()
     }
-    sizing()
+    sizing(0)
+    sizing(1)
     printf "\n"
 }' $* rdgIntrRds.txt  mahanoy.car mahanoy.loc
